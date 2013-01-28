@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicPathPlanner", "DynamicPathPlanner\DynamicPathPlanner.csproj", "{F90B9CDA-BB8E-4421-9195-6ECFCAECC625}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F90B9CDA-BB8E-4421-9195-6ECFCAECC625}.Debug|x86.ActiveCfg = Debug|x86
+		{F90B9CDA-BB8E-4421-9195-6ECFCAECC625}.Debug|x86.Build.0 = Debug|x86
+		{F90B9CDA-BB8E-4421-9195-6ECFCAECC625}.Release|x86.ActiveCfg = Release|x86
+		{F90B9CDA-BB8E-4421-9195-6ECFCAECC625}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
