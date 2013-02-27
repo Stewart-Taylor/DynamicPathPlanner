@@ -22,7 +22,7 @@
 		</Storyboard>
 		<Storyboard x:Key="PanguSlideOut">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_panguConnect">
-				<EasingDoubleKeyFrame KeyTime="0:0:1.9" Value="746.305">
+				<EasingDoubleKeyFrame KeyTime="0:0:1.9" Value="1179.722">
 					<EasingDoubleKeyFrame.EasingFunction>
 						<CubicEase EasingMode="EaseInOut"/>
 					</EasingDoubleKeyFrame.EasingFunction>
@@ -54,7 +54,7 @@
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Grid x:Name="grid_pangu" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu" Background="#FF525252">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -109,7 +109,7 @@
     			<RowDefinition Height="0.828*"/>
     			<RowDefinition Height="0.172*"/>
     		</Grid.RowDefinitions>
-    		<Grid x:Name="grid_models" Margin="8,0,354,8" Background="#FF339933">
+    		<Grid x:Name="grid_models" Margin="8,0,354,8">
     			<Grid.RowDefinitions>
     				<RowDefinition/>
     			</Grid.RowDefinitions>
@@ -117,39 +117,58 @@
     				<ColumnDefinition Width="0.527*"/>
     				<ColumnDefinition Width="0.5*"/>
     			</Grid.ColumnDefinitions>
-    			<Grid x:Name="grid_elevation" Background="Red" Margin="0,0,0,172.229">
-    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="16" Foreground="White" Margin="3,0,0,0"/>
+    			<Grid x:Name="grid_elevation" Background="#FF339933" Margin="0,0,0,183.749" d:IsLocked="True">
+    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" Margin="3,0,0,0"/>
+    				<Image Margin="6.446,79.356,8,7.943" Source="PathTest.png"/>
+    				<Image Height="30" Margin="92.157,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="ElevationIcon.png"/>
     			</Grid>
-    			<Grid Grid.Column="1" Margin="8,0,0,0" Background="#FF00758B">
+    			<Grid Grid.Column="1" Margin="8,0,0,0" d:IsLocked="True">
     				<Grid.RowDefinitions>
     					<RowDefinition Height="0.522*"/>
     					<RowDefinition Height="0.5*"/>
     				</Grid.RowDefinitions>
-    				<Grid x:Name="grid_slope" Margin="0,0,0,8" Background="#FFA70A0A">
-    					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" Margin="4,0,0,0"><Run Language="en-gb" Text="Slope"/></TextBlock>
+    				<Grid x:Name="grid_slope" Margin="0,0,0,8" Background="#FF8CBF26">
+    					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="4,0,0,0"><Run Language="en-gb" Text="Slope"/></TextBlock>
+    					<Image Margin="42.114,33.967,0,8" Source="PathTest.png" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    					<Image Height="30" Margin="53.407,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="Slope.png"/>
     				</Grid>
-    				<Grid x:Name="grid_hazard" Margin="0,8,0,0" Grid.Row="1" Background="#FF620A57">
-    					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" Margin="4,0,0,0"><Run Language="en-gb" Text="Hazard"/></TextBlock>
+    				<Grid x:Name="grid_hazard" Margin="0,8,0,0" Grid.Row="1" Background="#FFF09609">
+    					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="4,0,0,0"><Run Language="en-gb" Text="Hazard"/></TextBlock>
+    					<Grid Margin="0">
+    						<Grid.RowDefinitions>
+    							<RowDefinition Height="0.095*"/>
+    							<RowDefinition Height="0.905*"/>
+    						</Grid.RowDefinitions>
+    						<Grid.ColumnDefinitions>
+    							<ColumnDefinition Width="0.264*"/>
+    							<ColumnDefinition Width="0.736*"/>
+    						</Grid.ColumnDefinitions>
+    						<Image Grid.Column="1" Margin="0" Source="PathTest.png" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    					</Grid>
+    					<Image Height="30" Margin="66.326,0,210.181,0" VerticalAlignment="Top" Width="30" Source="HazardIcon.png" HorizontalAlignment="Left"/>
     				</Grid>
     			</Grid>
-    			<Grid x:Name="grid_panguS" Height="168.229" VerticalAlignment="Bottom" Background="#FFC3FF00">
-    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="4,0,0,146.949" Foreground="White" FontSize="16" d:LayoutOverrides="Height"><Run Language="en-gb" Text="PANGU"/></TextBlock>
+    			<Grid x:Name="grid_panguS" Height="168.229" VerticalAlignment="Bottom" Background="#FFA200FF" Width="330" d:IsLocked="True">
+    				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="4,0,0,146.949" Foreground="White" FontSize="20" d:LayoutOverrides="Height"><Run Language="en-gb" Text="PANGU"/></TextBlock>
+    				<Image Height="30" Margin="74.52,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="panguIcon.png"/>
+    				<Image Margin="161.092,8,0,0" Source="PathTest.png"/>
     			</Grid>
     		</Grid>
     		<Grid x:Name="grid_vehicle" HorizontalAlignment="Right" Width="328.983" Background="#FF00ABA9" Margin="0,8" d:IsLocked="True">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Vehicle" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="21.333" Foreground="White" Margin="5,4,0,0"/>
-    			<Grid Margin="0.935,35.901,0,126.136" Background="Red">
+    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Vehicle" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="20" Foreground="White" Margin="5,4,0,0"/>
+    			<Image Height="30" Margin="69.54,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="VehicleIcon.png"/>
+    			<Grid Margin="0.935,35.901,0,126.136">
     				<Grid.RowDefinitions>
     					<RowDefinition Height="0.543*"/>
     					<RowDefinition Height="0.5*"/>
     				</Grid.RowDefinitions>
-    				<Grid Margin="0,0,0,8" Background="#FF8CBF26">
+    				<Grid Margin="0,0,0,8">
     					<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="White" RenderTransformOrigin="0.1,1.082" HorizontalAlignment="Left"><Run Language="en-gb" Text="Internal"/></TextBlock>
-    					<Image Margin="97.27,20.716,8,0"/> 
+    					<Image Margin="115.51,0,0,0" Source="PathTest.png"/> 
     				</Grid>
-    				<Grid Background="#FF8CBF26" Grid.Row="1">
+    				<Grid Grid.Row="1">
     					<TextBlock Margin="8.84,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="White" RenderTransformOrigin="0.1,1.082" HorizontalAlignment="Left"><Run Language="en-gb" Text="RoverCam"/></TextBlock>
-    					<Image Margin="97.27,20.716,8,0"/> 
+    					<Image Margin="118.07,0,0,0" Source="PathTest.png"/> 
     				</Grid>
     			</Grid>
     		</Grid>
@@ -159,10 +178,10 @@
     			</Grid>
     			<TextBox Margin="0,19,8,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667"/>
     		</Grid>
-    		<Grid x:Name="grid_controls" HorizontalAlignment="Right" Grid.Row="1" Width="230" Background="White" Margin="0,2.962,8,8" d:IsLocked="True">
-    			<Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="#FF156829" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
-    			<Button x:Name="btn_start_Copy" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="#FF156829" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
-    			<Button x:Name="btn_start_Copy1" Content="Instant" VerticalAlignment="Center" Margin="0,0,35,0" Background="#FF156829" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
+    		<Grid x:Name="grid_controls" HorizontalAlignment="Right" Grid.Row="1" Width="230" Background="White" Margin="0,2.962,8,8">
+    			<Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="#FFF09609" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
+    			<Button x:Name="btn_start_Copy" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="#FF339933" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
+    			<Button x:Name="btn_start_Copy1" Content="Instant"  Margin="0,30,35,30" Background="#FF1BA1E2" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
     		</Grid>
     	</Grid>
         

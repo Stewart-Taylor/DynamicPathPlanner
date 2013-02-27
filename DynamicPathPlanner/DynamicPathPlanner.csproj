@@ -99,7 +99,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ElevationIcon.png" />
+    <Resource Include="HazardIcon.png" />
+    <Resource Include="panguIcon.png" />
     <Resource Include="PathTest.png" />
+    <Resource Include="Slope.png" />
+    <Resource Include="VehicleIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

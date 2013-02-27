@@ -23,8 +23,8 @@ namespace DynamicPathPlanner
         {
             InitializeComponent();
 
-          //  grid_layout.Visibility = Visibility.Hidden;
-            grid_pangu.Visibility = Visibility.Hidden;
+            grid_layout.Visibility = Visibility.Hidden;
+          //  grid_pangu.Visibility = Visibility.Hidden;
 
         }
 
