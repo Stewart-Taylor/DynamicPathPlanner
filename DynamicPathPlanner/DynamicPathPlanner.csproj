@@ -65,14 +65,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\InterfaceManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Simple Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -99,12 +96,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ElevationIcon.png" />
-    <Resource Include="HazardIcon.png" />
-    <Resource Include="panguIcon.png" />
-    <Resource Include="PathTest.png" />
-    <Resource Include="Slope.png" />
-    <Resource Include="VehicleIcon.png" />
+    <Resource Include="Images\ElevationIcon.png" />
+    <Resource Include="Images\HazardIcon.png" />
+    <Resource Include="Images\panguIcon.png" />
+    <Resource Include="Images\PathTest.png" />
+    <Resource Include="Images\Slope.png" />
+    <Resource Include="Images\VehicleIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,6 +15,10 @@ local.properties
 .classpath
 .settings/
 .loadpath
+*.png
+*.jpg
+*.jpeg
+*.gif
 
 # External tool builders
 .externalToolBuilders/
