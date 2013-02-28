@@ -65,7 +65,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\AverageSlope.cs" />
+    <Compile Include="Code\A_Star.cs" />
+    <Compile Include="Code\D_Star.cs" />
+    <Compile Include="Code\ElevationLoader.cs" />
+    <Compile Include="Code\ElevationModel.cs" />
+    <Compile Include="Code\HazardModel.cs" />
+    <Compile Include="Code\HornSlope.cs" />
     <Compile Include="Code\InterfaceManager.cs" />
+    <Compile Include="Code\LogManager.cs" />
+    <Compile Include="Code\MaxSlope.cs" />
+    <Compile Include="Code\NavigationMapManager.cs" />
+    <Compile Include="Code\PANGU_Connector.cs" />
+    <Compile Include="Code\PANGU_Manager.cs" />
+    <Compile Include="Code\PathFinder.cs" />
+    <Compile Include="Code\PathNode.cs" />
+    <Compile Include="Code\PPM_Loader.cs" />
+    <Compile Include="Code\SearchAlgorithm.cs" />
+    <Compile Include="Code\SimulationManager.cs" />
+    <Compile Include="Code\SlopeAlgorithm.cs" />
+    <Compile Include="Code\SlopeModel.cs" />
+    <Compile Include="Code\Vehicle.cs" />
+    <Compile Include="Code\VehicleHazardMap.cs" />
+    <Compile Include="Code\VehicleSensorManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

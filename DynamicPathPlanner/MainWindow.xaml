@@ -78,7 +78,7 @@
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Grid x:Name="grid_pangu" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu" Background="#FF525252">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -98,7 +98,7 @@
     			<TextBlock Margin="8,0,-8,138.179" TextWrapping="Wrap" FontSize="16" Foreground="White" VerticalAlignment="Bottom"><Run Language="en-gb" Text="Enter a port number"/></TextBlock>
     		</Grid>
     	</Grid>
-    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5">
+    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
     		<Menu.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -120,7 +120,7 @@
     			<MenuItem Header="MenuItem"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
+    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" d:IsHidden="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>

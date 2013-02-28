@@ -19,6 +19,10 @@ namespace DynamicPathPlanner
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private InterfaceManager interfaceManager = new InterfaceManager();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +34,10 @@ namespace DynamicPathPlanner
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+
+
+
+
         	// TODO: Add event handler implementation here.
           //  grid_layout.Visibility = Visibility.Visible;
           //  grid_pangu.Visibility = Visibility.Hidden;
