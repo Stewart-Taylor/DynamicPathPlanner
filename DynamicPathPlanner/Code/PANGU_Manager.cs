@@ -18,25 +18,21 @@ using System.Windows.Media.Imaging;
 
 namespace DynamicPathPlanner.Code
 {
-    class PANGU_Manager
+    static class PANGU_Manager
     {
 
-        private PANGU_Connector connector = new PANGU_Connector();
-        private InterfaceManager interfaceManager;
+        private static PANGU_Connector connector = new PANGU_Connector();
+        private static InterfaceManager interfaceManager;
 
-        public PANGU_Manager(InterfaceManager iManager)
-        {
-            interfaceManager = iManager;
-
-        }
+        
 
 
 
-        public bool connect(String hostname, int port)
+        public static bool connect(String hostname, int port)
         {
             if (connector.connect(hostname, port) == true)
             {
-                interfaceManager.addLogEntry("Connected");
+                //interfaceManager.addLogEntry("Connected");
                 return true;
             }
 
@@ -44,7 +40,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public double[,] getElevationModel(int distance, int width , int height)
+        public static double[,] getElevationModel(int distance, int width, int height)
         {
             double[,] elevationModel;
 
@@ -53,9 +49,16 @@ namespace DynamicPathPlanner.Code
             return elevationModel;
         }
 
-        public ImageSource getSkyView()
+        public static ImageSource getSkyView()
         {
-            Bitmap skyBitmap = connector.getImage(0, 0, 7000, 0, -90, 0);
+            float x = 0;
+            float y = 0;
+            float z = 7000;
+            float yaw = 0;
+            float pitch = -90;
+            float roll = 0;
+
+            Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
             MemoryStream ms = new MemoryStream();
             skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -70,7 +73,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public void endConnection()
+        public static void endConnection()
         {
             if (connector.getConnectionStatus() == true)
             {

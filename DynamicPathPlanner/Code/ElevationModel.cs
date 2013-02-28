@@ -24,7 +24,7 @@ namespace DynamicPathPlanner.Code
         private double[,] elevationModel;
 
 
-    
+        private ElevationLoader loader = new ElevationLoader();
 
         private String format;
         private int width;
@@ -34,7 +34,7 @@ namespace DynamicPathPlanner.Code
 
         private bool p6Valid = true;
         private Bitmap image;
-        private double[,] heightMap;
+
         private float verticalHeight = 0.1f; // 0.1m
 
         private double maxHeight = -1;
@@ -42,57 +42,40 @@ namespace DynamicPathPlanner.Code
 
 
 
-        public ElevationModel(double[,] grid)
-        {
-            heightMap = grid;
 
-            width = grid.GetLength(0);
-            height = grid.GetLength(0);
+        public ElevationModel()
+        {
+
+
+        }
+
+
+
+        public void load_PANGU_DEM()
+        {
+            elevationModel = loader.getPANGU_DEM();
+            width = elevationModel.GetLength(0);
+            height = elevationModel.GetLength(0);
 
             generateBitmap();
-
         }
 
 
-       
-
-       
-
-       
-
-
-        private void generateHeightMap()
+        public void load_PPM_DEM()
         {
-            heightMap = new double[width, height];
+            elevationModel = loader.getPPM_DEM();
+            width = elevationModel.GetLength(0);
+            height = elevationModel.GetLength(0);
 
-            int hexMapIndex = imageStartIndex + 7;
-            int widthCounter = 0;
-            int heightCounter = 0;
-
-            int x = 0;
-            int y = 0;
-
-            do
-            {
-                do
-                {
-                    int red = getColorValue(hexMap[hexMapIndex]);
-                    int green = getColorValue(hexMap[hexMapIndex + 1]);
-                    int blue = getColorValue(hexMap[hexMapIndex + 2]);
-
-                    heightMap[x, y] = getHeight(red, green);
-
-                    x++;
-                    widthCounter += 3;
-                    hexMapIndex += 3;
-                } while (x < width);
-                heightCounter++;
-                widthCounter = 0;
-                y++;
-                x = 0;
-
-            } while (y < height);
+            generateBitmap();
         }
+
+
+        public double[,] getModel()
+        {
+            return elevationModel;
+        }
+   
 
         private float getHeight(int red, int green)
         {
@@ -101,10 +84,6 @@ namespace DynamicPathPlanner.Code
 
             return height;
         }
-
-
-       
-
 
 
 
@@ -118,7 +97,7 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < height; y++)
                 {
-                    double heightTemp = heightMap[x, y];
+                    double heightTemp = elevationModel[x, y];
                     int value = getHeightColor(heightTemp);
 
                     System.Drawing.Color tempColor = System.Drawing.Color.FromArgb(255, value, value, value);
@@ -174,9 +153,9 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (heightMap[x, y] > maxHeight)
+                    if (elevationModel[x, y] > maxHeight)
                     {
-                        maxHeight = heightMap[x, y];
+                        maxHeight = elevationModel[x, y];
                     }
                 }
             }
@@ -185,14 +164,14 @@ namespace DynamicPathPlanner.Code
 
         private void setMinHeight()
         {
-            minHeight = heightMap[0, 0];
+            minHeight = elevationModel[0, 0];
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (heightMap[x, y] < minHeight)
+                    if (elevationModel[x, y] < minHeight)
                     {
-                        minHeight = heightMap[x, y];
+                        minHeight = elevationModel[x, y];
                     }
                 }
             }

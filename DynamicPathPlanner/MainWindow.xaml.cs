@@ -67,8 +67,10 @@ namespace DynamicPathPlanner
                     storyBoard.Completed += new EventHandler(storyBoard_Completed);
                     BeginStoryboard(storyBoard);
 
-                    img_elevation.Source = interfaceManager.getE();
+                    interfaceManager.generateModels();
+                    img_elevation.Source = interfaceManager.getElevationModelImage();
                     img_pangu.Source = interfaceManager.getSkyview();
+                    img_slope.Source = interfaceManager.getSlopeModelImage();
                 }
                 else
                 {

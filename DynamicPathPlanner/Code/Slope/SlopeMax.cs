@@ -7,8 +7,9 @@ namespace DynamicPathPlanner.Code
 {
     class SlopeMax : SlopeAlgrotithm
     {
+        public const String ALGORITHM = "MAX";
 
-        public SlopeMax(float[,] model)
+        public SlopeMax(double[,] model)
             : base(model)
         {
             heightMap = model;
@@ -19,22 +20,22 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        protected override float calculateSlopeValue(int x, int y)
+        protected override double calculateSlopeValue(int x, int y)
         {
 
-            float topLeft = getTopLeftSlope(x, y);
-            float topMid = getTopMiddleSlope(x, y);
-            float topRight = getTopRightSlope(x, y);
+            double topLeft = getTopLeftSlope(x, y);
+            double topMid = getTopMiddleSlope(x, y);
+            double topRight = getTopRightSlope(x, y);
 
-            float midLeft = getMiddleLeftSlope(x, y);
-            float midRight = getMiddleRightSlope(x, y);
+            double midLeft = getMiddleLeftSlope(x, y);
+            double midRight = getMiddleRightSlope(x, y);
 
-            float botLeft = getBottomLeftSlope(x, y);
-            float botMid = getBottomMiddleSlope(x, y);
-            float botRight = getBottomRightSlope(x, y);
+            double botLeft = getBottomLeftSlope(x, y);
+            double botMid = getBottomMiddleSlope(x, y);
+            double botRight = getBottomRightSlope(x, y);
 
 
-            float high = 0f;
+            double high = 0f;
 
             if (topLeft >= high) { high = topLeft; }
             if (topMid >= high) { high = topMid; }

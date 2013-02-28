@@ -17,13 +17,14 @@ namespace DynamicPathPlanner.Code
 {
     abstract class SlopeAlgrotithm
     {
-        protected float[,] heightMap;
-        protected float[,] slopeModel;
+        protected double[,] heightMap;
+        protected double[,] slopeModel;
         protected int height;
         protected int width;
 
+        public static String ALGORITHM;
 
-        public SlopeAlgrotithm(float[,] model)
+        public SlopeAlgrotithm(double[,] model)
         {
             heightMap = model;
             width = heightMap.GetLength(0);
@@ -35,7 +36,7 @@ namespace DynamicPathPlanner.Code
 
         protected void generateSlopeModel()
         {
-            slopeModel = new float[width, height];
+            slopeModel = new double[width, height];
 
             for (int x = 0; x < width; x++)
             {
@@ -47,20 +48,20 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        protected virtual float calculateSlopeValue(int x, int y)
+        protected virtual double calculateSlopeValue(int x, int y)
         {
-            float topLeft = getTopLeftSlope(x, y);
-            float topMid = getTopMiddleSlope(x, y);
-            float topRight = getTopRightSlope(x, y);
+            double topLeft = getTopLeftSlope(x, y);
+            double topMid = getTopMiddleSlope(x, y);
+            double topRight = getTopRightSlope(x, y);
 
-            float midLeft = getMiddleLeftSlope(x, y);
-            float midRight = getMiddleRightSlope(x, y);
+            double midLeft = getMiddleLeftSlope(x, y);
+            double midRight = getMiddleRightSlope(x, y);
 
-            float botLeft = getBottomLeftSlope(x, y);
-            float botMid = getBottomMiddleSlope(x, y);
-            float botRight = getBottomRightSlope(x, y);
+            double botLeft = getBottomLeftSlope(x, y);
+            double botMid = getBottomMiddleSlope(x, y);
+            double botRight = getBottomRightSlope(x, y);
 
-            float high = 0f;
+            double high = 0f;
 
             if (topLeft >= high) { high = topLeft; }
             if (topMid >= high) { high = topMid; }
@@ -71,17 +72,17 @@ namespace DynamicPathPlanner.Code
             if (botMid >= high) { high = botMid; }
             if (botRight >= high) { high = botRight; }
 
-            float total = topLeft + topRight + topMid + midLeft + midRight + botLeft + botMid + botRight;
+            double total = topLeft + topRight + topMid + midLeft + midRight + botLeft + botMid + botRight;
 
-            float value = high;
+            double value = high;
 
             return value;
         }
 
 
-        private float getGradientValue(float x, float y)
+        private double getGradientValue(double x, double y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if ((x > 0) && (y > 0))
             {
@@ -96,33 +97,33 @@ namespace DynamicPathPlanner.Code
 
         #region slope Calcs
 
-        protected float getTopLeftSlope(int x, int y)
+        protected double getTopLeftSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if ((x > 0) && (y > 0))
             {
-                gradient = getGradientValue((float)heightMap[x - 1, y - 1], (float)heightMap[x, y]);
+                gradient = getGradientValue(heightMap[x - 1, y - 1], heightMap[x, y]);
             }
 
             return gradient;
         }
 
-        protected float getTopMiddleSlope(int x, int y)
+        protected double getTopMiddleSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if (y > 0)
             {
-                gradient = getGradientValue((float)heightMap[x, y - 1], (float)heightMap[x, y]);
+                gradient = getGradientValue(heightMap[x, y - 1], heightMap[x, y]);
             }
 
             return gradient;
         }
 
-        protected float getTopRightSlope(int x, int y)
+        protected double getTopRightSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if ((x < width - 1) && (y > 0))
             {
@@ -132,9 +133,9 @@ namespace DynamicPathPlanner.Code
             return gradient;
         }
 
-        protected float getMiddleLeftSlope(int x, int y)
+        protected double getMiddleLeftSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if (x > 0)
             {
@@ -145,9 +146,9 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        protected float getMiddleRightSlope(int x, int y)
+        protected double getMiddleRightSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
 
             if (x < width - 1)
@@ -158,9 +159,9 @@ namespace DynamicPathPlanner.Code
             return gradient;
         }
 
-        protected float getBottomLeftSlope(int x, int y)
+        protected double getBottomLeftSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if ((x > 0) && (y < height - 1))
             {
@@ -170,21 +171,21 @@ namespace DynamicPathPlanner.Code
             return gradient;
         }
 
-        protected float getBottomMiddleSlope(int x, int y)
+        protected double getBottomMiddleSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if (y < height - 1)
             {
-                gradient = getGradientValue((float)heightMap[x, y + 1], (float)heightMap[x, y]);
+                gradient = getGradientValue(heightMap[x, y + 1], heightMap[x, y]);
             }
 
             return gradient;
         }
 
-        protected float getBottomRightSlope(int x, int y)
+        protected double getBottomRightSlope(int x, int y)
         {
-            float gradient = 0;
+            double gradient = 0;
 
             if ((x < width - 1) && (y < height - 1))
             {
@@ -200,7 +201,7 @@ namespace DynamicPathPlanner.Code
 
 
 
-        public float[,] getSlopeModel()
+        public double[,] getSlopeModel()
         {
             return slopeModel;
         }

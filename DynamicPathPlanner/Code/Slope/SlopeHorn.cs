@@ -7,8 +7,9 @@ namespace DynamicPathPlanner.Code.Slope
 {
     class SlopeHorn : SlopeAlgrotithm
     {
+        public const String ALGORITHM = "HORN";
 
-        public SlopeHorn(float[,] model)
+        public SlopeHorn(double[,] model)
             : base(model)
         {
             heightMap = model;
@@ -18,28 +19,28 @@ namespace DynamicPathPlanner.Code.Slope
             generateSlopeModel();
         }
 
-        protected override float calculateSlopeValue(int x, int y)
+        protected override double calculateSlopeValue(int x, int y)
         {
 
-            float a = getTopLeft(x, y);
-            float b = getTopMiddle(x, y);
-            float c = getTopRight(x, y);
+            double a = getTopLeft(x, y);
+            double b = getTopMiddle(x, y);
+            double c = getTopRight(x, y);
 
-            float d = getMiddleLeft(x, y);
-            float f = getMiddleRight(x, y);
+            double d = getMiddleLeft(x, y);
+            double f = getMiddleRight(x, y);
 
-            float g = getBottomLeft(x, y);
-            float h = getBottomMiddle(x, y);
-            float i = getBottomRight(x, y);
+            double g = getBottomLeft(x, y);
+            double h = getBottomMiddle(x, y);
+            double i = getBottomRight(x, y);
 
 
-            float x_cell_size = 0.1f;
-            float y_cell_size = 0.1f;
+            double x_cell_size = 0.1f;
+            double y_cell_size = 0.1f;
 
-            float deltaX = ((c + (2 * f) + i) - (a + (2 * d) + g)) / (8 * x_cell_size);
-            float deltaY = ((g + (2 * h) + i) - (a + (2 * b) + c)) / (8 * y_cell_size);
+            double deltaX = ((c + (2 * f) + i) - (a + (2 * d) + g)) / (8 * x_cell_size);
+            double deltaY = ((g + (2 * h) + i) - (a + (2 * b) + c)) / (8 * y_cell_size);
 
-            float value = deltaY / deltaX;
+            double value = deltaY / deltaX;
 
             return value;
         }
@@ -48,7 +49,7 @@ namespace DynamicPathPlanner.Code.Slope
 
         #region slope Heights
 
-        private float getTopLeft(int x, int y)
+        private double getTopLeft(int x, int y)
         {
             if ((x > 0) && (y > 0))
             {
@@ -60,7 +61,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getTopMiddle(int x, int y)
+        private double getTopMiddle(int x, int y)
         {
             if (y > 0)
             {
@@ -72,7 +73,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getTopRight(int x, int y)
+        private double getTopRight(int x, int y)
         {
             if ((x < width - 1) && (y > 0))
             {
@@ -84,7 +85,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getMiddleLeft(int x, int y)
+        private double getMiddleLeft(int x, int y)
         {
             if (x > 0)
             {
@@ -96,7 +97,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getMiddleRight(int x, int y)
+        private double getMiddleRight(int x, int y)
         {
             if (x < width - 1)
             {
@@ -108,7 +109,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getBottomLeft(int x, int y)
+        private double getBottomLeft(int x, int y)
         {
             if ((x > 0) && (y < height - 1))
             {
@@ -120,7 +121,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getBottomMiddle(int x, int y)
+        private double getBottomMiddle(int x, int y)
         {
             if (y < height - 1)
             {
@@ -132,7 +133,7 @@ namespace DynamicPathPlanner.Code.Slope
             }
         }
 
-        private float getBottomRight(int x, int y)
+        private double getBottomRight(int x, int y)
         {
 
             if ((x < width - 1) && (y < height - 1))

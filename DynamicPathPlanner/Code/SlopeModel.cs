@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Drawing;
+using DynamicPathPlanner.Code.Slope;
 
 namespace DynamicPathPlanner.Code
 {
@@ -23,17 +24,17 @@ namespace DynamicPathPlanner.Code
         private int width;
         private int height;
 
-        private float[,] model;
-        private float[,] slopeModel;
+        private double[,] model;
+        private double[,] slopeModel;
 
         private Bitmap slopeBitmap;
         private Bitmap image;
-        private float lowestGradient;
-        private float highestGradient;
+        private double lowestGradient;
+        private double highestGradient;
 
         private string algorithmType;
 
-        public SlopeModel(float[,] modelT, string type)
+        public SlopeModel(double[,] modelT, string type)
         {
             model = modelT;
 
@@ -50,19 +51,19 @@ namespace DynamicPathPlanner.Code
 
         private void generateSlopeModel()
         {
-            slopeModel = new float[model.GetLength(0), model.GetLength(1)];
+            slopeModel = new double[model.GetLength(0), model.GetLength(1)];
 
             SlopeAlgrotithm slopeAlgortihm;
 
-            if (algorithmType == "MAXIMUM")
+            if (algorithmType == SlopeMax.ALGORITHM)
             {
                 slopeAlgortihm = new SlopeMax(model);
             }
-            else if (algorithmType == "AVERAGE")
+            else if (algorithmType == SlopeAverage.ALGORITHM)
             {
                 slopeAlgortihm = new SlopeAverage(model);
             }
-            else if (algorithmType == "HORN")
+            else if (algorithmType == SlopeHorn.ALGORITHM)
             {
                 slopeAlgortihm = new SlopeAverage(model);
             }
@@ -98,8 +99,8 @@ namespace DynamicPathPlanner.Code
 
         private void getGradientLimits()
         {
-            float low = slopeModel[0, 0];
-            float high = slopeModel[0, 0];
+            double low = slopeModel[0, 0];
+            double high = slopeModel[0, 0];
 
             for (int x = 0; x < width; x++)
             {
@@ -122,7 +123,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        private System.Drawing.Color getSlopeColorValue(float gradient)
+        private System.Drawing.Color getSlopeColorValue(double gradient)
         {
             System.Drawing.Color color = System.Drawing.Color.White;
 
@@ -136,12 +137,12 @@ namespace DynamicPathPlanner.Code
             if (gradient <= 1f)
             {
 
-                red = (1f - gradient) * 255;
+                red = (1f - (float)gradient) * 255;
 
             }
             else if (gradient <= 3f)
             {
-                float percent = (gradient) / (3f);
+                float percent = ((float)gradient) / (3f);
 
                 green = (1f - percent) * 255;
             }
@@ -157,13 +158,13 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public float[,] getSlopeModel()
+        public double[,] getSlopeModel()
         {
             return slopeModel;
         }
 
 
-        public ImageSource getSlopeModelImage()
+        public ImageSource getImageSource()
         {
             MemoryStream ms = new MemoryStream();
             slopeBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);

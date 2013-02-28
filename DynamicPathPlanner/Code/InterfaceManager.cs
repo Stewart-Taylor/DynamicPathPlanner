@@ -20,12 +20,10 @@ namespace DynamicPathPlanner
     {
         private SimulationManager simulationManager = new SimulationManager();
         private LogManager logManager = new LogManager();
-        private PANGU_Manager panguManager;
         private NavigationMapManager navigationMapManager = new NavigationMapManager();
 
         public InterfaceManager()
         {
-            panguManager = new PANGU_Manager(this);
 
         }
 
@@ -34,7 +32,7 @@ namespace DynamicPathPlanner
             //if connection was established connect
             if ((hostname == "localhost") && (portNumber == 10363))
             {
-                if (panguManager.connect(hostname, portNumber) == true)
+                if (PANGU_Manager.connect(hostname, portNumber) == true)
                 {
 
                     return true;
@@ -46,7 +44,7 @@ namespace DynamicPathPlanner
 
         public void disconnectFromPANGU()
         {
-            panguManager.endConnection();
+            PANGU_Manager.endConnection();
         }
 
 
@@ -55,29 +53,32 @@ namespace DynamicPathPlanner
             logManager.addEntry(entry);
         }
 
+        public void generateModels()
+        {
+            navigationMapManager = new NavigationMapManager();
+            navigationMapManager.generateElevationModel();
+            navigationMapManager.generateSlopeModel();
+            navigationMapManager.generateHazardModel();
 
+
+        }
 
         //REMOVE
-        public ImageSource getE()
+        public ImageSource getElevationModelImage()
         {
-            ElevationModel e = new ElevationModel(panguManager.getElevationModel(10 ,128,128));
-
-            return e.getImageSource();
+            return navigationMapManager.getElevationImage();
         }
 
 
         public ImageSource getSlopeModelImage()
         {
-          //  SlopeModel e = new SlopeModel(panguManager.getElevationModel()
-
-         //   return e.getImageSource();
-            return null;
+            return navigationMapManager.getSlopeImage();
         }
 
         //REMOVE
         public ImageSource getSkyview()
         {
-            return panguManager.getSkyView();
+            return PANGU_Manager.getSkyView();
            // return null;
         }
 

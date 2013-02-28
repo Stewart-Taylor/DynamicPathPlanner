@@ -7,8 +7,9 @@ namespace DynamicPathPlanner.Code
 {
     class SlopeAverage : SlopeAlgrotithm
     {
+        public const String ALGORITHM = "AVERAGE";
 
-        public SlopeAverage(float[,] model)
+        public SlopeAverage(double[,] model)
             : base(model)
         {
             heightMap = model;
@@ -19,23 +20,23 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        protected override float calculateSlopeValue(int x, int y)
+        protected override double calculateSlopeValue(int x, int y)
         {
 
-            float topLeft = getTopLeftSlope(x, y);
-            float topMid = getTopMiddleSlope(x, y);
-            float topRight = getTopRightSlope(x, y);
+            double topLeft = getTopLeftSlope(x, y);
+            double topMid = getTopMiddleSlope(x, y);
+            double topRight = getTopRightSlope(x, y);
 
-            float midLeft = getMiddleLeftSlope(x, y);
-            float midRight = getMiddleRightSlope(x, y);
+            double midLeft = getMiddleLeftSlope(x, y);
+            double midRight = getMiddleRightSlope(x, y);
 
-            float botLeft = getBottomLeftSlope(x, y);
-            float botMid = getBottomMiddleSlope(x, y);
-            float botRight = getBottomRightSlope(x, y);
+            double botLeft = getBottomLeftSlope(x, y);
+            double botMid = getBottomMiddleSlope(x, y);
+            double botRight = getBottomRightSlope(x, y);
 
-            float total = topLeft + topRight + topMid + midLeft + midRight + botLeft + botMid + botRight;
+            double total = topLeft + topRight + topMid + midLeft + midRight + botLeft + botMid + botRight;
 
-            float value = total / 8f;
+            double value = total / 8f;
 
             return value;
         }
