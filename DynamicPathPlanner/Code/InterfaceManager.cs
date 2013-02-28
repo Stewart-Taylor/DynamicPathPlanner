@@ -45,6 +45,7 @@ namespace DynamicPathPlanner
         }
 
 
+
         public void addLogEntry(String entry)
         {
             logManager.addEntry(entry);
