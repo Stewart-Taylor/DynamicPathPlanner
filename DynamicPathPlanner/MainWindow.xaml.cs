@@ -51,5 +51,28 @@ namespace DynamicPathPlanner
             BeginStoryboard(storyBoard);
  
         }
+
+
+        void mainSlideOut_Completed(object sender, EventArgs e)
+        {
+            grid_pangu.Visibility = Visibility.Visible;
+            grid_layout.Visibility = Visibility.Hidden;
+
+            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideIn");
+
+            BeginStoryboard(storyBoard);
+
+        }
+
+        private void btn_disconnect_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideOut");
+            storyBoard.Completed += new EventHandler(mainSlideOut_Completed);
+            BeginStoryboard(storyBoard);
+        }
+
+
+
     }
 }

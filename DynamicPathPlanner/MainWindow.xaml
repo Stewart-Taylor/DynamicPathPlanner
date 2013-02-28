@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="window_main" x:Class="DynamicPathPlanner.MainWindow"
         Title="Dynamic Path Planner" Height="768" Width="1024" MinWidth="1024" MinHeight="768" Background="{x:Null}">
 	<Window.Resources>
-		<Storyboard x:Key="OnLoaded1">
+		<Storyboard x:Key="PanguSlideIn">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_panguConnect">
 				<EasingDoubleKeyFrame KeyTime="0" Value="-720.271"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="30.373">
@@ -19,6 +19,9 @@
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="grid_panguConnect">
 				<EasingDoubleKeyFrame KeyTime="0" Value="408"/>
 			</DoubleAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid_pangu">
+				<EasingColorKeyFrame KeyTime="0" Value="#FF525252"/>
+			</ColorAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Key="PanguSlideOut">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_panguConnect">
@@ -45,16 +48,37 @@
 					</EasingDoubleKeyFrame.EasingFunction>
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid_main">
+				<EasingColorKeyFrame KeyTime="0" Value="White"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="MainSlideOut">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_layout">
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1610">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid_main">
+				<EasingColorKeyFrame KeyTime="0" Value="White"/>
+				<EasingColorKeyFrame KeyTime="0:0:2" Value="#FF525252">
+					<EasingColorKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingColorKeyFrame.EasingFunction>
+				</EasingColorKeyFrame>
+			</ColorAnimationUsingKeyFrames>
 		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-			<BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+			<BeginStoryboard x:Name="PanguSlideIn_BeginStoryboard" Storyboard="{StaticResource PanguSlideIn}"/>
 			<BeginStoryboard Storyboard="{StaticResource MainSlideIn}"/>
+			<BeginStoryboard Storyboard="{StaticResource MainSlideOut}"/>
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Grid x:Name="grid_pangu" Background="#FF525252">
+    	<Grid x:Name="grid_pangu" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -96,7 +120,7 @@
     			<MenuItem Header="MenuItem"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5">
+    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -117,12 +141,12 @@
     				<ColumnDefinition Width="0.527*"/>
     				<ColumnDefinition Width="0.5*"/>
     			</Grid.ColumnDefinitions>
-    			<Grid x:Name="grid_elevation" Background="#FF339933" Margin="0,0,0,183.749" d:IsLocked="True">
+    			<Grid x:Name="grid_elevation" Background="#FF339933" Margin="0,0,0,183.749">
     				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" Margin="3,0,0,0"/>
     				<Image Margin="6.446,79.356,8,7.943" Source="PathTest.png"/>
     				<Image Height="30" Margin="92.157,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="ElevationIcon.png"/>
     			</Grid>
-    			<Grid Grid.Column="1" Margin="8,0,0,0" d:IsLocked="True">
+    			<Grid Grid.Column="1" Margin="8,0,0,0">
     				<Grid.RowDefinitions>
     					<RowDefinition Height="0.522*"/>
     					<RowDefinition Height="0.5*"/>
@@ -148,13 +172,14 @@
     					<Image Height="30" Margin="66.326,0,210.181,0" VerticalAlignment="Top" Width="30" Source="HazardIcon.png" HorizontalAlignment="Left"/>
     				</Grid>
     			</Grid>
-    			<Grid x:Name="grid_panguS" Height="168.229" VerticalAlignment="Bottom" Background="#FFA200FF" Width="330" d:IsLocked="True">
+    			<Grid x:Name="grid_panguS" Height="168.229" VerticalAlignment="Bottom" Background="#FFA200FF" Width="330">
     				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="4,0,0,146.949" Foreground="White" FontSize="20" d:LayoutOverrides="Height"><Run Language="en-gb" Text="PANGU"/></TextBlock>
     				<Image Height="30" Margin="74.52,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="panguIcon.png"/>
     				<Image Margin="161.092,8,0,0" Source="PathTest.png"/>
+    				<Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Padding="10,1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="btn_disconnect_Click"/>
     			</Grid>
     		</Grid>
-    		<Grid x:Name="grid_vehicle" HorizontalAlignment="Right" Width="328.983" Background="#FF00ABA9" Margin="0,8" d:IsLocked="True">
+    		<Grid x:Name="grid_vehicle" HorizontalAlignment="Right" Width="328.983" Background="#FF00ABA9" Margin="0,8">
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Vehicle" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="20" Foreground="White" Margin="5,4,0,0"/>
     			<Image Height="30" Margin="69.54,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="VehicleIcon.png"/>
     			<Grid Margin="0.935,35.901,0,126.136">
@@ -172,7 +197,7 @@
     				</Grid>
     			</Grid>
     		</Grid>
-    		<Grid x:Name="grid_console" Margin="8,0,243.391,8" Grid.Row="1" Background="#FF525252" d:IsLocked="True">
+    		<Grid x:Name="grid_console" Margin="8,0,243.391,8" Grid.Row="1" Background="#FF525252">
     			<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
     				<TextBlock TextWrapping="Wrap" Text="Console" Foreground="White"/>
     			</Grid>
