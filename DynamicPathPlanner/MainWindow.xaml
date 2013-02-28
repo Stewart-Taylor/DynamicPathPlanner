@@ -78,7 +78,7 @@
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Grid x:Name="grid_pangu" Background="#FF525252">
+    	<Grid x:Name="grid_pangu" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -121,7 +121,7 @@
     			<MenuItem Header="MenuItem"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" d:IsHidden="True">
+    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -144,7 +144,7 @@
     			</Grid.ColumnDefinitions>
     			<Grid x:Name="grid_elevation" Background="#FF339933" Margin="0,0,0,183.749">
     				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" Margin="3,0,0,0"/>
-    				<Image Margin="6.446,79.356,8,7.9" Source="Images/PathTest.png"/>
+    				<Image x:Name="img_elevation" Margin="6.446,79.356,8,7.9" Source="Images/PathTest.png"/>
     				<Image Height="30" Margin="92.157,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="Images/ElevationIcon.png"/>
     			</Grid>
     			<Grid Grid.Column="1" Margin="8,0,0,0">

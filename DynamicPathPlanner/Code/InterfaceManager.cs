@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DynamicPathPlanner.Code;
+using System.Windows.Media;
 
 namespace DynamicPathPlanner
 {
@@ -31,7 +32,6 @@ namespace DynamicPathPlanner
         public bool connectToPANGU(String hostname, int portNumber)
         {
             //if connection was established connect
-
             if ((hostname == "localhost") && (portNumber == 10363))
             {
                 if (panguManager.connect(hostname, portNumber) == true)
@@ -44,11 +44,23 @@ namespace DynamicPathPlanner
             return false;
         }
 
+        public void disconnectFromPANGU()
+        {
+            panguManager.endConnection();
+        }
 
 
         public void addLogEntry(String entry)
         {
             logManager.addEntry(entry);
+        }
+
+
+        public ImageSource getE()
+        {
+            ElevationModel e = new ElevationModel(panguManager.getElevationModel(10 ,128,128));
+
+            return e.getImageSource();
         }
 
     }

@@ -67,6 +67,8 @@ namespace DynamicPathPlanner
                     storyBoard.Completed += new EventHandler(storyBoard_Completed);
                     BeginStoryboard(storyBoard);
 
+                    img_elevation.Source = interfaceManager.getE();
+
                 }
                 else
                 {
@@ -114,6 +116,7 @@ namespace DynamicPathPlanner
 
         private void btn_disconnect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            interfaceManager.disconnectFromPANGU();
         	// TODO: Add event handler implementation here.
             System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideOut");
             storyBoard.Completed += new EventHandler(mainSlideOut_Completed);

@@ -18,7 +18,7 @@ namespace DynamicPathPlanner.Code
     {
 
         private PANGU_Connector connector = new PANGU_Connector();
-        private InterfaceManager interfaceManager = new InterfaceManager();
+        private InterfaceManager interfaceManager;
 
         public PANGU_Manager(InterfaceManager iManager)
         {
@@ -39,6 +39,24 @@ namespace DynamicPathPlanner.Code
             return false;
         }
 
+
+        public double[,] getElevationModel(int distance, int width , int height)
+        {
+            double[,] elevationModel;
+
+            elevationModel = connector.getDEM(distance, width, height);
+
+            return elevationModel;
+        }
+
+
+        public void endConnection()
+        {
+            if (connector.getConnectionStatus() == true)
+            {
+                connector.disconnect();
+            }
+        }
 
     }
 }

@@ -24,67 +24,67 @@ namespace DynamicPathPlanner.Code
         //------------------------------------------------------------------------------------------------------------
 
         // Customised function provides a socket that can be used in C#
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void* getSocket([MarshalAs(UnmanagedType.LPStr)]String hName, int port);
 
         // Starts a PANGU network protocol session
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_start(void* sock);
 
         // Ends a PANGU network protocol session
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_finish(void* sock);
 
         // Sets angle for Image Viewport
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern char* pan_protocol_get_viewpoint_by_angle(void* sock, float x, float y, float z, float yw, float pi, float rl, ulong* size);
 
         // Sets angle for Image Viewport
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern char* pan_protocol_set_viewpoint_by_angle(void* sock, float x, float y, float z, float yw, float pi, float rl);
 
         // Sets field of view for Image Viewport
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_set_field_of_view(void* sock, float f);
 
         // Sets aspect ration for Image Viewport
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_set_aspect_ratio(void* sock, float r);
 
         // Determines if boulders should appear in Image Viewport
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_set_boulder_view(void* sock, ulong t, int tex);
 
         // Gets Lidar Pulse result
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_get_lidar_pulse_result(void* sock, float x, float y, float z, float dx, float dy, float dz, float* r, float* a);
         
         // Quits the PANGU connection
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_quit(void* sock);
 
         // Gets the elevation for the array of points specified
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_get_surface_elevations(void* s, char boulders, ulong n, float* posv, float* resultv, char* errorv);
 
         // Gets the surface elevation for the array of points specified
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_get_elevations(void* s, ulong n, float* posv, float* resultv, char* errorv);
 
         // Gets the elevation for the point specified
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern float pan_protocol_get_elevation(void* s, char* perr);
 
         // Gets the Image from PANGU
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern char* pan_protocol_get_image(void* sock, ulong* s);
 
         // Gets an elevation patch
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void pan_protocol_get_surface_patch(void* sock, char boulders, float cx, float cy, ulong nx, ulong ny, float d, float theta, float* rv, char* ev);
 
         //Customised Elevation function, works faster
-        [DllImport(@"PanguDLLs\DLLpangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void getElevationModel(void* s, char b, float d, int sizeX, int sizeY, float[] elevationGrid);
        
         //------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ namespace DynamicPathPlanner.Code
         }
 
         //Uses getElevationModel function to get the DEM
-        public double[,] getDEM(string fpath, float distance, int width, int height)
+        public double[,] getDEM(float distance, int width, int height)
         {
             double[,] elevationModel = null;
 
@@ -140,6 +140,19 @@ namespace DynamicPathPlanner.Code
                 try
                 {
                     getElevationModel(sock, b, distance, nx, ny, elevationGrid);
+
+                    //Converts from 1D to 2D array
+                    int temp = 0;
+                    for (int y = 0; y < (int)ny; y++)
+                    {
+                        for (int x = 0; x < (int)nx; x++)
+                        {
+
+                            elevationModel[x, y] = elevationGrid[temp];
+                            temp++;
+                        }
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -188,12 +201,9 @@ namespace DynamicPathPlanner.Code
 
 
         //returns connection status
-        public bool getConnectionStatus
+        public bool getConnectionStatus()
         {
-            get
-            {
                 return connected;
-            }
         }
     }
 }
