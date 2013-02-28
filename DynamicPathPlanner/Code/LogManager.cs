@@ -18,5 +18,30 @@ namespace DynamicPathPlanner.Code
 {
     class LogManager
     {
+
+        public LogManager()
+        {
+
+        }
+
+
+        public void addEntry(String entryText)
+        {
+
+
+        }
+
+        private void printToLogFile()
+        {
+
+
+        }
+
+        private void printToConsole()
+        {
+
+
+        }
+
     }
 }

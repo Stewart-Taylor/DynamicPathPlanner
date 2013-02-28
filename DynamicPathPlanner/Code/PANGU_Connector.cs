@@ -16,5 +16,21 @@ namespace DynamicPathPlanner.Code
 {
     class PANGU_Connector
     {
+
+        public PANGU_Connector()
+        {
+
+
+        }
+
+
+
+        public bool connect(String host, int port)
+        {
+            return true;
+
+        }
+
+
     }
 }

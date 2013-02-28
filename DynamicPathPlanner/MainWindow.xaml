@@ -94,8 +94,9 @@
     			<TextBox x:Name="txt_hostname" Margin="8,186.416,0,182.753" TextWrapping="Wrap" Text="localhost" HorizontalAlignment="Left" Width="392" Background="#FFC8C8C8" FontSize="18.667" d:LayoutOverrides="Height"/>
     			<TextBlock Margin="8,161.136,-8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White"><Run Language="en-gb" Text="Enter a hostname"/></TextBlock>
     			<TextBlock Margin="0,89.269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
-    			<TextBox x:Name="txt_port" Margin="8,0,0,103.349" TextWrapping="Wrap" Text="10364" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="392" Background="#FFC8C8C8" FontSize="18.667"/>
+    			<TextBox x:Name="txt_port" Margin="8,0,0,103.349" TextWrapping="Wrap" Text="10363" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="392" Background="#FFC8C8C8" FontSize="18.667"/>
     			<TextBlock Margin="8,0,-8,138.179" TextWrapping="Wrap" FontSize="16" Foreground="White" VerticalAlignment="Bottom"><Run Language="en-gb" Text="Enter a port number"/></TextBlock>
+    			<TextBlock x:Name="lbl_connectError" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">

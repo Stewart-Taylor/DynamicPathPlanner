@@ -1,4 +1,4 @@
-﻿/*      Hornlope Class
+﻿/*      HornSlope Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class is used to generate a slope model 

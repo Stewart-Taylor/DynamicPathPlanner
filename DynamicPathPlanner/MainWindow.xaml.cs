@@ -34,17 +34,57 @@ namespace DynamicPathPlanner
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            String hostname = "";
+            int portNumber = 0;
+            bool validInput = true;
+
+            try
+            {
+
+                hostname = txt_hostname.Text;
+
+            }
+            catch(Exception ex)
+            {
+                validInput = false;
+            }
+
+            try
+            {
+                String portText = txt_port.Text;
+                portNumber = int.Parse(portText);
+            }
+            catch(Exception ex)
+            {
+                validInput = false;
+            }
+
+            if (validInput == true)
+            {
+                if (interfaceManager.connectToPANGU(hostname, portNumber) == true)
+                {
+                    System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideOut");
+                    storyBoard.Completed += new EventHandler(storyBoard_Completed);
+                    BeginStoryboard(storyBoard);
+
+                }
+                else
+                {
+                    //DING ERROR
+                    lbl_connectError.Text = "Error: Could not connect to PANGU server";
+                    lbl_connectError.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                //DING ERROR
+                lbl_connectError.Text = "Error: Please enter valid connection parameters";
+                lbl_connectError.Visibility = Visibility.Visible;
+            }
 
 
 
-
-        	// TODO: Add event handler implementation here.
-          //  grid_layout.Visibility = Visibility.Visible;
-          //  grid_pangu.Visibility = Visibility.Hidden;
-
-            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideOut");
-            storyBoard.Completed += new EventHandler(storyBoard_Completed);
-            BeginStoryboard(storyBoard);
+  
         }
 
 

@@ -16,5 +16,29 @@ namespace DynamicPathPlanner.Code
 {
     class PANGU_Manager
     {
+
+        private PANGU_Connector connector = new PANGU_Connector();
+        private InterfaceManager interfaceManager = new InterfaceManager();
+
+        public PANGU_Manager(InterfaceManager iManager)
+        {
+            interfaceManager = iManager;
+
+        }
+
+
+
+        public bool connect(String hostname, int port)
+        {
+            if (connector.connect(hostname, port) == true)
+            {
+                interfaceManager.addLogEntry("Connected");
+                return true;
+            }
+
+            return false;
+        }
+
+
     }
 }

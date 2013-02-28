@@ -19,26 +19,36 @@ namespace DynamicPathPlanner
     {
         private SimulationManager simulationManager = new SimulationManager();
         private LogManager logManager = new LogManager();
-        private PANGU_Manager panguManager = new PANGU_Manager();
+        private PANGU_Manager panguManager;
         private NavigationMapManager navigationMapManager = new NavigationMapManager();
 
         public InterfaceManager()
         {
-
+            panguManager = new PANGU_Manager(this);
 
         }
 
-        public bool connectToPANGU(String hostname, int portNumbert)
+        public bool connectToPANGU(String hostname, int portNumber)
         {
             //if connection was established connect
 
-            return true;
+            if ((hostname == "localhost") && (portNumber == 10363))
+            {
+                if (panguManager.connect(hostname, portNumber) == true)
+                {
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 
-
-
-
+        public void addLogEntry(String entry)
+        {
+            logManager.addEntry(entry);
+        }
 
     }
 }
