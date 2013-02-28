@@ -7,5 +7,17 @@ namespace DynamicPathPlanner.Code
 {
     class NavigationMapManager
     {
+
+        private ElevationModel elevationModel;
+        private SlopeModel slopeModel;
+        private HazardModel hazardModel;
+
+        public NavigationMapManager()
+        {
+
+
+
+        }
+
     }
 }

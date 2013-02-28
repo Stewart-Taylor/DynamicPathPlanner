@@ -68,7 +68,7 @@ namespace DynamicPathPlanner
                     BeginStoryboard(storyBoard);
 
                     img_elevation.Source = interfaceManager.getE();
-
+                    img_pangu.Source = interfaceManager.getSkyview();
                 }
                 else
                 {

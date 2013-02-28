@@ -154,7 +154,7 @@
     				</Grid.RowDefinitions>
     				<Grid x:Name="grid_slope" Margin="0,0,0,8" Background="#FF8CBF26">
     					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="4,0,0,0"><Run Language="en-gb" Text="Slope"/></TextBlock>
-    					<Image Margin="42.114,33.967,0,8" Source="Images/PathTest.png" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    					<Image x:Name="img_slope" Margin="42.114,33.967,0,8" Source="Images/PathTest.png" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     					<Image Height="30" Margin="53.407,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="Images/Slope.png"/>
     				</Grid>
     				<Grid x:Name="grid_hazard" Margin="0,8,0,0" Grid.Row="1" Background="#FFF09609">
@@ -168,7 +168,7 @@
     							<ColumnDefinition Width="0.264*"/>
     							<ColumnDefinition Width="0.736*"/>
     						</Grid.ColumnDefinitions>
-    						<Image Grid.Column="1" Margin="0" Source="Images/PathTest.png" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    						<Image x:Name="img_hazard" Grid.Column="1" Margin="0" Source="Images/PathTest.png" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     					</Grid>
     					<Image Height="30" Margin="66.326,0,210.181,0" VerticalAlignment="Top" Width="30" Source="Images/HazardIcon.png" HorizontalAlignment="Left"/>
     				</Grid>
@@ -176,7 +176,7 @@
     			<Grid x:Name="grid_panguS" Height="168.229" VerticalAlignment="Bottom" Background="#FFA200FF" Width="330">
     				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="4,0,0,146.949" Foreground="White" FontSize="20" d:LayoutOverrides="Height"><Run Language="en-gb" Text="PANGU"/></TextBlock>
     				<Image Height="30" Margin="74.52,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Source="Images/panguIcon.png"/>
-    				<Image Margin="161.092,8,0,0" Source="PathTest.png"/>
+    				<Image x:Name="img_pangu" Margin="161.092,8,0,0" Source="Images/PathTest.png"/>
     				<Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Padding="10,1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="btn_disconnect_Click"/>
     			</Grid>
     		</Grid>
@@ -190,11 +190,11 @@
     				</Grid.RowDefinitions>
     				<Grid Margin="0,0,0,8">
     					<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="White" RenderTransformOrigin="0.1,1.082" HorizontalAlignment="Left"><Run Language="en-gb" Text="Internal"/></TextBlock>
-    					<Image Margin="115.51,0,0,0" Source="Images/PathTest.png"/> 
+    					<Image x:Name="img_internalMap" Margin="115.51,0,0,0" Source="Images/PathTest.png"/> 
     				</Grid>
     				<Grid Grid.Row="1">
     					<TextBlock Margin="8.84,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="White" RenderTransformOrigin="0.1,1.082" HorizontalAlignment="Left"><Run Language="en-gb" Text="RoverCam"/></TextBlock>
-    					<Image Margin="118.07,0,0,0" Source="Images/PathTest.png"/> 
+    					<Image x:Name="img_rovercam" Margin="118.07,0,0,0" Source="Images/PathTest.png"/> 
     				</Grid>
     			</Grid>
     		</Grid>

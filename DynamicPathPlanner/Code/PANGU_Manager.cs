@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Windows.Media;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace DynamicPathPlanner.Code
 {
@@ -47,6 +51,22 @@ namespace DynamicPathPlanner.Code
             elevationModel = connector.getDEM(distance, width, height);
 
             return elevationModel;
+        }
+
+        public ImageSource getSkyView()
+        {
+            Bitmap skyBitmap = connector.getImage(0, 0, 7000, 0, -90, 0);
+            MemoryStream ms = new MemoryStream();
+            skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            ImageSource img = bi;
+
+            return img;
         }
 
 

@@ -56,11 +56,29 @@ namespace DynamicPathPlanner
         }
 
 
+
+        //REMOVE
         public ImageSource getE()
         {
             ElevationModel e = new ElevationModel(panguManager.getElevationModel(10 ,128,128));
 
             return e.getImageSource();
+        }
+
+
+        public ImageSource getSlopeModelImage()
+        {
+          //  SlopeModel e = new SlopeModel(panguManager.getElevationModel()
+
+         //   return e.getImageSource();
+            return null;
+        }
+
+        //REMOVE
+        public ImageSource getSkyview()
+        {
+            return panguManager.getSkyView();
+           // return null;
         }
 
     }

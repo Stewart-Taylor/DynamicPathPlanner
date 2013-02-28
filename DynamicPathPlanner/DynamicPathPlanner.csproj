@@ -67,9 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Code\AverageSlope.cs" />
-    <Compile Include="Code\A_Star.cs" />
-    <Compile Include="Code\D_Star.cs" />
+    <Compile Include="Code\Slope\AverageSlope.cs" />
+    <Compile Include="Code\Pathfinding\A_Star.cs" />
+    <Compile Include="Code\Pathfinding\D_Star.cs" />
     <Compile Include="Code\ElevationLoader.cs" />
     <Compile Include="Code\ElevationModel.cs" />
     <Compile Include="Code\HazardModel.cs" />
@@ -83,9 +83,12 @@
     <Compile Include="Code\PathFinder.cs" />
     <Compile Include="Code\PathNode.cs" />
     <Compile Include="Code\PPM_Loader.cs" />
-    <Compile Include="Code\SearchAlgorithm.cs" />
+    <Compile Include="Code\Pathfinding\SearchAlgorithm.cs" />
     <Compile Include="Code\SimulationManager.cs" />
-    <Compile Include="Code\SlopeAlgorithm.cs" />
+    <Compile Include="Code\Slope\SlopeAlgorithm.cs" />
+    <Compile Include="Code\Slope\SlopeAverage.cs" />
+    <Compile Include="Code\Slope\SlopeHorn.cs" />
+    <Compile Include="Code\Slope\SlopeMax.cs" />
     <Compile Include="Code\SlopeModel.cs" />
     <Compile Include="Code\Vehicle.cs" />
     <Compile Include="Code\VehicleHazardMap.cs" />

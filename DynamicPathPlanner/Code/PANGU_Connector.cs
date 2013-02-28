@@ -191,14 +191,94 @@ namespace DynamicPathPlanner.Code
                 img = pan_protocol_get_viewpoint_by_angle(sock, x, y, z, yaw, pitch, roll, &t); //get the image
                 UnmanagedMemoryStream readStream = new UnmanagedMemoryStream((byte*)img, (long)t);
 
-          //      PPM ppm = new PPM(readStream);//convert the image
+                Bitmap bitmap = fetchImage(readStream);
+               // PPM ppm = new PPM(readStream);//convert the image
                 readStream.Close(); //tidy up
                 readStream.Dispose();//tidy up
-           //     return ppm.getBitmap;
-                return null;
+                return bitmap;
+               // return null;
             }
         }
 
+
+
+        private Bitmap fetchImage(UnmanagedMemoryStream memStream)
+        {
+
+            int buffer;
+            string id ="";
+            int width;
+            int height;
+            int max;
+            byte[] rgbValues = null;
+            Bitmap bitmap;
+
+            do
+            {
+                buffer = memStream.ReadByte();
+                id += (char)buffer;
+            } while (buffer != '\n' && buffer != ' ');
+
+            string dimension = "";
+            do
+            {
+                buffer = memStream.ReadByte();
+                dimension += (char)buffer;
+            } while (buffer != '\n' && buffer != ' ');
+
+            width = Convert.ToInt16(dimension);
+            dimension = "";
+            do
+            {
+                buffer = memStream.ReadByte();
+                dimension += (char)buffer;
+            } while (buffer != '\n' && buffer != ' ');
+
+            height = Convert.ToInt16(dimension);
+            string maxRGB = "";
+            do
+            {
+                buffer = memStream.ReadByte();
+                maxRGB += (char)buffer;
+            } while (buffer != '\n' && buffer != ' ');
+
+            max = Convert.ToInt16(maxRGB);
+            rgbValues = new byte[height * width * 3];
+            for (int i = 0; i < rgbValues.Length; i++)
+            {
+                rgbValues[i] = (byte)memStream.ReadByte();
+            }
+
+            memStream.Close();
+
+            try
+            {
+                bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                Rectangle rect = new Rectangle(0, 0, width, height);
+                System.Drawing.Imaging.BitmapData bmpData = bitmap.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                IntPtr ptr = bmpData.Scan0;
+
+                byte[] bgrValues = new byte[rgbValues.Length];
+                for (int i = 0; i < rgbValues.Length; i += 3)
+                {
+                    bgrValues[i] = rgbValues[i + 2];
+                    bgrValues[i + 1] = rgbValues[i + 1];
+                    bgrValues[i + 2] = rgbValues[i];
+                }
+
+                System.Runtime.InteropServices.Marshal.Copy(bgrValues, 0, ptr, bgrValues.Length);
+                bitmap.UnlockBits(bmpData);
+                return bitmap;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error creating new bitmap: " + ex.ToString());
+            }
+
+            return null;
+        }
+
+ 
 
         //returns connection status
         public bool getConnectionStatus()
