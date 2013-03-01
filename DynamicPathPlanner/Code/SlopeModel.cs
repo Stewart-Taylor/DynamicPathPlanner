@@ -158,7 +158,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public double[,] getSlopeModel()
+        public double[,] getModel()
         {
             return slopeModel;
         }

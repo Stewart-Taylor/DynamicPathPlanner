@@ -12,7 +12,8 @@ namespace DynamicPathPlanner.Code
         private ElevationModel elevationModel;
         private SlopeModel slopeModel;
         private HazardModel hazardModel;
-      
+
+        private int hazardSectorSize = 10;
 
         public NavigationMapManager()
         {
@@ -35,7 +36,7 @@ namespace DynamicPathPlanner.Code
 
         public void generateHazardModel()
         {
-            hazardModel = new HazardModel();
+            hazardModel = new HazardModel(slopeModel.getModel(), hazardSectorSize);
         }
 
 
@@ -52,8 +53,7 @@ namespace DynamicPathPlanner.Code
 
         public ImageSource getHazardImage()
         {
-           // return hazardModel.getImageSource();
-            return null;
+            return hazardModel.getImageSource();
         }
 
 

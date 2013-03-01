@@ -17,7 +17,7 @@ namespace DynamicPathPlanner.Code
 
         public double[,] getPANGU_DEM()
         {
-            double[,] d = PANGU_Manager.getElevationModel(10 ,128,128);
+            double[,] d = PANGU_Manager.getElevationModel(1 ,256,256);
 
             return d;
         }

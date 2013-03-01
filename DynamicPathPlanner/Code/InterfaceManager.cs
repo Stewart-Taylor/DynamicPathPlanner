@@ -75,6 +75,11 @@ namespace DynamicPathPlanner
             return navigationMapManager.getSlopeImage();
         }
 
+        public ImageSource getHazardModelImage()
+        {
+            return navigationMapManager.getHazardImage();
+        }
+
         //REMOVE
         public ImageSource getSkyview()
         {

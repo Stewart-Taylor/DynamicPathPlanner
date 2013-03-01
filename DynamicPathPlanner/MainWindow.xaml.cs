@@ -71,6 +71,7 @@ namespace DynamicPathPlanner
                     img_elevation.Source = interfaceManager.getElevationModelImage();
                     img_pangu.Source = interfaceManager.getSkyview();
                     img_slope.Source = interfaceManager.getSlopeModelImage();
+                    img_hazard.Source = interfaceManager.getHazardModelImage();
                 }
                 else
                 {
