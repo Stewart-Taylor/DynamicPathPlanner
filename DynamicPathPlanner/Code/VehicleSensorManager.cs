@@ -7,5 +7,14 @@ namespace DynamicPathPlanner.Code
 {
     class VehicleSensorManager
     {
+        private NavigationMapManager navigationMap;
+        private Vehicle vehicle;
+
+        public VehicleSensorManager(Vehicle v, NavigationMapManager m)
+        {
+            vehicle = v;
+            navigationMap = m;
+
+        }
     }
 }

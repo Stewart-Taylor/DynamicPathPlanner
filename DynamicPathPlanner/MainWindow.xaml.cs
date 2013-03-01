@@ -126,6 +126,12 @@ namespace DynamicPathPlanner
             BeginStoryboard(storyBoard);
         }
 
+        private void btn_start_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.startSimulation();
+            img_internalMap.Source = interfaceManager.getRoverMap();
+        }
+
 
 
     }

@@ -59,8 +59,16 @@ namespace DynamicPathPlanner
             navigationMapManager.generateElevationModel();
             navigationMapManager.generateSlopeModel();
             navigationMapManager.generateHazardModel();
+            
+
+        }
 
 
+        public void startSimulation()
+        {
+            simulationManager.setSimulation(navigationMapManager);
+         //   simulationManager.startSimulation();
+            simulationManager.startSimulationDSTAR(1, 1, 5, 20);
         }
 
         //REMOVE
@@ -84,7 +92,11 @@ namespace DynamicPathPlanner
         public ImageSource getSkyview()
         {
             return PANGU_Manager.getSkyView();
-           // return null;
+        }
+
+        public ImageSource getRoverMap()
+        {
+            return simulationManager.getVehicleImage();
         }
 
     }

@@ -205,8 +205,8 @@
     			<TextBox Margin="0,19,8,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667"/>
     		</Grid>
     		<Grid x:Name="grid_controls" HorizontalAlignment="Right" Grid.Row="1" Width="230" Background="White" Margin="0,2.962,8,8">
-    			<Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="#FFF09609" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
-    			<Button x:Name="btn_start_Copy" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="#FF339933" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
+    			<Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="#FFF09609" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_start_Click"/>
+    			<Button x:Name="btn_pause" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="#FF339933" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
     			<Button x:Name="btn_start_Copy1" Content="Instant"  Margin="0,30,35,30" Background="#FF1BA1E2" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
     		</Grid>
     	</Grid>
