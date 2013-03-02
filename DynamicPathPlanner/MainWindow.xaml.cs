@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.ComponentModel;
 
 namespace DynamicPathPlanner
 {
@@ -28,6 +29,13 @@ namespace DynamicPathPlanner
         private Grid activeGrid;
         private Storyboard activeStoryboard;
 
+
+        private Storyboard startup_wait;
+
+
+
+        BackgroundWorker startup_worker = new BackgroundWorker();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +49,9 @@ namespace DynamicPathPlanner
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Hidden;
 
+
+            startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
+
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
             BeginStoryboard(startSlideIn);
@@ -49,9 +60,25 @@ namespace DynamicPathPlanner
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
-            panguStartUp();
+            startup_worker.DoWork += new DoWorkEventHandler(panguStartUp);
+            startup_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startup_worker_complete);
 
+            startup_worker.RunWorkerAsync();
+
+            BeginStoryboard(startup_wait);
         }
+
+
+    
+
+        private void startup_worker_complete(object sender, EventArgs e)
+        {
+            nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
+            startup_wait.Stop();
+        }
+
+
+     
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
         {
@@ -140,14 +167,12 @@ namespace DynamicPathPlanner
         }
 
 
-        private void panguStartUp()
+        private void panguStartUp(object sender, EventArgs e)
         {
             if (interfaceManager.connectToPANGU() == true)
             {
-                System.Threading.Thread.Sleep(1000); // REMOVE
-                nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
+                System.Threading.Thread.Sleep(5000); // REMOVE
             }
-
         }
 
 

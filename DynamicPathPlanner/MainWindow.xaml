@@ -183,6 +183,14 @@
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Startup_Wait" RepeatBehavior="Forever">
+			<StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="textBlock">
+				<DiscreteStringKeyFrame KeyTime="0" Value="Please Wait."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:0.5" Value="Please Wait.."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1.1" Value="Please Wait..."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:2" Value="Please Wait..."/>
+			</StringAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
@@ -296,7 +304,7 @@
     			<Button x:Name="btn_start_Copy1" Content="Instant"  Margin="0,30,35,30" Background="#FF1BA1E2" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_startup_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_startup_slide" Background="#FF525252">
     		<Grid x:Name="grid_startupContainer" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -309,7 +317,7 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="PANGU"/></TextBlock>
     			<TextBlock Margin="126.31,168.339,123.989,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" d:LayoutOverrides="Width"><Run Language="en-gb" Text="Connecting to PANGU"/></TextBlock>
     			<Button x:Name="btn_startupNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_startupNext_Click"/>
-    			<TextBlock Margin="0,193.619,0,185.101" TextWrapping="Wrap" FontSize="16" Foreground="White" d:LayoutOverrides="Height" HorizontalAlignment="Center"><Run Language="en-gb" Text="Please Wait..."/></TextBlock>
+    			<TextBlock x:Name="textBlock" Margin="126.31,0,153.623,152.335" TextWrapping="Wrap" FontSize="21.333" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..." d:LayoutOverrides="Width"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
