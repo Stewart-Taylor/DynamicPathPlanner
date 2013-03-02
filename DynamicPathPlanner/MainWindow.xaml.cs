@@ -31,10 +31,11 @@ namespace DynamicPathPlanner
 
 
         private Storyboard startup_wait;
-
+        private Storyboard elevation_wait;
 
 
         BackgroundWorker startup_worker = new BackgroundWorker();
+        BackgroundWorker elevation_worker = new BackgroundWorker();
 
         public MainWindow()
         {
@@ -50,7 +51,9 @@ namespace DynamicPathPlanner
             grid_layout.Visibility = Visibility.Hidden;
 
 
+            //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
+            elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
 
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
@@ -75,6 +78,13 @@ namespace DynamicPathPlanner
         {
             nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
             startup_wait.Stop();
+        }
+
+        private void elevation_worker_complete(object sender, EventArgs e)
+        {
+            elevation_wait.Stop();
+            lbl_elevationWait.Text = "";
+            img_elevationSlide.Source = interfaceManager.getElevationModelImage();
         }
 
 
@@ -102,11 +112,25 @@ namespace DynamicPathPlanner
         }
 
 
+        private void elevationScreen(object sender, EventArgs e)
+        {
+            interfaceManager.generateElevationModel();
+            
 
+        }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
+            elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
+
+            elevation_worker.RunWorkerAsync();
+
+            //BeginStoryboard(elevation_wait);
+            elevation_wait.Begin();
+
             nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
+            
             /*
             String hostname = "";
             int portNumber = 0;
@@ -171,7 +195,7 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.connectToPANGU() == true)
             {
-                System.Threading.Thread.Sleep(5000); // REMOVE
+                System.Threading.Thread.Sleep(2000); // REMOVE
             }
         }
 

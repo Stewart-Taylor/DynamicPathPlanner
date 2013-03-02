@@ -122,6 +122,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ImageLoad.png" />
     <Resource Include="Images\ElevationIcon.png" />
     <Resource Include="Images\HazardIcon.png" />
     <Resource Include="Images\panguIcon.png" />

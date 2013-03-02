@@ -82,6 +82,13 @@ namespace DynamicPathPlanner
             logManager.addEntry(entry);
         }
 
+
+        public void generateElevationModel()
+        {
+            navigationMapManager = new NavigationMapManager();
+            navigationMapManager.generateElevationModel();
+        }
+
         public void generateModels()
         {
             navigationMapManager = new NavigationMapManager();
