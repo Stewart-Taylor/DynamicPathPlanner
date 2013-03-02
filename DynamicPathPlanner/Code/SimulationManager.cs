@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*      SimulationManager Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is to run the pathfinding simulation
+ * 
+ *
+ * Last Updated: 02/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

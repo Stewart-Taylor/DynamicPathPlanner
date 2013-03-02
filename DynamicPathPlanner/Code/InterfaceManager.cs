@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 28/02/2013
+ * Last Updated: 02/03/2013
 */
 
 using System;
