@@ -89,6 +89,16 @@ namespace DynamicPathPlanner
             navigationMapManager.generateElevationModel();
         }
 
+        public void generateSlopeModel()
+        {
+            navigationMapManager.generateSlopeModel();
+        }
+
+        public void generateHazardModel()
+        {
+            navigationMapManager.generateHazardModel();
+        }
+
         public void generateModels()
         {
             navigationMapManager = new NavigationMapManager();
@@ -133,6 +143,15 @@ namespace DynamicPathPlanner
         public ImageSource getRoverMap()
         {
             return simulationManager.getVehicleImage();
+        }
+
+        public bool isSlopeMapGenerated()
+        {
+            if (navigationMapManager.getSlopeModel() != null)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

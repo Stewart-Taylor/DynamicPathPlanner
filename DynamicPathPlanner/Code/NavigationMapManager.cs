@@ -61,6 +61,10 @@ namespace DynamicPathPlanner.Code
             return hazardModel.getImageSource();
         }
 
+        public double[,] getSlopeModel()
+        {
+            return slopeModel.getModel();
+        }
 
     }
 }

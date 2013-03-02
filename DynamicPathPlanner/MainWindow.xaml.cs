@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*      MainWindow Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to control the interface
+ * It mainly controls screen animations and passes commands to the InterfaceManager
+ *
+ * Last Updated: 02/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,26 +25,23 @@ using System.ComponentModel;
 
 namespace DynamicPathPlanner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
         private InterfaceManager interfaceManager = new InterfaceManager();
 
-
         private Grid oldGrid;
         private Grid activeGrid;
         private Storyboard activeStoryboard;
 
-
         private Storyboard startup_wait;
         private Storyboard elevation_wait;
+        private Storyboard slope_wait;
 
-
-        BackgroundWorker startup_worker = new BackgroundWorker();
-        BackgroundWorker elevation_worker = new BackgroundWorker();
+        private BackgroundWorker startup_worker = new BackgroundWorker();
+        private BackgroundWorker elevation_worker = new BackgroundWorker();
+        private BackgroundWorker slope_worker = new BackgroundWorker();
+        private BackgroundWorker hazard_worker = new BackgroundWorker();
 
         public MainWindow()
         {
@@ -54,6 +60,7 @@ namespace DynamicPathPlanner
             //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
+            slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
 
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
@@ -85,9 +92,16 @@ namespace DynamicPathPlanner
             elevation_wait.Stop();
             lbl_elevationWait.Text = "";
             img_elevationSlide.Source = interfaceManager.getElevationModelImage();
+            btn_elevationNext.Visibility = Visibility.Visible;
         }
 
-
+        private void slope_worker_complete(object sender, EventArgs e)
+        {
+            slope_wait.Stop();
+            lbl_slopeWait.Text = "";
+            img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
+            btn_slopeNext.Visibility = Visibility.Visible;
+        }
      
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
@@ -115,78 +129,47 @@ namespace DynamicPathPlanner
         private void elevationScreen(object sender, EventArgs e)
         {
             interfaceManager.generateElevationModel();
-            
+        }
 
+
+        private void slopeScreen(object sender, EventArgs e)
+        {
+            interfaceManager.generateSlopeModel();
         }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
-            elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
 
-            elevation_worker.RunWorkerAsync();
+            bool valid = false;
 
-            //BeginStoryboard(elevation_wait);
-            elevation_wait.Begin();
+            String selectedText = "";
 
-            nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
-            
-            /*
-            String hostname = "";
-            int portNumber = 0;
-            bool validInput = true;
-
-            try
+            if (lst_environment.SelectedValue != null)
             {
-
-             //   hostname = txt_hostname.Text;
-
-            }
-            catch(Exception ex)
-            {
-                validInput = false;
+                TextBlock temp = (TextBlock)lst_environment.SelectedItem;
+                selectedText = temp.Text;
             }
 
-            try
+            if (selectedText == "Moon.pan")
             {
-            //    String portText = txt_port.Text;
-             //   portNumber = int.Parse(portText);
-            }
-            catch(Exception ex)
-            {
-                validInput = false;
+                valid = true;
             }
 
-            if (validInput == true)
+            if (valid == true)
             {
-                if (interfaceManager.connectToPANGU(hostname, portNumber) == true)
-                {
-                    System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideOut");
-                    storyBoard.Completed += new EventHandler(storyBoard_Completed);
-                    BeginStoryboard(storyBoard);
+                elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
+                elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
 
-                    interfaceManager.generateModels();
-                    img_elevation.Source = interfaceManager.getElevationModelImage();
-                    img_pangu.Source = interfaceManager.getSkyview();
-                    img_slope.Source = interfaceManager.getSlopeModelImage();
-                    img_hazard.Source = interfaceManager.getHazardModelImage();
-                }
-                else
-                {
-                    //DING ERROR
-                    lbl_connectError.Text = "Error: Could not connect to PANGU server";
-                    lbl_connectError.Visibility = Visibility.Visible;
-                }
+                elevation_worker.RunWorkerAsync();
+
+                //BeginStoryboard(elevation_wait);
+                btn_elevationNext.Visibility = Visibility.Hidden;
+                elevation_wait.Begin();
+
+                nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
+
             }
-            else
-            {
-                //DING ERROR
-                lbl_connectError.Text = "Error: Please enter valid connection parameters";
-                lbl_connectError.Visibility = Visibility.Visible;
-            }
-
-
-            */
+       
   
         }
 
@@ -250,11 +233,39 @@ namespace DynamicPathPlanner
 
         private void btn_slopeNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            nextSlide(grid_slope_slide, grid_hazard_slide , "Slope_SlideOut" , "Hazard_SlideIn");
+            bool valid = false;
+
+
+            string slopeType = "";
+
+            System.Windows.Controls.ComboBoxItem curItem = ((System.Windows.Controls.ComboBoxItem)cmb_slopeType.SelectedItem);
+
+            if (curItem != null)
+            {
+                slopeType = curItem.Content.ToString();
+            }
+
+
+            if (slopeType != "")
+            {
+                valid = true;
+            }
+
+            if (interfaceManager.isSlopeMapGenerated() == true)
+            {
+                nextSlide(grid_slope_slide, grid_hazard_slide, "Slope_SlideOut", "Hazard_SlideIn");
+            }
+
         }
 
         private void btn_elevationNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
+            slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+
+            slope_wait.Begin();
+            slope_worker.RunWorkerAsync();
+
             nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
         }
 

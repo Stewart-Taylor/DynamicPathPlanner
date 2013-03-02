@@ -199,10 +199,19 @@
 				<DiscreteStringKeyFrame KeyTime="0:0:1.6" Value="Please Wait ..."/>
 			</StringAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Slope_Wait" RepeatBehavior="Forever">
+			<StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="lbl_slopeWait">
+				<DiscreteStringKeyFrame KeyTime="0" Value="Please Wait ."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:0.5" Value="Please Wait .."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1" Value="Please Wait ..."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1.6" Value="Please Wait ..."/>
+			</StringAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
 			<BeginStoryboard Storyboard="{StaticResource Elevation_Wait}"/>
+			<BeginStoryboard x:Name="Slope_Wait_BeginStoryboard" Storyboard="{StaticResource Slope_Wait}"/>
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
@@ -228,7 +237,7 @@
     			<MenuItem Header="MenuItem"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" d:IsHidden="True">
+    	<Grid x:Name="grid_layout" Margin="0,26.733,0,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -350,14 +359,14 @@
     			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click"/>
     			<TextBlock Margin="0,89.269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
-    			<ListBox Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White">
+    			<ListBox x:Name="lst_environment" Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White">
     				<TextBlock TextWrapping="Wrap" Text="World1.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     				<TextBlock TextWrapping="Wrap" Text="Moon.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     				<TextBlock TextWrapping="Wrap" Text="Mars.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -377,7 +386,7 @@
     			<TextBlock x:Name="lbl_elevationWait" Margin="90.753,0,0,87.296" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..." HorizontalAlignment="Left"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_slope_slide" Background="#FF525252">
     		<Grid x:Name="grid_startupContainer2" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -389,11 +398,15 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Slope"/></TextBlock>
     			<Button x:Name="btn_slopeNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_slopeNext_Click"/>
-    			<TextBlock Margin="102.187,0,0,125.934" TextWrapping="Wrap" FontSize="16" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"><Run Language="en-gb" Text="Please Wait..."/></TextBlock>
+    			<TextBlock x:Name="lbl_slopeWait" Margin="102.187,0,0,125.934" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError3" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
-    			<Image HorizontalAlignment="Right" Margin="0,82.029,20,61.97" Width="256" Height="256" d:LayoutOverrides="HorizontalAlignment" Source="ImageLoad.png"/>
-    			<ComboBox HorizontalAlignment="Left" Margin="27.455,162.316,0,0" VerticalAlignment="Top" Width="166.405" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
+    			<Image x:Name="img_slopeSlide" HorizontalAlignment="Right" Margin="0,82.029,20,61.97" Width="256" Height="256" d:LayoutOverrides="HorizontalAlignment" Source="ImageLoad.png"/>
+    			<ComboBox x:Name="cmb_slopeType" HorizontalAlignment="Left" Margin="27.455,162.316,0,0" VerticalAlignment="Top" Width="166.405" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}">
+		    		<ComboBoxItem Content="Horn"  />
+		    		<ComboBoxItem Content="Max" />
+					<ComboBoxItem Content="Average" />
+				</ComboBox>
     			<TextBlock Margin="27.455,137.036,0,0" TextWrapping="Wrap" FontSize="16" Foreground="White" VerticalAlignment="Top" Text="Slope Algorithm" HorizontalAlignment="Left"/>
     		</Grid>
     	</Grid>
