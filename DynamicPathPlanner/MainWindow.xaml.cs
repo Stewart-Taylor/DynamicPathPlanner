@@ -269,13 +269,6 @@ namespace DynamicPathPlanner
             nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
         }
 
-        private void btn_startupNext_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
-        }
-
-
-
 
 
     }
