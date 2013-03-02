@@ -40,8 +40,18 @@ namespace DynamicPathPlanner
             grid_hazard_slide.Visibility = Visibility.Hidden;
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Hidden;
+
+            Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
+            startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
+            BeginStoryboard(startSlideIn);
         }
 
+
+        private void startSlideIn_Completed(object sender, EventArgs e)
+        {
+            panguStartUp();
+
+        }
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
         {
@@ -129,6 +139,16 @@ namespace DynamicPathPlanner
   
         }
 
+
+        private void panguStartUp()
+        {
+            if (interfaceManager.connectToPANGU() == true)
+            {
+                System.Threading.Thread.Sleep(1000); // REMOVE
+                nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
+            }
+
+        }
 
 
         void storyBoard_Completed(object sender, EventArgs e)

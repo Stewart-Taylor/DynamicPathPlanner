@@ -100,8 +100,10 @@ namespace DynamicPathPlanner.Code
 
         public bool connect(string hostname, int port)
         {
+
             unsafe
             {
+
                 byte[] host = new byte[hostname.Length];
                 host = Encoding.ASCII.GetBytes(hostname + "\0"); // convert hostname
                 try
@@ -116,7 +118,9 @@ namespace DynamicPathPlanner.Code
                 {
                     return false;
                 }
+
             }
+
    
         }
 

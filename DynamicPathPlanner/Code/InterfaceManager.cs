@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using DynamicPathPlanner.Code;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace DynamicPathPlanner
 {
@@ -27,19 +28,47 @@ namespace DynamicPathPlanner
 
         }
 
-        public bool connectToPANGU(String hostname, int portNumber)
+        public bool connectToPANGU()
         {
-            //if connection was established connect
-            if ((hostname == "localhost") && (portNumber == 10363))
-            {
-                if (PANGU_Manager.connect(hostname, portNumber) == true)
-                {
 
-                    return true;
-                }
+            String hostname = "localhost";
+            int portNumber = 10363;
+  
+
+            Process[] pname = Process.GetProcessesByName("viewer");
+            if (pname.Length == 0)
+            {
+                startPANGU();
             }
 
+
+
+            //if connection was established connect
+
+           if (PANGU_Manager.connect(hostname, portNumber) == true)
+           {
+
+              return true;
+          }
+
+
             return false;
+        }
+
+
+        private void startPANGU()
+        {
+            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/viewer.bat";
+
+            System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
+            proc.StartInfo.FileName = filename;
+            proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/");
+            proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.UseShellExecute = false;
+
+            proc.Start();
+            System.Threading.Thread.Sleep(1000);
         }
 
         public void disconnectFromPANGU()
