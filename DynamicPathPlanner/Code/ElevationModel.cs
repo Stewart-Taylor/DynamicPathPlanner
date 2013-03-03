@@ -56,11 +56,24 @@ namespace DynamicPathPlanner.Code
             width = elevationModel.GetLength(0);
             height = elevationModel.GetLength(1);
 
+            processModel();
             generateBitmap();
 
         }
 
-        public void load_PANGU_DEM(int distance , int size)
+        private void processModel()
+        {
+            for (int x =0; x < width; x++)
+            {
+                for (int y =0; y < height; y++)
+                {
+                    elevationModel[x, y] = elevationModel[x, y] * 100;
+                }
+            }
+        }
+
+
+        public void load_PANGU_DEM(int distance, int size)
         {
             elevationModel = loader.getPANGU_DEM("", distance , size);
             width = elevationModel.GetLength(0);
