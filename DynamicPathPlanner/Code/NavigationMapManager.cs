@@ -29,14 +29,14 @@ namespace DynamicPathPlanner.Code
             elevationModel.load_PANGU_DEM();
         }
 
-        public void generateSlopeModel()
+        public void generateSlopeModel(String type)
         {
-            slopeModel = new SlopeModel(elevationModel.getModel(), SlopeMax.ALGORITHM);
+            slopeModel = new SlopeModel(elevationModel.getModel(), type);
         }
 
-        public void generateHazardModel()
+        public void generateHazardModel(int size)
         {
-            hazardModel = new HazardModel(slopeModel.getModel(), hazardSectorSize);
+            hazardModel = new HazardModel(slopeModel.getModel(), size);
         }
 
 

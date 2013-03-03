@@ -89,22 +89,22 @@ namespace DynamicPathPlanner
             navigationMapManager.generateElevationModel();
         }
 
-        public void generateSlopeModel()
+        public void generateSlopeModel(String type)
         {
-            navigationMapManager.generateSlopeModel();
+            navigationMapManager.generateSlopeModel(type);
         }
 
-        public void generateHazardModel()
+        public void generateHazardModel(int size)
         {
-            navigationMapManager.generateHazardModel();
+            navigationMapManager.generateHazardModel(size);
         }
 
         public void generateModels()
         {
             navigationMapManager = new NavigationMapManager();
             navigationMapManager.generateElevationModel();
-            navigationMapManager.generateSlopeModel();
-            navigationMapManager.generateHazardModel();
+            navigationMapManager.generateSlopeModel("Horn");
+            navigationMapManager.generateHazardModel(10);
             
 
         }

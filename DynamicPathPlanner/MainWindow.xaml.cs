@@ -43,6 +43,8 @@ namespace DynamicPathPlanner
         private BackgroundWorker slope_worker = new BackgroundWorker();
         private BackgroundWorker hazard_worker = new BackgroundWorker();
 
+        private bool started = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -65,6 +67,8 @@ namespace DynamicPathPlanner
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
             BeginStoryboard(startSlideIn);
+
+            started = true;
         }
 
 
@@ -134,7 +138,7 @@ namespace DynamicPathPlanner
 
         private void slopeScreen(object sender, EventArgs e)
         {
-            interfaceManager.generateSlopeModel();
+            interfaceManager.generateSlopeModel("HORN");
         }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -178,7 +182,7 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.connectToPANGU() == true)
             {
-                System.Threading.Thread.Sleep(2000); // REMOVE
+                //System.Threading.Thread.Sleep(2000); // REMOVE
             }
         }
 
@@ -268,6 +272,44 @@ namespace DynamicPathPlanner
 
             nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
         }
+
+        private void cmb_slopeType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            string slopeType = "";
+            bool valid = false;
+
+            System.Windows.Controls.ComboBoxItem curItem = ((System.Windows.Controls.ComboBoxItem)cmb_slopeType.SelectedItem);
+            if (curItem != null)
+            {
+                slopeType = curItem.Content.ToString();
+            }
+
+            if (slopeType != "")
+            {
+                valid = true;
+            }
+
+            if (valid == true)
+            {
+                interfaceManager.generateSlopeModel(slopeType);
+                img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
+            }
+            
+
+        }
+
+
+
+        private void slider_sectorSize_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (started == true)
+            {
+                int size = (int)slider_sectorSize.Value;
+                interfaceManager.generateHazardModel(size);
+                img_hazardSlide.Source = interfaceManager.getHazardModelImage();
+            }
+        }
+
 
 
 
