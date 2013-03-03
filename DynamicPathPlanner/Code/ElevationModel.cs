@@ -50,10 +50,19 @@ namespace DynamicPathPlanner.Code
         }
 
 
+        public void load(String environment, int distance, int size)
+        {
+            elevationModel = loader.load_DEM(environment, distance, size);
+            width = elevationModel.GetLength(0);
+            height = elevationModel.GetLength(1);
+
+            generateBitmap();
+
+        }
 
         public void load_PANGU_DEM(int distance , int size)
         {
-            elevationModel = loader.getPANGU_DEM(distance , size);
+            elevationModel = loader.getPANGU_DEM("", distance , size);
             width = elevationModel.GetLength(0);
             height = elevationModel.GetLength(0);
 

@@ -49,6 +49,7 @@ namespace DynamicPathPlanner
         private int elevationDistance;
         private int elevationSize;
         private String slopeType;
+        private int hazardSectorSize;
 
         public MainWindow()
         {
@@ -68,7 +69,7 @@ namespace DynamicPathPlanner
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
-       //     hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
+            hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
 
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
@@ -112,6 +113,14 @@ namespace DynamicPathPlanner
             img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
             btn_slopeNext.Visibility = Visibility.Visible;
         }
+
+
+        private void hazard_worker_complete(object sender, EventArgs e)
+        {
+            hazard_wait.Stop();
+            lbl_hazardWait.Text = "";
+            img_hazardSlide.Source = interfaceManager.getHazardModelImage();
+        }
      
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
@@ -150,6 +159,12 @@ namespace DynamicPathPlanner
         private void slopeScreen(object sender, EventArgs e)
         {
             interfaceManager.generateSlopeModel(slopeType);
+        }
+
+        private void hazardScreen(object sender, EventArgs e)
+        {
+            interfaceManager.generateHazardModel(hazardSectorSize);
+
         }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -363,9 +378,22 @@ namespace DynamicPathPlanner
         {
             if (started == true)
             {
-                int size = (int)slider_sectorSize.Value;
-                interfaceManager.generateHazardModel(size);
-                img_hazardSlide.Source = interfaceManager.getHazardModelImage();
+                if (hazard_worker.IsBusy == false)
+                {
+                    hazardSectorSize = (int)slider_sectorSize.Value;
+
+                    hazard_worker.DoWork += new DoWorkEventHandler(hazardScreen);
+                    hazard_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(hazard_worker_complete);
+
+                    hazard_wait.Begin();
+
+
+                    hazard_worker.RunWorkerAsync();
+
+
+                }
+                //   interfaceManager.generateHazardModel(size);
+                //   img_hazardSlide.Source = interfaceManager.getHazardModelImage();
             }
         }
 

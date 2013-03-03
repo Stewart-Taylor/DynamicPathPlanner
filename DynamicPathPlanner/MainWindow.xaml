@@ -207,6 +207,14 @@
 				<DiscreteStringKeyFrame KeyTime="0:0:1.6" Value="Please Wait ..."/>
 			</StringAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Hazard_Wait" RepeatBehavior="Forever">
+			<StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="lbl_hazardWait">
+				<DiscreteStringKeyFrame KeyTime="0" Value="Please Wait ."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:0.5" Value="Please Wait .."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1" Value="Please Wait ..."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1.5" Value="Please Wait ..."/>
+			</StringAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
@@ -359,7 +367,7 @@
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -419,7 +427,7 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Hazard"/></TextBlock>
     			<TextBlock Margin="8,105.692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Height="26.318"><Run Language="en-gb" Text="Sector Size"/><LineBreak/><Run Language="en-gb"/></TextBlock>
     			<Button x:Name="btn_hazardNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_hazardNext_Click"/>
-    			<TextBlock x:Name="lbl_hazardWait" Margin="53.243,0,0,102.732" TextWrapping="Wrap" FontSize="16" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"><Run Language="en-gb" Text="Please Wait..."/></TextBlock>
+    			<TextBlock x:Name="lbl_hazardWait" Margin="111.152,0,0,50.114" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="162.914"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError4" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<Image x:Name="img_hazardSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" d:LayoutOverrides="HorizontalAlignment" Source="ImageLoad.png"/>

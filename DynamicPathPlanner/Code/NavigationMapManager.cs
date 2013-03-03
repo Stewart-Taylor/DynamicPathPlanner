@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*      NavigationMapManager Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This is used to manage all of the navigational data 
+ * It is used to manage and generate the elevation,slope and hazard models
+ *
+ * Last Updated: 03/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +40,8 @@ namespace DynamicPathPlanner.Code
         public void generateElevationModel(int distance , int size)
         {
             elevationModel = new ElevationModel();
-            elevationModel.load_PANGU_DEM(distance , size);
+         //   elevationModel.load_PANGU_DEM(distance , size);
+            elevationModel.load(environmentText, distance, size);
         }
 
         public void generateSlopeModel(String type)
