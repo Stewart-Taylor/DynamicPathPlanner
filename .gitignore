@@ -19,6 +19,7 @@ local.properties
 *.jpg
 *.jpeg
 *.gif
+*.ico
 
 # External tool builders
 .externalToolBuilders/

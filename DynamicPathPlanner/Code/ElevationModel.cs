@@ -4,7 +4,7 @@
  * This class is used to provide an elevation model
  * 
  *
- * Last Updated: 28/02/2013
+ * Last Updated: 03/03/2013
 */
 
 using System;
@@ -23,7 +23,6 @@ namespace DynamicPathPlanner.Code
 
         private double[,] elevationModel;
 
-
         private ElevationLoader loader = new ElevationLoader();
 
         private String format;
@@ -41,11 +40,8 @@ namespace DynamicPathPlanner.Code
         private double minHeight = 0;
 
 
-
-
         public ElevationModel()
         {
-
 
         }
 
@@ -58,7 +54,6 @@ namespace DynamicPathPlanner.Code
 
             processModel();
             generateBitmap();
-
         }
 
         private void processModel()
@@ -67,7 +62,7 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y =0; y < height; y++)
                 {
-                    elevationModel[x, y] = elevationModel[x, y] * 100;
+                    elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE
                 }
             }
         }
@@ -107,8 +102,6 @@ namespace DynamicPathPlanner.Code
             return height;
         }
 
-
-
         private void generateBitmap()
         {
             setMaxHeight();
@@ -126,7 +119,6 @@ namespace DynamicPathPlanner.Code
                     bitmap.SetPixel(x, y, tempColor);
                 }
             }
-
             image = bitmap;
         }
 
@@ -163,7 +155,6 @@ namespace DynamicPathPlanner.Code
             bi.BeginInit();
             bi.StreamSource = ms;
             bi.EndInit();
-
             ImageSource img = bi;
 
             return img;

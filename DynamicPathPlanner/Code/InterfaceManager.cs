@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 02/03/2013
+ * Last Updated: 03/03/2013
 */
 
 using System;
@@ -33,12 +33,11 @@ namespace DynamicPathPlanner
             navigationMapManager = new NavigationMapManager();
         }
 
+
         public bool connectToPANGU()
         {
-
             String hostname = "localhost";
             int portNumber = 10363;
-  
 
             Process[] pname = Process.GetProcessesByName("viewer");
             if (pname.Length == 0)
@@ -46,28 +45,22 @@ namespace DynamicPathPlanner
                 startPANGU();
             }
 
-
-
             //if connection was established connect
-
-           if (PANGU_Manager.connect(hostname, portNumber) == true)
-           {
-
-              return true;
-          }
-
+            if (PANGU_Manager.connect(hostname, portNumber) == true)
+            {
+                return true;
+            }
 
             return false;
         }
 
-
         private void startPANGU()
         {
-            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/viewer.bat";
+            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/viewer.bat"; // GET FROM CONFIG
 
             System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
             proc.StartInfo.FileName = filename;
-            proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/");
+            proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -75,7 +68,6 @@ namespace DynamicPathPlanner
             proc.Start();
             System.Threading.Thread.Sleep(1000);
         }
-
 
         public void setEnviornmentString(String environment)
         {
@@ -87,12 +79,10 @@ namespace DynamicPathPlanner
             PANGU_Manager.endConnection();
         }
 
-
         public void addLogEntry(String entry)
         {
             logManager.addEntry(entry);
         }
-
 
         public void generateElevationModel(float distance , int size)
         {
@@ -115,24 +105,18 @@ namespace DynamicPathPlanner
             navigationMapManager.generateElevationModel(1,1);
             navigationMapManager.generateSlopeModel("Horn");
             navigationMapManager.generateHazardModel(10);
-            
-
         }
-
 
         public void startSimulation()
         {
             simulationManager.setSimulation(navigationMapManager);
             simulationManager.startSimulation();
-         //   simulationManager.startSimulationDSTAR(1, 1, 5, 20);
         }
 
-        //REMOVE
         public ImageSource getElevationModelImage()
         {
             return navigationMapManager.getElevationImage();
         }
-
 
         public ImageSource getSlopeModelImage()
         {
@@ -144,7 +128,6 @@ namespace DynamicPathPlanner
             return navigationMapManager.getHazardImage();
         }
 
-        //REMOVE
         public ImageSource getSkyview()
         {
             return PANGU_Manager.getSkyView();
@@ -190,7 +173,6 @@ namespace DynamicPathPlanner
 
         public void updateRoverSlideStartPosition(int x, int y)
         {
-
             if( (x > 0) && ( y >0))
             {
                 if( (x < navigationMapManager.getHazardWidth()) && (y < navigationMapManager.getHazardHeight()))
@@ -220,7 +202,6 @@ namespace DynamicPathPlanner
 
         public bool vehicleValuesValid(int startX , int startY, int targetX , int targetY)
         {
-
             if ((startX <= 0) || (startY <= 0) || (targetX <= 0) || (targetY <= 0)) 
             {
                 return false;
@@ -236,7 +217,6 @@ namespace DynamicPathPlanner
                 return false;
             }
 
-
             return true;
         }
 
@@ -244,7 +224,6 @@ namespace DynamicPathPlanner
         {
             simulationManager.setSimulation(navigationMapManager);
             simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
-          //  return true;
         }
 
         public void updateRoverSlideTargetPosition(int x, int y)
@@ -255,7 +234,6 @@ namespace DynamicPathPlanner
                 {
                     x = x * navigationMapManager.getHazardSectorSize();
                     y = y * navigationMapManager.getHazardSectorSize();
-
 
                     int size = 10;
                     System.Drawing.Color color = System.Drawing.Color.BlueViolet;
@@ -271,12 +249,9 @@ namespace DynamicPathPlanner
                                 }
                             }
                         }
-
                     }
                 }
             }
-
-
         }
 
         public ImageSource getRoverSlideImage()
@@ -289,10 +264,7 @@ namespace DynamicPathPlanner
             bi.StreamSource = ms;
             bi.EndInit();
 
-            ImageSource img = bi;
-
-            return img;
-
+            return bi;
         }
 
     }

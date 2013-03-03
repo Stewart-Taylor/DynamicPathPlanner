@@ -29,7 +29,6 @@ namespace DynamicPathPlanner
     {
 
         private InterfaceManager interfaceManager = new InterfaceManager();
-
         private Grid oldGrid;
         private Grid activeGrid;
         private Storyboard activeStoryboard;
@@ -45,11 +44,10 @@ namespace DynamicPathPlanner
         private BackgroundWorker hazard_worker = new BackgroundWorker();
 
         private bool started = false;
-
         private float elevationDistance;
         private int elevationSize;
-        private String slopeType;
         private int hazardSectorSize;
+        private String slopeType;
 
         public MainWindow()
         {
@@ -64,7 +62,6 @@ namespace DynamicPathPlanner
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Hidden;
 
-
             //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
@@ -78,7 +75,6 @@ namespace DynamicPathPlanner
             started = true;
         }
 
-
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
             startup_worker.DoWork += new DoWorkEventHandler(panguStartUp);
@@ -88,9 +84,6 @@ namespace DynamicPathPlanner
 
             BeginStoryboard(startup_wait);
         }
-
-
-    
 
         private void startup_worker_complete(object sender, EventArgs e)
         {
@@ -113,7 +106,6 @@ namespace DynamicPathPlanner
             img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
             btn_slopeNext.Visibility = Visibility.Visible;
         }
-
 
         private void hazard_worker_complete(object sender, EventArgs e)
         {
@@ -147,14 +139,8 @@ namespace DynamicPathPlanner
 
         private void elevationScreen(object sender, EventArgs e)
         {
-           
-          
-
-                interfaceManager.generateElevationModel(elevationDistance,elevationSize);
-           
-
+            interfaceManager.generateElevationModel(elevationDistance, elevationSize);
         }
-
 
         private void slopeScreen(object sender, EventArgs e)
         {
@@ -164,13 +150,10 @@ namespace DynamicPathPlanner
         private void hazardScreen(object sender, EventArgs e)
         {
             interfaceManager.generateHazardModel(hazardSectorSize);
-
         }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
-
             bool valid = false;
 
             String selectedText = "";
@@ -190,25 +173,13 @@ namespace DynamicPathPlanner
             if (valid == true)
             {
                 interfaceManager.setEnviornmentString(selectedText);
-            //    elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
-             //   elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
 
-             //   elevation_worker.RunWorkerAsync();
-
-                //BeginStoryboard(elevation_wait);
-           //     btn_elevationNext.Visibility = Visibility.Hidden;
-           //     elevation_wait.Begin();
-
-                
                 img_elevationSlide.Source = interfaceManager.getSkyview();
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
-
             }
-       
   
         }
-
 
         private void panguStartUp(object sender, EventArgs e)
         {
@@ -218,16 +189,14 @@ namespace DynamicPathPlanner
             }
         }
 
-
         void storyBoard_Completed(object sender, EventArgs e)
         {
             grid_pangu_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Visible;
 
             System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideIn");
-            
+
             BeginStoryboard(storyBoard);
- 
         }
 
 
@@ -239,13 +208,12 @@ namespace DynamicPathPlanner
             System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideIn");
 
             BeginStoryboard(storyBoard);
-
         }
 
         private void btn_disconnect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             interfaceManager.disconnectFromPANGU();
-        	// TODO: Add event handler implementation here.
+
             System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideOut");
             storyBoard.Completed += new EventHandler(mainSlideOut_Completed);
             BeginStoryboard(storyBoard);
@@ -294,10 +262,6 @@ namespace DynamicPathPlanner
             {
                 //Error message
             }
-
-
-
-         
         }
 
         private void btn_hazardNext_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -308,31 +272,20 @@ namespace DynamicPathPlanner
                 interfaceManager.setRoverSlide();
                 img_roverSlide.Source = interfaceManager.getRoverSlideImage();
             }
-
-
-  
         }
 
         private void btn_slopeNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
             if (interfaceManager.isSlopeMapGenerated() == true)
             {
                 nextSlide(grid_slope_slide, grid_hazard_slide, "Slope_SlideOut", "Hazard_SlideIn");
             }
-
         }
 
         private void btn_elevationNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (interfaceManager.isElevationMapGenerated())
             {
-     //           slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
-        //        slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
-
-         //       slope_wait.Begin();
-         //       slope_worker.RunWorkerAsync();
-
                 nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
             }
         }
@@ -356,23 +309,14 @@ namespace DynamicPathPlanner
             if (valid == true)
             {
                 slopeType = slopeTypeT;
-              //  interfaceManager.generateSlopeModel(slopeType);
-              //  img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
-
 
                 slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
                 slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
 
                 slope_wait.Begin();
                 slope_worker.RunWorkerAsync();
-
-
             }
-            
-
         }
-
-
 
         private void slider_sectorSize_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
@@ -386,19 +330,10 @@ namespace DynamicPathPlanner
                     hazard_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(hazard_worker_complete);
 
                     hazard_wait.Begin();
-
-
                     hazard_worker.RunWorkerAsync();
-
-
                 }
-                //   interfaceManager.generateHazardModel(size);
-                //   img_hazardSlide.Source = interfaceManager.getHazardModelImage();
             }
         }
-
-
-
 
         private void roverPositionsUpdated(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -425,7 +360,6 @@ namespace DynamicPathPlanner
 
                     interfaceManager.updateRoverSlideStartPosition(startX, startY);
                     img_roverSlide.Source = interfaceManager.getRoverSlideImage();
-
                 }
                 catch (Exception ex)
                 {
@@ -446,15 +380,12 @@ namespace DynamicPathPlanner
                 catch (Exception ex)
                 {
 
-
                 }
             }
-
         }
 
         private void btn_elevationUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
             String distanceTemp;
             String sizeTemp;
 
@@ -470,7 +401,6 @@ namespace DynamicPathPlanner
                 elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
 
                 elevation_worker.RunWorkerAsync();
-
                 BeginStoryboard(elevation_wait);
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 elevation_wait.Begin();
@@ -480,13 +410,7 @@ namespace DynamicPathPlanner
             {
 
             }
-
-
         }
-
-
-
-
 
     }
 }

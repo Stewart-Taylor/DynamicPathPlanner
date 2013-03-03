@@ -5,7 +5,7 @@
  * It requires the data from the slope model
  * 
  *
- * Last Updated: 01/03/2013
+ * Last Updated: 03/03/2013
 */
 
 using System;
@@ -88,10 +88,6 @@ namespace DynamicPathPlanner.Code
                 slopeX += sectorSize;
             }
 
-
-
-
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -100,6 +96,7 @@ namespace DynamicPathPlanner.Code
                     hazardModel[x, y] = getHazardValue(hazardModel[x, y]);
                 }
             }
+
         }
 
 

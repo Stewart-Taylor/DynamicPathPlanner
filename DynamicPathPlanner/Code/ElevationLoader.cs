@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*      ElevationLoader Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to load in digital elevation models (DEM)
+ * It will first attempt to load a DEM from the file cache
+ * If no copy exists in the cache it will fetch the elevation model from PANGU
+ * Fetching the DEM from PANGU can be slow, hence the cache system.
+ *
+ * Last Updated: 03/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +26,11 @@ namespace DynamicPathPlanner.Code
         public ElevationLoader()
         {
 
-
         }
-
 
         public double[,] load_DEM(String environment, float distance ,int size)
         {
             double[,] d;
-
 
             if (cacheExists(environment, distance, size))
             {
@@ -33,9 +41,7 @@ namespace DynamicPathPlanner.Code
                 d = getPANGU_DEM(environment, distance, size);
             }
 
-
             return d;
-
         }
 
         private bool cacheExists(String environment, float distance, int size)
@@ -55,7 +61,6 @@ namespace DynamicPathPlanner.Code
             String filepath = cacheFolder + environment + separator + distance + separator + size + extension;
             double[,] d = new double[size,size];
 
-
             try
             {
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
@@ -65,7 +70,7 @@ namespace DynamicPathPlanner.Code
 
                 while ((line = file.ReadLine()) != null)
                 {
-                    x =0;
+                    x = 0;
                     string[] values = line.Split(',');
 
                     for (int i = 0; i < size; i++)
@@ -73,22 +78,17 @@ namespace DynamicPathPlanner.Code
                         String temp = values[i];
                         double tempValue = double.Parse(temp);
                         d[x, y] = tempValue;
-
                         x++;
                     }
-
                     y++;
                 }
 
                 return d;
-                
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-             //   Console.WriteLine("The file could not be read:");
-             //   Console.WriteLine(e.Message);
+              // Error With cache
             }
-
 
             return null;
         }
@@ -97,7 +97,6 @@ namespace DynamicPathPlanner.Code
         public double[,] getPANGU_DEM(String environment, float distance, int size)
         {
             double[,] d = PANGU_Manager.getElevationModel(distance, size, size);
-
             createCache(environment, distance, size, d);
 
             return d;
@@ -119,15 +118,12 @@ namespace DynamicPathPlanner.Code
                     }
                     file.WriteLine();
                 }
-            
             }
-
         }
 
-
+        // TODO
         public double[,] getPPM_DEM()
         {
-
             return null;
         }
 
