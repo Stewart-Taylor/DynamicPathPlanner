@@ -47,6 +47,10 @@ namespace DynamicPathPlanner.Code
 
         public double[,] getHazardModel()
         {
+            if (hazardModel == null)
+            {
+                return null;
+            }
             return hazardModel.getModel();
         }
 
@@ -83,7 +87,12 @@ namespace DynamicPathPlanner.Code
 
         public double[,] getSlopeModel()
         {
+            if (slopeModel == null)
+            {
+                return null;
+            }
             return slopeModel.getModel();
+
         }
 
         public int getHazardSectorSize()

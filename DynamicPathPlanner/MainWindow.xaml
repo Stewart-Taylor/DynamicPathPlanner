@@ -375,11 +375,11 @@
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError2" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png"/>
-    			<TextBlock x:Name="lbl_elevationWait" Margin="115.154,0,0,42.921" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..." HorizontalAlignment="Left"/>
+    			<TextBlock x:Name="lbl_elevationWait" Margin="0,0,110.382,13" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..." HorizontalAlignment="Right"/>
     			<TextBox x:Name="txt_elevationDistance" Margin="142.731,120.689,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" Height="30" HorizontalAlignment="Left" Width="50"/>
-    			<TextBox x:Name="txt_elevationSize" Margin="142.731,194.17,0,175.83" TextWrapping="Wrap" Text="256" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="50" Height="30"/>
-    			<TextBlock Margin="6.686,194.17,0,181" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Elevation Size" Width="118.257" d:LayoutOverrides="Height"/>
-    			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="156.891,0,0,118.468" HorizontalAlignment="Left" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" VerticalAlignment="Bottom"/>
+    			<TextBox x:Name="txt_elevationSize" Margin="142.731,176.25,0,193.75" TextWrapping="Wrap" Text="128" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="50" Height="30"/>
+    			<TextBlock Margin="6.686,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Elevation Size" Width="118.257" d:LayoutOverrides="Height"/>
+    			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="154.331,0,0,138.948" HorizontalAlignment="Left" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" VerticalAlignment="Bottom"/>
     		</Grid>
     	</Grid>
     	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsHidden="True">

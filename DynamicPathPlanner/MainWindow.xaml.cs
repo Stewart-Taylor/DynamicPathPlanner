@@ -37,6 +37,7 @@ namespace DynamicPathPlanner
         private Storyboard startup_wait;
         private Storyboard elevation_wait;
         private Storyboard slope_wait;
+        private Storyboard hazard_wait;
 
         private BackgroundWorker startup_worker = new BackgroundWorker();
         private BackgroundWorker elevation_worker = new BackgroundWorker();
@@ -47,6 +48,7 @@ namespace DynamicPathPlanner
 
         private int elevationDistance;
         private int elevationSize;
+        private String slopeType;
 
         public MainWindow()
         {
@@ -66,6 +68,7 @@ namespace DynamicPathPlanner
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
+       //     hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
 
             Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
             startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
@@ -146,7 +149,7 @@ namespace DynamicPathPlanner
 
         private void slopeScreen(object sender, EventArgs e)
         {
-            interfaceManager.generateSlopeModel("HORN");
+            interfaceManager.generateSlopeModel(slopeType);
         }
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -156,6 +159,7 @@ namespace DynamicPathPlanner
             bool valid = false;
 
             String selectedText = "";
+            lbl_elevationWait.Text = "";
 
             if (lst_environment.SelectedValue != null)
             {
@@ -180,6 +184,9 @@ namespace DynamicPathPlanner
            //     btn_elevationNext.Visibility = Visibility.Hidden;
            //     elevation_wait.Begin();
 
+                
+                img_elevationSlide.Source = interfaceManager.getSkyview();
+                btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
 
             }
@@ -293,23 +300,6 @@ namespace DynamicPathPlanner
 
         private void btn_slopeNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            bool valid = false;
-
-
-            string slopeType = "";
-
-            System.Windows.Controls.ComboBoxItem curItem = ((System.Windows.Controls.ComboBoxItem)cmb_slopeType.SelectedItem);
-
-            if (curItem != null)
-            {
-                slopeType = curItem.Content.ToString();
-            }
-
-
-            if (slopeType != "")
-            {
-                valid = true;
-            }
 
             if (interfaceManager.isSlopeMapGenerated() == true)
             {
@@ -322,11 +312,11 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isElevationMapGenerated())
             {
-                slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
-                slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+     //           slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
+        //        slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
 
-                slope_wait.Begin();
-                slope_worker.RunWorkerAsync();
+         //       slope_wait.Begin();
+         //       slope_worker.RunWorkerAsync();
 
                 nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
             }
@@ -334,13 +324,13 @@ namespace DynamicPathPlanner
 
         private void cmb_slopeType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            string slopeType = "";
+            string slopeTypeT = "";
             bool valid = false;
 
             System.Windows.Controls.ComboBoxItem curItem = ((System.Windows.Controls.ComboBoxItem)cmb_slopeType.SelectedItem);
             if (curItem != null)
             {
-                slopeType = curItem.Content.ToString();
+                slopeTypeT = curItem.Content.ToString();
             }
 
             if (slopeType != "")
@@ -350,8 +340,18 @@ namespace DynamicPathPlanner
 
             if (valid == true)
             {
-                interfaceManager.generateSlopeModel(slopeType);
-                img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
+                slopeType = slopeTypeT;
+              //  interfaceManager.generateSlopeModel(slopeType);
+              //  img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
+
+
+                slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
+                slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+
+                slope_wait.Begin();
+                slope_worker.RunWorkerAsync();
+
+
             }
             
 
