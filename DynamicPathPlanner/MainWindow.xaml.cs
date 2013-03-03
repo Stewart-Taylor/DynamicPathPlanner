@@ -232,7 +232,15 @@ namespace DynamicPathPlanner
 
         private void btn_hazardNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            nextSlide(grid_hazard_slide, grid_rover_slide, "Hazard_SlideOut", "Rover_SlideIn");
+            if(interfaceManager.isHazardMapGenerated() == true)
+            {
+                nextSlide(grid_hazard_slide, grid_rover_slide, "Hazard_SlideOut", "Rover_SlideIn");
+                interfaceManager.setRoverSlide();
+                img_roverSlide.Source = interfaceManager.getRoverSlideImage();
+            }
+
+
+  
         }
 
         private void btn_slopeNext_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -309,6 +317,62 @@ namespace DynamicPathPlanner
                 img_hazardSlide.Source = interfaceManager.getHazardModelImage();
             }
         }
+
+
+
+
+        private void roverPositionsUpdated(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (started == true)
+            {
+                int startX;
+                int startY;
+                int targetX;
+                int targetY;
+
+                String textStartX;
+                String textStartY;
+                String textTargetX;
+                String textTargetY;
+
+                interfaceManager.setRoverSlide();
+                try
+                {
+                    textStartX = txt_startX.Text;
+                    textStartY = txt_startY.Text;
+
+                    startX = int.Parse(textStartX);
+                    startY = int.Parse(textStartY);
+
+                    interfaceManager.updateRoverSlideStartPosition(startX, startY);
+                    img_roverSlide.Source = interfaceManager.getRoverSlideImage();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try
+                {
+                    textTargetX = txt_targetX.Text;
+                    textTargetY = txt_targetY.Text;
+
+                    targetX = int.Parse(textTargetX);
+                    targetY = int.Parse(textTargetY);
+
+                    interfaceManager.updateRoverSlideTargetPosition(targetX, targetY);
+                    img_roverSlide.Source = interfaceManager.getRoverSlideImage();
+                }
+                catch (Exception ex)
+                {
+
+
+                }
+            }
+
+        }
+
 
 
 

@@ -14,6 +14,9 @@ using System.Text;
 using DynamicPathPlanner.Code;
 using System.Windows.Media;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace DynamicPathPlanner
 {
@@ -22,6 +25,8 @@ namespace DynamicPathPlanner
         private SimulationManager simulationManager = new SimulationManager();
         private LogManager logManager = new LogManager();
         private NavigationMapManager navigationMapManager = new NavigationMapManager();
+
+        private Bitmap roverSlideBitmap;
 
         public InterfaceManager()
         {
@@ -152,6 +157,100 @@ namespace DynamicPathPlanner
                 return true;
             }
             return false;
+        }
+
+        public bool isHazardMapGenerated()
+        {
+            if (navigationMapManager.getHazardModel() != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public void setRoverSlide()
+        {
+            roverSlideBitmap = (Bitmap)navigationMapManager.getHazardBitmap().Clone();
+        }
+
+        public void updateRoverSlideStartPosition(int x, int y)
+        {
+
+            if( (x > 0) && ( y >0))
+            {
+                if( (x < navigationMapManager.getHazardWidth()) && (y < navigationMapManager.getHazardHeight()))
+                {
+                    x = x * navigationMapManager.getHazardSectorSize();
+                    y = y * navigationMapManager.getHazardSectorSize();
+
+                    int size = 10;
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    for (int a = (x - (size / 2)); a < (x + (size / 2)); a++)
+                    {
+                        for (int b = (y - (size / 2)); b < (y + (size / 2)); b++)
+                        {
+                            if ((a> 0) && (b > 0))
+                            {
+                                if ((a < roverSlideBitmap.Width) && (b < roverSlideBitmap.Height))
+                                {
+                                    roverSlideBitmap.SetPixel(a, b, color);
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        public void updateRoverSlideTargetPosition(int x, int y)
+        {
+            if ((x > 0) && (y > 0))
+            {
+                if ((x < navigationMapManager.getHazardWidth()) && (y < navigationMapManager.getHazardHeight()))
+                {
+                    x = x * navigationMapManager.getHazardSectorSize();
+                    y = y * navigationMapManager.getHazardSectorSize();
+
+
+                    int size = 10;
+                    System.Drawing.Color color = System.Drawing.Color.BlueViolet;
+                    for (int a = (x - (size / 2)); a < (x + (size / 2)); a++)
+                    {
+                        for (int b = (y - (size / 2)); b < (y + (size / 2)); b++)
+                        {
+                            if ((a > 0) && (b > 0))
+                            {
+                                if ((a < roverSlideBitmap.Width) && (b < roverSlideBitmap.Height))
+                                {
+                                    roverSlideBitmap.SetPixel(a, b, color);
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+
+        }
+
+        public ImageSource getRoverSlideImage()
+        {
+            MemoryStream ms = new MemoryStream();
+            roverSlideBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            ImageSource img = bi;
+
+            return img;
+
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
+using System.Drawing;
 
 namespace DynamicPathPlanner.Code
 {
@@ -61,9 +62,29 @@ namespace DynamicPathPlanner.Code
             return hazardModel.getImageSource();
         }
 
+        public Bitmap getHazardBitmap()
+        {
+            return hazardModel.getBitmap();
+        }
+
         public double[,] getSlopeModel()
         {
             return slopeModel.getModel();
+        }
+
+        public int getHazardSectorSize()
+        {
+            return hazardModel.getSectorSize();
+        }
+
+        public int getHazardWidth()
+        {
+            return hazardModel.getWidth();
+        }
+
+        public int getHazardHeight()
+        {
+            return hazardModel.getHeight();
         }
 
     }

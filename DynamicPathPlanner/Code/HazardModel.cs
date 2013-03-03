@@ -184,8 +184,25 @@ namespace DynamicPathPlanner.Code
             return color;
         }
 
+        public Bitmap getBitmap()
+        {
+            return hazardBitmap;
+        }
 
+        public int getSectorSize()
+        {
+            return sectorSize;
+        }
 
+        public int getWidth()
+        {
+            return width;
+        }
+
+        public int getHeight()
+        {
+            return height;
+        }
 
         public ImageSource getImageSource()
         {
