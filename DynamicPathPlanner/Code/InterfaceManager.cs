@@ -118,8 +118,8 @@ namespace DynamicPathPlanner
         public void startSimulation()
         {
             simulationManager.setSimulation(navigationMapManager);
-         //   simulationManager.startSimulation();
-            simulationManager.startSimulationDSTAR(1, 1, 5, 20);
+            simulationManager.startSimulation();
+         //   simulationManager.startSimulationDSTAR(1, 1, 5, 20);
         }
 
         //REMOVE
@@ -204,6 +204,34 @@ namespace DynamicPathPlanner
             }
         }
 
+        public bool vehicleValuesValid(int startX , int startY, int targetX , int targetY)
+        {
+
+            if ((startX <= 0) || (startY <= 0) || (targetX <= 0) || (targetY <= 0)) 
+            {
+                return false;
+            }
+
+            if ((startX >= navigationMapManager.getHazardWidth()) || (startY >= navigationMapManager.getHazardHeight()) || (targetX >= navigationMapManager.getHazardWidth()) || (targetY >= navigationMapManager.getHazardHeight()))
+            {
+                return false;
+            }
+
+            if ((startX == targetX) && (startY == targetY))
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+
+        public void setVehicleValues(int startX , int startY, int targetX , int targetY , String algorithm, bool knownMap)
+        {
+            simulationManager.setSimulation(navigationMapManager);
+            simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
+          //  return true;
+        }
 
         public void updateRoverSlideTargetPosition(int x, int y)
         {

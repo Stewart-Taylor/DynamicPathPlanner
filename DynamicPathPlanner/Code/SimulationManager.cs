@@ -31,6 +31,13 @@ namespace DynamicPathPlanner.Code
         private Vehicle rover;
         private int steps;
 
+        private int startX;
+        private int startY;
+        private int targetX;
+        private int targetY;
+        private String searchAlgortihm;
+        private bool knownMap;
+
         private ImageSource imageSource;
 
         private String timeTaken;
@@ -65,7 +72,23 @@ namespace DynamicPathPlanner.Code
             hazardModel = m.hazardModel; // REMOVE
         }
 
-       
+        public void setSimulationValues(int xStart , int yStart, int endX , int endY , String algorithm, bool known)
+        {
+            startX = xStart;
+            startY = yStart;
+            targetX = endX;
+            targetY = endY;
+            searchAlgortihm = algorithm;
+            knownMap = known;
+        }
+
+
+        public void startSimulation()
+        {
+            startSimulationDSTAR(startX, startY, targetX, targetY);
+
+        }
+
 
         public void generatePath(int startX, int startY, int targetX, int targetY)
         {

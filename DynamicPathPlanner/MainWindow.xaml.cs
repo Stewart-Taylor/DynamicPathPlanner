@@ -227,7 +227,45 @@ namespace DynamicPathPlanner
 
         private void btn_roverNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            nextSlide(grid_rover_slide, grid_layout, "Rover_SlideOut", "Main_SlideIn");
+            int startX;
+            int startY;
+            int targetX;
+            int targetY;
+
+            String textStartX;
+            String textStartY;
+            String textTargetX;
+            String textTargetY;
+
+            interfaceManager.setRoverSlide();
+            try
+            {
+                textStartX = txt_startX.Text;
+                textStartY = txt_startY.Text;
+
+                startX = int.Parse(textStartX);
+                startY = int.Parse(textStartY);
+
+                textTargetX = txt_targetX.Text;
+                textTargetY = txt_targetY.Text;
+
+                targetX = int.Parse(textTargetX);
+                targetY = int.Parse(textTargetY);
+
+                if (interfaceManager.vehicleValuesValid(startX, startY , targetX , targetY))
+                {
+                    interfaceManager.setVehicleValues(startX, startY, targetX, targetY, "a_star", false);
+                    nextSlide(grid_rover_slide, grid_layout, "Rover_SlideOut", "Main_SlideIn");
+                }
+            }
+            catch (Exception ex)
+            {
+                //Error message
+            }
+
+
+
+         
         }
 
         private void btn_hazardNext_Click(object sender, System.Windows.RoutedEventArgs e)
