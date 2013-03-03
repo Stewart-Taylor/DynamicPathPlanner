@@ -30,7 +30,7 @@ namespace DynamicPathPlanner
 
         public InterfaceManager()
         {
-
+            navigationMapManager = new NavigationMapManager();
         }
 
         public bool connectToPANGU()
@@ -76,6 +76,12 @@ namespace DynamicPathPlanner
             System.Threading.Thread.Sleep(1000);
         }
 
+
+        public void setEnviornmentString(String environment)
+        {
+            navigationMapManager.setEnvironmentText(environment);
+        }
+
         public void disconnectFromPANGU()
         {
             PANGU_Manager.endConnection();
@@ -88,10 +94,9 @@ namespace DynamicPathPlanner
         }
 
 
-        public void generateElevationModel()
+        public void generateElevationModel(int distance , int size)
         {
-            navigationMapManager = new NavigationMapManager();
-            navigationMapManager.generateElevationModel();
+            navigationMapManager.generateElevationModel(distance , size);
         }
 
         public void generateSlopeModel(String type)
@@ -107,7 +112,7 @@ namespace DynamicPathPlanner
         public void generateModels()
         {
             navigationMapManager = new NavigationMapManager();
-            navigationMapManager.generateElevationModel();
+            navigationMapManager.generateElevationModel(1,1);
             navigationMapManager.generateSlopeModel("Horn");
             navigationMapManager.generateHazardModel(10);
             
@@ -148,6 +153,15 @@ namespace DynamicPathPlanner
         public ImageSource getRoverMap()
         {
             return simulationManager.getVehicleImage();
+        }
+
+        public bool isElevationMapGenerated()
+        {
+            if (navigationMapManager.getElevationModel() != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool isSlopeMapGenerated()

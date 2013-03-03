@@ -45,6 +45,9 @@ namespace DynamicPathPlanner
 
         private bool started = false;
 
+        private int elevationDistance;
+        private int elevationSize;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -132,7 +135,12 @@ namespace DynamicPathPlanner
 
         private void elevationScreen(object sender, EventArgs e)
         {
-            interfaceManager.generateElevationModel();
+           
+          
+
+                interfaceManager.generateElevationModel(elevationDistance,elevationSize);
+           
+
         }
 
 
@@ -143,6 +151,7 @@ namespace DynamicPathPlanner
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+
 
             bool valid = false;
 
@@ -161,14 +170,15 @@ namespace DynamicPathPlanner
 
             if (valid == true)
             {
-                elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
-                elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
+                interfaceManager.setEnviornmentString(selectedText);
+            //    elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
+             //   elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
 
-                elevation_worker.RunWorkerAsync();
+             //   elevation_worker.RunWorkerAsync();
 
                 //BeginStoryboard(elevation_wait);
-                btn_elevationNext.Visibility = Visibility.Hidden;
-                elevation_wait.Begin();
+           //     btn_elevationNext.Visibility = Visibility.Hidden;
+           //     elevation_wait.Begin();
 
                 nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
 
@@ -310,13 +320,16 @@ namespace DynamicPathPlanner
 
         private void btn_elevationNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
-            slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+            if (interfaceManager.isElevationMapGenerated())
+            {
+                slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
+                slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
 
-            slope_wait.Begin();
-            slope_worker.RunWorkerAsync();
+                slope_wait.Begin();
+                slope_worker.RunWorkerAsync();
 
-            nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
+                nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
+            }
         }
 
         private void cmb_slopeType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -408,6 +421,38 @@ namespace DynamicPathPlanner
 
                 }
             }
+
+        }
+
+        private void btn_elevationUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+            String distanceTemp;
+            String sizeTemp;
+
+            try
+            {
+                distanceTemp = txt_elevationDistance.Text;
+                sizeTemp = txt_elevationSize.Text;
+
+                elevationDistance = int.Parse(distanceTemp);
+                elevationSize = int.Parse(sizeTemp);
+               
+                elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
+                elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
+
+                elevation_worker.RunWorkerAsync();
+
+                BeginStoryboard(elevation_wait);
+                btn_elevationNext.Visibility = Visibility.Hidden;
+                elevation_wait.Begin();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
 
         }
 

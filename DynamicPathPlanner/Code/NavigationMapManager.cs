@@ -15,6 +15,7 @@ namespace DynamicPathPlanner.Code
         public HazardModel hazardModel;
 
         private int hazardSectorSize = 10;
+        private String environmentText;
 
         public NavigationMapManager()
         {
@@ -23,11 +24,14 @@ namespace DynamicPathPlanner.Code
 
         }
 
-
-        public void generateElevationModel()
+        public void setEnvironmentText(String environment)
+        {
+            environmentText = environment;
+        }
+        public void generateElevationModel(int distance , int size)
         {
             elevationModel = new ElevationModel();
-            elevationModel.load_PANGU_DEM();
+            elevationModel.load_PANGU_DEM(distance , size);
         }
 
         public void generateSlopeModel(String type)
@@ -44,6 +48,16 @@ namespace DynamicPathPlanner.Code
         public double[,] getHazardModel()
         {
             return hazardModel.getModel();
+        }
+
+        public double[,] getElevationModel()
+        {
+            if (elevationModel == null)
+            {
+                return null;
+            }
+
+            return elevationModel.getModel();
         }
 
 
