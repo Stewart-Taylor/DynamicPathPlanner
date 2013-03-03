@@ -19,7 +19,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public double[,] load_DEM(String environment, int distance ,int size)
+        public double[,] load_DEM(String environment, float distance ,int size)
         {
             double[,] d;
 
@@ -38,7 +38,7 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        private bool cacheExists(String environment, int distance, int size)
+        private bool cacheExists(String environment, float distance, int size)
         {
             String filepath = cacheFolder + environment + separator + distance + separator + size + extension;
 
@@ -50,7 +50,7 @@ namespace DynamicPathPlanner.Code
             return false;
         }
 
-        private double[,] loadCache(String environment, int distance, int size)
+        private double[,] loadCache(String environment, float distance, int size)
         {
             String filepath = cacheFolder + environment + separator + distance + separator + size + extension;
             double[,] d = new double[size,size];
@@ -94,7 +94,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public double[,] getPANGU_DEM(String environment, int distance , int size)
+        public double[,] getPANGU_DEM(String environment, float distance, int size)
         {
             double[,] d = PANGU_Manager.getElevationModel(distance, size, size);
 
@@ -104,7 +104,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        private void createCache(String environment, int distance, int size , double[,] d)
+        private void createCache(String environment, float distance, int size, double[,] d)
         {
             String filepath = cacheFolder + environment + separator + distance + separator + size + extension;
 

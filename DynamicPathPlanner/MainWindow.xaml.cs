@@ -46,7 +46,7 @@ namespace DynamicPathPlanner
 
         private bool started = false;
 
-        private int elevationDistance;
+        private float elevationDistance;
         private int elevationSize;
         private String slopeType;
         private int hazardSectorSize;
@@ -463,7 +463,7 @@ namespace DynamicPathPlanner
                 distanceTemp = txt_elevationDistance.Text;
                 sizeTemp = txt_elevationSize.Text;
 
-                elevationDistance = int.Parse(distanceTemp);
+                elevationDistance = float.Parse(distanceTemp);
                 elevationSize = int.Parse(sizeTemp);
                
                 elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);

@@ -37,7 +37,7 @@ namespace DynamicPathPlanner.Code
         {
             environmentText = environment;
         }
-        public void generateElevationModel(int distance , int size)
+        public void generateElevationModel(float distance , int size)
         {
             elevationModel = new ElevationModel();
          //   elevationModel.load_PANGU_DEM(distance , size);

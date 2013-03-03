@@ -50,7 +50,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public void load(String environment, int distance, int size)
+        public void load(String environment, float distance, int size)
         {
             elevationModel = loader.load_DEM(environment, distance, size);
             width = elevationModel.GetLength(0);

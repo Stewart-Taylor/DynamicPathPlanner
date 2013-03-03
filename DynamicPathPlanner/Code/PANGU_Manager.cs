@@ -40,7 +40,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public static double[,] getElevationModel(int distance, int width, int height)
+        public static double[,] getElevationModel(float distance, int width, int height)
         {
             double[,] elevationModel;
 

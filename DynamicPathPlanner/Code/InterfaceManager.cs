@@ -94,7 +94,7 @@ namespace DynamicPathPlanner
         }
 
 
-        public void generateElevationModel(int distance , int size)
+        public void generateElevationModel(float distance , int size)
         {
             navigationMapManager.generateElevationModel(distance , size);
         }
