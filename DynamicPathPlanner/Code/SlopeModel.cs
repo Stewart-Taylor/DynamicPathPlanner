@@ -28,7 +28,7 @@ namespace DynamicPathPlanner.Code
         private double[,] slopeModel;
 
         private Bitmap slopeBitmap;
-        private Bitmap image;
+        private Bitmap bitmap;
         private double lowestGradient;
         private double highestGradient;
 
@@ -177,6 +177,11 @@ namespace DynamicPathPlanner.Code
             ImageSource img = bi;
 
             return img;
+        }
+
+        public Bitmap getBitmap()
+        {
+            return slopeBitmap;
         }
 
 

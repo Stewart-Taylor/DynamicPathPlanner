@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*      Vehicle Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class contains the vehicle logic for the simulation
+ *
+ * Last Updated: 04/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +14,6 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Drawing;
-
 
 namespace DynamicPathPlanner.Code
 {
@@ -508,6 +515,12 @@ namespace DynamicPathPlanner.Code
             bitmap.EndInit();
 
             return bitmap;
+        }
+
+
+        public List<PathNode> getPathPoints()
+        {
+            return takenPath;
         }
 
     }

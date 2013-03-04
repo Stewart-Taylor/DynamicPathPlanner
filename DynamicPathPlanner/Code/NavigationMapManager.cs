@@ -85,10 +85,7 @@ namespace DynamicPathPlanner.Code
             return hazardModel.getImageSource();
         }
 
-        public Bitmap getHazardBitmap()
-        {
-            return hazardModel.getBitmap();
-        }
+
 
         public double[,] getSlopeModel()
         {
@@ -113,6 +110,21 @@ namespace DynamicPathPlanner.Code
         public int getHazardHeight()
         {
             return hazardModel.getHeight();
+        }
+
+        public Bitmap getElevationBitmap()
+        {
+            return elevationModel.getBitmap();
+        }
+
+        public Bitmap getSlopeBitmap()
+        {
+            return slopeModel.getBitmap();
+        }
+
+        public Bitmap getHazardBitmap()
+        {
+            return hazardModel.getBitmap();
         }
 
     }

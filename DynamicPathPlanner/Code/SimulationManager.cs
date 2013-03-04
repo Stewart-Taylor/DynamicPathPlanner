@@ -2,9 +2,10 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class is to run the pathfinding simulation
- * 
+ * It handles the results of the simulation
+ * and generates visual output
  *
- * Last Updated: 02/03/2013
+ * Last Updated: 04/03/2013
 */
 
 using System;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace DynamicPathPlanner.Code
 {
@@ -23,6 +25,16 @@ namespace DynamicPathPlanner.Code
         private SlopeModel slopeModel;
         private HazardModel hazardModel;
         private Pathfinder pathfinder;
+
+        private Bitmap skyBitamp;
+        private Bitmap elevationBitmap;
+        private Bitmap slopeBitmap;
+        private Bitmap hazardBitmap;
+        private Bitmap skyPathBitamp;
+        private Bitmap elevationPathBitmap;
+        private Bitmap slopePathBitmap;
+        private Bitmap hazardPathBitmap;
+
 
         private Random r = new Random();
 
@@ -41,6 +53,8 @@ namespace DynamicPathPlanner.Code
         private ImageSource imageSource;
 
         private String timeTaken;
+
+        private bool pathGenerated = false;
 
         #region GET
 
@@ -69,6 +83,10 @@ namespace DynamicPathPlanner.Code
         public void setSimulation(NavigationMapManager m)
         {
             mapManager = m;
+            elevationBitmap = (Bitmap)mapManager.getElevationBitmap().Clone();
+            slopeBitmap = (Bitmap)mapManager.getSlopeBitmap().Clone(); 
+            hazardBitmap = (Bitmap)mapManager.getHazardBitmap().Clone(); 
+            
             hazardModel = m.hazardModel; // REMOVE
         }
 
@@ -86,7 +104,7 @@ namespace DynamicPathPlanner.Code
         public void startSimulation()
         {
             startSimulationDSTAR(startX, startY, targetX, targetY);
-
+            pathGenerated = true;
         }
 
 
@@ -203,7 +221,39 @@ namespace DynamicPathPlanner.Code
             return null;
         }
 
-   
+
+        public Bitmap getElevationPathImage()
+        {
+            if( pathGenerated == true)
+            {
+                return getElevationPathBitmap();
+            }
+            return elevationBitmap;
+        }
+
+
+        private Bitmap getElevationPathBitmap()
+        {
+            if (elevationPathBitmap == null)
+            {
+                elevationPathBitmap = (Bitmap)elevationBitmap.Clone();
+
+                foreach (PathNode p in rover.getPathPoints())
+                {
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    elevationPathBitmap.SetPixel(p.x*10, p.y*10, color);
+                }
+            }
+
+            return elevationPathBitmap;
+        }
+
+
+        public ImageSource getElevationImage()
+        {
+          //  return 
+            return null;
+        }
 
         public List<PathNode> getPathModel()
         {

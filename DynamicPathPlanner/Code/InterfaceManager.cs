@@ -274,5 +274,18 @@ namespace DynamicPathPlanner
             return bi;
         }
 
+        public ImageSource getSimulationElevationImage()
+        {
+            Bitmap bitmap = simulationManager.getElevationPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
     }
 }

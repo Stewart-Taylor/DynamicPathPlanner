@@ -74,6 +74,20 @@ namespace DynamicPathPlanner
             BeginStoryboard(startSlideIn);
 
             started = true;
+
+            fastSetup();
+        }
+
+
+        private void fastSetup()
+        {
+            interfaceManager.connectToPANGU();
+            interfaceManager.setEnviornmentString("Moon.pan");
+            interfaceManager.generateElevationModel(0.1f, 1024);
+            interfaceManager.generateSlopeModel("HORN");
+            interfaceManager.generateHazardModel(10);
+            interfaceManager.setVehicleValues(4, 3, 55, 93, "D_STAR", false);
+            nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
         }
 
         private void startSlideIn_Completed(object sender, EventArgs e)
@@ -427,7 +441,7 @@ namespace DynamicPathPlanner
 
         private void btn_simulationElevation_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            img_simulationMain.Source = interfaceManager.getElevationModelImage();
+            img_simulationMain.Source = interfaceManager.getSimulationElevationImage();
         }
 
         private void btn_simulationSlope_Click(object sender, System.Windows.RoutedEventArgs e)
