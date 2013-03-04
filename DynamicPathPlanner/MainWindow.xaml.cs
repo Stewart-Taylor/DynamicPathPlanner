@@ -255,7 +255,8 @@ namespace DynamicPathPlanner
                 if (interfaceManager.vehicleValuesValid(startX, startY , targetX , targetY))
                 {
                     interfaceManager.setVehicleValues(startX, startY, targetX, targetY, "a_star", false);
-                    nextSlide(grid_rover_slide, grid_layout, "Rover_SlideOut", "Main_SlideIn");
+                   // nextSlide(grid_rover_slide, grid_layout, "Rover_SlideOut", "Main_SlideIn");
+                    nextSlide(grid_rover_slide, grid_simulation , "Rover_SlideOut", "Simulation_SlideIn");
                 }
             }
             catch (Exception ex)

@@ -215,7 +215,24 @@
 				<DiscreteStringKeyFrame KeyTime="0:0:1.5" Value="Please Wait ..."/>
 			</StringAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Grid_Simulation"/>
+		<Storyboard x:Key="Simulation_SlideIn">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_simulationContainer">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-1294"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-2">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource Grid_Simulation}"/>
+			<BeginStoryboard Storyboard="{StaticResource Simulation_SlideIn}"/>
+		</EventTrigger>
+	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
     		<Menu.RenderTransform>
@@ -367,7 +384,7 @@
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -465,6 +482,76 @@
     			<TextBox x:Name="txt_targetX" Margin="72.153,0,0,141.454" TextWrapping="Wrap" Text="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="50" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" TextChanged="roverPositionsUpdated" Height="30"/>
     			<TextBox x:Name="txt_targetY" HorizontalAlignment="Left" Margin="155.758,0,0,141.454" TextWrapping="Wrap" Text="1" VerticalAlignment="Bottom" Width="50" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" TextChanged="roverPositionsUpdated" Height="30"/>
     			<TextBlock Margin="139.968,0,0,141.454" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="21.333" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Y"/>
+    		</Grid>
+    	</Grid>
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    		<Grid.RenderTransform>
+    			<TransformGroup>
+    				<ScaleTransform/>
+    				<SkewTransform/>
+    				<RotateTransform/>
+    				<TranslateTransform/>
+    			</TransformGroup>
+    		</Grid.RenderTransform>
+    		<Grid.RowDefinitions>
+    			<RowDefinition/>
+    		</Grid.RowDefinitions>
+    		<Grid x:Name="grid_simulationContainer" RenderTransformOrigin="0.5,0.5">
+    			<Grid.RenderTransform>
+    				<TransformGroup>
+    					<ScaleTransform/>
+    					<SkewTransform/>
+    					<RotateTransform/>
+    					<TranslateTransform/>
+    				</TransformGroup>
+    			</Grid.RenderTransform>
+    			<Grid.RowDefinitions>
+    				<RowDefinition Height="0.804*"/>
+    				<RowDefinition Height="0.196*"/>
+    			</Grid.RowDefinitions>
+    			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
+    				<Button x:Name="btn_start1" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_start_Click"/>
+    				<Button x:Name="btn_pause1" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
+    				<Button x:Name="btn_start_Copy2" Content="Instant"  Margin="0,30,35,30" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
+    			</Grid>
+    			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left">
+    				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
+    					<TextBlock TextWrapping="Wrap" Text="Console" Foreground="White" Margin="8,0,0,0" HorizontalAlignment="Left"/>
+    				</Grid>
+    				<TextBox Margin="0,15,0,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667"/>
+    			</Grid>
+    			<Grid Margin="8" HorizontalAlignment="Center">
+    				<Grid.ColumnDefinitions>
+    					<ColumnDefinition Width="0.392*"/>
+    					<ColumnDefinition Width="0.608*"/>
+    				</Grid.ColumnDefinitions>
+    				<Grid Margin="8,0,12,0" d:IsLocked="True">
+    					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="18.667" Foreground="White"/>
+    					<Grid Margin="8,39.96,8,132.682" Height="380">
+    						<Image Source="Images/PathTest.png" Margin="8,8,8,37"/>
+    						<Button Content="Slope" Margin="0,0,104.766,8" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Right" Width="70" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
+    						<Button Content="Elevation" HorizontalAlignment="Left" Margin="101.234,0,0,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
+    						<Button Content="Sky" HorizontalAlignment="Left" Margin="27.234,0,0,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
+    						<Button Content="Hazard" HorizontalAlignment="Right" Margin="0,0,30.766,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
+    					</Grid>
+    				</Grid>
+    				<Grid Margin="8,0" Grid.Column="1">
+    					<TextBlock TextWrapping="Wrap" Text="Rover" VerticalAlignment="Top" Margin="8,8,0,0" FontSize="18.667" Foreground="White" d:LayoutOverrides="Width"/>
+    					<TextBlock HorizontalAlignment="Left" Margin="70.79,42.308,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+    					<Image HorizontalAlignment="Left" Height="42.308" VerticalAlignment="Top" Width="100"/>
+    					<Grid HorizontalAlignment="Left" Height="346.712" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
+    						<Grid.ColumnDefinitions>
+    							<ColumnDefinition Width="0.451*"/>
+    							<ColumnDefinition Width="0.5*"/>
+    						</Grid.ColumnDefinitions>
+    						<TextBlock Margin="8,0" TextWrapping="Wrap" Text="Internal Map" Foreground="White" FontSize="16" VerticalAlignment="Top"/>
+    						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1"/>
+    						<Image Margin="8,25.28,8,77.174" Source="Images/PathTest.png"/>
+    						<Image Grid.Column="1" Margin="8,25.28,8,77.174" Source="Images/PathTest.png"/>
+    					</Grid>
+    				</Grid>
+    				<Grid Margin="0,8" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
+    			</Grid>
     		</Grid>
     	</Grid>
         
