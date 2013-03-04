@@ -299,11 +299,15 @@ namespace DynamicPathPlanner.Code
 
         private void updateOwnMap(int x, int y)
         {
-            knownMap[x, y] = realMap[x, y];
+            if ((x > 0) && (y > 0))
+            {
+                
+                knownMap[x, y] = realMap[x, y];
 
-            System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
+                System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
 
-            pathBitmap.SetPixel(x, y, tempColor);
+                pathBitmap.SetPixel(x, y, tempColor);
+            }
         }
 
 

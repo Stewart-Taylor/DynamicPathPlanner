@@ -75,7 +75,7 @@ namespace DynamicPathPlanner
 
             started = true;
 
-            fastSetup();
+         //   fastSetup();
         }
 
 
