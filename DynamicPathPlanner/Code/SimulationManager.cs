@@ -15,6 +15,8 @@ using System.Text;
 using System.Windows.Media;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace DynamicPathPlanner.Code
 {
@@ -34,7 +36,7 @@ namespace DynamicPathPlanner.Code
         private Bitmap elevationPathBitmap;
         private Bitmap slopePathBitmap;
         private Bitmap hazardPathBitmap;
-
+        private Bitmap comboPathBitmap;
 
         private Random r = new Random();
 
@@ -231,6 +233,104 @@ namespace DynamicPathPlanner.Code
             return elevationBitmap;
         }
 
+        public Bitmap getSlopePathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getSlopePathBitmap();
+            }
+            return slopeBitmap;
+        }
+
+        public Bitmap getHazardPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getHazardPathBitmap();
+            }
+            return hazardBitmap;
+        }
+
+        public Bitmap getComboPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getComboPathBitmap();
+            }
+            return elevationBitmap;
+        }
+
+
+        private Bitmap getComboPathBitmap()
+        {
+            if (comboPathBitmap == null)
+            {
+                comboPathBitmap = (Bitmap)elevationBitmap.Clone();
+
+
+                float alpha = 0.2f;
+
+                for (int a = 0; a < comboPathBitmap.Width; a++)
+                {
+                    for (int b = 0; b < comboPathBitmap.Height; b++)
+                    {
+                        System.Drawing.Color c2 = comboPathBitmap.GetPixel(a, b);
+                        System.Drawing.Color c1 = hazardBitmap.GetPixel(a, b);
+
+                        float red1 = (c1.R /255f);
+                        float red2 = (c2.R /255f);
+                        float redNew = alpha * red1 + (1 - alpha) * red2;
+
+                        float green1 = (c1.G / 255f);
+                        float green2 = (c2.G / 255f);
+                        float greenNew = alpha * green1 + (1 - alpha) * green2;
+
+                        float blue1 = (c1.B / 255f);
+                        float blue2 = (c2.B / 255f);
+                        float blueNew = alpha * blue1 + (1 - alpha) * blue2;
+                       
+                        
+                        int red = (int)(redNew * 255f);
+                        int green = (int)(greenNew * 255f);
+                        int blue = (int)(blueNew * 255f);
+
+     
+                        System.Drawing.Color newCol = System.Drawing.Color.FromArgb(red,green,blue);
+                        comboPathBitmap.SetPixel(a, b, newCol);
+                    }
+                }
+
+        
+
+
+                int xPrev = -1;
+                int yPrev = -1;
+
+                foreach (PathNode p in rover.getPathPoints())
+                {
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    int x = p.x * 10;
+                    int y = p.y * 10;
+
+                    comboPathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+
+                    using (var graphics = Graphics.FromImage(comboPathBitmap))
+                    {
+                        if ((xPrev != -1) && (yPrev != -1))
+                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                    }
+
+                    xPrev = x;
+                    yPrev = y;
+                }
+            }
+
+            return comboPathBitmap;
+        }
+
+
+
 
         private Bitmap getElevationPathBitmap()
         {
@@ -238,16 +338,95 @@ namespace DynamicPathPlanner.Code
             {
                 elevationPathBitmap = (Bitmap)elevationBitmap.Clone();
 
+                int xPrev = -1;
+                int yPrev = -1;
+
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
+                    int x = p.x * 10;
+                    int y = p.y * 10;
+
                     elevationPathBitmap.SetPixel(p.x*10, p.y*10, color);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+
+                    using (var graphics = Graphics.FromImage(elevationPathBitmap))
+                    {
+                        if( (xPrev != -1) && (yPrev != -1))
+                        graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                    }
+
+                    xPrev = x;
+                    yPrev = y;
                 }
             }
 
             return elevationPathBitmap;
         }
 
+        private Bitmap getSlopePathBitmap()
+        {
+            if (slopePathBitmap == null)
+            {
+                slopePathBitmap = (Bitmap)slopeBitmap.Clone();
+
+                int xPrev = -1;
+                int yPrev = -1;
+
+                foreach (PathNode p in rover.getPathPoints())
+                {
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    int x = p.x * 10;
+                    int y = p.y * 10;
+
+                    slopePathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+
+                    using (var graphics = Graphics.FromImage(slopePathBitmap))
+                    {
+                        if ((xPrev != -1) && (yPrev != -1))
+                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                    }
+
+                    xPrev = x;
+                    yPrev = y;
+                }
+            }
+
+            return slopePathBitmap;
+        }
+
+        private Bitmap getHazardPathBitmap()
+        {
+            if (hazardPathBitmap == null)
+            {
+                hazardPathBitmap = (Bitmap)hazardBitmap.Clone();
+
+                int xPrev = -1;
+                int yPrev = -1;
+
+                foreach (PathNode p in rover.getPathPoints())
+                {
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    int x = p.x * 10;
+                    int y = p.y * 10;
+
+                    hazardPathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+
+                    using (var graphics = Graphics.FromImage(hazardPathBitmap))
+                    {
+                        if ((xPrev != -1) && (yPrev != -1))
+                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                    }
+
+                    xPrev = x;
+                    yPrev = y;
+                }
+            }
+
+            return hazardPathBitmap;
+        }
 
         public ImageSource getElevationImage()
         {

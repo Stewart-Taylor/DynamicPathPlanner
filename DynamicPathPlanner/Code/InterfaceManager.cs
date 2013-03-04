@@ -287,5 +287,48 @@ namespace DynamicPathPlanner
 
             return bi;
         }
+
+        public ImageSource getSimulationSlopeImage()
+        {
+            Bitmap bitmap = simulationManager.getSlopePathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource getSimulationHazardImage()
+        {
+            Bitmap bitmap = simulationManager.getHazardPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+
+        public ImageSource getSimulationComboImage()
+        {
+            Bitmap bitmap = simulationManager.getComboPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
     }
 }

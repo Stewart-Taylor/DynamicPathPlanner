@@ -446,12 +446,12 @@ namespace DynamicPathPlanner
 
         private void btn_simulationSlope_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            img_simulationMain.Source = interfaceManager.getSlopeModelImage();
+            img_simulationMain.Source = interfaceManager.getSimulationSlopeImage();
         }
 
         private void btn_simulationHazard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            img_simulationMain.Source = interfaceManager.getHazardModelImage();
+            img_simulationMain.Source = interfaceManager.getSimulationHazardImage();
         }
 
         private void btn_simulationStart_Click(object sender, System.Windows.RoutedEventArgs e)
