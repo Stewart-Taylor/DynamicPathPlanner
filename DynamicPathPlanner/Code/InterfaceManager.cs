@@ -113,6 +113,7 @@ namespace DynamicPathPlanner
             simulationManager.startSimulation();
         }
 
+
         public ImageSource getElevationModelImage()
         {
             return navigationMapManager.getElevationImage();
@@ -137,6 +138,12 @@ namespace DynamicPathPlanner
         {
             return simulationManager.getVehicleImage();
         }
+
+        public ImageSource getRoverInternalMap()
+        {
+            return simulationManager.getVehicleInternalMapImage();
+        }
+
 
         public bool isElevationMapGenerated()
         {

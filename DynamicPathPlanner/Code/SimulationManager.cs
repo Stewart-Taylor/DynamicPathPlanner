@@ -231,5 +231,10 @@ namespace DynamicPathPlanner.Code
             return imageSource;
         }
 
+        public ImageSource getVehicleInternalMapImage()
+        {
+            return rover.getPathImage();
+        }
+
     }
 }

@@ -190,6 +190,7 @@ namespace DynamicPathPlanner.Code
 
                 do
                 {
+                    updateFrontView();
                     if (steps >= 1600)
                     {
                         atTarget = true;
@@ -212,6 +213,9 @@ namespace DynamicPathPlanner.Code
 
                     if (isNextNodeSafe(nextNode) == true)
                     {
+                        previousX = positionX;
+                        previousY = positionY;
+
                         positionX = nextNode.x;
                         positionY = nextNode.y;
                         takenPath.Add(nextNode);
@@ -280,7 +284,7 @@ namespace DynamicPathPlanner.Code
 
             if (realMap[node.x, node.y] == knownMap[node.x, node.y])
             {
-                return true; // means no safer path
+              //  return true; // means no safer path
             }
             return false;
         }
@@ -300,8 +304,8 @@ namespace DynamicPathPlanner.Code
         {
             if ((previousX != 0) && (previousY != 0))
             {
-                if (realMap[positionX, positionY] != knownMap[positionX, positionY])
-                {
+              //  if (realMap[positionX, positionY] != knownMap[positionX, positionY])
+              //  {
                     int directionX = positionX - previousX;
                     int directionY = positionY - previousY;
 
@@ -313,14 +317,15 @@ namespace DynamicPathPlanner.Code
                     else if ((directionX == -1) && (directionY == 1)) { updateFacingBottomLeft(); }
                     else if ((directionX == 0) && (directionY == 1)) { updateFacingBottomMiddle(); }
                     else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(); }
-                }
+              //  }
             }
         }
 
 
         private void updateTile(int x, int y)
         {
-            knownMap[x, y] = realMap[x, y];
+           // knownMap[x, y] = realMap[x, y];
+            updateOwnMap(x, y);
         }
 
         private void updateFacingTopLeft()
@@ -423,7 +428,7 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < knownMap.GetLength(1); y++)
                 {
-                    System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
+                    System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
 
                     bitmap.SetPixel(x, y, tempColor);
                 }
@@ -443,7 +448,7 @@ namespace DynamicPathPlanner.Code
             float blue = 0;
 
             bool notKnown = false;
-            if (gradient == 0)
+            if (gradient != realMap[x,y])
             {
                 notKnown = true;
                 gradient = realImageMap[x, y];
@@ -467,8 +472,8 @@ namespace DynamicPathPlanner.Code
 
             if (notKnown == true)
             {
-                green = ((float)green * 0.3f);
-                red = ((float)red * 0.3f);
+                green = ((float)green * 0.1f);
+                red = ((float)red * 0.1f);
             }
 
             foreach (PathNode n in takenPath)

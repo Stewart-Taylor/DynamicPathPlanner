@@ -234,7 +234,7 @@
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
+    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5">
     		<Menu.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -345,7 +345,7 @@
     			<Button x:Name="btn_start_Copy1" Content="Instant"  Margin="0,30,35,30" Background="#FF1BA1E2" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_startup_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_startup_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -362,7 +362,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -384,7 +384,7 @@
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -407,7 +407,7 @@
     			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="154.331,0,0,138.948" HorizontalAlignment="Left" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" VerticalAlignment="Bottom"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer2" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -431,7 +431,7 @@
     			<TextBlock Margin="27.455,137.036,0,0" TextWrapping="Wrap" FontSize="16" Foreground="White" VerticalAlignment="Top" Text="Slope Algorithm" HorizontalAlignment="Left"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_hazard_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_hazard_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer3" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -455,7 +455,7 @@
     			<TextBlock Margin="8.181,177.357,0,196.325" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Hazard Gradient"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_rover_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_rover_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer4" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -509,48 +509,49 @@
     				<RowDefinition Height="0.804*"/>
     				<RowDefinition Height="0.196*"/>
     			</Grid.RowDefinitions>
+    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0" Text="Simulation"/>
+    			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_start1" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_start_Click"/>
+    				<Button x:Name="btn_simulationStart" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_simulationStart_Click"/>
     				<Button x:Name="btn_pause1" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50"/>
     				<Button x:Name="btn_start_Copy2" Content="Instant"  Margin="0,30,35,30" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50"/>
     			</Grid>
-    			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left">
+    			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
     					<TextBlock TextWrapping="Wrap" Text="Console" Foreground="White" Margin="8,0,0,0" HorizontalAlignment="Left"/>
     				</Grid>
     				<TextBox Margin="0,15,0,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667"/>
     			</Grid>
-    			<Grid Margin="8" HorizontalAlignment="Center">
+    			<Grid Margin="8,90.03,8,8" HorizontalAlignment="Center">
     				<Grid.ColumnDefinitions>
     					<ColumnDefinition Width="0.392*"/>
     					<ColumnDefinition Width="0.608*"/>
     				</Grid.ColumnDefinitions>
-    				<Grid Margin="8,0,12,0" d:IsLocked="True">
-    					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="18.667" Foreground="White"/>
-    					<Grid Margin="8,39.96,8,132.682" Height="380">
-    						<Image Source="Images/PathTest.png" Margin="8,8,8,37"/>
-    						<Button Content="Slope" Margin="0,0,104.766,8" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Right" Width="70" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
-    						<Button Content="Elevation" HorizontalAlignment="Left" Margin="101.234,0,0,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
-    						<Button Content="Sky" HorizontalAlignment="Left" Margin="27.234,0,0,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
-    						<Button Content="Hazard" HorizontalAlignment="Right" Margin="0,0,30.766,8" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold"/>
+    				<Grid Margin="8,8,12,8">
+    					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
+    					<Grid Margin="8,39.96,8,8">
+    						<Image x:Name="img_simulationMain" Source="Images/PathTest.png" Margin="8,8,8,37"/>
+    						<Button x:Name="btn_simulationSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
+    						<Button x:Name="btn_simulationElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
+    						<Button x:Name="btn_simulationSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
+    						<Button x:Name="btn_simulationHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click"/>
     					</Grid>
     				</Grid>
-    				<Grid Margin="8,0" Grid.Column="1">
-    					<TextBlock TextWrapping="Wrap" Text="Rover" VerticalAlignment="Top" Margin="8,8,0,0" FontSize="18.667" Foreground="White" d:LayoutOverrides="Width"/>
+    				<Grid Margin="8" Grid.Column="1">
+    					<TextBlock TextWrapping="Wrap" Text="Rover" VerticalAlignment="Top" Margin="8,0,0,0" FontSize="26.667" Foreground="White" d:LayoutOverrides="Width" FontFamily="Segoe UI Light" Height="42.308"/>
     					<TextBlock HorizontalAlignment="Left" Margin="70.79,42.308,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-    					<Image HorizontalAlignment="Left" Height="42.308" VerticalAlignment="Top" Width="100"/>
-    					<Grid HorizontalAlignment="Left" Height="346.712" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
+    					<Grid HorizontalAlignment="Left" Height="309.617" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
     						<Grid.ColumnDefinitions>
     							<ColumnDefinition Width="0.451*"/>
     							<ColumnDefinition Width="0.5*"/>
     						</Grid.ColumnDefinitions>
     						<TextBlock Margin="8,0" TextWrapping="Wrap" Text="Internal Map" Foreground="White" FontSize="16" VerticalAlignment="Top"/>
-    						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1"/>
-    						<Image Margin="8,25.28,8,77.174" Source="Images/PathTest.png"/>
-    						<Image Grid.Column="1" Margin="8,25.28,8,77.174" Source="Images/PathTest.png"/>
+    						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1" Margin="8,0,0,0"/>
+    						<Image x:Name="img_simulationInternal" Margin="8,25.28,8,35.958" Source="Images/PathTest.png"/>
+    						<Image x:Name="img_simulationRover" Grid.Column="1" Margin="8,25.28,8,35.958" Source="Images/PathTest.png"/>
     					</Grid>
     				</Grid>
-    				<Grid Margin="0,8" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
+    				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
     			</Grid>
     		</Grid>
     	</Grid>

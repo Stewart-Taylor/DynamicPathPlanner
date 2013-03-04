@@ -61,6 +61,7 @@ namespace DynamicPathPlanner
             grid_hazard_slide.Visibility = Visibility.Hidden;
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Hidden;
+            grid_simulation.Visibility = Visibility.Hidden;
 
             //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
@@ -113,7 +114,13 @@ namespace DynamicPathPlanner
             lbl_hazardWait.Text = "";
             img_hazardSlide.Source = interfaceManager.getHazardModelImage();
         }
-     
+
+
+        private void startSimulationScreen()
+        {
+
+
+        }
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
         {
@@ -411,6 +418,32 @@ namespace DynamicPathPlanner
             {
 
             }
+        }
+
+        private void btn_simulationSky_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            img_simulationMain.Source = interfaceManager.getSkyview();
+        }
+
+        private void btn_simulationElevation_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            img_simulationMain.Source = interfaceManager.getElevationModelImage();
+        }
+
+        private void btn_simulationSlope_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            img_simulationMain.Source = interfaceManager.getSlopeModelImage();
+        }
+
+        private void btn_simulationHazard_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            img_simulationMain.Source = interfaceManager.getHazardModelImage();
+        }
+
+        private void btn_simulationStart_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.startSimulation();
+            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
         }
 
     }
