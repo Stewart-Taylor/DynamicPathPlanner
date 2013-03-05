@@ -186,7 +186,7 @@ namespace DynamicPathPlanner.Code
             unsafe
             {
                 pan_protocol_set_aspect_ratio(sock, 1); //set aspect ratio
-                pan_protocol_set_boulder_view(sock, 0, 0);//turn boulders off
+                pan_protocol_set_boulder_view(sock, 1, 0);//turn boulders off
                 pan_protocol_set_field_of_view(sock, 30.0f);//set field of view
 
                 ulong t = 1024;

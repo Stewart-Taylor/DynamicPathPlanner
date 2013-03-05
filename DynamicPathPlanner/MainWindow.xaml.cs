@@ -85,8 +85,8 @@ namespace DynamicPathPlanner
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.generateElevationModel(0.1f, 1024);
             interfaceManager.generateSlopeModel("HORN");
-            interfaceManager.generateHazardModel(10);
-            interfaceManager.setVehicleValues(10, 10, 50, 80, "D_STAR", false);
+            interfaceManager.generateHazardModel(20);
+            interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
         }
 
@@ -458,6 +458,7 @@ namespace DynamicPathPlanner
         {
             interfaceManager.startSimulation();
             img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+            img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
         }
 
     }

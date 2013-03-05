@@ -3,7 +3,7 @@
  *------------------------------------
  * This class contains the vehicle logic for the simulation
  *
- * Last Updated: 04/03/2013
+ * Last Updated: 05/03/2013
 */
 
 using System;
@@ -470,9 +470,13 @@ namespace DynamicPathPlanner.Code
             float blue = 0;
 
             bool notKnown = false;
-            if (gradient != realMap[x,y])
+            if (gradient == 0)
             {
                 notKnown = true;
+                //   gradient = realImageMap[x, y];
+            }
+            else
+            {
                 gradient = realImageMap[x, y];
             }
 
@@ -494,8 +498,22 @@ namespace DynamicPathPlanner.Code
 
             if (notKnown == true)
             {
-                green = ((float)green * 0.1f);
-                red = ((float)red * 0.1f);
+              //  green = ((float)green * 0.1f);
+               // red = ((float)red * 0.1f);
+                green = 0;
+                red = 0;
+                blue = 0;
+
+                if (x % 3 == 0)
+                {
+                    blue = 40;
+                }
+
+                if (y % 3 == 0)
+                {
+                    blue = 40;
+                }
+
             }
 
             foreach (PathNode n in takenPath)
@@ -516,6 +534,12 @@ namespace DynamicPathPlanner.Code
             color = System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
 
             return color;
+        }
+
+
+        public ImageSource getRoverCam()
+        {
+            return PANGU_Manager.getSkyView(0.1f , 1024);
         }
 
 

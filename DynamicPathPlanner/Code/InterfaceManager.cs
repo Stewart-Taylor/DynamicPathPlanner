@@ -349,5 +349,10 @@ namespace DynamicPathPlanner
 
             return bi;
         }
+
+        public ImageSource getSimulationRoverImage()
+        {
+            return simulationManager.getRoverCamImage();
+        }
     }
 }
