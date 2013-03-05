@@ -28,11 +28,11 @@ namespace DynamicPathPlanner.Code
         private HazardModel hazardModel;
         private Pathfinder pathfinder;
 
-        private Bitmap skyBitamp;
+        private Bitmap skyBitmap;
         private Bitmap elevationBitmap;
         private Bitmap slopeBitmap;
         private Bitmap hazardBitmap;
-        private Bitmap skyPathBitamp;
+        private Bitmap skyPathBitmap;
         private Bitmap elevationPathBitmap;
         private Bitmap slopePathBitmap;
         private Bitmap hazardPathBitmap;
@@ -51,6 +51,8 @@ namespace DynamicPathPlanner.Code
         private int targetY;
         private String searchAlgortihm;
         private bool knownMap;
+
+        private int hazardSectorSize;
 
         private ImageSource imageSource;
 
@@ -82,12 +84,15 @@ namespace DynamicPathPlanner.Code
 
 
         
-        public void setSimulation(NavigationMapManager m)
+        public void setSimulation(NavigationMapManager m , Bitmap skyView)
         {
             mapManager = m;
             elevationBitmap = (Bitmap)mapManager.getElevationBitmap().Clone();
             slopeBitmap = (Bitmap)mapManager.getSlopeBitmap().Clone(); 
-            hazardBitmap = (Bitmap)mapManager.getHazardBitmap().Clone(); 
+            hazardBitmap = (Bitmap)mapManager.getHazardBitmap().Clone();
+            skyBitmap = (Bitmap)skyView.Clone();
+
+            hazardSectorSize = m.getHazardSectorSize();
             
             hazardModel = m.hazardModel; // REMOVE
         }
@@ -260,6 +265,15 @@ namespace DynamicPathPlanner.Code
             return elevationBitmap;
         }
 
+        public Bitmap getSkyPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getSkyPathBitmap();
+            }
+            return skyBitmap;
+        }
+
 
         private Bitmap getComboPathBitmap()
         {
@@ -309,10 +323,10 @@ namespace DynamicPathPlanner.Code
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
-                    int x = p.x * 10;
-                    int y = p.y * 10;
+                    int x = p.x * hazardSectorSize;
+                    int y = p.y * hazardSectorSize;
 
-                    comboPathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    comboPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
 
                     using (var graphics = Graphics.FromImage(comboPathBitmap))
@@ -344,10 +358,10 @@ namespace DynamicPathPlanner.Code
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
-                    int x = p.x * 10;
-                    int y = p.y * 10;
+                    int x = p.x * hazardSectorSize;
+                    int y = p.y * hazardSectorSize;
 
-                    elevationPathBitmap.SetPixel(p.x*10, p.y*10, color);
+                    elevationPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
 
                     using (var graphics = Graphics.FromImage(elevationPathBitmap))
@@ -376,10 +390,10 @@ namespace DynamicPathPlanner.Code
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
-                    int x = p.x * 10;
-                    int y = p.y * 10;
+                    int x = p.x * hazardSectorSize;
+                    int y = p.y * hazardSectorSize;
 
-                    slopePathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    slopePathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
 
                     using (var graphics = Graphics.FromImage(slopePathBitmap))
@@ -408,10 +422,10 @@ namespace DynamicPathPlanner.Code
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
-                    int x = p.x * 10;
-                    int y = p.y * 10;
+                    int x = p.x * hazardSectorSize;
+                    int y = p.y * hazardSectorSize;
 
-                    hazardPathBitmap.SetPixel(p.x * 10, p.y * 10, color);
+                    hazardPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
 
                     using (var graphics = Graphics.FromImage(hazardPathBitmap))
@@ -426,6 +440,39 @@ namespace DynamicPathPlanner.Code
             }
 
             return hazardPathBitmap;
+        }
+
+
+        private Bitmap getSkyPathBitmap()
+        {
+            if (skyPathBitmap == null)
+            {
+                skyPathBitmap = (Bitmap)skyBitmap.Clone();
+
+                int xPrev = -1;
+                int yPrev = -1;
+
+                foreach (PathNode p in rover.getPathPoints())
+                {
+                    System.Drawing.Color color = System.Drawing.Color.Blue;
+                    int x = p.x * (hazardSectorSize / 2); 
+                    int y = p.y * (hazardSectorSize / 2);
+
+                    skyPathBitmap.SetPixel(p.x * (hazardSectorSize / 2), p.y * (hazardSectorSize / 2), color);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+
+                    using (var graphics = Graphics.FromImage(skyPathBitmap))
+                    {
+                        if ((xPrev != -1) && (yPrev != -1))
+                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                    }
+
+                    xPrev = x;
+                    yPrev = y;
+                }
+            }
+
+            return skyPathBitmap;
         }
 
         public ImageSource getElevationImage()

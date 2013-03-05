@@ -75,7 +75,7 @@ namespace DynamicPathPlanner
 
             started = true;
 
-         //   fastSetup();
+            fastSetup();
         }
 
 
@@ -86,7 +86,7 @@ namespace DynamicPathPlanner
             interfaceManager.generateElevationModel(0.1f, 1024);
             interfaceManager.generateSlopeModel("HORN");
             interfaceManager.generateHazardModel(10);
-            interfaceManager.setVehicleValues(4, 3, 55, 93, "D_STAR", false);
+            interfaceManager.setVehicleValues(10, 10, 50, 80, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
         }
 
@@ -195,7 +195,7 @@ namespace DynamicPathPlanner
             {
                 interfaceManager.setEnviornmentString(selectedText);
 
-                img_elevationSlide.Source = interfaceManager.getSkyview();
+                img_elevationSlide.Source = interfaceManager.getQuickView();
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
             }
@@ -436,7 +436,7 @@ namespace DynamicPathPlanner
 
         private void btn_simulationSky_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            img_simulationMain.Source = interfaceManager.getSkyview();
+            img_simulationMain.Source = interfaceManager.getSimulationAerialImage();
         }
 
         private void btn_simulationElevation_Click(object sender, System.Windows.RoutedEventArgs e)

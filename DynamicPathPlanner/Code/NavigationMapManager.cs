@@ -25,6 +25,9 @@ namespace DynamicPathPlanner.Code
         private int hazardSectorSize = 10;
         private String environmentText;
 
+        private float distanceStep;
+        private int areaSize;
+
         public NavigationMapManager()
         {
 
@@ -36,6 +39,8 @@ namespace DynamicPathPlanner.Code
         }
         public void generateElevationModel(float distance , int size)
         {
+            distanceStep = distance;
+            areaSize = size;
             elevationModel = new ElevationModel();
             elevationModel.load(environmentText, distance, size);
         }
@@ -48,6 +53,16 @@ namespace DynamicPathPlanner.Code
         public void generateHazardModel(int size)
         {
             hazardModel = new HazardModel(slopeModel.getModel(), size);
+        }
+
+        public float getDistanceStep()
+        {
+            return distanceStep;
+        }
+
+        public int getAreaSize()
+        {
+            return areaSize;
         }
 
         public double[,] getHazardModel()

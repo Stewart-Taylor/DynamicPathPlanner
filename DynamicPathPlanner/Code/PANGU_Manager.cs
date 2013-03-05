@@ -49,16 +49,11 @@ namespace DynamicPathPlanner.Code
             return elevationModel;
         }
 
-        public static ImageSource getSkyView()
+        public static ImageSource getSkyView(float distance , int size)
         {
-            float x = 0;
-            float y = 0;
-            float z = 7000;
-            float yaw = 0;
-            float pitch = -90;
-            float roll = 0;
 
-            Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+       //     Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+             Bitmap skyBitmap = getSkyBitmap( distance ,  size);
             MemoryStream ms = new MemoryStream();
             skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -70,6 +65,26 @@ namespace DynamicPathPlanner.Code
             ImageSource img = bi;
 
             return img;
+        }
+
+
+        public static Bitmap getSkyBitmap(float distance, int size)
+        {
+            float x = 0;
+            float y = 0;
+            float z = 0;
+            float yaw = 90;
+            float pitch = -90;
+            float roll = 0;
+
+
+            float constantValue = 1.96f;
+
+
+            z = distance * size * constantValue;
+
+            Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+            return skyBitmap;
         }
 
 

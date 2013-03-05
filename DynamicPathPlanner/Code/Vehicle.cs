@@ -301,12 +301,14 @@ namespace DynamicPathPlanner.Code
         {
             if ((x > 0) && (y > 0))
             {
-                
-                knownMap[x, y] = realMap[x, y];
+                if ((x < knownMap.GetLength(0)) && (y < knownMap.GetLength(1)))
+                {
+                    knownMap[x, y] = realMap[x, y];
 
-                System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
+                    System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
 
-                pathBitmap.SetPixel(x, y, tempColor);
+                    pathBitmap.SetPixel(x, y, tempColor);
+                }
             }
         }
 
@@ -329,6 +331,15 @@ namespace DynamicPathPlanner.Code
                     else if ((directionX == 0) && (directionY == 1)) { updateFacingBottomMiddle(); }
                     else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(); }
               //  }
+            }
+
+
+            for (int x = -2; x < 2; x++)
+            {
+                for (int y = -2; y < 2; y++)
+                {
+                    updateTile(positionX + x, positionY + y);
+                }
             }
         }
 

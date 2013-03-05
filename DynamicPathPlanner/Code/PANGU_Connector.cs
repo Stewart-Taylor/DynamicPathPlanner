@@ -147,9 +147,9 @@ namespace DynamicPathPlanner.Code
 
                     //Converts from 1D to 2D array
                     int temp = 0;
-                    for (int y = 0; y < (int)ny; y++)
+                    for (int x = 0; x < (int)nx; x++)
                     {
-                        for (int x = 0; x < (int)nx; x++)
+                        for (int y = 0; y < (int)ny; y++)
                         {
 
                             elevationModel[x, y] = elevationGrid[temp];

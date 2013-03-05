@@ -109,7 +109,7 @@ namespace DynamicPathPlanner
 
         public void startSimulation()
         {
-            simulationManager.setSimulation(navigationMapManager);
+            simulationManager.setSimulation(navigationMapManager , PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()));
             simulationManager.startSimulation();
         }
 
@@ -129,9 +129,14 @@ namespace DynamicPathPlanner
             return navigationMapManager.getHazardImage();
         }
 
-        public ImageSource getSkyview()
+        public ImageSource getQuickView()
         {
-            return PANGU_Manager.getSkyView();
+            return PANGU_Manager.getSkyView(0.1f ,512 );
+        }
+
+        public ImageSource getAerialView()
+        {
+            return PANGU_Manager.getSkyView(navigationMapManager.getDistanceStep(), navigationMapManager.getAreaSize());
         }
 
         public ImageSource getRoverMap()
@@ -229,7 +234,7 @@ namespace DynamicPathPlanner
 
         public void setVehicleValues(int startX , int startY, int targetX , int targetY , String algorithm, bool knownMap)
         {
-            simulationManager.setSimulation(navigationMapManager);
+                        simulationManager.setSimulation(navigationMapManager , PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()));
             simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
         }
 
@@ -320,6 +325,20 @@ namespace DynamicPathPlanner
         public ImageSource getSimulationComboImage()
         {
             Bitmap bitmap = simulationManager.getComboPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource getSimulationAerialImage()
+        {
+            Bitmap bitmap = simulationManager.getSkyPathImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
