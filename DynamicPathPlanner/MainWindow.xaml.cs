@@ -28,7 +28,7 @@ namespace DynamicPathPlanner
     public partial class MainWindow : Window
     {
 
-        private InterfaceManager interfaceManager = new InterfaceManager();
+        private InterfaceManager interfaceManager;
         private Grid oldGrid;
         private Grid activeGrid;
         private Storyboard activeStoryboard;
@@ -52,6 +52,8 @@ namespace DynamicPathPlanner
         public MainWindow()
         {
             InitializeComponent();
+
+            interfaceManager = new InterfaceManager(txt_simulationConsole);
 
             grid_startup_slide.Visibility = Visibility.Visible;
             grid_layout.Visibility = Visibility.Hidden;

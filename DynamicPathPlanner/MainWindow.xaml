@@ -727,7 +727,7 @@
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
     					<TextBlock TextWrapping="Wrap" Text="Console" Foreground="White" Margin="8,0,0,0" HorizontalAlignment="Left"/>
     				</Grid>
-    				<TextBox x:Name="txt_simulationConsole" Margin="0,15,0,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667"/>
+    				<TextBox x:Name="txt_simulationConsole" Margin="0,15,0,0" TextWrapping="Wrap" Text="Console Output Text will go here" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="10.667" Padding="5,1,1,1"/>
     			</Grid>
     			<Grid Margin="8,90.03,8,8" HorizontalAlignment="Center">
     				<Grid.ColumnDefinitions>
@@ -737,7 +737,7 @@
     				<Grid Margin="8,8,12,8">
     					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
-    						<Image x:Name="img_simulationMain" Source="Images/PathTest.png" Margin="8,8,8,37"/>
+    						<Image x:Name="img_simulationMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
     						<Button x:Name="btn_simulationSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
     						<Button x:Name="btn_simulationElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
     						<Button x:Name="btn_simulationSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
@@ -754,8 +754,8 @@
     						</Grid.ColumnDefinitions>
     						<TextBlock Margin="8,0" TextWrapping="Wrap" Text="Internal Map" Foreground="White" FontSize="16" VerticalAlignment="Top"/>
     						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1" Margin="8,0,0,0"/>
-    						<Image x:Name="img_simulationInternal" Margin="8,25.28,8,35.958" Source="Images/PathTest.png"/>
-    						<Image x:Name="img_simulationRover" Grid.Column="1" Margin="8,25.28,8,35.958" Source="Images/PathTest.png"/>
+    						<Image x:Name="img_simulationInternal" Margin="8,25.28,8,35.958" Source="ImageLoad.png"/>
+    						<Image x:Name="img_simulationRover" Grid.Column="1" Margin="8,25.28,8,35.958" Source="ImageLoad.png"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>

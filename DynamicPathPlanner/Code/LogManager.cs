@@ -13,33 +13,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace DynamicPathPlanner.Code
 {
     class LogManager
     {
 
-        public LogManager()
-        {
+        String filepath = "Log.txt";
+        TextBox textConsole;
 
+        public LogManager(TextBox tBox)
+        {
+            textConsole = tBox;
         }
 
 
         public void addEntry(String entryText)
         {
+            printToLogFile(entryText);
+            printToConsole(entryText);
+        }
 
+        private void printToLogFile(String entry)
+        {
+            
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filepath))
+            {
+                    file.WriteLine(entry);
+            }
 
         }
 
-        private void printToLogFile()
+        private void printToConsole(String entry)
         {
-
-
-        }
-
-        private void printToConsole()
-        {
-
+            textConsole.Text += '\r' + entry ;
 
         }
 

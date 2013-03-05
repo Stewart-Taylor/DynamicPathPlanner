@@ -17,20 +17,22 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 
 namespace DynamicPathPlanner
 {
     class InterfaceManager
     {
         private SimulationManager simulationManager = new SimulationManager();
-        private LogManager logManager = new LogManager();
+        private LogManager logManager;
         private NavigationMapManager navigationMapManager = new NavigationMapManager();
 
         private Bitmap roverSlideBitmap;
 
-        public InterfaceManager()
+        public InterfaceManager(TextBox tBox)
         {
             navigationMapManager = new NavigationMapManager();
+            logManager = new LogManager(tBox);
         }
 
 
@@ -48,6 +50,7 @@ namespace DynamicPathPlanner
             //if connection was established connect
             if (PANGU_Manager.connect(hostname, portNumber) == true)
             {
+                addLogEntry("Pangu Started");
                 return true;
             }
 
@@ -81,7 +84,7 @@ namespace DynamicPathPlanner
 
         public void addLogEntry(String entry)
         {
-            logManager.addEntry(entry);
+            logManager.addEntry(entry );
         }
 
         public void generateElevationModel(float distance , int size)
@@ -109,8 +112,10 @@ namespace DynamicPathPlanner
 
         public void startSimulation()
         {
+            logManager.addEntry("Simulation Started");
             simulationManager.setSimulation(navigationMapManager , PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()));
             simulationManager.startSimulation();
+            logManager.addEntry("Simulation Complete");
         }
 
 
