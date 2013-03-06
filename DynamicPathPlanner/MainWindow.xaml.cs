@@ -64,6 +64,7 @@ namespace DynamicPathPlanner
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_layout.Visibility = Visibility.Hidden;
             grid_simulation.Visibility = Visibility.Hidden;
+            grid_results.Visibility = Visibility.Hidden;
 
             //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
@@ -461,6 +462,27 @@ namespace DynamicPathPlanner
             interfaceManager.startSimulation();
             img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
             img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
+        }
+
+        private void btn_pause1_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.simulationStepSetUp(2, 2, 25, 40, "D_STAR", false);
+  
+        	// TODO: Add event handler implementation here.
+            //BackgroundWorker
+        }
+
+        private void btn_start_Copy2_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+            interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+        }
+
+        private void img_roverSlide_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+			
         }
 
     }

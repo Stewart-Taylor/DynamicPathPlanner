@@ -243,41 +243,89 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public void traverseMapStep()
+        public void traverseMapDStep()
         {
-            SearchAlgorithm search;
-
-            search = new A_Star(knownMap, positionX, positionY, targetX, targetY);
-
-            givenPath = search.getPath();
 
 
-            if ((positionX == targetX) && (positionY == targetY))
+            if (atTarget == false)
             {
-                atTarget = true;
+                if (givenPath.Count == 0)
+                {
+                    D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
+
+
+                    search.updateStart(positionX, positionY);
+                    search.replan(knownMap);
+
+                    givenPath = search.getPath();
+                }
+
+
+                updateFrontView();
+                if (steps >= 1600)
+                {
+                    atTarget = true;
+                    //   break;
+                }
+                steps++;
+
+                if ((positionX == targetX) && (positionY == targetY))
+                {
+                    atTarget = true;
+                    //  break;
+                }
+                if (givenPath.Count == 0)
+                {
+                    atTarget = true;
+                    //   break;
+                }
+                if (atTarget == false)
+                {
+                    PathNode nextNode = givenPath.Last();
+                    givenPath.Remove(nextNode);
+
+                    if ((nextNode.x == positionX) && (nextNode.y == positionY))
+                    {
+
+                        if (givenPath.Count > 0)
+                        {
+                            nextNode = givenPath.Last();
+                        }
+                        if ((nextNode.x == previousX) && (nextNode.y == previousY))
+                        {
+                            if (givenPath.Count > 0)
+                            {
+                                nextNode = givenPath.Last();
+                            }
+                        }
+                    }
+
+                    if (isNextNodeSafe(nextNode) == true)
+                    {
+                        previousX = positionX;
+                        previousY = positionY;
+
+                        positionX = nextNode.x;
+                        positionY = nextNode.y;
+                        takenPath.Add(nextNode);
+
+                        updateOwnMap(positionX, positionY);
+                    }
+                    else
+                    {
+                        givenPath.Clear();
+                        //  search.updateVertex(nextNode.x, nextNode.y);
+                        knownMap[nextNode.x, nextNode.y] = 99999;
+                        updateFrontView();
+                        updateOwnMap(nextNode.x, nextNode.y);
+                        // break;
+                    }
+                }
             }
+           
 
-            if (givenPath.Count == 0)
-            {
-                atTarget = true;
 
-            }
-
-            PathNode nextNode = givenPath.Last();
-            givenPath.Remove(nextNode);
-
-            if (isNextNodeSafe(nextNode) == true)
-            {
-                positionX = nextNode.x;
-                positionY = nextNode.y;
-                takenPath.Add(nextNode);
-
-                updateOwnMap(positionX, positionY);
-            }
-            else
-            {
-                updateOwnMap(nextNode.x, nextNode.y);
-            }
+            generatePathImage();
 
         }
 
@@ -560,6 +608,11 @@ namespace DynamicPathPlanner.Code
         public List<PathNode> getPathPoints()
         {
             return takenPath;
+        }
+
+        public bool reachedTarget()
+        {
+            return atTarget;
         }
 
     }

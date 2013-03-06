@@ -119,6 +119,29 @@ namespace DynamicPathPlanner
         }
 
 
+        public void simulationStepSetUp(int startX, int startY, int targetX, int targetY, String algorithm, bool knownMap)
+        {
+            simulationManager.setSimulation(navigationMapManager, PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep(), navigationMapManager.getAreaSize()));
+            simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
+            simulationManager.simulationStepSetUp();
+        }
+
+        public void simulationStep(int startX, int startY, int targetX, int targetY, String algorithm, bool knownMap)
+        {
+            if (simulationManager.isStepSet())
+            {
+                simulationManager.simulationStep();
+            }
+            else
+            {
+                simulationStepSetUp(startX, startY, targetX, targetY, algorithm, knownMap);
+                simulationManager.simulationStep();
+            }
+        }
+
+
+
+
         public ImageSource getElevationModelImage()
         {
             return navigationMapManager.getElevationImage();
