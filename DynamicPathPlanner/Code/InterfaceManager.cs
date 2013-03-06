@@ -28,6 +28,7 @@ namespace DynamicPathPlanner
         private NavigationMapManager navigationMapManager = new NavigationMapManager();
 
         private Bitmap roverSlideBitmap;
+  
 
         public InterfaceManager(TextBox tBox)
         {
@@ -391,6 +392,16 @@ namespace DynamicPathPlanner
         public void resetSimulation()
         {
             simulationManager = new SimulationManager(); // CHANGE!
+        }
+
+        public int getHazardSectorSize()
+        {
+            return navigationMapManager.getHazardSectorSize();
+        }
+
+        public int getAreaSize()
+        {
+            return navigationMapManager.getAreaSize();
         }
     }
 }

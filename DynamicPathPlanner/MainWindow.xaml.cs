@@ -83,7 +83,7 @@ namespace DynamicPathPlanner
 
             started = true;
 
-            fastSetup();
+           // fastSetup();
         }
 
 
@@ -511,8 +511,8 @@ namespace DynamicPathPlanner
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point pos = Mouse.GetPosition(img_roverSlide);
-                double x = (pos.X / 10) * 2;
-                double y = (pos.Y / 10) * 2;
+                double x = (pos.X / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
+                double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_startX.Text = ((int)x).ToString();
                 txt_startY.Text = ((int)y).ToString();
 
@@ -522,8 +522,8 @@ namespace DynamicPathPlanner
             else if (e.RightButton == MouseButtonState.Pressed)
             {
                 Point pos = Mouse.GetPosition(img_roverSlide);
-                double x = (pos.X / 10) * 2;
-                double y = (pos.Y / 10) * 2;
+                double x = (pos.X / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
+                double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_targetX.Text = ((int)x).ToString();
                 txt_targetY.Text = ((int)y).ToString();
 

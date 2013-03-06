@@ -3,7 +3,7 @@
  *------------------------------------
  * This class contains the vehicle logic for the simulation
  *
- * Last Updated: 05/03/2013
+ * Last Updated: 06/03/2013
 */
 
 using System;
@@ -75,12 +75,10 @@ namespace DynamicPathPlanner.Code
             pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
         }
 
-
         public void initializeSensorManager(NavigationMapManager mapManager)
         {
             sensorManager = new VehicleSensorManager(this, mapManager);
         }
-
 
 
         public void startTraverse(int startXt, int startYt, int endXt, int endYt)
@@ -245,8 +243,6 @@ namespace DynamicPathPlanner.Code
 
         public void traverseMapDStep()
         {
-
-
             if (atTarget == false)
             {
                 if (givenPath.Count == 0)
@@ -323,10 +319,7 @@ namespace DynamicPathPlanner.Code
                 }
             }
            
-
-
             generatePathImage();
-
         }
 
 
@@ -360,7 +353,6 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-
         private void updateFrontView()
         {
             if ((previousX != 0) && (previousY != 0))
@@ -381,7 +373,7 @@ namespace DynamicPathPlanner.Code
               //  }
             }
 
-            int size = 2;
+            int size = 10;
             for (int x = -size; x < size; x++)
             {
                 for (int y = -size; y < size; y++)
@@ -390,7 +382,6 @@ namespace DynamicPathPlanner.Code
                 }
             }
         }
-
 
         private void updateTile(int x, int y)
         {
@@ -405,7 +396,6 @@ namespace DynamicPathPlanner.Code
             updateTile(positionX + 1, positionY + 1);
             updateTile(positionX - 2, positionY - 2);
         }
-
 
         private void updateFacingTopMiddle()
         {
@@ -463,13 +453,6 @@ namespace DynamicPathPlanner.Code
             updateTile(positionX + 2, positionY + 2);
         }
 
-
-        public void imageUpdate()
-        {
-           // ((MainWindow)App.Current.MainWindow).img_main.Source = getPathImage();
-        }
-
-
         private void generateImageQuick()
         {
             Bitmap bitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
@@ -479,13 +462,9 @@ namespace DynamicPathPlanner.Code
                 for (int y = 0; y < knownMap.GetLength(1); y++)
                 {
                     System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
-
                     bitmap.SetPixel(x, y, tempColor);
-
                 }
-
             }
-
             pathBitmap = bitmap;
         }
 
@@ -503,7 +482,6 @@ namespace DynamicPathPlanner.Code
                     bitmap.SetPixel(x, y, tempColor);
                 }
             }
-
             pathBitmap = bitmap;
         }
 
@@ -535,7 +513,6 @@ namespace DynamicPathPlanner.Code
             else if (gradient <= 3f)
             {
                 float percent = ((float)gradient) / (3f);
-
                 green = (1f - percent) * 255;
             }
             else
@@ -595,7 +572,6 @@ namespace DynamicPathPlanner.Code
             return PANGU_Manager.getSkyView(0.1f , 1024);
         }
 
-
         public ImageSource getPathImage()
         {
             MemoryStream ms = new MemoryStream();
@@ -608,7 +584,6 @@ namespace DynamicPathPlanner.Code
 
             return bitmap;
         }
-
 
         public List<PathNode> getPathPoints()
         {
