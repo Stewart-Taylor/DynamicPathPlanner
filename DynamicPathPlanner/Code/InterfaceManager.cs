@@ -126,7 +126,7 @@ namespace DynamicPathPlanner
             simulationManager.simulationStepSetUp();
         }
 
-        public void simulationStep(int startX, int startY, int targetX, int targetY, String algorithm, bool knownMap)
+        public void simulationStep()
         {
             if (simulationManager.isStepSet())
             {
@@ -134,7 +134,7 @@ namespace DynamicPathPlanner
             }
             else
             {
-                simulationStepSetUp(startX, startY, targetX, targetY, algorithm, knownMap);
+                simulationStepSetUp(simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getAlgorithm(), simulationManager.getKnownMap());
                 simulationManager.simulationStep();
             }
         }
@@ -386,6 +386,11 @@ namespace DynamicPathPlanner
         public bool isSimulationComplete()
         {
             return simulationManager.isComplete();
+        }
+
+        public void resetSimulation()
+        {
+            simulationManager = new SimulationManager(); // CHANGE!
         }
     }
 }

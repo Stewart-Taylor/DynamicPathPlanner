@@ -603,5 +603,36 @@ namespace DynamicPathPlanner.Code
             return false;
         }
 
+
+        public int getStartX()
+        {
+            return startX;
+        }
+
+        public int getStartY()
+        {
+            return startY;
+        }
+
+        public int getTargetX()
+        {
+            return targetX;
+        }
+
+        public int getTargetY()
+        {
+            return targetY;
+        }
+
+        public String getAlgorithm()
+        {
+            return searchAlgortihm;
+        }
+
+        public bool getKnownMap()
+        {
+            return knownMap;
+        }
+
     }
 }

@@ -114,18 +114,7 @@ namespace DynamicPathPlanner
             startup_wait.Stop();
         }
 
-        private void step_workerTask(object sender, EventArgs e)
-        {
-            interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
-   
-        }
-
-        private void step_worker_complete(object sender, EventArgs e)
-        {
-
-            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
-            img_simulationMain.Source = interfaceManager.getElevationModelImage();
-        }
+      
 
         private void elevation_worker_complete(object sender, EventArgs e)
         {
@@ -485,89 +474,62 @@ namespace DynamicPathPlanner
 
         private void btn_pause1_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.simulationStepSetUp(2, 2, 25, 40, "D_STAR", false);
-  
-        	// TODO: Add event handler implementation here.
-            //BackgroundWorker
+            interfaceManager.resetSimulation();
+            nextSlide(grid_simulation, grid_rover_slide, "Simulation_SlideOut", "Rover_SlideIn");
         }
+
 
         private void btn_start_Copy2_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
-       //     interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
-       //     img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
-       //     img_simulationMain.Source = interfaceManager.getElevationModelImage();
-         //   runSimulation();
-
-          //  step_worker.DoWork += new DoWorkEventHandler(runSimulation);
-        //    step_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(step_worker_complete);
-
-
-        //    step_worker.RunWorkerAsync();
-           // runSimulation();
-
-
-
-            dispatcherTimer.Tick += new EventHandler(simulationTick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            dispatcherTimer.Start();
-
-
+            runSimulation();
         }
-
-
 
         private void simulationTick(object sender, EventArgs e)
         {
             if (interfaceManager.isSimulationComplete() == false)
             {
-                interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
-
-
+                interfaceManager.simulationStep();
                 img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
-
             }
             else
             {
-                interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+                interfaceManager.simulationStep();
                 dispatcherTimer.Stop();
             }
-
 
         }
 
         private void runSimulation()
         {
-          
-
-            do
-            {
-               
-                if (step_worker.IsBusy == false)
-                {
-                    step_worker.DoWork += new DoWorkEventHandler(step_workerTask);
-                    step_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(step_worker_complete);
-
-
-                    step_worker.RunWorkerAsync();
-                }
-                
-
-                step_workerTask(null ,null);
- 
-
-            } while (interfaceManager.isSimulationComplete() == false);
-           
-
-       //     step_workerTask(sender ,e);
-        //    step_worker_complete(sender, e);
-
+            dispatcherTimer.Tick += new EventHandler(simulationTick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer.Start();
         }
 
         private void img_roverSlide_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
-			
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point pos = Mouse.GetPosition(img_roverSlide);
+                double x = (pos.X / 10) * 2;
+                double y = (pos.Y / 10) * 2;
+                txt_startX.Text = ((int)x).ToString();
+                txt_startY.Text = ((int)y).ToString();
+
+
+                interfaceManager.updateRoverSlideStartPosition((int)x, (int)y);
+            }
+            else if (e.RightButton == MouseButtonState.Pressed)
+            {
+                Point pos = Mouse.GetPosition(img_roverSlide);
+                double x = (pos.X / 10) * 2;
+                double y = (pos.Y / 10) * 2;
+                txt_targetX.Text = ((int)x).ToString();
+                txt_targetY.Text = ((int)y).ToString();
+
+
+                interfaceManager.updateRoverSlideTargetPosition((int)x, (int)y);
+            }
         }
 
 

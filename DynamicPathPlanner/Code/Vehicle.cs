@@ -381,10 +381,10 @@ namespace DynamicPathPlanner.Code
               //  }
             }
 
-
-            for (int x = -2; x < 2; x++)
+            int size = 2;
+            for (int x = -size; x < size; x++)
             {
-                for (int y = -2; y < 2; y++)
+                for (int y = -size; y < size; y++)
                 {
                     updateTile(positionX + x, positionY + y);
                 }
