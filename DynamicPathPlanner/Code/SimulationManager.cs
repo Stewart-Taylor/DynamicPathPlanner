@@ -234,6 +234,10 @@ namespace DynamicPathPlanner.Code
                     rover.generatePathImage();
                     steps = rover.getSteps();
                     imageSource = rover.getPathImage();
+                    if (rover.reachedTarget())
+                    {
+                        pathGenerated = true;
+                    }
                 }
 
             }
@@ -259,16 +263,24 @@ namespace DynamicPathPlanner.Code
 
         public void nextStep(int startX , int startY , int endX , int endY)
         {
-            if (stepTraverseStarted == false)
+            if (pathGenerated == false)
             {
-                rover = new Vehicle(hazardModel.getModel() , hazardModel.hazardModelImage);
-                rover.startTraverse(startX, startY, endX, endY);
-                stepTraverseStarted = true;
-            }
-            else
-            {
-                rover.traverseMapDStep();
-                imageSource = rover.getPathImage();
+                if (stepTraverseStarted == false)
+                {
+                    rover = new Vehicle(hazardModel.getModel(), hazardModel.hazardModelImage);
+                    rover.startTraverse(startX, startY, endX, endY);
+                    stepTraverseStarted = true;
+                }
+                else
+                {
+                    rover.traverseMapDStep();
+                    imageSource = rover.getPathImage();
+                    if (rover.reachedTarget())
+                    {
+                        pathGenerated = true;
+                    }
+
+                }
             }
         }
 
@@ -316,6 +328,8 @@ namespace DynamicPathPlanner.Code
 
         public Bitmap getComboPathImage()
         {
+            comboPathBitmap = null;
+            return getComboPathBitmap();
             if (pathGenerated == true)
             {
                 return getComboPathBitmap();
@@ -332,12 +346,16 @@ namespace DynamicPathPlanner.Code
             return skyBitmap;
         }
 
+        public void resetSimulation()
+        {
+
+        }
 
         private Bitmap getComboPathBitmap()
         {
             if (comboPathBitmap == null)
             {
-                comboPathBitmap = (Bitmap)elevationBitmap.Clone();
+                comboPathBitmap = (Bitmap)skyBitmap.Clone();
 
 
                 float alpha = 0.2f;
@@ -573,6 +591,16 @@ namespace DynamicPathPlanner.Code
         public ImageSource getRoverCamImage()
         {
             return rover.getRoverCam();
+        }
+
+        public bool isComplete()
+        {
+            if (rover != null)
+            {
+                return rover.reachedTarget();
+            }
+
+            return false;
         }
 
     }

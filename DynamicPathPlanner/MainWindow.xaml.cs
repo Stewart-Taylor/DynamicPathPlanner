@@ -22,10 +22,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace DynamicPathPlanner
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
     {
 
         private InterfaceManager interfaceManager;
@@ -42,12 +43,16 @@ namespace DynamicPathPlanner
         private BackgroundWorker elevation_worker = new BackgroundWorker();
         private BackgroundWorker slope_worker = new BackgroundWorker();
         private BackgroundWorker hazard_worker = new BackgroundWorker();
+        private BackgroundWorker step_worker = new BackgroundWorker();
 
         private bool started = false;
         private float elevationDistance;
         private int elevationSize;
         private int hazardSectorSize;
         private String slopeType;
+
+
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -109,6 +114,19 @@ namespace DynamicPathPlanner
             startup_wait.Stop();
         }
 
+        private void step_workerTask(object sender, EventArgs e)
+        {
+            interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+   
+        }
+
+        private void step_worker_complete(object sender, EventArgs e)
+        {
+
+            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+            img_simulationMain.Source = interfaceManager.getElevationModelImage();
+        }
+
         private void elevation_worker_complete(object sender, EventArgs e)
         {
             elevation_wait.Stop();
@@ -124,6 +142,7 @@ namespace DynamicPathPlanner
             img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
             btn_slopeNext.Visibility = Visibility.Visible;
         }
+
 
         private void hazard_worker_complete(object sender, EventArgs e)
         {
@@ -475,8 +494,74 @@ namespace DynamicPathPlanner
         private void btn_start_Copy2_Click(object sender, System.Windows.RoutedEventArgs e)
         {
         	// TODO: Add event handler implementation here.
-            interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
-            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+       //     interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+       //     img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+       //     img_simulationMain.Source = interfaceManager.getElevationModelImage();
+         //   runSimulation();
+
+          //  step_worker.DoWork += new DoWorkEventHandler(runSimulation);
+        //    step_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(step_worker_complete);
+
+
+        //    step_worker.RunWorkerAsync();
+           // runSimulation();
+
+
+
+            dispatcherTimer.Tick += new EventHandler(simulationTick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            dispatcherTimer.Start();
+
+
+        }
+
+
+
+        private void simulationTick(object sender, EventArgs e)
+        {
+            if (interfaceManager.isSimulationComplete() == false)
+            {
+                interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+
+
+                img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+
+            }
+            else
+            {
+                interfaceManager.simulationStep(2, 2, 25, 40, "D_STAR", false);
+                dispatcherTimer.Stop();
+            }
+
+
+        }
+
+        private void runSimulation()
+        {
+          
+
+            do
+            {
+               
+                if (step_worker.IsBusy == false)
+                {
+                    step_worker.DoWork += new DoWorkEventHandler(step_workerTask);
+                    step_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(step_worker_complete);
+
+
+                    step_worker.RunWorkerAsync();
+                }
+                
+
+                step_workerTask(null ,null);
+ 
+
+            } while (interfaceManager.isSimulationComplete() == false);
+           
+
+       //     step_workerTask(sender ,e);
+        //    step_worker_complete(sender, e);
+
         }
 
         private void img_roverSlide_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -484,6 +569,8 @@ namespace DynamicPathPlanner
         	// TODO: Add event handler implementation here.
 			
         }
+
+
 
     }
 }

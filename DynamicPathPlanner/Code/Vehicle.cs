@@ -568,15 +568,20 @@ namespace DynamicPathPlanner.Code
             {
                 if ((n.x == x) && (n.y == y))
                 {
-                    red = 0;
-                    green = 0;
-                    blue = 255;
+                    red = 50;
+                    green = 170;
+                    blue = 150;
                 }
             }
 
             if ((targetX == x) && (targetY == y))
             {
                 green = 255; red = 255; blue = 255;
+            }
+
+            if ((positionX == x) && (positionY == y))
+            {
+                green = 0; red = 0; blue = 255;
             }
 
             color = System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
