@@ -373,7 +373,7 @@ namespace DynamicPathPlanner.Code
               //  }
             }
 
-            int size = 10;
+            int size = 3;
             for (int x = -size; x < size; x++)
             {
                 for (int y = -size; y < size; y++)
