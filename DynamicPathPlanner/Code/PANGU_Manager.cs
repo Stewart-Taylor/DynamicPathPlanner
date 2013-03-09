@@ -4,7 +4,7 @@
  * This class is used as an easy way to simply fetch data from a PANGU server
  * The PANGU Connector contains the wrapper functionality 
  *
- * Last Updated: 28/02/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -22,11 +22,6 @@ namespace DynamicPathPlanner.Code
     {
 
         private static PANGU_Connector connector = new PANGU_Connector();
-        private static InterfaceManager interfaceManager;
-
-        
-
-
 
         public static bool connect(String hostname, int port)
         {
@@ -35,25 +30,19 @@ namespace DynamicPathPlanner.Code
                 //interfaceManager.addLogEntry("Connected");
                 return true;
             }
-
             return false;
         }
 
-
         public static double[,] getElevationModel(float distance, int width, int height)
         {
-            double[,] elevationModel;
-
-            elevationModel = connector.getDEM(distance, width, height);
+            double[,] elevationModel = connector.getDEM(distance, width, height);
 
             return elevationModel;
         }
 
-        public static ImageSource getSkyView(float distance , int size)
+        public static ImageSource getSkyView(float distance, int size)
         {
-
-       //     Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
-             Bitmap skyBitmap = getSkyBitmap( distance ,  size);
+            Bitmap skyBitmap = getSkyBitmap(distance, size);
             MemoryStream ms = new MemoryStream();
             skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -62,9 +51,7 @@ namespace DynamicPathPlanner.Code
             bi.StreamSource = ms;
             bi.EndInit();
 
-            ImageSource img = bi;
-
-            return img;
+            return bi;
         }
 
 
@@ -76,17 +63,14 @@ namespace DynamicPathPlanner.Code
             float yaw = 90;
             float pitch = -90;
             float roll = 0;
-
-
             float constantValue = 1.96f;
 
-
-            z = distance * size * constantValue;
+            z = distance * size * constantValue; // CHANGE
 
             Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+
             return skyBitmap;
         }
-
 
         public static void endConnection()
         {

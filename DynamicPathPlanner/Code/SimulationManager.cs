@@ -1,11 +1,11 @@
 ﻿/*      SimulationManager Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
- * This class is to run the pathfinding simulation
+ * This class is used to run the pathfinding simulation
  * It handles the results of the simulation
  * and generates visual output
  *
- * Last Updated: 04/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -23,7 +23,6 @@ namespace DynamicPathPlanner.Code
     class SimulationManager
     {
         private NavigationMapManager mapManager;
-        private ElevationLoader elevationLoader;
         private SlopeModel slopeModel;
         private HazardModel hazardModel;
         private Pathfinder pathfinder;
@@ -51,17 +50,11 @@ namespace DynamicPathPlanner.Code
         private int targetY;
         private String searchAlgortihm;
         private bool knownMap;
-
         private int hazardSectorSize;
-
         private ImageSource imageSource;
-
         private String timeTaken;
-
         private bool pathGenerated = false;
-
         private bool simulationInProgress = false;
-
         private bool stepSet = false;
 
         #region GET
@@ -84,21 +77,19 @@ namespace DynamicPathPlanner.Code
           
         }
 
-    
 
-
-        
-        public void setSimulation(NavigationMapManager m , Bitmap skyView)
+        public void setSimulation(NavigationMapManager navMap , Bitmap skyView)
         {
-            mapManager = m;
+            mapManager = navMap;
+
             elevationBitmap = (Bitmap)mapManager.getElevationBitmap().Clone();
             slopeBitmap = (Bitmap)mapManager.getSlopeBitmap().Clone(); 
             hazardBitmap = (Bitmap)mapManager.getHazardBitmap().Clone();
             skyBitmap = (Bitmap)skyView.Clone();
 
-            hazardSectorSize = m.getHazardSectorSize();
+            hazardSectorSize = mapManager.getHazardSectorSize();
             
-            hazardModel = m.hazardModel; // REMOVE
+            hazardModel = mapManager.hazardModel; // REMOVE
         }
 
         public void setSimulationValues(int xStart , int yStart, int endX , int endY , String algorithm, bool known)
@@ -111,13 +102,11 @@ namespace DynamicPathPlanner.Code
             knownMap = known;
         }
 
-
         public void startSimulation()
         {
             startSimulationDSTAR(startX, startY, targetX, targetY);
             pathGenerated = true;
         }
-
 
         public void generatePath(int startX, int startY, int targetX, int targetY)
         {
@@ -134,7 +123,6 @@ namespace DynamicPathPlanner.Code
                 catch (Exception) { }
             }
         }
-
 
         public void startSimulationKnownMap(int startX, int startY, int endX, int endY)
         {
@@ -153,13 +141,6 @@ namespace DynamicPathPlanner.Code
             timeTaken = sw.Elapsed.TotalSeconds + " Seconds";
 
             stepTraverseStarted = false;
-        }
-
-
-        private void generatePathImage()
-        {
-
-
         }
 
         public void startSimulation(int startX , int startY , int endX , int endY)
@@ -209,9 +190,6 @@ namespace DynamicPathPlanner.Code
             stepSet = true;
 
             rover.startTraverse(startX,startY ,targetX,targetY);
-
-      
-
         }
 
 
@@ -239,9 +217,7 @@ namespace DynamicPathPlanner.Code
                         pathGenerated = true;
                     }
                 }
-
             }
-
         }
 
         public bool simulationComplete()
@@ -258,7 +234,6 @@ namespace DynamicPathPlanner.Code
             }
             return false;
         }
-
 
 
         public void nextStep(int startX , int startY , int endX , int endY)
@@ -282,20 +257,6 @@ namespace DynamicPathPlanner.Code
 
                 }
             }
-        }
-
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-          //  rover = new Vehicle(hazardModel.getHazardModel());
-         //   rover.traverseMap(startX, startY, endX, endY);
-        }
-
-
-        public ImageSource getElevationModelImage()
-        {
-          //  return elevationLoader.getImageSource();
-            return null;
         }
 
 
@@ -329,7 +290,6 @@ namespace DynamicPathPlanner.Code
         public Bitmap getComboPathImage()
         {
             comboPathBitmap = null;
-            return getComboPathBitmap();
             if (pathGenerated == true)
             {
                 return getComboPathBitmap();
@@ -384,14 +344,10 @@ namespace DynamicPathPlanner.Code
                         int green = (int)(greenNew * 255f);
                         int blue = (int)(blueNew * 255f);
 
-     
                         System.Drawing.Color newCol = System.Drawing.Color.FromArgb(red,green,blue);
                         comboPathBitmap.SetPixel(a, b, newCol);
                     }
                 }
-
-        
-
 
                 int xPrev = -1;
                 int yPrev = -1;
@@ -418,8 +374,6 @@ namespace DynamicPathPlanner.Code
 
             return comboPathBitmap;
         }
-
-
 
 
         private Bitmap getElevationPathBitmap()
@@ -551,12 +505,6 @@ namespace DynamicPathPlanner.Code
             return skyPathBitmap;
         }
 
-        public ImageSource getElevationImage()
-        {
-          //  return 
-            return null;
-        }
-
         public List<PathNode> getPathModel()
         {
             return pathfinder.getPath();
@@ -576,7 +524,6 @@ namespace DynamicPathPlanner.Code
         {
             return pathfinder.getPathImage();
         }
-
 
         public ImageSource getVehicleImage()
         {
@@ -602,7 +549,6 @@ namespace DynamicPathPlanner.Code
 
             return false;
         }
-
 
         public int getStartX()
         {

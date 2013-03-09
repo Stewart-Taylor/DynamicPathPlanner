@@ -11,8 +11,6 @@ namespace DynamicPathPlanner.Code
         List<Node> closed = new List<Node>();
         List<Node> open = new List<Node>();
 
-        List<Node> path;
-
         private Node targetNode;
 
         public class Node
@@ -111,32 +109,7 @@ namespace DynamicPathPlanner.Code
                         }
                         current = current.parent;
                     }
-
-
-                    /*
-                    do
-                    {
-                        PathNode pathNode = new PathNode();
-                        pathNode.x = current.x;
-                        pathNode.y = current.y;
-
-                        pathNodes.Add(pathNode);
-
-                        if (current.parent.Equals(null))
-                        {
-                            // path.Add(new int[2] { current.x, current.y });
-                            current = current.parent;
-                        }
-                        else
-                        {
-                            closed.Clear();
-                        }
-
-                    } while (closed.Count > 0);
-                    */
                 }
-
-
             }
 
         }

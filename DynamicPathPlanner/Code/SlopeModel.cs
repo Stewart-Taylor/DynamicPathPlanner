@@ -4,7 +4,7 @@
  * This class is used as an easy way to simply fetch data from a PANGU server
  * The PANGU Connector contains the wrapper functionality 
  *
- * Last Updated: 28/02/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -28,11 +28,11 @@ namespace DynamicPathPlanner.Code
         private double[,] slopeModel;
 
         private Bitmap slopeBitmap;
-        private Bitmap bitmap;
         private double lowestGradient;
         private double highestGradient;
 
         private string algorithmType;
+
 
         public SlopeModel(double[,] modelT, string type)
         {
@@ -40,7 +40,6 @@ namespace DynamicPathPlanner.Code
 
             algorithmType = type;
             algorithmType = algorithmType.ToUpper();
-
 
             width = model.GetLength(0);
             height = model.GetLength(1);
@@ -83,7 +82,6 @@ namespace DynamicPathPlanner.Code
             Bitmap bitmap = new Bitmap(model.GetLength(0), model.GetLength(1));
             getGradientLimits();
 
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -96,7 +94,7 @@ namespace DynamicPathPlanner.Code
             slopeBitmap = bitmap;
         }
 
-
+        //Must be called before image generation
         private void getGradientLimits()
         {
             double low = slopeModel[0, 0];
@@ -126,31 +124,25 @@ namespace DynamicPathPlanner.Code
         private System.Drawing.Color getSlopeColorValue(double gradient)
         {
             System.Drawing.Color color = System.Drawing.Color.White;
-
             gradient = Math.Abs(gradient);
 
             float green = 255;
             float red = 255;
             float blue = 0;
 
-
             if (gradient <= 1f)
             {
-
                 red = (1f - (float)gradient) * 255;
-
             }
             else if (gradient <= 3f)
             {
                 float percent = ((float)gradient) / (3f);
-
                 green = (1f - percent) * 255;
             }
             else
             {
                 green = 0;
             }
-
 
             color = System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
 
@@ -163,7 +155,6 @@ namespace DynamicPathPlanner.Code
             return slopeModel;
         }
 
-
         public ImageSource getImageSource()
         {
             MemoryStream ms = new MemoryStream();
@@ -174,16 +165,13 @@ namespace DynamicPathPlanner.Code
             bi.StreamSource = ms;
             bi.EndInit();
 
-            ImageSource img = bi;
-
-            return img;
+            return bi;
         }
 
         public Bitmap getBitmap()
         {
             return slopeBitmap;
         }
-
 
     }
 }

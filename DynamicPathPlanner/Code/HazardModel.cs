@@ -5,7 +5,7 @@
  * It requires the data from the slope model
  * 
  *
- * Last Updated: 03/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -34,6 +34,34 @@ namespace DynamicPathPlanner.Code
         private int width;
         private int height;
 
+        #region GET
+
+        public double[,] getModel()
+        {
+            return hazardModel;
+        }
+
+        public Bitmap getBitmap()
+        {
+            return hazardBitmap;
+        }
+
+        public int getSectorSize()
+        {
+            return sectorSize;
+        }
+
+        public int getWidth()
+        {
+            return width;
+        }
+
+        public int getHeight()
+        {
+            return height;
+        }
+
+        #endregion
 
         public HazardModel(double[,] slope, int sectorSizeT)
         {
@@ -50,10 +78,7 @@ namespace DynamicPathPlanner.Code
 
 
 
-        public double[,] getModel()
-        {
-            return hazardModel;
-        }
+
 
         private void generateHazardModel()
         {
@@ -181,25 +206,7 @@ namespace DynamicPathPlanner.Code
             return color;
         }
 
-        public Bitmap getBitmap()
-        {
-            return hazardBitmap;
-        }
 
-        public int getSectorSize()
-        {
-            return sectorSize;
-        }
-
-        public int getWidth()
-        {
-            return width;
-        }
-
-        public int getHeight()
-        {
-            return height;
-        }
 
         public ImageSource getImageSource()
         {

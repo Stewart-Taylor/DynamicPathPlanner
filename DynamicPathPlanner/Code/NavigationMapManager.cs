@@ -4,7 +4,7 @@
  * This is used to manage all of the navigational data 
  * It is used to manage and generate the elevation,slope and hazard models
  *
- * Last Updated: 03/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -20,9 +20,8 @@ namespace DynamicPathPlanner.Code
     {
         private ElevationModel elevationModel;
         private SlopeModel slopeModel;
-        public HazardModel hazardModel;
+        public HazardModel hazardModel; // CHANGE
 
-        private int hazardSectorSize = 10;
         private String environmentText;
 
         private float distanceStep;
@@ -99,8 +98,6 @@ namespace DynamicPathPlanner.Code
         {
             return hazardModel.getImageSource();
         }
-
-
 
         public double[,] getSlopeModel()
         {

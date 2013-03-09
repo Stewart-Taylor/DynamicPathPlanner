@@ -1,10 +1,10 @@
 ﻿/*      ElevationModel Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
- * This class is used to provide an elevation model
- * 
+ * This class is used to generate an elevation model
+ * The model will be fetched using the Elevation Loader
  *
- * Last Updated: 03/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -25,16 +25,10 @@ namespace DynamicPathPlanner.Code
 
         private ElevationLoader loader = new ElevationLoader();
 
-        private String format;
         private int width;
         private int height;
-        private String[] hexMap;
-        private int imageStartIndex;
 
-        private bool p6Valid = true;
         private Bitmap image;
-
-        private float verticalHeight = 0.1f; // 0.1m
 
         private double maxHeight = -1;
         private double minHeight = 0;

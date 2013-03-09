@@ -6,7 +6,7 @@
  * If no copy exists in the cache it will fetch the elevation model from PANGU
  * Fetching the DEM from PANGU can be slow, hence the cache system.
  *
- * Last Updated: 03/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -30,18 +30,18 @@ namespace DynamicPathPlanner.Code
 
         public double[,] load_DEM(String environment, float distance ,int size)
         {
-            double[,] d;
+            double[,] model;
 
             if (cacheExists(environment, distance, size))
             {
-                d = loadCache(environment, distance, size);
+                model = loadCache(environment, distance, size);
             }
             else
             {
-                d = getPANGU_DEM(environment, distance, size);
+                model = getPANGU_DEM(environment, distance, size);
             }
 
-            return d;
+            return model;
         }
 
         private bool cacheExists(String environment, float distance, int size)
@@ -85,14 +85,13 @@ namespace DynamicPathPlanner.Code
 
                 return d;
             }
-            catch (Exception ex)
+            catch 
             {
               // Error With cache
             }
 
             return null;
         }
-
 
         public double[,] getPANGU_DEM(String environment, float distance, int size)
         {
@@ -102,18 +101,17 @@ namespace DynamicPathPlanner.Code
             return d;
         }
 
-
-        private void createCache(String environment, float distance, int size, double[,] d)
+        private void createCache(String environment, float distance, int size, double[,] model)
         {
             String filepath = cacheFolder + environment + separator + distance + separator + size + extension;
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filepath))
             {
-                for (int y = 0; y < d.GetLength(1); y++)
+                for (int y = 0; y < model.GetLength(1); y++)
                 {
-                    for (int x = 0; x < d.GetLength(0); x++)
+                    for (int x = 0; x < model.GetLength(0); x++)
                     {
-                        file.Write(d[x, y].ToString());
+                        file.Write(model[x, y].ToString());
                         file.Write(",");
                     }
                     file.WriteLine();

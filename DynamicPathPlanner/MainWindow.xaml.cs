@@ -83,7 +83,7 @@ namespace DynamicPathPlanner
 
             started = true;
 
-           // fastSetup();
+            fastSetup();
         }
 
 
@@ -291,7 +291,7 @@ namespace DynamicPathPlanner
                     nextSlide(grid_rover_slide, grid_simulation , "Rover_SlideOut", "Simulation_SlideIn");
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //Error message
             }
@@ -394,7 +394,7 @@ namespace DynamicPathPlanner
                     interfaceManager.updateRoverSlideStartPosition(startX, startY);
                     img_roverSlide.Source = interfaceManager.getRoverSlideImage();
                 }
-                catch (Exception ex)
+                catch 
                 {
 
                 }
@@ -410,7 +410,7 @@ namespace DynamicPathPlanner
                     interfaceManager.updateRoverSlideTargetPosition(targetX, targetY);
                     img_roverSlide.Source = interfaceManager.getRoverSlideImage();
                 }
-                catch (Exception ex)
+                catch 
                 {
 
                 }
@@ -439,7 +439,7 @@ namespace DynamicPathPlanner
                 elevation_wait.Begin();
 
             }
-            catch (Exception ex)
+            catch
             {
 
             }

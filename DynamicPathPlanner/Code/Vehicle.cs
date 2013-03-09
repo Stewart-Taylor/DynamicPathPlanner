@@ -3,7 +3,7 @@
  *------------------------------------
  * This class contains the vehicle logic for the simulation
  *
- * Last Updated: 06/03/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -39,9 +39,8 @@ namespace DynamicPathPlanner.Code
         private int targetY;
 
         private int steps = 0;
+        private int stepLimit = 1600;
         private bool atTarget = false;
-
-        private bool stepTraverseStarted = false;
 
         private Bitmap pathBitmap;
 
@@ -80,7 +79,6 @@ namespace DynamicPathPlanner.Code
             sensorManager = new VehicleSensorManager(this, mapManager);
         }
 
-
         public void startTraverse(int startXt, int startYt, int endXt, int endYt)
         {
             steps = 0;
@@ -94,7 +92,6 @@ namespace DynamicPathPlanner.Code
             positionY = startY;
 
             knownMap = new double[realMap.GetLength(0), realMap.GetLength(1)];
-
             atTarget = false;
 
             pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
@@ -120,12 +117,11 @@ namespace DynamicPathPlanner.Code
             do
             {
                 search = new A_Star(knownMap, positionX, positionY, targetX, targetY);
-
                 givenPath = search.getPath();
 
                 do
                 {
-                    if (steps >= 1600)
+                    if (steps >= stepLimit)
                     {
                         atTarget = true;
                         break;
@@ -196,7 +192,7 @@ namespace DynamicPathPlanner.Code
                 do
                 {
                     updateFrontView();
-                    if (steps >= 1600)
+                    if (steps >= stepLimit)
                     {
                         atTarget = true;
                         break;
@@ -258,7 +254,7 @@ namespace DynamicPathPlanner.Code
 
 
                 updateFrontView();
-                if (steps >= 1600)
+                if (steps >= stepLimit)
                 {
                     atTarget = true;
                     //   break;

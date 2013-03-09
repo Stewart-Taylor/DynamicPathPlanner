@@ -2,9 +2,9 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class connects to PANGU directly
- * It makes use of the Pangu.dll which is a compiled PANGU socket client
+ * It makes use of the Pangu.dll which is a compiled PANGU socket client written in C
  *
- * Last Updated: 28/02/2013
+ * Last Updated: 09/03/2013
 */
 
 using System;
@@ -19,6 +19,8 @@ namespace DynamicPathPlanner.Code
 {
     class PANGU_Connector
     {
+        private bool connected = false;
+        private unsafe void* sock;
 
         //Socket Connection Functions
         //------------------------------------------------------------------------------------------------------------
@@ -89,23 +91,18 @@ namespace DynamicPathPlanner.Code
        
         //------------------------------------------------------------------------------------------------------------
 
-        private bool connected = false;
-        private unsafe void* sock;
-
         public PANGU_Connector()
         {
-
 
         }
 
         public bool connect(string hostname, int port)
         {
-
             unsafe
             {
-
                 byte[] host = new byte[hostname.Length];
                 host = Encoding.ASCII.GetBytes(hostname + "\0"); // convert hostname
+                
                 try
                 {
                     sock = getSocket(hostname, port); //Gets the socket
@@ -114,14 +111,11 @@ namespace DynamicPathPlanner.Code
                     connected = true;
                     return true;
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return false;
                 }
-
             }
-
-   
         }
 
         //Uses getElevationModel function to get the DEM
@@ -158,13 +152,11 @@ namespace DynamicPathPlanner.Code
 
                     }
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return null;
                 }
-
             }
-
 
             return elevationModel;
         }
@@ -196,11 +188,9 @@ namespace DynamicPathPlanner.Code
                 UnmanagedMemoryStream readStream = new UnmanagedMemoryStream((byte*)img, (long)t);
 
                 Bitmap bitmap = fetchImage(readStream);
-               // PPM ppm = new PPM(readStream);//convert the image
                 readStream.Close(); //tidy up
                 readStream.Dispose();//tidy up
                 return bitmap;
-               // return null;
             }
         }
 
@@ -208,7 +198,6 @@ namespace DynamicPathPlanner.Code
 
         private Bitmap fetchImage(UnmanagedMemoryStream memStream)
         {
-
             int buffer;
             string id ="";
             int width;
@@ -282,12 +271,12 @@ namespace DynamicPathPlanner.Code
             return null;
         }
 
- 
 
         //returns connection status
         public bool getConnectionStatus()
         {
                 return connected;
         }
+
     }
 }
