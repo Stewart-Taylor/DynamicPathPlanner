@@ -20,13 +20,20 @@ namespace DynamicPathPlanner.Code
 {
     static class PANGU_Manager
     {
+        private static bool connectionExists = false;
 
         private static PANGU_Connector connector = new PANGU_Connector();
 
         public static bool connect(String hostname, int port)
         {
+            if (connectionExists == true)
+            {
+                return true;
+            }
+
             if (connector.connect(hostname, port) == true)
             {
+                connectionExists = true;
                 //interfaceManager.addLogEntry("Connected");
                 return true;
             }

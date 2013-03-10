@@ -33,6 +33,7 @@ namespace DynamicPathPlanner
         private Grid oldGrid;
         private Grid activeGrid;
         private Storyboard activeStoryboard;
+        private Storyboard startSlideIn;
 
         private Storyboard startup_wait;
         private Storyboard elevation_wait;
@@ -51,42 +52,58 @@ namespace DynamicPathPlanner
         private int hazardSectorSize;
         private String slopeType;
 
+        private int simulationInterval = 100;
 
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
-
-            interfaceManager = new InterfaceManager(txt_simulationConsole);
-
-            grid_startup_slide.Visibility = Visibility.Visible;
-            grid_layout.Visibility = Visibility.Hidden;
-            grid_elevation_slide.Visibility = Visibility.Hidden;
-            grid_pangu_slide.Visibility = Visibility.Hidden;
-            grid_slope_slide.Visibility = Visibility.Hidden;
-            grid_hazard_slide.Visibility = Visibility.Hidden;
-            grid_rover_slide.Visibility = Visibility.Hidden;
-            grid_layout.Visibility = Visibility.Hidden;
-            grid_simulation.Visibility = Visibility.Hidden;
-            grid_results.Visibility = Visibility.Hidden;
-
+           
             //Set Storyboards
             startup_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_Wait");
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
             hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
 
-            Storyboard startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
-            startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
+            applicationSetUp();
+
+            fastSetup(); // Testing Only
+        }
+
+        private void applicationSetUp()
+        {
+            interfaceManager = new InterfaceManager(txt_simulationConsole);
+
+            grid_startup_slide.Visibility = Visibility.Visible;
+            grid_elevation_slide.Visibility = Visibility.Hidden;
+            grid_pangu_slide.Visibility = Visibility.Hidden;
+            grid_slope_slide.Visibility = Visibility.Hidden;
+            grid_hazard_slide.Visibility = Visibility.Hidden;
+            grid_rover_slide.Visibility = Visibility.Hidden;
+            grid_simulation.Visibility = Visibility.Hidden;
+            grid_results.Visibility = Visibility.Hidden;
+
+            if (startSlideIn == null)
+            {
+                startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
+                startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
+            }
+           
             BeginStoryboard(startSlideIn);
 
             started = true;
-
-            fastSetup();
         }
 
+        private void panguStartUp(object sender, EventArgs e)
+        {
+            if (interfaceManager.connectToPANGU() == true)
+            {
+                //System.Threading.Thread.Sleep(2000); // REMOVE
+            }
+        }
 
+        //Used for testing 
         private void fastSetup()
         {
             interfaceManager.connectToPANGU();
@@ -115,7 +132,6 @@ namespace DynamicPathPlanner
         }
 
       
-
         private void elevation_worker_complete(object sender, EventArgs e)
         {
             elevation_wait.Stop();
@@ -141,12 +157,6 @@ namespace DynamicPathPlanner
         }
 
 
-        private void startSimulationScreen()
-        {
-
-
-        }
-
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
         {
             Storyboard slideOut = (System.Windows.Media.Animation.Storyboard)FindResource(outSlide);
@@ -164,10 +174,8 @@ namespace DynamicPathPlanner
         {
             oldGrid.Visibility = Visibility.Hidden;
             activeGrid.Visibility = Visibility.Visible;
-
             BeginStoryboard(activeStoryboard);
         }
-
 
         private void elevationScreen(object sender, EventArgs e)
         {
@@ -210,51 +218,6 @@ namespace DynamicPathPlanner
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
             }
-  
-        }
-
-        private void panguStartUp(object sender, EventArgs e)
-        {
-            if (interfaceManager.connectToPANGU() == true)
-            {
-                //System.Threading.Thread.Sleep(2000); // REMOVE
-            }
-        }
-
-        void storyBoard_Completed(object sender, EventArgs e)
-        {
-            grid_pangu_slide.Visibility = Visibility.Hidden;
-            grid_layout.Visibility = Visibility.Visible;
-
-            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideIn");
-
-            BeginStoryboard(storyBoard);
-        }
-
-
-        void mainSlideOut_Completed(object sender, EventArgs e)
-        {
-            grid_pangu_slide.Visibility = Visibility.Visible;
-            grid_layout.Visibility = Visibility.Hidden;
-
-            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("PanguSlideIn");
-
-            BeginStoryboard(storyBoard);
-        }
-
-        private void btn_disconnect_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            interfaceManager.disconnectFromPANGU();
-
-            System.Windows.Media.Animation.Storyboard storyBoard = (System.Windows.Media.Animation.Storyboard)FindResource("MainSlideOut");
-            storyBoard.Completed += new EventHandler(mainSlideOut_Completed);
-            BeginStoryboard(storyBoard);
-        }
-
-        private void btn_start_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            interfaceManager.startSimulation();
-            img_internalMap.Source = interfaceManager.getRoverMap();
         }
 
         private void btn_roverNext_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -437,7 +400,6 @@ namespace DynamicPathPlanner
                 BeginStoryboard(elevation_wait);
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 elevation_wait.Begin();
-
             }
             catch
             {
@@ -478,7 +440,6 @@ namespace DynamicPathPlanner
             nextSlide(grid_simulation, grid_rover_slide, "Simulation_SlideOut", "Rover_SlideIn");
         }
 
-
         private void btn_start_Copy2_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             runSimulation();
@@ -502,7 +463,7 @@ namespace DynamicPathPlanner
         private void runSimulation()
         {
             dispatcherTimer.Tick += new EventHandler(simulationTick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
             dispatcherTimer.Start();
         }
 
@@ -516,7 +477,6 @@ namespace DynamicPathPlanner
                 txt_startX.Text = ((int)x).ToString();
                 txt_startY.Text = ((int)y).ToString();
 
-
                 interfaceManager.updateRoverSlideStartPosition((int)x, (int)y);
             }
             else if (e.RightButton == MouseButtonState.Pressed)
@@ -527,9 +487,25 @@ namespace DynamicPathPlanner
                 txt_targetX.Text = ((int)x).ToString();
                 txt_targetY.Text = ((int)y).ToString();
 
-
                 interfaceManager.updateRoverSlideTargetPosition((int)x, (int)y);
             }
+        }
+
+
+        private void men_about_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Window aboutWindow = new About();
+            aboutWindow.Show(); 
+        }
+
+        private void men_new_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            applicationSetUp();
+        }
+
+        private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.Close();
         }
 
 
