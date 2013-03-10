@@ -63,9 +63,12 @@ namespace DynamicPathPlanner.Code
             float yaw = 90;
             float pitch = -90;
             float roll = 0;
-            float constantValue = 1.96f;
+            float fov = 30;
+            float height;
 
-            z = distance * size * constantValue; // CHANGE
+            fov = ((float)Math.PI / 180f) * fov;
+            height = (float)size / (2f*(float)Math.Tan(fov/2f));
+            z = height *0.1f; // Convert to unit distance from pixel distance
 
             Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
 
