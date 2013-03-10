@@ -51,6 +51,7 @@ namespace DynamicPathPlanner.Code
         private String searchAlgortihm;
         private bool knownMap;
         private int hazardSectorSize;
+        private int areaSize;
         private ImageSource imageSource;
         private String timeTaken;
         private bool pathGenerated = false;
@@ -88,6 +89,7 @@ namespace DynamicPathPlanner.Code
             skyBitmap = (Bitmap)skyView.Clone();
 
             hazardSectorSize = mapManager.getHazardSectorSize();
+            areaSize = mapManager.getAreaSize();
             
             hazardModel = mapManager.hazardModel; // REMOVE
         }
@@ -120,7 +122,7 @@ namespace DynamicPathPlanner.Code
                 {
                     pathfinder = new Pathfinder(hazardModel.getModel(), hazardModel.hazardModelImage, startX, startY, targetX, targetY);
                 }
-                catch (Exception) { }
+                catch (Exception){ }
             }
         }
 
@@ -485,10 +487,10 @@ namespace DynamicPathPlanner.Code
                 foreach (PathNode p in rover.getPathPoints())
                 {
                     System.Drawing.Color color = System.Drawing.Color.Blue;
-                    int x = p.x * (hazardSectorSize / 2); 
-                    int y = p.y * (hazardSectorSize / 2);
+                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Width)));
+                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Height)));
 
-                    skyPathBitmap.SetPixel(p.x * (hazardSectorSize / 2), p.y * (hazardSectorSize / 2), color);
+                    skyPathBitmap.SetPixel(x, y, color);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
 
                     using (var graphics = Graphics.FromImage(skyPathBitmap))
