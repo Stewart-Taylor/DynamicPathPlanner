@@ -65,13 +65,11 @@ namespace DynamicPathPlanner.Code
         #endregion
 
 
-        public Vehicle(double[,] realMapT, double[,] imageMap)
+        public Vehicle(double[,] realMapT, double[,] imageMap , int width , int height)
         {
             realMap = realMapT;
             realImageMap = imageMap;
             knownMap = new double[realMap.GetLength(0), realMap.GetLength(1)]; // find another way to get map dimensions dynamically
-
-            pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
         }
 
         public void initializeSensorManager(NavigationMapManager mapManager)
@@ -244,7 +242,6 @@ namespace DynamicPathPlanner.Code
                 if (givenPath.Count == 0)
                 {
                     D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
-
 
                     search.updateStart(positionX, positionY);
                     search.replan(knownMap);

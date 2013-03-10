@@ -16,5 +16,22 @@ namespace DynamicPathPlanner.Code
             navigationMap = m;
 
         }
+
+        public int getWidth()
+        {
+            return navigationMap.getAreaSize();
+        }
+
+        public int getHeight()
+        {
+            return navigationMap.getAreaSize();
+        }
+
+
+        public double getTileValue(int x , int y)
+        {
+            double value = navigationMap.getHazardModel()[x,y];
+            return value;
+        }
     }
 }
