@@ -403,5 +403,10 @@ namespace DynamicPathPlanner
         {
             return navigationMapManager.getAreaSize();
         }
+
+        public ImageSource getRoverCam()
+        {
+            return simulationManager.getRoverCamImage();
+        }
     }
 }

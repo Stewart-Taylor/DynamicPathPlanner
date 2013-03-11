@@ -43,6 +43,7 @@ namespace DynamicPathPlanner.Code
         private bool atTarget = false;
 
         private Bitmap pathBitmap;
+        private Bitmap camBitmap;
 
 
         #region GET
@@ -291,6 +292,7 @@ namespace DynamicPathPlanner.Code
 
                     if (isNextNodeSafe(nextNode) == true)
                     {
+                        generateRoverImage();
                         previousX = positionX;
                         previousY = positionY;
 
@@ -562,7 +564,43 @@ namespace DynamicPathPlanner.Code
 
         public ImageSource getRoverCam()
         {
-            return PANGU_Manager.getSkyView(0.1f , 1024);
+            if (camBitmap != null)
+            {
+                Bitmap skyBitmap = camBitmap;
+                MemoryStream ms = new MemoryStream();
+                skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+
+                return bi;
+            }
+
+            return null;
+        }
+
+
+        private void generateRoverImage()
+        {
+            int x = (int) ( ((float)positionX  - (1024f/2f))*0.1f);
+            int y = (int)((float)positionY - ((1024f / 2f)) * 0.1f);
+            int z = 20;
+            float yaw = 0;
+            int pitch = -10;
+            int roll = 0;
+
+         
+
+          //  float d = ((float)positionX - (float)previousX) - ((float)positionY - (float)previousY);
+            float dir = -(float)Math.Atan2(((float)positionX - (float)previousX), ((float)positionY - (float)previousX));
+             yaw = dir * 180f / (float)Math.PI;
+             yaw += 70;
+        
+
+            camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll);
+
         }
 
         public ImageSource getPathImage()

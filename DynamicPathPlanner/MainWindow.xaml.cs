@@ -23,6 +23,9 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.ComponentModel;
 using System.Windows.Threading;
+using DynamicPathPlanner.Code;
+using System.Drawing;
+using System.IO;
 
 namespace DynamicPathPlanner
 {
@@ -52,7 +55,7 @@ namespace DynamicPathPlanner
         private int hazardSectorSize;
         private String slopeType;
 
-        private int simulationInterval = 100;
+        private int simulationInterval = 700;
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
@@ -451,6 +454,7 @@ namespace DynamicPathPlanner
             {
                 interfaceManager.simulationStep();
                 img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+                img_simulationRover.Source = interfaceManager.getRoverCam();
             }
             else
             {
@@ -471,7 +475,7 @@ namespace DynamicPathPlanner
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                Point pos = Mouse.GetPosition(img_roverSlide);
+                System.Windows.Point pos = Mouse.GetPosition(img_roverSlide);
                 double x = (pos.X / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_startX.Text = ((int)x).ToString();
@@ -481,7 +485,7 @@ namespace DynamicPathPlanner
             }
             else if (e.RightButton == MouseButtonState.Pressed)
             {
-                Point pos = Mouse.GetPosition(img_roverSlide);
+                System.Windows.Point pos = Mouse.GetPosition(img_roverSlide);
                 double x = (pos.X / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_targetX.Text = ((int)x).ToString();
@@ -506,6 +510,38 @@ namespace DynamicPathPlanner
         private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_testImg_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                int x = int.Parse(tstX.Text);
+                int y = int.Parse(tstY.Text);
+                int z = int.Parse(tstZ.Text);
+                float yaw = float.Parse(tstYaw.Text);
+                float pitch = float.Parse(tstPitch.Text);
+                float roll = 0;
+
+                Bitmap b = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll);
+
+
+                Bitmap skyBitmap = b;
+                MemoryStream ms = new MemoryStream();
+                skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+
+                img_simulationRover.Source = bi;
+
+            }
+            catch
+            {
+
+            }
         }
 
 

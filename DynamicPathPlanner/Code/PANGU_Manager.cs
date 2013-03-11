@@ -62,6 +62,31 @@ namespace DynamicPathPlanner.Code
         }
 
 
+        public static Bitmap getImageView(int x, int y , int z , float yaw ,float pitch ,float roll  )
+        {
+            Bitmap bitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+
+
+            return bitmap;
+        }
+
+
+
+        public static ImageSource getRoverView(float distance, int size)
+        {
+            Bitmap skyBitmap = getSkyBitmap(distance, size);
+            MemoryStream ms = new MemoryStream();
+            skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+
         public static Bitmap getSkyBitmap(float distance, int size)
         {
             float x = 0;

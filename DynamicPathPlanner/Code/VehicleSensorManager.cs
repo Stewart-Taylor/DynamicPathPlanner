@@ -33,5 +33,7 @@ namespace DynamicPathPlanner.Code
             double value = navigationMap.getHazardModel()[x,y];
             return value;
         }
+
+
     }
 }
