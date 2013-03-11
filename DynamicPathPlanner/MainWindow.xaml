@@ -755,16 +755,45 @@
 				</Trigger>
 			</Style.Triggers>
 		</Style>
+		<Storyboard x:Key="Results_SlideIn">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_resultsContainer">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-1464"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid_resultsContainer">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="9">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="Results_SlideOut">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_resultsContainer">
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1815">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
 			<BeginStoryboard Storyboard="{StaticResource Grid_Simulation}"/>
 			<BeginStoryboard Storyboard="{StaticResource Simulation_SlideIn}"/>
 			<BeginStoryboard Storyboard="{StaticResource Simulation_SlideOut}"/>
+			<BeginStoryboard Storyboard="{StaticResource Results_SlideIn}"/>
+			<BeginStoryboard Storyboard="{StaticResource Results_SlideOut}"/>
 		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
-    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True" d:IsHidden="True">
+    	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
     		<Menu.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -920,7 +949,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -990,7 +1019,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1017,11 +1046,7 @@
     			</Grid.RowDefinitions>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0"><Run Language="en-gb" Text="Results"/></TextBlock>
     			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
-    			<Grid x:Name="grid_controls2" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_simulationStart1" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_simulationStart_Click"/>
-    				<Button x:Name="btn_pause2" Content="Pause" VerticalAlignment="Center" Margin="91,0,89,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_pause1_Click"/>
-    				<Button x:Name="btn_start_Copy3" Content="Instant"  Margin="0,30,35,30" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50" Click="btn_start_Copy2_Click"/>
-    			</Grid>
+    			<Grid x:Name="grid_controls2" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1"/>
     			<Grid x:Name="grid_console2" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
     					<TextBlock TextWrapping="Wrap" Text="Console" Foreground="White" Margin="8,0,0,0" HorizontalAlignment="Left"/>
@@ -1036,25 +1061,25 @@
     				<Grid Margin="8,8,12,8">
     					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
-    						<Image x:Name="img_simulationMain1" Source="ImageLoad.png" Margin="8,8,8,37"/>
-    						<Button x:Name="btn_simulationSlope1" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
-    						<Button x:Name="btn_simulationElevation1" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
-    						<Button x:Name="btn_simulationSky1" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
-    						<Button x:Name="btn_simulationHazard1" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click"/>
+    						<Image x:Name="img_resultsMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
+    						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
+    						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
+    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
+    						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="8" Grid.Column="1">
-    					<TextBlock TextWrapping="Wrap" Text="Rover" VerticalAlignment="Top" Margin="8,0,0,0" FontSize="26.667" Foreground="White" d:LayoutOverrides="Width" FontFamily="Segoe UI Light" Height="42.308"/>
+    					<TextBlock TextWrapping="Wrap" Text="Details" VerticalAlignment="Top" Margin="8,0,0,0" FontSize="26.667" Foreground="White" d:LayoutOverrides="Width" FontFamily="Segoe UI Light" Height="42.308"/>
     					<TextBlock HorizontalAlignment="Left" Margin="70.79,42.308,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-    					<Grid HorizontalAlignment="Left" Height="309.617" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
+    					<Grid HorizontalAlignment="Left" Height="404.305" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
     						<Grid.ColumnDefinitions>
-    							<ColumnDefinition Width="0.451*"/>
+    							<ColumnDefinition Width="0.454*"/>
     							<ColumnDefinition Width="0.5*"/>
     						</Grid.ColumnDefinitions>
-    						<TextBlock Margin="8,0" TextWrapping="Wrap" Text="Internal Map" Foreground="White" FontSize="16" VerticalAlignment="Top"/>
-    						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1" Margin="8,0,0,0"/>
-    						<Image x:Name="img_simulationInternal1" Margin="8,25.28,8,35.958" Source="ImageLoad.png"/>
-    						<Image x:Name="img_simulationRover1" Grid.Column="1" Margin="8,25.28,8,35.958" Source="ImageLoad.png"/>
+    						<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="This Simulation Run" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
+    						<TextBlock Margin="7.999,8,0,0" TextWrapping="Wrap" Text="Best" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Grid.Column="1"/>
+    						<TextBlock Margin="7.525,47.64,0,0" TextWrapping="Wrap" Text="Steps: 245" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
+    						<TextBlock Margin="7.525,95.523,0,0" TextWrapping="Wrap" Text="Path Likeness: 44%" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>

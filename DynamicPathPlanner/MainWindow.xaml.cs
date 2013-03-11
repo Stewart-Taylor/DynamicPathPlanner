@@ -26,6 +26,7 @@ using System.Windows.Threading;
 using DynamicPathPlanner.Code;
 using System.Drawing;
 using System.IO;
+using System.Diagnostics;
 
 namespace DynamicPathPlanner
 {
@@ -512,39 +513,6 @@ namespace DynamicPathPlanner
             this.Close();
         }
 
-        private void btn_testImg_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            try
-            {
-                int x = int.Parse(tstX.Text);
-                int y = int.Parse(tstY.Text);
-                int z = int.Parse(tstZ.Text);
-                float yaw = float.Parse(tstYaw.Text);
-                float pitch = float.Parse(tstPitch.Text);
-                float roll = 0;
-
-                Bitmap b = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll);
-
-
-                Bitmap skyBitmap = b;
-                MemoryStream ms = new MemoryStream();
-                skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                ms.Position = 0;
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-
-                img_simulationRover.Source = bi;
-
-            }
-            catch
-            {
-
-            }
-        }
-
-
-
+ 
     }
 }
