@@ -60,6 +60,8 @@ namespace DynamicPathPlanner
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
+        private ImageSource loadImage;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,6 +71,8 @@ namespace DynamicPathPlanner
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
             hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
+
+            loadImage = img_hazardSlide.Source;
 
             applicationSetUp();
 
@@ -87,6 +91,15 @@ namespace DynamicPathPlanner
             grid_rover_slide.Visibility = Visibility.Hidden;
             grid_simulation.Visibility = Visibility.Hidden;
             grid_results.Visibility = Visibility.Hidden;
+
+            //Reset Images
+            img_elevationSlide.Source = loadImage;
+            img_slopeSlide.Source = loadImage;
+            img_hazardSlide.Source = loadImage;
+            img_roverSlide.Source = loadImage;
+            img_simulationMain.Source = loadImage;
+            img_simulationInternal.Source = loadImage;
+            img_simulationRover.Source = loadImage;
 
             if (startSlideIn == null)
             {
