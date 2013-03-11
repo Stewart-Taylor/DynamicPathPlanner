@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Drawing.Imaging;
 
 namespace DynamicPathPlanner.Code
 {
@@ -145,9 +146,12 @@ namespace DynamicPathPlanner.Code
         {
             Bitmap bitmap = new Bitmap(slopeWidth, slopeHeight);
 
+
             int slopeX = 0;
             int slopeY = 0;
 
+            BitmapHelper bMap = new BitmapHelper(bitmap);
+            bMap.LockBitmap();
 
             for (int x = 0; x < width; x++)
             {
@@ -155,12 +159,12 @@ namespace DynamicPathPlanner.Code
                 {
                     System.Drawing.Color tempColor = getHazardColorValue(hazardModelImage[x, y]);
 
-                    bitmap.SetPixel(slopeX, slopeY, tempColor);
+                    bMap.SetPixel(slopeX, slopeY, tempColor);
                     for (int a = 0; a < sectorSize; a++)
                     {
                         for (int b = 0; b < sectorSize; b++)
                         {
-                            bitmap.SetPixel(slopeX + a, slopeY + b, tempColor);
+                            bMap.SetPixel(slopeX + a, slopeY + b, tempColor);
                         }
                     }
 
@@ -170,7 +174,9 @@ namespace DynamicPathPlanner.Code
                 slopeX += sectorSize;
             }
 
-            hazardBitmap = bitmap;
+            bMap.UnlockBitmap();
+
+            hazardBitmap = bMap.Bitmap;
         }
 
 
@@ -186,14 +192,11 @@ namespace DynamicPathPlanner.Code
 
             if (gradient <= 1f)
             {
-
                 red = (1 - (float)gradient) * 255;
-
             }
             else if (gradient <= 3f)
             {
                 double percent = (gradient) / (3f);
-
                 green = (1 - (float)percent) * 255;
             }
             else

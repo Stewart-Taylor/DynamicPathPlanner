@@ -830,7 +830,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -852,7 +852,7 @@
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -949,7 +949,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -977,9 +977,9 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0" Text="Simulation"/>
     			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_simulationStart" Content="Instant" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="37,0,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_simulationStart_Click"/>
-    				<Button x:Name="btn_pause1" Content="Back" VerticalAlignment="Center" Margin="91,0,89,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" Click="btn_pause1_Click"/>
-    				<Button x:Name="btn_start_Copy2" Content="Play"  Margin="0,30,35,30" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Right" Width="50" Click="btn_start_Copy2_Click"/>
+    				<Button x:Name="btn_simulationStart" Content="Instant" Margin="0,41.754,29,37.751" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationStart_Click" HorizontalAlignment="Right" Width="50"/>
+    				<Button x:Name="btn_pause1" Content="Back" Margin="97,41.754,83,37.751" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click"/>
+    				<Button x:Name="btn_start_Copy2" Content="Play"  Margin="43,41.754,0,37.75" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Left" Width="50" Click="btn_start_Copy2_Click"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1019,7 +1019,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>

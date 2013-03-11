@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\BitmapHelper.cs" />
     <Compile Include="Code\Pathfinding\A_Star.cs" />
     <Compile Include="Code\Pathfinding\D_Star.cs" />
     <Compile Include="Code\ElevationLoader.cs" />
