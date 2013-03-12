@@ -26,7 +26,6 @@ namespace DynamicPathPlanner.Code
         private List<PathNode> givenPath = new List<PathNode>();
 
         private double[,] knownMap;
-        private double[,] realImageMap;
 
         private int positionX;
         private int positionY;
@@ -52,6 +51,7 @@ namespace DynamicPathPlanner.Code
         private float distanceStep;
 
         private int cameraPitch = -10;
+        private int cameraHeight = 17;
 
         #region GET
 
@@ -70,17 +70,53 @@ namespace DynamicPathPlanner.Code
             return positionY;
         }
 
+        public List<PathNode> getPathPoints()
+        {
+            return takenPath;
+        }
+
+        public bool reachedTarget()
+        {
+            return atTarget;
+        }
+
+        public ImageSource getPathImage()
+        {
+            MemoryStream ms = new MemoryStream();
+            pathBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = ms;
+            bitmap.EndInit();
+
+            return bitmap;
+        }
+
         #endregion
 
+        #region SET
 
-        public Vehicle(NavigationMapManager mapManager , double[,] imageMap , int widthT , int heightT)
+        public void setStepLimit(int limit)
+        {
+            stepLimit = limit;
+        }
+
+        public void setNode(int x, int y, double value)
+        {
+            knownMap[x, y] = value;
+        }
+
+
+        #endregion
+
+        public Vehicle(NavigationMapManager mapManager)
         {
             sensorManager = new VehicleSensorManager(this, mapManager);
             areaSize = mapManager.getAreaSize();
             distanceStep = mapManager.getDistanceStep();
             width = mapManager.getHazardModel().GetLength(0);
             height = mapManager.getHazardModel().GetLength(1);
-            realImageMap = imageMap;
             knownMap = new double[width, height]; // find another way to get map dimensions dynamically
         }
 
@@ -148,7 +184,7 @@ namespace DynamicPathPlanner.Code
                     PathNode nextNode = givenPath.Last();
                     givenPath.Remove(nextNode);
 
-                    if (isNextNodeSafe(nextNode) == true)
+                    if (sensorManager.isAreaSafe(nextNode) == true)
                     {
                         previousX = positionX;
                         previousY = positionY;
@@ -157,11 +193,11 @@ namespace DynamicPathPlanner.Code
 
                         takenPath.Add(nextNode);
 
-                        updateOwnMap(positionX, positionY);
+                        sensorManager.updateOwnLocation(positionX, positionY);
                     }
                     else
                     {
-                        updateOwnMap(nextNode.x, nextNode.y);
+                        sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                         break;
                     }
 
@@ -196,7 +232,7 @@ namespace DynamicPathPlanner.Code
 
                 do
                 {
-                    updateFrontView();
+                    sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
                     if (steps >= stepLimit)
                     {
                         atTarget = true;
@@ -217,7 +253,7 @@ namespace DynamicPathPlanner.Code
                     PathNode nextNode = givenPath.Last();
                     givenPath.Remove(nextNode);
 
-                    if (isNextNodeSafe(nextNode) == true)
+                    if (sensorManager.isAreaSafe(nextNode) == true)
                     {
                         previousX = positionX;
                         previousY = positionY;
@@ -226,12 +262,12 @@ namespace DynamicPathPlanner.Code
                         positionY = nextNode.y;
                         takenPath.Add(nextNode);
 
-                        updateOwnMap(positionX, positionY);
+                        sensorManager.updateOwnLocation(positionX, positionY);
                     }
                     else
                     {
                         search.updateVertex(nextNode.x, nextNode.y);
-                        updateOwnMap(nextNode.x, nextNode.y);
+                        sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                         break;
                     }
 
@@ -246,35 +282,32 @@ namespace DynamicPathPlanner.Code
         {
             if (atTarget == false)
             {
+                sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
+
+                steps++;
+
                 if (givenPath.Count == 0)
                 {
                     D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
-
                     search.updateStart(positionX, positionY);
                     search.replan(knownMap);
-
                     givenPath = search.getPath();
                 }
 
-                generateRoverImage();
-                updateFrontView();
                 if (steps >= stepLimit)
                 {
                     atTarget = true;
-                    //   break;
                 }
-                steps++;
 
                 if ((positionX == targetX) && (positionY == targetY))
                 {
                     atTarget = true;
-                    //  break;
                 }
                 if (givenPath.Count == 0)
                 {
                     atTarget = true;
-                    //   break;
                 }
+
                 if (atTarget == false)
                 {
                     PathNode nextNode = givenPath.Last();
@@ -282,7 +315,6 @@ namespace DynamicPathPlanner.Code
 
                     if ((nextNode.x == positionX) && (nextNode.y == positionY))
                     {
-
                         if (givenPath.Count > 0)
                         {
                             nextNode = givenPath.Last();
@@ -296,7 +328,7 @@ namespace DynamicPathPlanner.Code
                         }
                     }
 
-                    if (isNextNodeSafe(nextNode) == true)
+                    if (sensorManager.isAreaSafe(nextNode) == true)
                     {
                         previousX = positionX;
                         previousY = positionY;
@@ -305,168 +337,35 @@ namespace DynamicPathPlanner.Code
                         positionY = nextNode.y;
                         takenPath.Add(nextNode);
 
-                        updateOwnMap(positionX, positionY);
+                        sensorManager.updateOwnLocation(positionX, positionY);
                     }
                     else
                     {
                         givenPath.Clear();
-                        //  search.updateVertex(nextNode.x, nextNode.y);
                         knownMap[nextNode.x, nextNode.y] = 99999;
-                        updateFrontView();
-                        updateOwnMap(nextNode.x, nextNode.y);
-                        // break;
+                        sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
+                        sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                     }
                 }
             }
-           
+
+            generateRoverImage();
             generatePathImage();
-        }
-
-
-        private bool isNextNodeSafe(PathNode node)
-        {
-            if(sensorManager.getTileValue(node.x,node.y) <= 5.0)
-            {
-                return true;
-            }
-
-            if (sensorManager.getTileValue(node.x, node.y) == knownMap[node.x,node.y])
-            {
-              //  return true; // means no safer path
-            }
-            return false;
-        }
-
-
-        private void updateOwnMap(int x, int y)
-        {
-            if ((x > 0) && (y > 0))
-            {
-                if ((x < knownMap.GetLength(0)) && (y < knownMap.GetLength(1)))
-                {
-                    knownMap[x, y] = sensorManager.getTileValue(x, y);
-
-                    System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
-
-          //          pathBitmap.SetPixel(x, y, tempColor);
-                }
-            }
-        }
-
-        private void updateFrontView()
-        {
-            if ((previousX != 0) && (previousY != 0))
-            {
-              //  if (realMap[positionX, positionY] != knownMap[positionX, positionY])
-              //  {
-                    int directionX = positionX - previousX;
-                    int directionY = positionY - previousY;
-
-                    if ((directionX == -1) && (directionY == -1)) { updateFacingTopLeft(); }
-                    else if ((directionX == 0) && (directionY == -1)) { updateFacingTopMiddle(); }
-                    else if ((directionX == 1) && (directionY == -1)) { updateFacingTopRight(); }
-                    else if ((directionX == -1) && (directionY == 0)) { updateFacingMiddleLeft(); }
-                    else if ((directionX == 1) && (directionY == 0)) { updateFacingMiddleRight(); }
-                    else if ((directionX == -1) && (directionY == 1)) { updateFacingBottomLeft(); }
-                    else if ((directionX == 0) && (directionY == 1)) { updateFacingBottomMiddle(); }
-                    else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(); }
-              //  }
-            }
-
-            int size = 3;
-            for (int x = -size; x < size; x++)
-            {
-                for (int y = -size; y < size; y++)
-                {
-                    updateTile(positionX + x, positionY + y);
-                }
-            }
-        }
-
-        private void updateTile(int x, int y)
-        {
-           // knownMap[x, y] = realMap[x, y];
-            updateOwnMap(x, y);
-        }
-
-        private void updateFacingTopLeft()
-        {
-            updateTile(positionX - 1, positionY - 1);
-            updateTile(positionX - 2, positionY);
-            updateTile(positionX + 1, positionY + 1);
-            updateTile(positionX - 2, positionY - 2);
-        }
-
-        private void updateFacingTopMiddle()
-        {
-            updateTile(positionX - 1, positionY - 1);
-            updateTile(positionX, positionY - 1);
-            updateTile(positionX + 1, positionY - 1);
-            updateTile(positionX, positionY - 2);
-        }
-
-        private void updateFacingTopRight()
-        {
-            updateTile(positionX + 1, positionY - 1);
-            updateTile(positionX, positionY - 2);
-            updateTile(positionX + 2, positionY);
-            updateTile(positionX + 2, positionY - 2);
-        }
-
-        private void updateFacingMiddleLeft()
-        {
-            updateTile(positionX - 1, positionY);
-            updateTile(positionX - 1, positionY - 1);
-            updateTile(positionX - 1, positionY + 1);
-            updateTile(positionX - 2, positionY);
-        }
-
-        private void updateFacingMiddleRight()
-        {
-            updateTile(positionX + 1, positionY);
-            updateTile(positionX + 1, positionY - 1);
-            updateTile(positionX + 1, positionY + 1);
-            updateTile(positionX + 2, positionY);
-        }
-
-        private void updateFacingBottomLeft()
-        {
-            updateTile(positionX - 1, positionY + 1);
-            updateTile(positionX - 2, positionY);
-            updateTile(positionX, positionY + 2);
-            updateTile(positionX - 2, positionY + 2);
-        }
-
-        private void updateFacingBottomMiddle()
-        {
-            updateTile(positionX, positionY + 1);
-            updateTile(positionX - 1, positionY + 1);
-            updateTile(positionX + 1, positionY + 1);
-            updateTile(positionX, positionY + 2);
-        }
-
-        private void updateFacingBottomRight()
-        {
-            updateTile(positionX + 1, positionY + 1);
-            updateTile(positionX + 2, positionY);
-            updateTile(positionX, positionY + 2);
-            updateTile(positionX + 2, positionY + 2);
         }
 
 
         public void generatePathImage()
         {
-            Bitmap bitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
+            pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
 
             for (int x = 0; x < knownMap.GetLength(0); x++)
             {
                 for (int y = 0; y < knownMap.GetLength(1); y++)
                 {
                     System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
-                    bitmap.SetPixel(x, y, tempColor);
+                    pathBitmap.SetPixel(x, y, tempColor);
                 }
             }
-            pathBitmap = bitmap;
         }
 
         private System.Drawing.Color getVehicleColorValue(double gradient, int x, int y)
@@ -483,11 +382,10 @@ namespace DynamicPathPlanner.Code
             if (gradient == 0)
             {
                 notKnown = true;
-                //   gradient = realImageMap[x, y];
             }
             else
             {
-                gradient = realImageMap[x, y];
+                gradient = sensorManager.getSlopeValue(x, y);
             }
 
             if (gradient <= 1f)
@@ -569,7 +467,7 @@ namespace DynamicPathPlanner.Code
         {
             int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
             int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
-            int z = 17;
+            int z = cameraHeight;
             float yaw = 0;
             int pitch = cameraPitch;
             int roll = 0;
@@ -581,29 +479,6 @@ namespace DynamicPathPlanner.Code
             yaw -= 45;
 
             camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
-        }
-
-        public ImageSource getPathImage()
-        {
-            MemoryStream ms = new MemoryStream();
-            pathBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.StreamSource = ms;
-            bitmap.EndInit();
-
-            return bitmap;
-        }
-
-        public List<PathNode> getPathPoints()
-        {
-            return takenPath;
-        }
-
-        public bool reachedTarget()
-        {
-            return atTarget;
         }
 
     }

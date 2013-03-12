@@ -42,6 +42,11 @@ namespace DynamicPathPlanner.Code
             return hazardModel;
         }
 
+        public double[,] getHazardSlope()
+        {
+            return hazardModelImage;
+        }
+
         public Bitmap getBitmap()
         {
             return hazardBitmap;

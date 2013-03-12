@@ -156,7 +156,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulation(int startX , int startY , int endX , int endY)
         {
-            rover = new Vehicle( mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -176,7 +176,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulationDSTAR(int startX, int startY, int endX, int endY)
         {
-            rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -195,7 +195,7 @@ namespace DynamicPathPlanner.Code
 
         public void simulationStepSetUp()
         {
-            rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager);
 
             simulationInProgress = true;
             stepSet = true;
@@ -253,7 +253,7 @@ namespace DynamicPathPlanner.Code
             {
                 if (stepTraverseStarted == false)
                 {
-                    rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
+                    rover = new Vehicle(mapManager);
                     rover.startTraverse(startX, startY, endX, endY);
                     stepTraverseStarted = true;
                 }

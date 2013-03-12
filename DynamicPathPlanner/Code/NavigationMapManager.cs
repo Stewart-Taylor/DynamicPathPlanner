@@ -74,6 +74,11 @@ namespace DynamicPathPlanner.Code
             return hazardModel.getModel();
         }
 
+        public double[,] getHazardSlope()
+        {
+            return hazardModel.getHazardSlope();
+        }
+
         public double[,] getElevationModel()
         {
             if (elevationModel == null)
