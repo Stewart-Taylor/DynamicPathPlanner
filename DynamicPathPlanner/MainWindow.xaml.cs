@@ -171,6 +171,7 @@ namespace DynamicPathPlanner
 
         private void slope_worker_complete(object sender, EventArgs e)
         {
+            cmb_slopeType.IsEnabled = true;
             slope_wait.Stop();
             lbl_slopeWait.Text = "";
             img_slopeSlide.Source = interfaceManager.getSlopeModelImage();
@@ -335,10 +336,13 @@ namespace DynamicPathPlanner
             {
                 slopeType = slopeTypeT;
 
-
-
                 slope_wait.Begin();
-                slope_worker.RunWorkerAsync();
+
+                if (slope_worker.IsBusy == false)
+                {
+                    cmb_slopeType.IsEnabled = false;
+                    slope_worker.RunWorkerAsync();
+                }
             }
         }
 

@@ -147,7 +147,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulation(int startX , int startY , int endX , int endY)
         {
-            rover = new Vehicle(hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle( mapManager,hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -167,7 +167,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulationDSTAR(int startX, int startY, int endX, int endY)
         {
-            rover = new Vehicle(hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -186,7 +186,7 @@ namespace DynamicPathPlanner.Code
 
         public void simulationStepSetUp()
         {
-            rover = new Vehicle(hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
 
             simulationInProgress = true;
             stepSet = true;
@@ -244,7 +244,7 @@ namespace DynamicPathPlanner.Code
             {
                 if (stepTraverseStarted == false)
                 {
-                    rover = new Vehicle(hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+                    rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
                     rover.startTraverse(startX, startY, endX, endY);
                     stepTraverseStarted = true;
                 }
@@ -256,7 +256,6 @@ namespace DynamicPathPlanner.Code
                     {
                         pathGenerated = true;
                     }
-
                 }
             }
         }

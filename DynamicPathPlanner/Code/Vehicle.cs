@@ -3,7 +3,7 @@
  *------------------------------------
  * This class contains the vehicle logic for the simulation
  *
- * Last Updated: 09/03/2013
+ * Last Updated: 12/03/2013
 */
 
 using System;
@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Drawing;
+using System.Collections;
 
 namespace DynamicPathPlanner.Code
 {
@@ -25,7 +26,6 @@ namespace DynamicPathPlanner.Code
         private List<PathNode> givenPath = new List<PathNode>();
 
         private double[,] knownMap;
-        private double[,] realMap;
         private double[,] realImageMap;
 
         private int positionX;
@@ -44,6 +44,14 @@ namespace DynamicPathPlanner.Code
 
         private Bitmap pathBitmap;
         private Bitmap camBitmap;
+
+        private int width;
+        private int height;
+
+        private int areaSize;
+        private float distanceStep;
+
+        private int cameraPitch = -10;
 
 
         #region GET
@@ -66,16 +74,15 @@ namespace DynamicPathPlanner.Code
         #endregion
 
 
-        public Vehicle(double[,] realMapT, double[,] imageMap , int width , int height)
-        {
-            realMap = realMapT;
-            realImageMap = imageMap;
-            knownMap = new double[realMap.GetLength(0), realMap.GetLength(1)]; // find another way to get map dimensions dynamically
-        }
-
-        public void initializeSensorManager(NavigationMapManager mapManager)
+        public Vehicle(NavigationMapManager mapManager , double[,] realMapT, double[,] imageMap , int widthT , int heightT)
         {
             sensorManager = new VehicleSensorManager(this, mapManager);
+            areaSize = mapManager.getAreaSize();
+            distanceStep = mapManager.getDistanceStep();
+            width = realMapT.GetLength(0); // CHANGE
+            height = realMapT.GetLength(1); // CHANGE
+            realImageMap = imageMap;
+            knownMap = new double[realMapT.GetLength(0), realMapT.GetLength(1)]; // find another way to get map dimensions dynamically
         }
 
         public void startTraverse(int startXt, int startYt, int endXt, int endYt)
@@ -90,7 +97,7 @@ namespace DynamicPathPlanner.Code
             positionX = startX;
             positionY = startY;
 
-            knownMap = new double[realMap.GetLength(0), realMap.GetLength(1)];
+            knownMap = new double[width, height];
             atTarget = false;
 
             pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
@@ -319,12 +326,12 @@ namespace DynamicPathPlanner.Code
 
         private bool isNextNodeSafe(PathNode node)
         {
-            if (realMap[node.x, node.y] <= 5.0)
+            if(sensorManager.getTileValue(node.x,node.y) <= 5.0)
             {
                 return true;
             }
 
-            if (realMap[node.x, node.y] == knownMap[node.x, node.y])
+            if (sensorManager.getTileValue(node.x, node.y) == knownMap[node.x,node.y])
             {
               //  return true; // means no safer path
             }
@@ -338,7 +345,7 @@ namespace DynamicPathPlanner.Code
             {
                 if ((x < knownMap.GetLength(0)) && (y < knownMap.GetLength(1)))
                 {
-                    knownMap[x, y] = realMap[x, y];
+                    knownMap[x, y] = sensorManager.getTileValue(x, y);
 
                     System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
 
@@ -447,7 +454,8 @@ namespace DynamicPathPlanner.Code
             updateTile(positionX + 2, positionY + 2);
         }
 
-        private void generateImageQuick()
+
+        public void generatePathImage()
         {
             Bitmap bitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
 
@@ -455,38 +463,11 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < knownMap.GetLength(1); y++)
                 {
-                    System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
+                    System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
                     bitmap.SetPixel(x, y, tempColor);
                 }
             }
             pathBitmap = bitmap;
-        }
-
-
-        public void generatePathImage()
-        {
-            Bitmap bitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
-
-            unsafe
-            {
-                BitmapHelper b = new BitmapHelper(bitmap);
-                b.LockBitmap();
-
-                for (int x = 0; x < knownMap.GetLength(0) -1; x++)
-                {
-                    for (int y = 0; y < knownMap.GetLength(1) -1; y++)
-                    {
-                        System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
-
-                        b.SetPixel(x, y, tempColor);
-                    }
-                }
-
-                b.UnlockBitmap();
-                pathBitmap = b.Bitmap;
-            }
-
-           
         }
 
         private System.Drawing.Color getVehicleColorValue(double gradient, int x, int y)
@@ -524,14 +505,9 @@ namespace DynamicPathPlanner.Code
                 green = 0;
             }
 
-
             if (notKnown == true)
             {
-              //  green = ((float)green * 0.1f);
-               // red = ((float)red * 0.1f);
-                green = 0;
-                red = 0;
-                blue = 0;
+                green = 0; red = 0; blue = 0;
 
                 if (x % 3 == 0)
                 {
@@ -542,7 +518,6 @@ namespace DynamicPathPlanner.Code
                 {
                     blue = 40;
                 }
-
             }
 
             foreach (PathNode n in takenPath)
@@ -593,30 +568,20 @@ namespace DynamicPathPlanner.Code
 
         private void generateRoverImage()
         {
-            int x = (int) ( ((float)positionX  - (1024f/2f))*0.1f);
-            int y = (int)((float)positionY - ((1024f / 2f)) * 0.1f);
+            int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
+            int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
             int z = 17;
             float yaw = 0;
-            int pitch = -10;
+            int pitch = cameraPitch;
             int roll = 0;
 
-  
-          //  float d = ((float)positionX - (float)previousX) - ((float)positionY - (float)previousY);
-            float dir = -(float)Math.Atan2(((float)positionX - (float)previousX), ((float)positionY - (float)previousY));
-            
-            yaw = dir * 180f / (float)Math.PI;
-             yaw += 70;
- 
-           float deltaX = (float)positionX - (float)previousX;
-           float deltaY = (float)positionY - (float)previousY; 
+            float deltaX = (float)positionX - (float)previousX;
+            float deltaY = (float)positionY - (float)previousY;
 
-  
-          
-            yaw =  (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
+            yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
             yaw -= 45;
 
-            camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll);
-
+            camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
         }
 
         public ImageSource getPathImage()

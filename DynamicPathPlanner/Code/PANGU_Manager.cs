@@ -64,27 +64,24 @@ namespace DynamicPathPlanner.Code
 
         public static Bitmap getImageView(int x, int y , int z , float yaw ,float pitch ,float roll  )
         {
-            Bitmap bitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+            Bitmap bitmap = connector.getImage(x, y, z, yaw, pitch, roll , 30.0f);
 
+            return bitmap;
+        }
+
+        public static Bitmap getImageView(int x, int y, int z, float yaw, float pitch, float roll, float fov )
+        {
+            Bitmap bitmap = connector.getImage(x, y, z, yaw, pitch, roll, fov);
 
             return bitmap;
         }
 
 
 
-        public static ImageSource getRoverView(float distance, int size)
-        {
-            Bitmap skyBitmap = getSkyBitmap(distance, size);
-            MemoryStream ms = new MemoryStream();
-            skyBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
+      
 
-            return bi;
-        }
+  
+
 
 
         public static Bitmap getSkyBitmap(float distance, int size)
@@ -99,10 +96,10 @@ namespace DynamicPathPlanner.Code
             float height;
 
             fov = ((float)Math.PI / 180f) * fov;
-            height = (float)size / (2f*(float)Math.Tan(fov/2f));
-            z = height *0.1f; // Convert to unit distance from pixel distance
+            height = (float)size / (2f * (float)Math.Tan(fov / 2f));
+            z = height * 0.1f; // Convert to unit distance from pixel distance
 
-            Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll);
+            Bitmap skyBitmap = connector.getImage(x, y, z, yaw, pitch, roll ,30.0f);
 
             return skyBitmap;
         }

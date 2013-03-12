@@ -47,7 +47,6 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-
         protected virtual double calculateSlopeValue(int x, int y)
         {
             double topLeft = getTopLeftSlope(x, y);
