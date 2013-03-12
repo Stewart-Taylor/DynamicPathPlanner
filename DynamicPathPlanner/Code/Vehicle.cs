@@ -342,7 +342,7 @@ namespace DynamicPathPlanner.Code
 
                     System.Drawing.Color tempColor = getVehicleColorValue(realImageMap[x, y], x, y);
 
-                    pathBitmap.SetPixel(x, y, tempColor);
+          //          pathBitmap.SetPixel(x, y, tempColor);
                 }
             }
         }
@@ -467,16 +467,26 @@ namespace DynamicPathPlanner.Code
         {
             Bitmap bitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
 
-            for (int x = 0; x < knownMap.GetLength(0); x++)
+            unsafe
             {
-                for (int y = 0; y < knownMap.GetLength(1); y++)
-                {
-                    System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
+                BitmapHelper b = new BitmapHelper(bitmap);
+                b.LockBitmap();
 
-                    bitmap.SetPixel(x, y, tempColor);
+                for (int x = 0; x < knownMap.GetLength(0) -1; x++)
+                {
+                    for (int y = 0; y < knownMap.GetLength(1) -1; y++)
+                    {
+                        System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
+
+                        b.SetPixel(x, y, tempColor);
+                    }
                 }
+
+                b.UnlockBitmap();
+                pathBitmap = b.Bitmap;
             }
-            pathBitmap = bitmap;
+
+           
         }
 
         private System.Drawing.Color getVehicleColorValue(double gradient, int x, int y)

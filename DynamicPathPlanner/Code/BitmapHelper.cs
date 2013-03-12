@@ -69,7 +69,7 @@ namespace DynamicPathPlanner.Code
             width = (int)boundsF.Width * sizeof(Pixel);
             if (width % 4 != 0)
             {
-                width = (int)(4f * ((float)width / 4f + 1f));
+                width = 4 * (width / 4 + 1);
             }
             bitmapData =
            bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);

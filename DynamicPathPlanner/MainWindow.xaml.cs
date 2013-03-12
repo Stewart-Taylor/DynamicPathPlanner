@@ -149,8 +149,6 @@ namespace DynamicPathPlanner
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
-
-
             startup_worker.RunWorkerAsync();
 
             BeginStoryboard(startup_wait);
