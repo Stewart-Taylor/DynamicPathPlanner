@@ -199,7 +199,6 @@ namespace DynamicPathPlanner
             BeginStoryboard(slideOut);
         }
 
-
         private void slideOut_Completed(object sender, EventArgs e)
         {
             oldGrid.Visibility = Visibility.Hidden;
@@ -386,10 +385,7 @@ namespace DynamicPathPlanner
                     interfaceManager.updateRoverSlideStartPosition(startX, startY);
                     img_roverSlide.Source = interfaceManager.getRoverSlideImage();
                 }
-                catch 
-                {
-
-                }
+                catch { }
 
                 try
                 {
@@ -402,10 +398,7 @@ namespace DynamicPathPlanner
                     interfaceManager.updateRoverSlideTargetPosition(targetX, targetY);
                     img_roverSlide.Source = interfaceManager.getRoverSlideImage();
                 }
-                catch 
-                {
-
-                }
+                catch { }
             }
         }
 
@@ -427,10 +420,7 @@ namespace DynamicPathPlanner
                 btn_elevationNext.Visibility = Visibility.Hidden;
                 elevation_wait.Begin();
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void btn_simulationSky_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -455,9 +445,7 @@ namespace DynamicPathPlanner
 
         private void btn_simulationStart_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.startSimulation();
-            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
-            img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
+            runSimulation();
         }
 
         private void btn_pause1_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -534,6 +522,40 @@ namespace DynamicPathPlanner
             this.Close();
         }
 
- 
+        private void btn_simulationNext_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (interfaceManager.isSimulationComplete())
+            {
+                nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
+            }
+        }
+
+        private void btn_resultsSky_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.getSimulationAerialImage();
+        }
+
+        private void btn_resultsElevation_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.getSimulationElevationImage();
+        }
+
+        private void btn_resultsSlope_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.getSimulationSlopeImage();
+        }
+
+        private void btn_resultsHazard_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.getSimulationHazardImage();
+        }
+
+        private void btn_simulationInstant_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.startSimulation();
+            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+            img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
+        }
+
     }
 }

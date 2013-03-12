@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 03/03/2013
+ * Last Updated: 12/03/2013
 */
 
 using System;
@@ -407,6 +407,11 @@ namespace DynamicPathPlanner
         public ImageSource getRoverCam()
         {
             return simulationManager.getRoverCamImage();
+        }
+
+        public void runCompareSimulation()
+        {
+            simulationManager.runCompareSimulation();
         }
     }
 }

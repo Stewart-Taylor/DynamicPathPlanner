@@ -53,7 +53,6 @@ namespace DynamicPathPlanner.Code
 
         private int cameraPitch = -10;
 
-
         #region GET
 
         public int getSteps()
@@ -74,15 +73,15 @@ namespace DynamicPathPlanner.Code
         #endregion
 
 
-        public Vehicle(NavigationMapManager mapManager , double[,] realMapT, double[,] imageMap , int widthT , int heightT)
+        public Vehicle(NavigationMapManager mapManager , double[,] imageMap , int widthT , int heightT)
         {
             sensorManager = new VehicleSensorManager(this, mapManager);
             areaSize = mapManager.getAreaSize();
             distanceStep = mapManager.getDistanceStep();
-            width = realMapT.GetLength(0); // CHANGE
-            height = realMapT.GetLength(1); // CHANGE
+            width = mapManager.getHazardModel().GetLength(0);
+            height = mapManager.getHazardModel().GetLength(1);
             realImageMap = imageMap;
-            knownMap = new double[realMapT.GetLength(0), realMapT.GetLength(1)]; // find another way to get map dimensions dynamically
+            knownMap = new double[width, height]; // find another way to get map dimensions dynamically
         }
 
         public void startTraverse(int startXt, int startYt, int endXt, int endYt)
@@ -116,7 +115,7 @@ namespace DynamicPathPlanner.Code
             positionX = startX;
             positionY = startY;
 
-            bool atTarget = false;
+            atTarget = false;
 
             SearchAlgorithm search;
 
@@ -184,7 +183,7 @@ namespace DynamicPathPlanner.Code
             positionX = startX;
             positionY = startY;
 
-            bool atTarget = false;
+             atTarget = false;
 
             D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
 

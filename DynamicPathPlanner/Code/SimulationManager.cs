@@ -104,6 +104,9 @@ namespace DynamicPathPlanner.Code
             knownMap = known;
         }
 
+
+
+
         public void startSimulation()
         {
             startSimulationDSTAR(startX, startY, targetX, targetY);
@@ -124,6 +127,12 @@ namespace DynamicPathPlanner.Code
                 }
                 catch (Exception){ }
             }
+        }
+
+
+        public void runCompareSimulation()
+        {
+
         }
 
         public void startSimulationKnownMap(int startX, int startY, int endX, int endY)
@@ -147,7 +156,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulation(int startX , int startY , int endX , int endY)
         {
-            rover = new Vehicle( mapManager,hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle( mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -167,7 +176,7 @@ namespace DynamicPathPlanner.Code
 
         public void startSimulationDSTAR(int startX, int startY, int endX, int endY)
         {
-            rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -186,7 +195,7 @@ namespace DynamicPathPlanner.Code
 
         public void simulationStepSetUp()
         {
-            rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+            rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
 
             simulationInProgress = true;
             stepSet = true;
@@ -244,7 +253,7 @@ namespace DynamicPathPlanner.Code
             {
                 if (stepTraverseStarted == false)
                 {
-                    rover = new Vehicle(mapManager, hazardModel.getModel(), hazardModel.hazardModelImage, areaSize, areaSize);
+                    rover = new Vehicle(mapManager, hazardModel.hazardModelImage, areaSize, areaSize);
                     rover.startTraverse(startX, startY, endX, endY);
                     stepTraverseStarted = true;
                 }
@@ -307,17 +316,11 @@ namespace DynamicPathPlanner.Code
             return skyBitmap;
         }
 
-        public void resetSimulation()
-        {
-
-        }
-
         private Bitmap getComboPathBitmap()
         {
             if (comboPathBitmap == null)
             {
                 comboPathBitmap = (Bitmap)skyBitmap.Clone();
-
 
                 float alpha = 0.2f;
 

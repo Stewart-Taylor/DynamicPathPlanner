@@ -977,9 +977,10 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0" Text="Simulation"/>
     			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_simulationStart" Content="Instant" Margin="0,41.754,29,37.751" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationStart_Click" HorizontalAlignment="Right" Width="50"/>
-    				<Button x:Name="btn_pause1" Content="Back" Margin="97,41.754,83,37.751" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click"/>
-    				<Button x:Name="btn_start_Copy2" Content="Play"  Margin="43,41.754,0,37.75" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Left" Width="50" Click="btn_start_Copy2_Click"/>
+    				<Button x:Name="btn_simulationInstant" Content="Instant" Margin="0,8,29,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationInstant_Click" HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Top"/>
+    				<Button x:Name="btn_pause1" Content="Back" Margin="97,8,83,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click" Height="50" VerticalAlignment="Top"/>
+    				<Button x:Name="btn_simulationStart" Content="Play"  Margin="43,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click"/>
+    				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,8" Background="#FF52A525" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1062,10 +1063,10 @@
     					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
     						<Image x:Name="img_resultsMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
-    						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
-    						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
-    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
-    						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click"/>
+    						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_resultsSlope_Click"/>
+    						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsElevation_Click"/>
+    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsSky_Click"/>
+    						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsHazard_Click"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="8" Grid.Column="1">
