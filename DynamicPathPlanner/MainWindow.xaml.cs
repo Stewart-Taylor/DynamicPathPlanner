@@ -72,6 +72,21 @@ namespace DynamicPathPlanner
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
             hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
 
+            //Set Events
+            hazard_worker.DoWork += new DoWorkEventHandler(hazardScreen);
+            hazard_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(hazard_worker_complete);
+            
+            slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
+            slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+
+            elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
+            elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
+
+            dispatcherTimer.Tick += new EventHandler(simulationTick);
+
+            startup_worker.DoWork += new DoWorkEventHandler(panguStartUp);
+            startup_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startup_worker_complete);
+
             loadImage = img_hazardSlide.Source;
 
             applicationSetUp();
@@ -134,8 +149,7 @@ namespace DynamicPathPlanner
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
-            startup_worker.DoWork += new DoWorkEventHandler(panguStartUp);
-            startup_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startup_worker_complete);
+
 
             startup_worker.RunWorkerAsync();
 
@@ -323,8 +337,7 @@ namespace DynamicPathPlanner
             {
                 slopeType = slopeTypeT;
 
-                slope_worker.DoWork += new DoWorkEventHandler(slopeScreen);
-                slope_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(slope_worker_complete);
+
 
                 slope_wait.Begin();
                 slope_worker.RunWorkerAsync();
@@ -338,9 +351,6 @@ namespace DynamicPathPlanner
                 if (hazard_worker.IsBusy == false)
                 {
                     hazardSectorSize = (int)slider_sectorSize.Value;
-
-                    hazard_worker.DoWork += new DoWorkEventHandler(hazardScreen);
-                    hazard_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(hazard_worker_complete);
 
                     hazard_wait.Begin();
                     hazard_worker.RunWorkerAsync();
@@ -410,9 +420,6 @@ namespace DynamicPathPlanner
                 elevationDistance = float.Parse(distanceTemp);
                 elevationSize = int.Parse(sizeTemp);
                
-                elevation_worker.DoWork += new DoWorkEventHandler(elevationScreen);
-                elevation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(elevation_worker_complete);
-
                 elevation_worker.RunWorkerAsync();
                 BeginStoryboard(elevation_wait);
                 btn_elevationNext.Visibility = Visibility.Hidden;
@@ -480,7 +487,6 @@ namespace DynamicPathPlanner
 
         private void runSimulation()
         {
-            dispatcherTimer.Tick += new EventHandler(simulationTick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
             dispatcherTimer.Start();
         }

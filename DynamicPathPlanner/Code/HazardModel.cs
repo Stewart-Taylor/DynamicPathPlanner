@@ -164,6 +164,10 @@ namespace DynamicPathPlanner.Code
                     {
                         for (int b = 0; b < sectorSize; b++)
                         {
+                            if (tempColor == System.Drawing.Color.Black)
+                            {
+                                int d = 5;
+                            }
                             bMap.SetPixel(slopeX + a, slopeY + b, tempColor);
                         }
                     }

@@ -69,7 +69,7 @@ namespace DynamicPathPlanner.Code
             width = (int)boundsF.Width * sizeof(Pixel);
             if (width % 4 != 0)
             {
-                width = 4 * (width / 4 + 1);
+                width = (int)(4f * ((float)width / 4f + 1f));
             }
             bitmapData =
            bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -89,6 +89,7 @@ namespace DynamicPathPlanner.Code
             p.R = color.R;
             p.G = color.G;
             p.B = color.B;
+
             Pixel* pixel = PixelAt(x, y);
             *pixel = p;
         }
