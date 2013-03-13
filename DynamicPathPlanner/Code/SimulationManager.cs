@@ -42,6 +42,7 @@ namespace DynamicPathPlanner.Code
         private bool stepTraverseStarted = false;
 
         private Vehicle rover;
+        private Vehicle compareRover;
         private int steps;
 
         private int startX;
@@ -57,6 +58,8 @@ namespace DynamicPathPlanner.Code
         private bool pathGenerated = false;
         private bool simulationInProgress = false;
         private bool stepSet = false;
+
+        private float pathLikeness = 0f;
 
         #region GET
 
@@ -105,8 +108,6 @@ namespace DynamicPathPlanner.Code
         }
 
 
-
-
         public void startSimulation()
         {
             startSimulationDSTAR(startX, startY, targetX, targetY);
@@ -132,7 +133,49 @@ namespace DynamicPathPlanner.Code
 
         public void runCompareSimulation()
         {
+            if (rover.reachedTarget())
+            {
+                compareRover = new Vehicle(mapManager);
+                compareRover.fullEnvironment();
+                compareRover.traverseMap(startX, startY, targetX, targetY);
 
+                comparePaths();
+            }
+        }
+
+        private void comparePaths()
+        {
+            int count = 0;
+            int length = compareRover.getPathPoints().Count;
+            List<PathNode> usedPoints = new List<PathNode>();
+
+            foreach (PathNode p in rover.getPathPoints())
+            {
+                foreach (PathNode a in compareRover.getPathPoints())
+                {
+                    bool isUsed = false;
+
+                    foreach (PathNode u in usedPoints)
+                    {
+                        if (u == p)
+                        {
+                            isUsed = true;
+                        }
+                    }
+
+                    if (isUsed == false)
+                    {
+                        if ((p.x == a.x) && (p.x == a.y))
+                        {
+                            count++;
+                            usedPoints.Add(p);
+                        }
+                    }
+                }
+            }
+
+            pathLikeness = (float)count / (float)length;
+            pathLikeness = pathLikeness * 100f;
         }
 
         public void startSimulationKnownMap(int startX, int startY, int endX, int endY)
@@ -582,6 +625,16 @@ namespace DynamicPathPlanner.Code
         public bool getKnownMap()
         {
             return knownMap;
+        }
+
+        public int getOptimalSteps()
+        {
+            return compareRover.getSteps();
+        }
+
+        public float getPathLikeness()
+        {
+            return pathLikeness;
         }
 
     }

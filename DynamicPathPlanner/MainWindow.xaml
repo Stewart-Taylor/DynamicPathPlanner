@@ -949,7 +949,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1020,7 +1020,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1074,13 +1074,10 @@
     					<TextBlock HorizontalAlignment="Left" Margin="70.79,42.308,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     					<Grid HorizontalAlignment="Left" Height="404.305" Margin="0,42.308,0,0" VerticalAlignment="Top" Width="579.136">
     						<Grid.ColumnDefinitions>
-    							<ColumnDefinition Width="0.454*"/>
-    							<ColumnDefinition Width="0.5*"/>
+    							<ColumnDefinition/>
     						</Grid.ColumnDefinitions>
-    						<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="This Simulation Run" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
-    						<TextBlock Margin="7.999,8,0,0" TextWrapping="Wrap" Text="Best" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Grid.Column="1"/>
-    						<TextBlock Margin="7.525,47.64,0,0" TextWrapping="Wrap" Text="Steps: 245" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
-    						<TextBlock Margin="7.525,95.523,0,0" TextWrapping="Wrap" Text="Path Likeness: 44%" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667"/>
+    						<TextBlock x:Name="lbl_resultSteps" Margin="8,8,0,0" TextWrapping="Wrap" Text="Steps:  [Simulation: 345]  [Optimal: 310]" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Width="563.136"/>
+    						<TextBlock x:Name="lbl_resultLikeness" Margin="8,125.055,0,0" TextWrapping="Wrap" Text="Path Likeness: 67%" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Width="563.136"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>

@@ -413,5 +413,81 @@ namespace DynamicPathPlanner
         {
             simulationManager.runCompareSimulation();
         }
+
+        public int getSimulationLikeness()
+        {
+            return 2;
+        }
+
+        public ImageSource getResultsAerial()
+        {
+            Bitmap bitmap = simulationManager.getSkyPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource getResultsElevation()
+        {
+            Bitmap bitmap = simulationManager.getElevationPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource getResultsSlope()
+        {
+            Bitmap bitmap = simulationManager.getSlopePathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource getResultsHazard()
+        {
+            Bitmap bitmap = simulationManager.getHazardPathImage();
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public int getSimulationSteps()
+        {
+            return simulationManager.getSteps();
+        }
+
+        public int getOptimalSteps()
+        {
+            return simulationManager.getOptimalSteps();
+        }
+
+        public float getPathLikeness()
+        {
+            return simulationManager.getPathLikeness();
+        }
     }
 }

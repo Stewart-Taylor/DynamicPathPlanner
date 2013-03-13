@@ -481,5 +481,17 @@ namespace DynamicPathPlanner.Code
             camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
         }
 
+        //Used to give rover full knowledge of enviroment. Used for compare tests
+        public void fullEnvironment()
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    sensorManager.updateOwnLocation(x, y);
+                }
+            }
+        }
+
     }
 }

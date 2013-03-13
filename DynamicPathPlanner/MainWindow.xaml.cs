@@ -4,7 +4,7 @@
  * This class is used to control the interface
  * It mainly controls screen animations and passes commands to the InterfaceManager
  *
- * Last Updated: 02/03/2013
+ * Last Updated: 13/03/2013
 */
 
 using System;
@@ -526,28 +526,31 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isSimulationComplete())
             {
+                interfaceManager.runCompareSimulation();
+                lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]";
+                lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
                 nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
             }
         }
 
         private void btn_resultsSky_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getSimulationAerialImage();
+            img_resultsMain.Source = interfaceManager.getResultsAerial();
         }
 
         private void btn_resultsElevation_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getSimulationElevationImage();
+            interfaceManager.getResultsElevation();
         }
 
         private void btn_resultsSlope_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getSimulationSlopeImage();
+            interfaceManager.getResultsSlope();
         }
 
         private void btn_resultsHazard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getSimulationHazardImage();
+            interfaceManager.getResultsHazard();
         }
 
         private void btn_simulationInstant_Click(object sender, System.Windows.RoutedEventArgs e)
