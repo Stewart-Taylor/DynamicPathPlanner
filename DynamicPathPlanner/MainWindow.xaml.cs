@@ -540,17 +540,17 @@ namespace DynamicPathPlanner
 
         private void btn_resultsElevation_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getResultsElevation();
+            img_resultsMain.Source = interfaceManager.getResultsElevation();
         }
 
         private void btn_resultsSlope_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getResultsSlope();
+            img_resultsMain.Source = interfaceManager.getResultsSlope();
         }
 
         private void btn_resultsHazard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.getResultsHazard();
+            img_resultsMain.Source = interfaceManager.getResultsHazard();
         }
 
         private void btn_simulationInstant_Click(object sender, System.Windows.RoutedEventArgs e)

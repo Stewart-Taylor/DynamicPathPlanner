@@ -367,7 +367,7 @@ namespace DynamicPathPlanner
 
         public ImageSource getSimulationAerialImage()
         {
-            Bitmap bitmap = simulationManager.getSkyPathImage();
+            Bitmap bitmap = simulationManager.getAerialPathImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -421,7 +421,7 @@ namespace DynamicPathPlanner
 
         public ImageSource getResultsAerial()
         {
-            Bitmap bitmap = simulationManager.getSkyPathImage();
+            Bitmap bitmap = simulationManager.getAerialCompareImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -435,7 +435,7 @@ namespace DynamicPathPlanner
 
         public ImageSource getResultsElevation()
         {
-            Bitmap bitmap = simulationManager.getElevationPathImage();
+            Bitmap bitmap = simulationManager.getElevationCompareImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -449,7 +449,7 @@ namespace DynamicPathPlanner
 
         public ImageSource getResultsSlope()
         {
-            Bitmap bitmap = simulationManager.getSlopePathImage();
+            Bitmap bitmap = simulationManager.getSlopeCompareImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
@@ -463,7 +463,7 @@ namespace DynamicPathPlanner
 
         public ImageSource getResultsHazard()
         {
-            Bitmap bitmap = simulationManager.getHazardPathImage();
+            Bitmap bitmap = simulationManager.getHazardCompareImage();
             MemoryStream ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             ms.Position = 0;
