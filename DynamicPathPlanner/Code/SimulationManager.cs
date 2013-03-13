@@ -67,6 +67,9 @@ namespace DynamicPathPlanner.Code
 
         private bool compareCompleted;
 
+        private System.Drawing.Color pathColor = System.Drawing.Color.Blue;
+        private System.Drawing.Color compareColor = System.Drawing.Color.AntiqueWhite;
+
         #region GET
 
         public String getTimeTaken()
@@ -359,7 +362,7 @@ namespace DynamicPathPlanner.Code
 
         public Bitmap getAerialPathImage()
         {
-            if (compareCompleted == true)
+            if (pathGenerated == true)
             {
                 return getSkyPathBitmap();
             }
@@ -477,12 +480,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = p.x * hazardSectorSize;
                     int y = p.y * hazardSectorSize;
 
-                    elevationPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    elevationPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(elevationPathBitmap))
                     {
@@ -509,12 +511,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = p.x * hazardSectorSize;
                     int y = p.y * hazardSectorSize;
 
-                    slopePathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    slopePathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(slopePathBitmap))
                     {
@@ -541,12 +542,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = p.x * hazardSectorSize;
                     int y = p.y * hazardSectorSize;
 
-                    hazardPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    hazardPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(hazardPathBitmap))
                     {
@@ -574,12 +574,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Height)));
 
-                    skyPathBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    skyPathBitmap.SetPixel(x, y, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(skyPathBitmap))
                     {
@@ -607,12 +606,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Height)));
 
-                    aerialCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    aerialCompareBitmap.SetPixel(x, y, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(aerialCompareBitmap))
                     {
@@ -629,12 +627,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Pink;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Height)));
 
-                    aerialCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Pink, 5);
+                    aerialCompareBitmap.SetPixel(x, y, compareColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
 
                     using (var graphics = Graphics.FromImage(aerialCompareBitmap))
                     {
@@ -660,12 +657,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Height)));
 
-                    elevationCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    elevationCompareBitmap.SetPixel(x, y, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(elevationCompareBitmap))
                     {
@@ -682,12 +678,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Pink;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Height)));
 
-                    elevationCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Pink, 5);
+                    elevationCompareBitmap.SetPixel(x, y, compareColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
 
                     using (var graphics = Graphics.FromImage(elevationCompareBitmap))
                     {
@@ -713,12 +708,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Height)));
 
-                    slopeCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    slopeCompareBitmap.SetPixel(x, y, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(slopeCompareBitmap))
                     {
@@ -735,12 +729,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Pink;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Height)));
 
-                    slopeCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Pink, 5);
+                    slopeCompareBitmap.SetPixel(x, y, compareColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
 
                     using (var graphics = Graphics.FromImage(slopeCompareBitmap))
                     {
@@ -768,12 +761,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Height)));
 
-                    hazardCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    hazardCompareBitmap.SetPixel(x, y, pathColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(hazardCompareBitmap))
                     {
@@ -790,12 +782,11 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Pink;
                     int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Width)));
                     int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Height)));
 
-                    hazardCompareBitmap.SetPixel(x, y, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Pink, 5);
+                    hazardCompareBitmap.SetPixel(x, y, compareColor);
+                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
 
                     using (var graphics = Graphics.FromImage(hazardCompareBitmap))
                     {
@@ -853,7 +844,6 @@ namespace DynamicPathPlanner.Code
             {
                 return rover.reachedTarget();
             }
-
             return false;
         }
 
