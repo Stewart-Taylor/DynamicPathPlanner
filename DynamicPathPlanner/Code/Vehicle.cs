@@ -54,6 +54,7 @@ namespace DynamicPathPlanner.Code
 
         private bool roverCamEnabled = false;
 
+
         #region GET
 
         public int getSteps()
@@ -139,9 +140,25 @@ namespace DynamicPathPlanner.Code
             positionY = startY;
 
             map = new VehicleHazardMap(width, height);
+            map.setHazardMap(startX, startY);
             atTarget = false;
 
             pathBitmap = new Bitmap(map.getWidth(), map.getHeight());
+
+        /*    BitmapHelper b = new BitmapHelper(pathBitmap);
+            b.LockBitmap();
+            for (int x = 0; x < map.getWidth(); x++)
+            {
+                for (int y = 0; y < map.getHeight(); y++)
+                {
+
+                            System.Drawing.Color tempColor = getVehicleColorValue(map.getValue(x, y), x, y);
+                            b.SetPixel(x, y, tempColor);
+                }
+            }
+            b.UnlockBitmap();
+            pathBitmap = b.Bitmap;
+         */ 
         }
 
 
@@ -392,17 +409,24 @@ namespace DynamicPathPlanner.Code
 
         public void generatePathImage()
         {
-                pathBitmap = new Bitmap(map.getWidth(), map.getHeight());
+
+             pathBitmap = new Bitmap(map.getAdjustWidth(), map.getAdjustHeight());
 
                 BitmapHelper b = new BitmapHelper(pathBitmap);
                 b.LockBitmap();
 
-                for (int x = 1; x < map.getWidth() - 1; x++)
+                for (int x = map.getMinX(); x < map.getMaxX(); x++)
                 {
-                    for (int y = 1; y < map.getWidth() - 1; y++)
+                    for (int y = map.getMinY(); y < map.getMaxY(); y++)
                     {
-                        System.Drawing.Color tempColor = getVehicleColorValue(map.getValue(x,y), x, y);
-                        b.SetPixel(x, y, tempColor);
+                        float t = (float)(x - map.getMinX()) / map.getAdjustWidth();
+                        int a = (int)Math.Round((double)t * (double)map.getAdjustWidth());
+
+                        t = (float)(y - map.getMinY()) / map.getAdjustHeight();
+                        int ba = (int)Math.Round((double)t * (double)map.getAdjustHeight());
+
+                        System.Drawing.Color tempColor = getVehicleColorValue(map.getValue(x, y), x, y);
+                        b.SetPixel(a, ba, tempColor);
                     }
                 }
 

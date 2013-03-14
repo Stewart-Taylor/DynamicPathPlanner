@@ -75,7 +75,7 @@ namespace DynamicPathPlanner.Code
                 else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(positionX, positionY); }
             }
 
-            areaScan(positionX, positionY, 3);
+            areaScan(positionX, positionY, 5);
         }
 
         private void areaScan(int positionX, int positionY, int size)
