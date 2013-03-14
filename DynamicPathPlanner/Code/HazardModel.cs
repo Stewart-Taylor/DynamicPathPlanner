@@ -134,7 +134,7 @@ namespace DynamicPathPlanner.Code
 
         private int getHazardValue(double value)
         {
-            if (value <= 0.7)
+            if (value <= 0.8)
             {
                 return 1;
             }

@@ -296,8 +296,23 @@ namespace DynamicPathPlanner.Code
 
         private int estimateDistance(int currentX, int currentY, Node target)
         {
+            int xDist = Math.Abs(currentX - target.x);
+            int yDist = Math.Abs(currentY - target.y);
 
-            return (Math.Abs(currentX- target.x) + Math.Abs(currentY - target.y));
+            if(xDist > yDist)
+            {
+               return (int)(1.4f*yDist + (xDist-yDist));
+            } 
+            else 
+            {
+               return  (int)(1.4f*xDist + (yDist-xDist));
+            }
+
+
+
+
+
+          //  return (Math.Abs(currentX- target.x) + Math.Abs(currentY - target.y));
         }
 
 

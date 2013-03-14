@@ -138,14 +138,15 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-        /*   interfaceManager.connectToPANGU();
+      /*     interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
            interfaceManager.generateElevationModel(0.1f, 1024);
            interfaceManager.generateSlopeModel("HORN");
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-            */
+           
+       */ 
 
             interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
@@ -501,7 +502,7 @@ namespace DynamicPathPlanner
                 txt_startX.Text = ((int)x).ToString();
                 txt_startY.Text = ((int)y).ToString();
 
-                interfaceManager.updateRoverSlideStartPosition((int)x, (int)y);
+              //  interfaceManager.updateRoverSlideStartPosition((int)x, (int)y);
             }
             else if (e.RightButton == MouseButtonState.Pressed)
             {
@@ -511,7 +512,7 @@ namespace DynamicPathPlanner
                 txt_targetX.Text = ((int)x).ToString();
                 txt_targetY.Text = ((int)y).ToString();
 
-                interfaceManager.updateRoverSlideTargetPosition((int)x, (int)y);
+              //  interfaceManager.updateRoverSlideTargetPosition((int)x, (int)y);
             }
         }
 

@@ -218,6 +218,10 @@ namespace DynamicPathPlanner
             {
                 if( (x < navigationMapManager.getHazardWidth()) && (y < navigationMapManager.getHazardHeight()))
                 {
+
+                    BitmapHelper bH = new BitmapHelper(roverSlideBitmap);
+                    bH.LockBitmap();
+
                     x = x * navigationMapManager.getHazardSectorSize();
                     y = y * navigationMapManager.getHazardSectorSize();
 
@@ -231,12 +235,14 @@ namespace DynamicPathPlanner
                             {
                                 if ((a < roverSlideBitmap.Width) && (b < roverSlideBitmap.Height))
                                 {
-                                    roverSlideBitmap.SetPixel(a, b, color);
+                                    bH.SetPixel(a, b, color);
                                 }
                             }
                         }
 
                     }
+                    bH.UnlockBitmap();
+                    roverSlideBitmap = bH.Bitmap;
                 }
             }
         }
@@ -273,6 +279,10 @@ namespace DynamicPathPlanner
             {
                 if ((x < navigationMapManager.getHazardWidth()) && (y < navigationMapManager.getHazardHeight()))
                 {
+
+                    BitmapHelper bH = new BitmapHelper(roverSlideBitmap);
+                    bH.LockBitmap();
+
                     x = x * navigationMapManager.getHazardSectorSize();
                     y = y * navigationMapManager.getHazardSectorSize();
 
@@ -286,11 +296,15 @@ namespace DynamicPathPlanner
                             {
                                 if ((a < roverSlideBitmap.Width) && (b < roverSlideBitmap.Height))
                                 {
-                                    roverSlideBitmap.SetPixel(a, b, color);
+                                    bH.SetPixel(a, b, color);
                                 }
                             }
                         }
                     }
+
+                    bH.UnlockBitmap();
+                    roverSlideBitmap = bH.Bitmap;
+
                 }
             }
         }

@@ -37,7 +37,7 @@ namespace DynamicPathPlanner.Code
         private int targetY;
 
         private int steps = 0;
-        private int stepLimit = 1600;
+        private int stepLimit = 2600;
         private bool atTarget = false;
 
         private Bitmap pathBitmap;
@@ -304,7 +304,7 @@ namespace DynamicPathPlanner.Code
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
                     //    knownMap[nextNode.x, nextNode.y] += 1;
-                    //    map.setNode(nextNode.x, nextNode.y
+                        map.setNode(nextNode.x, nextNode.y, 40);
 
                         previousX = positionX;
                         previousY = positionY;
@@ -382,6 +382,7 @@ namespace DynamicPathPlanner.Code
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
                        // knownMap[nextNode.x, nextNode.y] += 1;
+                        map.setNode(nextNode.x, nextNode.y, 40);
 
                         previousX = positionX;
                         previousY = positionY;
