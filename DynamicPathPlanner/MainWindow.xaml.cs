@@ -56,7 +56,7 @@ namespace DynamicPathPlanner
         private int hazardSectorSize;
         private String slopeType;
 
-        private int simulationInterval = 700;
+        private int simulationInterval = 1;
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
@@ -140,11 +140,21 @@ namespace DynamicPathPlanner
         {
             interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
-            interfaceManager.generateElevationModel(0.1f, 1024);
-            interfaceManager.generateSlopeModel("HORN");
-            interfaceManager.generateHazardModel(20);
+           interfaceManager.generateElevationModel(0.1f, 1024);
+           interfaceManager.generateSlopeModel("HORN");
+           interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
+
+
+    /*        interfaceManager.connectToPANGU();
+            interfaceManager.setEnviornmentString("Moon.pan");
+            interfaceManager.generateElevationModel(0.1f, 1024);
+            interfaceManager.generateSlopeModel("HORN");
+            interfaceManager.generateHazardModel(1);
+            interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
+            nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
+     */
         }
 
         private void startSlideIn_Completed(object sender, EventArgs e)

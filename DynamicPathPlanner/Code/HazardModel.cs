@@ -24,7 +24,7 @@ namespace DynamicPathPlanner.Code
     {
         private int sectorSize;
 
-        private double[,] hazardModel;
+        private int[,] hazardModel;
         public double[,] hazardModelImage;  // REMOVE
         private double[,] slopeModel;
 
@@ -37,7 +37,7 @@ namespace DynamicPathPlanner.Code
 
         #region GET
 
-        public double[,] getModel()
+        public int[,] getModel()
         {
             return hazardModel;
         }
@@ -90,7 +90,8 @@ namespace DynamicPathPlanner.Code
         {
             width = slopeWidth / sectorSize;
             height = slopeHeight / sectorSize;
-            hazardModel = new double[width, height];
+            hazardModel = new int[width, height];
+           double[,] tempModel = new double[width, height];
             hazardModelImage = new double[width, height];
 
             int slopeX = 0;
@@ -100,15 +101,15 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < height; y++)
                 {
-                    hazardModel[x, y] = slopeModel[slopeX, slopeY];
+                    tempModel[x, y] = slopeModel[slopeX, slopeY];
 
                     for (int a = 0; a < sectorSize; a++)
                     {
                         for (int b = 0; b < sectorSize; b++)
                         {
-                            if (hazardModel[x, y] < slopeModel[slopeX + a, slopeY + b])
+                            if (tempModel[x, y] < slopeModel[slopeX + a, slopeY + b])
                             {
-                                hazardModel[x, y] = slopeModel[slopeX + a, slopeY + b];
+                                tempModel[x, y] = slopeModel[slopeX + a, slopeY + b];
                             }
                         }
                     }
@@ -123,8 +124,8 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < height; y++)
                 {
-                    hazardModelImage[x, y] = hazardModel[x, y];
-                    hazardModel[x, y] = getHazardValue(hazardModel[x, y]);
+                    hazardModelImage[x, y] = tempModel[x, y];
+                    hazardModel[x, y] = getHazardValue(tempModel[x, y]);
                 }
             }
 

@@ -18,7 +18,7 @@ namespace DynamicPathPlanner.Code
     {
         private NavigationMapManager navigationMap;
         private Vehicle vehicle;
-        private double[,] realMap;
+        private int[,] realMap;
 
         private int width;
         private int height;
@@ -91,11 +91,11 @@ namespace DynamicPathPlanner.Code
 
         private void updateNode(int x, int y)
         {
-            if ((x > 0) && (y > 0))
+            if ((x >= 0) && (y >= 0))
             {
-                if ((x < width) && (y < height))
+                if ((x <= width) && (y <= height))
                 {
-                    double value = realMap[x, y];
+                    int value = realMap[x, y];
                     vehicle.setNode(x, y, value);
                 }
             }

@@ -21,11 +21,10 @@ namespace DynamicPathPlanner.Code
     class Vehicle
     {
         private VehicleSensorManager sensorManager;
+        private VehicleHazardMap map;
 
         private List<PathNode> takenPath = new List<PathNode>();
         private List<PathNode> givenPath = new List<PathNode>();
-
-        private double[,] knownMap;
 
         private int positionX;
         private int positionY;
@@ -52,6 +51,8 @@ namespace DynamicPathPlanner.Code
 
         private int cameraPitch = -10;
         private int cameraHeight = 17;
+
+        private bool roverCamEnabled = false;
 
         #region GET
 
@@ -97,14 +98,19 @@ namespace DynamicPathPlanner.Code
 
         #region SET
 
+        public void setRoverCam(bool isEnabled)
+        {
+            roverCamEnabled = isEnabled;
+        }
+
         public void setStepLimit(int limit)
         {
             stepLimit = limit;
         }
 
-        public void setNode(int x, int y, double value)
+        public void setNode(int x, int y, int value)
         {
-            knownMap[x, y] = value;
+            map.setNode(x, y, value);
         }
 
 
@@ -117,7 +123,7 @@ namespace DynamicPathPlanner.Code
             distanceStep = mapManager.getDistanceStep();
             width = mapManager.getHazardModel().GetLength(0);
             height = mapManager.getHazardModel().GetLength(1);
-            knownMap = new double[width, height]; // find another way to get map dimensions dynamically
+            map = new VehicleHazardMap(width, height);
         }
 
         public void startTraverse(int startXt, int startYt, int endXt, int endYt)
@@ -132,10 +138,10 @@ namespace DynamicPathPlanner.Code
             positionX = startX;
             positionY = startY;
 
-            knownMap = new double[width, height];
+            map = new VehicleHazardMap(width, height);
             atTarget = false;
 
-            pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
+            pathBitmap = new Bitmap(map.getWidth(), map.getHeight());
         }
 
 
@@ -157,7 +163,7 @@ namespace DynamicPathPlanner.Code
 
             do
             {
-                search = new A_Star(knownMap, positionX, positionY, targetX, targetY);
+                search = new A_Star(map.getMap(), positionX, positionY, targetX, targetY);
                 givenPath = search.getPath();
 
                 do
@@ -207,6 +213,31 @@ namespace DynamicPathPlanner.Code
             } while (atTarget == false);
         }
 
+
+        public void traverseCompare(int startXt, int startYt, int endXt, int endYt)
+        {
+            startX = startXt;
+            startY = startYt;
+            targetX = endXt;
+            targetY = endYt;
+
+            positionX = startX;
+            positionY = startY;
+
+            atTarget = false;
+
+            SearchAlgorithm search;
+
+
+            search = new A_Star(map.getMap(), positionX, positionY, targetX, targetY);
+            givenPath = search.getPath();
+
+            takenPath = givenPath;
+            atTarget = true;
+
+        }
+
+
         public void traverseMapDstar(int startXt, int startYt, int endXt, int endYt)
         {
             steps = 0;
@@ -221,12 +252,12 @@ namespace DynamicPathPlanner.Code
 
              atTarget = false;
 
-            D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
+            D_Star search = new D_Star(map.getMap(), positionX, positionY, targetX, targetY);
 
             do
             {
                 search.updateStart(positionX, positionY);
-                search.replan(knownMap);
+                search.replan(map.getMap());
 
                 givenPath = search.getPath();
 
@@ -255,6 +286,9 @@ namespace DynamicPathPlanner.Code
 
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
+                    //    knownMap[nextNode.x, nextNode.y] += 1;
+                    //    map.setNode(nextNode.x, nextNode.y
+
                         previousX = positionX;
                         previousY = positionY;
 
@@ -288,9 +322,9 @@ namespace DynamicPathPlanner.Code
 
                 if (givenPath.Count == 0)
                 {
-                    D_Star search = new D_Star(knownMap, positionX, positionY, targetX, targetY);
+                    D_Star search = new D_Star(map.getMap(), positionX, positionY, targetX, targetY);
                     search.updateStart(positionX, positionY);
-                    search.replan(knownMap);
+                    search.replan(map.getMap());
                     givenPath = search.getPath();
                 }
 
@@ -330,6 +364,8 @@ namespace DynamicPathPlanner.Code
 
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
+                       // knownMap[nextNode.x, nextNode.y] += 1;
+
                         previousX = positionX;
                         previousY = positionY;
 
@@ -342,7 +378,7 @@ namespace DynamicPathPlanner.Code
                     else
                     {
                         givenPath.Clear();
-                        knownMap[nextNode.x, nextNode.y] = 99999;
+                        map.setNode(nextNode.x, nextNode.y, 99999);
                         sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
                         sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                     }
@@ -356,16 +392,23 @@ namespace DynamicPathPlanner.Code
 
         public void generatePathImage()
         {
-            pathBitmap = new Bitmap(knownMap.GetLength(0), knownMap.GetLength(1));
+                pathBitmap = new Bitmap(map.getWidth(), map.getHeight());
 
-            for (int x = 0; x < knownMap.GetLength(0); x++)
-            {
-                for (int y = 0; y < knownMap.GetLength(1); y++)
+                BitmapHelper b = new BitmapHelper(pathBitmap);
+                b.LockBitmap();
+
+                for (int x = 1; x < map.getWidth() - 1; x++)
                 {
-                    System.Drawing.Color tempColor = getVehicleColorValue(knownMap[x, y], x, y);
-                    pathBitmap.SetPixel(x, y, tempColor);
+                    for (int y = 1; y < map.getWidth() - 1; y++)
+                    {
+                        System.Drawing.Color tempColor = getVehicleColorValue(map.getValue(x,y), x, y);
+                        b.SetPixel(x, y, tempColor);
+                    }
                 }
-            }
+
+                b.UnlockBitmap();
+
+                pathBitmap = b.Bitmap;
         }
 
         private System.Drawing.Color getVehicleColorValue(double gradient, int x, int y)
@@ -465,20 +508,23 @@ namespace DynamicPathPlanner.Code
 
         private void generateRoverImage()
         {
-            int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
-            int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
-            int z = cameraHeight;
-            float yaw = 0;
-            int pitch = cameraPitch;
-            int roll = 0;
+            if (roverCamEnabled == true)
+            {
+                int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
+                int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
+                int z = cameraHeight;
+                float yaw = 0;
+                int pitch = cameraPitch;
+                int roll = 0;
 
-            float deltaX = (float)positionX - (float)previousX;
-            float deltaY = (float)positionY - (float)previousY;
+                float deltaX = (float)positionX - (float)previousX;
+                float deltaY = (float)positionY - (float)previousY;
 
-            yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
-            yaw -= 45;
+                yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
+                yaw -= 45;
 
-            camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
+                camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
+            }
         }
 
         //Used to give rover full knowledge of enviroment. Used for compare tests

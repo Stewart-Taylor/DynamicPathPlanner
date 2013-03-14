@@ -64,7 +64,7 @@ namespace DynamicPathPlanner.Code
             return areaSize;
         }
 
-        public double[,] getHazardModel()
+        public int[,] getHazardModel()
         {
             if (hazardModel == null)
             {

@@ -99,6 +99,7 @@
     <Compile Include="Code\Slope\SlopeMax.cs" />
     <Compile Include="Code\SlopeModel.cs" />
     <Compile Include="Code\Vehicle.cs" />
+    <Compile Include="Code\VehicleHazardMap.cs" />
     <Compile Include="Code\VehicleSensorManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

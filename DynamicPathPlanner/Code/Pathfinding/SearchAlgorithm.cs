@@ -9,14 +9,14 @@ namespace DynamicPathPlanner.Code
     {
         protected List<PathNode> pathNodes = new List<PathNode>();
 
-        protected double[,] grid;
+        protected int[,] grid;
         protected int startX;
         protected int startY;
         protected int targetX;
         protected int targetY;
 
 
-        public SearchAlgorithm(double[,] grid, int startX, int startY, int targetX, int targetY)
+        public SearchAlgorithm(int[,] grid, int startX, int startY, int targetX, int targetY)
         {
 
         }

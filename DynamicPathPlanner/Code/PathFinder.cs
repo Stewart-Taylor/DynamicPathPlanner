@@ -25,7 +25,7 @@ namespace DynamicPathPlanner.Code
 
 
         private Bitmap pathBitmap;
-        private double[,] hazardModel;
+        private int[,] hazardModel;
         private double[,] hazardImageModel;
 
         private List<PathNode> pathNodes = new List<PathNode>();
@@ -41,7 +41,7 @@ namespace DynamicPathPlanner.Code
             return pathNodes.Count;
         }
 
-        public Pathfinder(double[,] hazardModelT, double[,] hazardImageModelT, int startXT, int startYT, int targetXT, int targetYT)
+        public Pathfinder(int[,] hazardModelT, double[,] hazardImageModelT, int startXT, int startYT, int targetXT, int targetYT)
         {
             hazardModel = hazardModelT;
             hazardImageModel = hazardImageModelT;

@@ -28,7 +28,7 @@ namespace DynamicPathPlanner.Code
         private Node current;
         private Node target;
 
-        public D_Star(double[,] gridT, int startXT, int startYT, int targetXT, int targetYT)
+        public D_Star(int[,] gridT, int startXT, int startYT, int targetXT, int targetYT)
             : base(gridT, startXT, startYT, targetXT, targetYT)
         {
             grid = gridT;
@@ -41,6 +41,7 @@ namespace DynamicPathPlanner.Code
             target = new Node();
             target.x = targetX;
             target.y = targetY;
+
         }
 
 
@@ -51,10 +52,10 @@ namespace DynamicPathPlanner.Code
             n.y = y;
 
             hazard.Add(n);
-
         }
 
-        public void replan(double[,] gridT)
+
+        public void replan(int[,] gridT)
         {
             grid = gridT;
 

@@ -27,7 +27,7 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        public A_Star(double[,] gridT, int startXT, int startYT, int targetXT, int targetYT)
+        public A_Star(int[,] gridT, int startXT, int startYT, int targetXT, int targetYT)
             : base(gridT, startXT, startYT, targetXT, targetYT)
         {
             grid = gridT;

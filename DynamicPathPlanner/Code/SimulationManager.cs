@@ -146,7 +146,7 @@ namespace DynamicPathPlanner.Code
             {
                 compareRover = new Vehicle(mapManager);
                 compareRover.fullEnvironment();
-                compareRover.traverseMap(startX, startY, targetX, targetY);
+                compareRover.traverseCompare(startX, startY, targetX, targetY);
 
                 comparePaths();
                 compareCompleted = true;
@@ -879,7 +879,7 @@ namespace DynamicPathPlanner.Code
 
         public int getOptimalSteps()
         {
-            return compareRover.getSteps();
+            return compareRover.getPathPoints().Count;
         }
 
         public float getPathLikeness()
