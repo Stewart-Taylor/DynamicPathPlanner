@@ -225,7 +225,7 @@ namespace DynamicPathPlanner
                     x = x * navigationMapManager.getHazardSectorSize();
                     y = y * navigationMapManager.getHazardSectorSize();
 
-                    int size = 10;
+                    int size = (int)((float)navigationMapManager.getAreaSize() * 0.02f);
                     System.Drawing.Color color = System.Drawing.Color.Blue;
                     for (int a = (x - (size / 2)); a < (x + (size / 2)); a++)
                     {
@@ -286,7 +286,7 @@ namespace DynamicPathPlanner
                     x = x * navigationMapManager.getHazardSectorSize();
                     y = y * navigationMapManager.getHazardSectorSize();
 
-                    int size = 10;
+                    int size =  (int)((float)navigationMapManager.getAreaSize() * 0.02f);
                     System.Drawing.Color color = System.Drawing.Color.BlueViolet;
                     for (int a = (x - (size / 2)); a < (x + (size / 2)); a++)
                     {

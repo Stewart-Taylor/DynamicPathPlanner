@@ -150,7 +150,7 @@ namespace DynamicPathPlanner
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
            
        
-            /*
+           /*
             interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.generateElevationModel(0.1f, 1024);
@@ -158,7 +158,7 @@ namespace DynamicPathPlanner
             interfaceManager.generateHazardModel(1);
             interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-    */
+   */
         }
 
         private void startSlideIn_Completed(object sender, EventArgs e)

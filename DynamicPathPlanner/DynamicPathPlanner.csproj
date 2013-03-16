@@ -81,10 +81,8 @@
     <Compile Include="Code\ElevationLoader.cs" />
     <Compile Include="Code\ElevationModel.cs" />
     <Compile Include="Code\HazardModel.cs" />
-    <Compile Include="Code\HornSlope.cs" />
     <Compile Include="Code\InterfaceManager.cs" />
     <Compile Include="Code\LogManager.cs" />
-    <Compile Include="Code\MaxSlope.cs" />
     <Compile Include="Code\NavigationMapManager.cs" />
     <Compile Include="Code\PANGU_Connector.cs" />
     <Compile Include="Code\PANGU_Manager.cs" />
