@@ -4,7 +4,7 @@
  * This class manages the system sensors
  * It allows the vehicle to simulate how it would obtain data from its environment
  *
- * Last Updated: 12/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

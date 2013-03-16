@@ -1,9 +1,10 @@
 ﻿/*      MainWindow Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
- * This class is used to control the interface
+ * This class is used to control the Main Interface
  * It mainly controls screen animations and passes commands to the InterfaceManager
- *
+ * It also handles how real time simulations are controlled e.g pause,speed
+ * 
  * Last Updated: 16/03/2013
 */
 

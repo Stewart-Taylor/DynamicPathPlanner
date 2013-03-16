@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*      AboutWindow Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to control the about interface
+ *
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -12,16 +20,13 @@ using System.Windows.Shapes;
 
 namespace DynamicPathPlanner
 {
-	/// <summary>
-	/// Interaction logic for About.xaml
-	/// </summary>
 	public partial class About : Window
 	{
 		public About()
 		{
 			this.InitializeComponent();
 			
-			// Insert code required on object creation below this point.
+			
 		}
 	}
 }
