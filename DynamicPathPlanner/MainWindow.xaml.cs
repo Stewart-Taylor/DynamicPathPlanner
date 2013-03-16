@@ -4,7 +4,7 @@
  * This class is used to control the interface
  * It mainly controls screen animations and passes commands to the InterfaceManager
  *
- * Last Updated: 13/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;
@@ -61,6 +61,8 @@ namespace DynamicPathPlanner
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         private ImageSource loadImage;
+
+        private bool simulationRunning = false;
 
         public MainWindow()
         {
@@ -138,7 +140,7 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-      /*     interfaceManager.connectToPANGU();
+           interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
            interfaceManager.generateElevationModel(0.1f, 1024);
            interfaceManager.generateSlopeModel("HORN");
@@ -146,8 +148,8 @@ namespace DynamicPathPlanner
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
            
-       */ 
-
+       
+            /*
             interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.generateElevationModel(0.1f, 1024);
@@ -155,7 +157,7 @@ namespace DynamicPathPlanner
             interfaceManager.generateHazardModel(1);
             interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-    
+    */
         }
 
         private void startSlideIn_Completed(object sender, EventArgs e)
@@ -488,8 +490,16 @@ namespace DynamicPathPlanner
 
         private void runSimulation()
         {
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
-            dispatcherTimer.Start();
+            if (simulationRunning == false)
+            {
+                simulationRunning = true;
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
+                dispatcherTimer.Start();
+            }
+            else
+            {
+                simulationRunning = false;
+            }
         }
 
         private void img_roverSlide_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -517,21 +527,6 @@ namespace DynamicPathPlanner
         }
 
 
-        private void men_about_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Window aboutWindow = new About();
-            aboutWindow.Show(); 
-        }
-
-        private void men_new_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            applicationSetUp();
-        }
-
-        private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
         private void btn_simulationNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -570,6 +565,27 @@ namespace DynamicPathPlanner
             img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
             img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
         }
+
+
+        #region MENU
+
+        private void men_about_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Window aboutWindow = new About();
+            aboutWindow.Show();
+        }
+
+        private void men_new_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            applicationSetUp();
+        }
+
+        private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
 
     }
 }

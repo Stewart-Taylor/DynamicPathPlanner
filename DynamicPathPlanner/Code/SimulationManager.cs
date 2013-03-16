@@ -882,9 +882,9 @@ namespace DynamicPathPlanner.Code
             return compareRover.getPathPoints().Count;
         }
 
-        public float getPathLikeness()
+        public int getPathLikeness()
         {
-            return pathLikeness;
+            return (int)pathLikeness;
         }
 
     }
