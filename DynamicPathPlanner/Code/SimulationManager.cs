@@ -71,6 +71,8 @@ namespace DynamicPathPlanner.Code
         private System.Drawing.Color pathColor = System.Drawing.Color.Blue;
         private System.Drawing.Color compareColor = System.Drawing.Color.AntiqueWhite;
         private System.Drawing.Color compareDColor = System.Drawing.Color.RosyBrown;
+        private System.Drawing.Color startColor = System.Drawing.Color.MediumAquamarine;
+        private System.Drawing.Color targetColor = System.Drawing.Color.MediumAquamarine;
 
         #region GET
 
@@ -83,6 +85,245 @@ namespace DynamicPathPlanner.Code
         {
             return steps;
         }
+
+        public Bitmap getElevationPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getElevationPathBitmap();
+            }
+            return elevationBitmap;
+        }
+
+        public Bitmap getSlopePathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getSlopePathBitmap();
+            }
+            return slopeBitmap;
+        }
+
+        public Bitmap getHazardPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getHazardPathBitmap();
+            }
+            return hazardBitmap;
+        }
+
+        public Bitmap getComboPathImage()
+        {
+            comboPathBitmap = null;
+            if (pathGenerated == true)
+            {
+                return getComboPathBitmap();
+            }
+            return elevationBitmap;
+        }
+
+        public Bitmap getAerialPathImage()
+        {
+            if (pathGenerated == true)
+            {
+                return getSkyPathBitmap();
+            }
+            return skyBitmap;
+        }
+
+        public Bitmap getAerialCompareImage()
+        {
+            if (compareCompleted == true)
+            {
+                return getAerialCompareBitmap();
+            }
+            return skyBitmap;
+        }
+
+        public Bitmap getElevationCompareImage()
+        {
+            if (compareCompleted == true)
+            {
+                return getElevationCompareBitmap();
+            }
+            return elevationBitmap;
+        }
+
+        public Bitmap getSlopeCompareImage()
+        {
+            if (compareCompleted == true)
+            {
+                return getSlopeCompareBitmap();
+            }
+            return slopeBitmap;
+        }
+
+        public Bitmap getHazardCompareImage()
+        {
+            if (compareCompleted == true)
+            {
+                return getHazardCompareBitmap();
+            }
+            return hazardBitmap;
+        }
+
+        public List<PathNode> getPathModel()
+        {
+            return pathfinder.getPath();
+        }
+
+        public ImageSource getSlopeModelImage()
+        {
+            return slopeModel.getImageSource();
+        }
+
+        public ImageSource getHazardModelImage()
+        {
+            return hazardModel.getImageSource();
+        }
+
+        public ImageSource getPathImage()
+        {
+            return pathfinder.getPathImage();
+        }
+
+        public ImageSource getVehicleImage()
+        {
+            return imageSource;
+        }
+
+        public ImageSource getVehicleInternalMapImage()
+        {
+            return rover.getPathImage();
+        }
+
+        public ImageSource getRoverCamImage()
+        {
+            return rover.getRoverCam();
+        }
+
+        public bool isComplete()
+        {
+            if (rover != null)
+            {
+                return rover.reachedTarget();
+            }
+            return false;
+        }
+
+        public int getStartX()
+        {
+            return startX;
+        }
+
+        public int getStartY()
+        {
+            return startY;
+        }
+
+        public int getTargetX()
+        {
+            return targetX;
+        }
+
+        public int getTargetY()
+        {
+            return targetY;
+        }
+
+        public String getAlgorithm()
+        {
+            return searchAlgortihm;
+        }
+
+        public bool getKnownMap()
+        {
+            return knownMap;
+        }
+
+        public int getOptimalSteps()
+        {
+            return compareRover.getPathPoints().Count;
+        }
+
+        public int getDKnownSteps()
+        {
+            return compareRoverD.getPathPoints().Count;
+        }
+
+        public int getPathLikeness()
+        {
+            return (int)pathLikeness;
+        }
+
+        private Bitmap getElevationCompareBitmap()
+        {
+            if (elevationCompareBitmap == null)
+            {
+                elevationCompareBitmap =generateCompareBitmap(elevationBitmap);
+            }
+
+            return elevationCompareBitmap;
+        }
+
+        private Bitmap getSlopeCompareBitmap()
+        {
+            if (slopeCompareBitmap == null)
+            {
+                slopeCompareBitmap = generateCompareBitmap(slopeBitmap);
+            }
+
+            return slopeCompareBitmap;
+        }
+
+
+        private Bitmap getHazardCompareBitmap()
+        {
+            if (hazardCompareBitmap == null)
+            {
+                hazardCompareBitmap = generateCompareBitmap(hazardBitmap);
+            }
+
+            return hazardCompareBitmap;
+        }
+
+        private Bitmap getElevationPathBitmap()
+        {
+            if (elevationPathBitmap == null)
+            {
+                elevationPathBitmap = generatePathBitmap(elevationBitmap);
+            }
+
+            return elevationPathBitmap;
+        }
+
+        private Bitmap getSlopePathBitmap()
+        {
+            if (slopePathBitmap == null)
+            {
+                slopePathBitmap = generatePathBitmap(slopeBitmap);
+            }
+
+            return slopePathBitmap;
+        }
+
+        private Bitmap getHazardPathBitmap()
+        {
+            if (hazardPathBitmap == null)
+            {
+                hazardPathBitmap = generatePathBitmap(hazardBitmap);
+            }
+
+            return hazardPathBitmap;
+        }
+
+        #endregion
+
+
+        #region SET
+
+
 
         #endregion
 
@@ -329,87 +570,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public Bitmap getElevationPathImage()
-        {
-            if( pathGenerated == true)
-            {
-                return getElevationPathBitmap();
-            }
-            return elevationBitmap;
-        }
 
-        public Bitmap getSlopePathImage()
-        {
-            if (pathGenerated == true)
-            {
-                return getSlopePathBitmap();
-            }
-            return slopeBitmap;
-        }
-
-        public Bitmap getHazardPathImage()
-        {
-            if (pathGenerated == true)
-            {
-                return getHazardPathBitmap();
-            }
-            return hazardBitmap;
-        }
-
-        public Bitmap getComboPathImage()
-        {
-            comboPathBitmap = null;
-            if (pathGenerated == true)
-            {
-                return getComboPathBitmap();
-            }
-            return elevationBitmap;
-        }
-
-        public Bitmap getAerialPathImage()
-        {
-            if (pathGenerated == true)
-            {
-                return getSkyPathBitmap();
-            }
-            return skyBitmap;
-        }
-
-        public Bitmap getAerialCompareImage()
-        {
-            if (compareCompleted == true)
-            {
-                return getAerialCompareBitmap();
-            }
-            return skyBitmap;
-        }
-
-        public Bitmap getElevationCompareImage()
-        {
-            if (compareCompleted == true)
-            {
-                return getElevationCompareBitmap();
-            }
-            return elevationBitmap;
-        }
-
-        public Bitmap getSlopeCompareImage()
-        {
-            if (compareCompleted == true)
-            {
-                return getSlopeCompareBitmap();
-            }
-            return slopeBitmap;
-        }
-
-        public Bitmap getHazardCompareImage()
-        {
-            if (compareCompleted == true)
-            {
-                return getHazardCompareBitmap();
-            }
-            return hazardBitmap;
-        }
 
         private Bitmap getComboPathBitmap()
         {
@@ -475,11 +636,10 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        private Bitmap getElevationPathBitmap()
+
+        private Bitmap generatePathBitmap(Bitmap oBitmap)
         {
-            if (elevationPathBitmap == null)
-            {
-                elevationPathBitmap = (Bitmap)elevationBitmap.Clone();
+                Bitmap pathBitmap = (Bitmap)oBitmap.Clone();
 
                 int xPrev = -1;
                 int yPrev = -1;
@@ -489,78 +649,10 @@ namespace DynamicPathPlanner.Code
                     int x = p.x * hazardSectorSize;
                     int y = p.y * hazardSectorSize;
 
-                    elevationPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
+                    pathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
-                    using (var graphics = Graphics.FromImage(elevationPathBitmap))
-                    {
-                        if( (xPrev != -1) && (yPrev != -1))
-                        graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                int sX = startX * hazardSectorSize;
-                int sY = startY * hazardSectorSize;
-                int tX = targetX * hazardSectorSize;
-                int tY = targetY * hazardSectorSize;
-
-                int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
-                for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
-                {
-                    for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < elevationPathBitmap.Width) && (b < elevationPathBitmap.Height))
-                            {
-                                elevationPathBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-                 size = (int)((float)areaSize * 0.02f);
-                 color = System.Drawing.Color.BlueViolet;
-                 for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
-                {
-                    for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < elevationPathBitmap.Width) && (b < elevationPathBitmap.Height))
-                            {
-                                elevationPathBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return elevationPathBitmap;
-        }
-
-        private Bitmap getSlopePathBitmap()
-        {
-            if (slopePathBitmap == null)
-            {
-                slopePathBitmap = (Bitmap)slopeBitmap.Clone();
-
-                int xPrev = -1;
-                int yPrev = -1;
-
-                foreach (PathNode p in rover.getPathPoints())
-                {
-                    int x = p.x * hazardSectorSize;
-                    int y = p.y * hazardSectorSize;
-
-                    slopePathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
-
-                    using (var graphics = Graphics.FromImage(slopePathBitmap))
+                    using (var graphics = Graphics.FromImage(pathBitmap))
                     {
                         if ((xPrev != -1) && (yPrev != -1))
                             graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
@@ -583,9 +675,9 @@ namespace DynamicPathPlanner.Code
                     {
                         if ((a > 0) && (b > 0))
                         {
-                            if ((a < slopePathBitmap.Width) && (b < slopePathBitmap.Height))
+                            if ((a < pathBitmap.Width) && (b < pathBitmap.Height))
                             {
-                                slopePathBitmap.SetPixel(a, b, color);
+                                pathBitmap.SetPixel(a, b, color);
                             }
                         }
                     }
@@ -599,85 +691,20 @@ namespace DynamicPathPlanner.Code
                     {
                         if ((a > 0) && (b > 0))
                         {
-                            if ((a < slopePathBitmap.Width) && (b < slopePathBitmap.Height))
+                            if ((a < pathBitmap.Width) && (b < pathBitmap.Height))
                             {
-                                slopePathBitmap.SetPixel(a, b, color);
+                                pathBitmap.SetPixel(a, b, color);
                             }
                         }
                     }
                 }
-            }
+            
 
-            return slopePathBitmap;
+            return pathBitmap;
+
         }
 
-        private Bitmap getHazardPathBitmap()
-        {
-            if (hazardPathBitmap == null)
-            {
-                hazardPathBitmap = (Bitmap)hazardBitmap.Clone();
 
-                int xPrev = -1;
-                int yPrev = -1;
-
-                foreach (PathNode p in rover.getPathPoints())
-                {
-                    int x = p.x * hazardSectorSize;
-                    int y = p.y * hazardSectorSize;
-
-                    hazardPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
-
-                    using (var graphics = Graphics.FromImage(hazardPathBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                int sX = startX * hazardSectorSize;
-                int sY = startY * hazardSectorSize;
-                int tX = targetX * hazardSectorSize;
-                int tY = targetY * hazardSectorSize;
-
-                int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
-                for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
-                {
-                    for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < hazardPathBitmap.Width) && (b < hazardPathBitmap.Height))
-                            {
-                                hazardPathBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-                size = (int)((float)areaSize * 0.02f);
-                color = System.Drawing.Color.BlueViolet;
-                for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
-                {
-                    for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < hazardPathBitmap.Width) && (b < hazardPathBitmap.Height))
-                            {
-                                hazardPathBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return hazardPathBitmap;
-        }
 
 
         private Bitmap getSkyPathBitmap()
@@ -858,24 +885,23 @@ namespace DynamicPathPlanner.Code
             return aerialCompareBitmap;
         }
 
-        private Bitmap getElevationCompareBitmap()
+
+        private Bitmap generateCompareBitmap(Bitmap oBitmap)
         {
-            if (elevationCompareBitmap == null)
-            {
-                elevationCompareBitmap = (Bitmap)elevationBitmap.Clone();
+                Bitmap compareBitmap = (Bitmap)oBitmap.Clone();
 
                 int xPrev = -1;
                 int yPrev = -1;
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Height)));
+                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Width)));
+                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Height)));
 
-                    elevationCompareBitmap.SetPixel(x, y, pathColor);
+                    compareBitmap.SetPixel(x, y, pathColor);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
 
-                    using (var graphics = Graphics.FromImage(elevationCompareBitmap))
+                    using (var graphics = Graphics.FromImage(compareBitmap))
                     {
                         if ((xPrev != -1) && (yPrev != -1))
                             graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
@@ -890,13 +916,13 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRover.getPathPoints())
                 {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Height)));
+                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Width)));
+                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Height)));
 
-                    elevationCompareBitmap.SetPixel(x, y, compareColor);
+                    compareBitmap.SetPixel(x, y, compareColor);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
 
-                    using (var graphics = Graphics.FromImage(elevationCompareBitmap))
+                    using (var graphics = Graphics.FromImage(compareBitmap))
                     {
                         if ((xPrev != -1) && (yPrev != -1))
                             graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
@@ -911,13 +937,13 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in compareRoverD.getPathPoints())
                 {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)elevationCompareBitmap.Height)));
+                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Width)));
+                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)compareBitmap.Height)));
 
-                    elevationCompareBitmap.SetPixel(x, y, compareDColor);
+                    compareBitmap.SetPixel(x, y, compareDColor);
                     System.Drawing.Pen blackPen = new System.Drawing.Pen(compareDColor, 5);
 
-                    using (var graphics = Graphics.FromImage(elevationCompareBitmap))
+                    using (var graphics = Graphics.FromImage(compareBitmap))
                     {
                         if ((xPrev != -1) && (yPrev != -1))
                             graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
@@ -940,9 +966,9 @@ namespace DynamicPathPlanner.Code
                     {
                         if ((a > 0) && (b > 0))
                         {
-                            if ((a < elevationCompareBitmap.Width) && (b < elevationCompareBitmap.Height))
+                            if ((a < compareBitmap.Width) && (b < compareBitmap.Height))
                             {
-                                elevationCompareBitmap.SetPixel(a, b, color);
+                                compareBitmap.SetPixel(a, b, color);
                             }
                         }
                     }
@@ -956,330 +982,22 @@ namespace DynamicPathPlanner.Code
                     {
                         if ((a > 0) && (b > 0))
                         {
-                            if ((a < elevationCompareBitmap.Width) && (b < elevationCompareBitmap.Height))
+                            if ((a < compareBitmap.Width) && (b < compareBitmap.Height))
                             {
-                                elevationCompareBitmap.SetPixel(a, b, color);
+                                compareBitmap.SetPixel(a, b, color);
                             }
                         }
                     }
                 }
 
-            }
-            return elevationCompareBitmap;
-        }
-
-        private Bitmap getSlopeCompareBitmap()
-        {
-            if (slopeCompareBitmap == null)
-            {
-                slopeCompareBitmap = (Bitmap)slopeBitmap.Clone();
-
-                int xPrev = -1;
-                int yPrev = -1;
-
-                foreach (PathNode p in rover.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Height)));
-
-                    slopeCompareBitmap.SetPixel(x, y, pathColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
-
-                    using (var graphics = Graphics.FromImage(slopeCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                xPrev = -1;
-                yPrev = -1;
-
-                foreach (PathNode p in compareRover.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Height)));
-
-                    slopeCompareBitmap.SetPixel(x, y, compareColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
-
-                    using (var graphics = Graphics.FromImage(slopeCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-
-
-                xPrev = -1;
-                yPrev = -1;
-
-                foreach (PathNode p in compareRoverD.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)slopeCompareBitmap.Height)));
-
-                    slopeCompareBitmap.SetPixel(x, y, compareDColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareDColor, 5);
-
-                    using (var graphics = Graphics.FromImage(slopeCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                int sX = startX * hazardSectorSize;
-                int sY = startY * hazardSectorSize;
-                int tX = targetX * hazardSectorSize;
-                int tY = targetY * hazardSectorSize;
-
-                int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
-                for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
-                {
-                    for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < slopeCompareBitmap.Width) && (b < slopeCompareBitmap.Height))
-                            {
-                                slopeCompareBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-                size = (int)((float)areaSize * 0.02f);
-                color = System.Drawing.Color.BlueViolet;
-                for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
-                {
-                    for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < slopeCompareBitmap.Width) && (b < slopeCompareBitmap.Height))
-                            {
-                                slopeCompareBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-            }
-            return slopeCompareBitmap;
+            
+            return compareBitmap;
         }
 
 
-        private Bitmap getHazardCompareBitmap()
-        {
-            if (hazardCompareBitmap == null)
-            {
-                hazardCompareBitmap = (Bitmap)hazardBitmap.Clone();
-
-                int xPrev = -1;
-                int yPrev = -1;
-
-                foreach (PathNode p in rover.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Height)));
-
-                    hazardCompareBitmap.SetPixel(x, y, pathColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(pathColor, 5);
-
-                    using (var graphics = Graphics.FromImage(hazardCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                xPrev = -1;
-                yPrev = -1;
-
-                foreach (PathNode p in compareRover.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Height)));
-
-                    hazardCompareBitmap.SetPixel(x, y, compareColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareColor, 5);
-
-                    using (var graphics = Graphics.FromImage(hazardCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                xPrev = -1;
-                yPrev = -1;
-
-                foreach (PathNode p in compareRoverD.getPathPoints())
-                {
-                    int x = (int)((float)p.x * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Width)));
-                    int y = (int)((float)p.y * ((float)hazardSectorSize / ((float)areaSize / (float)hazardCompareBitmap.Height)));
-
-                    hazardCompareBitmap.SetPixel(x, y, compareDColor);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(compareDColor, 5);
-
-                    using (var graphics = Graphics.FromImage(hazardCompareBitmap))
-                    {
-                        if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
-                    }
-
-                    xPrev = x;
-                    yPrev = y;
-                }
-
-                int sX = startX * hazardSectorSize;
-                int sY = startY * hazardSectorSize;
-                int tX = targetX * hazardSectorSize;
-                int tY = targetY * hazardSectorSize;
-
-                int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
-                for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
-                {
-                    for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < hazardCompareBitmap.Width) && (b < hazardCompareBitmap.Height))
-                            {
-                                hazardCompareBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-                size = (int)((float)areaSize * 0.02f);
-                color = System.Drawing.Color.BlueViolet;
-                for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
-                {
-                    for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
-                    {
-                        if ((a > 0) && (b > 0))
-                        {
-                            if ((a < hazardCompareBitmap.Width) && (b < hazardCompareBitmap.Height))
-                            {
-                                hazardCompareBitmap.SetPixel(a, b, color);
-                            }
-                        }
-                    }
-                }
-
-            }
-            return hazardCompareBitmap;
-        }
 
 
-        public List<PathNode> getPathModel()
-        {
-            return pathfinder.getPath();
-        }
 
-        public ImageSource getSlopeModelImage()
-        {
-            return slopeModel.getImageSource();
-        }
-
-        public ImageSource getHazardModelImage()
-        {
-            return hazardModel.getImageSource();
-        }
-
-        public ImageSource getPathImage()
-        {
-            return pathfinder.getPathImage();
-        }
-
-        public ImageSource getVehicleImage()
-        {
-            return imageSource;
-        }
-
-        public ImageSource getVehicleInternalMapImage()
-        {
-            return rover.getPathImage();
-        }
-
-        public ImageSource getRoverCamImage()
-        {
-            return rover.getRoverCam();
-        }
-
-        public bool isComplete()
-        {
-            if (rover != null)
-            {
-                return rover.reachedTarget();
-            }
-            return false;
-        }
-
-        public int getStartX()
-        {
-            return startX;
-        }
-
-        public int getStartY()
-        {
-            return startY;
-        }
-
-        public int getTargetX()
-        {
-            return targetX;
-        }
-
-        public int getTargetY()
-        {
-            return targetY;
-        }
-
-        public String getAlgorithm()
-        {
-            return searchAlgortihm;
-        }
-
-        public bool getKnownMap()
-        {
-            return knownMap;
-        }
-
-        public int getOptimalSteps()
-        {
-            return compareRover.getPathPoints().Count;
-        }
-
-        public int getDKnownSteps()
-        {
-            return compareRoverD.getPathPoints().Count;
-        }
-
-        public int getPathLikeness()
-        {
-            return (int)pathLikeness;
-        }
 
     }
 }

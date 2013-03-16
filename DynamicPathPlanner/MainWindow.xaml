@@ -1090,7 +1090,6 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         
     </Grid>
 </Window>
