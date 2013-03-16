@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DynamicPathPlanner.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DistanceStep" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">0.1</Value>
+    <Setting Name="IntervalTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>

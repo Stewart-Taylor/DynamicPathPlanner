@@ -25,8 +25,6 @@ namespace DynamicPathPlanner
 		public About()
 		{
 			this.InitializeComponent();
-			
-			
 		}
 	}
 }

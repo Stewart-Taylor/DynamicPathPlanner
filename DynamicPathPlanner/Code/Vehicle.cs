@@ -146,21 +146,6 @@ namespace DynamicPathPlanner.Code
             atTarget = false;
 
             pathBitmap = new Bitmap(map.getWidth(), map.getHeight());
-
-        /*    BitmapHelper b = new BitmapHelper(pathBitmap);
-            b.LockBitmap();
-            for (int x = 0; x < map.getWidth(); x++)
-            {
-                for (int y = 0; y < map.getHeight(); y++)
-                {
-
-                            System.Drawing.Color tempColor = getVehicleColorValue(map.getValue(x, y), x, y);
-                            b.SetPixel(x, y, tempColor);
-                }
-            }
-            b.UnlockBitmap();
-            pathBitmap = b.Bitmap;
-         */ 
         }
 
 
@@ -579,7 +564,6 @@ namespace DynamicPathPlanner.Code
                         v = 99999999;
                     }
                     setNode(x, y, v);
-                    // sensorManager.updateOwnLocation(x, y);
                 }
             }
         }

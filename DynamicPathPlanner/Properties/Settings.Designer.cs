@@ -25,13 +25,13 @@ namespace DynamicPathPlanner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
-        public float DistanceStep {
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int IntervalTime {
             get {
-                return ((float)(this["DistanceStep"]));
+                return ((int)(this["IntervalTime"]));
             }
             set {
-                this["DistanceStep"] = value;
+                this["IntervalTime"] = value;
             }
         }
     }

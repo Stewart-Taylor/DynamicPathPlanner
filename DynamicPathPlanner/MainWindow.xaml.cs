@@ -60,8 +60,6 @@ namespace DynamicPathPlanner
         private int hazardSectorSize;
         private String slopeType;
 
-        private int simulationInterval = 1;
-
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         private ImageSource loadImage;
@@ -532,7 +530,7 @@ namespace DynamicPathPlanner
             {
                 btn_simulationStart.Content = "Pause";
                 simulationRunning = true;
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, Properties.Settings.Default.IntervalTime);
                 dispatcherTimer.Start();
             }
             else
@@ -619,6 +617,12 @@ namespace DynamicPathPlanner
         private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void men_settings_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Window settingsWindow = new SettingsScreen();
+            settingsWindow.Show();
         }
 
         #endregion

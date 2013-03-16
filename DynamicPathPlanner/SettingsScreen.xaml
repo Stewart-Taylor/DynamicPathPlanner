@@ -1,0 +1,31 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="DynamicPathPlanner.SettingsScreen"
+	x:Name="Window"
+	Title="SettingsScreen"
+	Width="420" Height="400" ResizeMode="NoResize">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid Background="#FF484848">
+			<Button x:Name="btn_okay" Content="Ok" HorizontalAlignment="Right" Margin="0,0,87,8" VerticalAlignment="Bottom" Width="75" Click="btn_okay_Click" Background="#FF168D23" Foreground="White" BorderBrush="Black"/>
+			<Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="75" Click="btn_cancel_Click" Foreground="White" BorderBrush="Black" Background="#FF168D23"/>
+			<Grid Margin="8,66.976,8,33.96">
+				<TextBlock Margin="0,8,166,0" TextWrapping="Wrap" Text="Simulation Interval Update Time (ms)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
+				<TextBox x:Name="txt_intervalTime" HorizontalAlignment="Right" Margin="0,8,8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+					<TextBox.BorderBrush>
+						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+							<GradientStop Color="#FFABADB3" Offset="0.05"/>
+							<GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+							<GradientStop Color="White" Offset="1"/>
+						</LinearGradientBrush>
+					</TextBox.BorderBrush>
+				</TextBox>
+			</Grid>
+			<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="29.333" Foreground="White" FontFamily="Segoe UI Light" Width="218.823"/>
+			<TextBlock HorizontalAlignment="Left" Margin="8,47.016,0,0" TextWrapping="Wrap" Text="//////////////////////////" VerticalAlignment="Top" Foreground="#FFD8D8D8"/>
+			<TextBlock x:Name="lbl_error" Margin="8,0,166,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White"/>
+		</Grid>
+	</Grid>
+</Window>
