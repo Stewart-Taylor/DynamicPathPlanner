@@ -51,6 +51,7 @@ namespace DynamicPathPlanner
         private BackgroundWorker slope_worker = new BackgroundWorker();
         private BackgroundWorker hazard_worker = new BackgroundWorker();
         private BackgroundWorker step_worker = new BackgroundWorker();
+        private BackgroundWorker simulation_worker = new BackgroundWorker();
         private BackgroundWorker result_worker = new BackgroundWorker();
 
         private bool started = false;
@@ -95,6 +96,9 @@ namespace DynamicPathPlanner
 
             result_worker.DoWork += new DoWorkEventHandler(resultScreen);
             result_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(result_worker_complete);
+
+            simulation_worker.DoWork += new DoWorkEventHandler(instantSimulation);
+            simulation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(simulation_worker_complete);
 
             loadImage = img_hazardSlide.Source;
 
@@ -181,11 +185,23 @@ namespace DynamicPathPlanner
             btn_simulationNext.IsEnabled = true;
         }
 
+        private void instantSimulation(object sender, EventArgs e)
+        {
+            interfaceManager.startSimulation();
+        }
+
+        private void simulation_worker_complete(object sender, EventArgs e)
+        {
+            simulation_wait.Stop();
+            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
+            img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
+            btn_simulationInstant.IsEnabled = true;
+        }
+
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
             startup_worker.RunWorkerAsync();
-
             BeginStoryboard(startup_wait);
         }
 
@@ -581,9 +597,9 @@ namespace DynamicPathPlanner
 
         private void btn_simulationInstant_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.startSimulation();
-            img_simulationInternal.Source = interfaceManager.getRoverInternalMap();
-            img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
+            btn_simulationInstant.IsEnabled = false;
+            simulation_wait.Begin();
+            simulation_worker.RunWorkerAsync();
         }
 
 
