@@ -321,7 +321,7 @@ namespace DynamicPathPlanner.Code
 
 
 
-          //  return (Math.Abs(currentX- target.x) + Math.Abs(currentY - target.y));
+       //     return (Math.Abs(currentX- target.x) + Math.Abs(currentY - target.y));
         }
 
 

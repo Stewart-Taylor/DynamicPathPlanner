@@ -537,7 +537,7 @@ namespace DynamicPathPlanner
             if (interfaceManager.isSimulationComplete())
             {
                 interfaceManager.runCompareSimulation();
-                lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]";
+                lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]  [All Known: " + interfaceManager.getDKnownSteps() + "]";
                 lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
                 nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
             }

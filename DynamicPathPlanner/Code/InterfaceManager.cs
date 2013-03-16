@@ -499,6 +499,11 @@ namespace DynamicPathPlanner
             return simulationManager.getOptimalSteps();
         }
 
+        public int getDKnownSteps()
+        {
+            return simulationManager.getDKnownSteps();
+        }
+
         public float getPathLikeness()
         {
             return simulationManager.getPathLikeness();
