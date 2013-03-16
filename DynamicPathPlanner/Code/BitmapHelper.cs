@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*      BitmapHelper Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to render bitmaps quicker
+ * 
+ *
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,35 +42,26 @@ namespace DynamicPathPlanner.Code
             this.source = source;
         }
 
-        /// <summary>
-        /// Lock bitmap data
-        /// </summary>
+
         public void LockBitmap()
         {
             try
             {
-                // Get width and height of bitmap
                 Width = source.Width;
                 Height = source.Height;
 
-                // get total locked pixels count
                 int PixelCount = Width * Height;
 
-                // Create rectangle to lock
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
-                // get source bitmap pixel format size
                 Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
 
-                // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
                 {
-                    throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
+                    throw new ArgumentException("Not supported.");
                 }
 
-                // Lock bitmap and return bitmap data
-                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
-                                             source.PixelFormat);
+                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,source.PixelFormat);
 
                 // create byte array to copy pixel values
                 int step = Depth / 8;
@@ -77,9 +77,6 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        /// <summary>
-        /// Unlock bitmap data
-        /// </summary>
         public void UnlockBitmap()
         {
             try
@@ -96,12 +93,7 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        /// <summary>
-        /// Get the color of the specified pixel
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+
         public Color GetPixel(int x, int y)
         {
             Color clr = Color.Empty;
@@ -139,12 +131,7 @@ namespace DynamicPathPlanner.Code
             return clr;
         }
 
-        /// <summary>
-        /// Set the color of the specified pixel
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="color"></param>
+
         public void SetPixel(int x, int y, Color color)
         {
             // Get color components count
@@ -173,4 +160,5 @@ namespace DynamicPathPlanner.Code
             }
         }
     }
+
 }

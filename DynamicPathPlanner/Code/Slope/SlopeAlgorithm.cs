@@ -3,8 +3,7 @@
  *------------------------------------
  * This abstract provides a base for slope algorithms
  * 
- *
- * Last Updated: 28/02/2013
+ * Last Updated: 16/03/2013
 */
 
 

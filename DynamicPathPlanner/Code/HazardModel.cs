@@ -4,8 +4,7 @@
  * This class generates a hazard map
  * It requires the data from the slope model
  * 
- *
- * Last Updated: 09/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

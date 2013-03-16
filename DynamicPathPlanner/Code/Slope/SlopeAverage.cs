@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*      SlopeAverage Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to generate a slope model from elevation data
+ * It uses the Average method. 
+ * It will uses the average value from all adjacent gradient values
+ * 
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

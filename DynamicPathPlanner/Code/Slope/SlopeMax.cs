@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*      SlopeMax Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to generate a slope model from elevation data
+ * It uses the MAX method. 
+ * This will uses the highest gradient value from all adjacent values
+ *
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

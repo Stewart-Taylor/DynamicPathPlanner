@@ -5,7 +5,7 @@
  * It handles the results of the simulation
  * and generates visual output
  *
- * Last Updated: 10/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

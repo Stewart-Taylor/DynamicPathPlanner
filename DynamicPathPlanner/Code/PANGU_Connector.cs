@@ -4,7 +4,7 @@
  * This class connects to PANGU directly
  * It makes use of the Pangu.dll which is a compiled PANGU socket client written in C
  *
- * Last Updated: 09/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

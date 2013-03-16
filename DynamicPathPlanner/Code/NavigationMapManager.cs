@@ -2,9 +2,9 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This is used to manage all of the navigational data 
- * It is used to manage and generate the elevation,slope and hazard models
+ * It is used to manage and generate the elevation, slope and hazard models
  *
- * Last Updated: 09/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

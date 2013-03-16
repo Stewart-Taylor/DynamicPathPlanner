@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*      SearchAlgorithm Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This abstract provides a base for search algorithms
+ * 
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

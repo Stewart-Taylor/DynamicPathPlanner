@@ -2,8 +2,10 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class contains the vehicle logic for the simulation
+ * It will access the sensorManager to get enviorment data (Simulates Sensors)
+ * It will use it's own internal hazard map for pathfinding only!
  *
- * Last Updated: 12/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

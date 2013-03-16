@@ -4,7 +4,7 @@
  * This class is used to generate an elevation model
  * The model will be fetched using the Elevation Loader
  *
- * Last Updated: 09/03/2013
+ * Last Updated: 16/03/2013
 */
 
 using System;

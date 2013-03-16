@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*      D_Star Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to find a route to a target
+ * It uses the D STAR Search algorithm to do this
+ * 
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

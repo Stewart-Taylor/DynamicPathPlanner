@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*      PathNode Class
+ *	    AUTHOR: STEWART TAYLOR
+ *------------------------------------
+ * This class is used to store path data
+ *
+ * Last Updated: 16/03/2013
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
