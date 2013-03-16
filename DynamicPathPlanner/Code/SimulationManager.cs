@@ -818,10 +818,10 @@ namespace DynamicPathPlanner.Code
                     yPrev = y;
                 }
 
-                int sX = (int)((float)startX * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Width)));
-                int sY = (int)((float)startY * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Height)));
-                int tX = (int)((float)targetX * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Width)));
-                int tY = (int)((float)targetY * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Height)));
+                int sX = (int)((float)startX * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Width)));
+                int sY = (int)((float)startY * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Height)));
+                int tX = (int)((float)targetX * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Width)));
+                int tY = (int)((float)targetY * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Height)));
 
                 int size = (int)((float)areaSize * 0.01f);
                 System.Drawing.Color color = System.Drawing.Color.BlueViolet;

@@ -273,6 +273,13 @@ namespace DynamicPathPlanner.Code
 
             D_Star search = new D_Star(map.getMap(), positionX, positionY, targetX, targetY);
 
+
+            //Add In start Node
+            PathNode startNode = new PathNode();
+            startNode.x = startX;
+            startNode.y = startY;
+            takenPath.Add(startNode);
+
             do
             {
                 search.updateStart(positionX, positionY);
@@ -379,6 +386,10 @@ namespace DynamicPathPlanner.Code
                                 nextNode = givenPath.Last();
                             }
                         }
+                    }
+                    else
+                    {
+                        takenPath.Add(nextNode); // Add Start To taken Path
                     }
 
                     if (sensorManager.isAreaSafe(nextNode) == true)
