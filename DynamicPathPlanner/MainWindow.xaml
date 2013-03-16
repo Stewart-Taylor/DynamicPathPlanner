@@ -782,15 +782,17 @@
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Simulation_Wait" RepeatBehavior="Forever">
+			<StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="lbl_simulationWait">
+				<DiscreteStringKeyFrame KeyTime="0" Value="Please Wait ."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:0.5" Value="Please Wait .."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1" Value="Please Wait ..."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1.5" Value="Please Wait ..."/>
+			</StringAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-			<BeginStoryboard Storyboard="{StaticResource Grid_Simulation}"/>
-			<BeginStoryboard Storyboard="{StaticResource Simulation_SlideIn}"/>
-			<BeginStoryboard Storyboard="{StaticResource Simulation_SlideOut}"/>
-			<BeginStoryboard Storyboard="{StaticResource Results_SlideIn}"/>
-			<BeginStoryboard Storyboard="{StaticResource Results_SlideOut}"/>
-		</EventTrigger>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
@@ -899,7 +901,7 @@
     			<TextBlock Margin="27.455,137.036,0,0" TextWrapping="Wrap" FontSize="16" Foreground="White" VerticalAlignment="Top" Text="Slope Algorithm" HorizontalAlignment="Left"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_hazard_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_hazard_slide" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer3" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -949,7 +951,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -981,6 +983,7 @@
     				<Button x:Name="btn_pause1" Content="Back" Margin="97,8,83,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click" Height="50" VerticalAlignment="Top"/>
     				<Button x:Name="btn_simulationStart" Content="Play"  Margin="43,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click"/>
     				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,8" Background="#FF52A525" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom"/>
+    				<TextBlock x:Name="lbl_simulationWait" HorizontalAlignment="Left" Margin="10.016,0,0,9.305" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1020,7 +1023,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>

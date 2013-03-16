@@ -44,12 +44,14 @@ namespace DynamicPathPlanner
         private Storyboard elevation_wait;
         private Storyboard slope_wait;
         private Storyboard hazard_wait;
+        private Storyboard simulation_wait;
 
         private BackgroundWorker startup_worker = new BackgroundWorker();
         private BackgroundWorker elevation_worker = new BackgroundWorker();
         private BackgroundWorker slope_worker = new BackgroundWorker();
         private BackgroundWorker hazard_worker = new BackgroundWorker();
         private BackgroundWorker step_worker = new BackgroundWorker();
+        private BackgroundWorker result_worker = new BackgroundWorker();
 
         private bool started = false;
         private float elevationDistance;
@@ -74,6 +76,7 @@ namespace DynamicPathPlanner
             elevation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Elevation_Wait");
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
             hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
+            simulation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Simulation_Wait");
 
             //Set Events
             hazard_worker.DoWork += new DoWorkEventHandler(hazardScreen);
@@ -89,6 +92,9 @@ namespace DynamicPathPlanner
 
             startup_worker.DoWork += new DoWorkEventHandler(panguStartUp);
             startup_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startup_worker_complete);
+
+            result_worker.DoWork += new DoWorkEventHandler(resultScreen);
+            result_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(result_worker_complete);
 
             loadImage = img_hazardSlide.Source;
 
@@ -141,16 +147,16 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-           interfaceManager.connectToPANGU();
+        /*   interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
            interfaceManager.generateElevationModel(0.1f, 1024);
            interfaceManager.generateSlopeModel("HORN");
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-           
+          */ 
        
-           /*
+           
             interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.generateElevationModel(0.1f, 1024);
@@ -158,8 +164,23 @@ namespace DynamicPathPlanner
             interfaceManager.generateHazardModel(1);
             interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-   */
+   
         }
+
+        private void resultScreen(object sender, EventArgs e)
+        {
+            interfaceManager.runCompareSimulation();
+        }
+
+        private void result_worker_complete(object sender, EventArgs e)
+        {
+            simulation_wait.Stop();
+            lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]  [All Known: " + interfaceManager.getDKnownSteps() + "]";
+            lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
+            nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
+            btn_simulationNext.IsEnabled = true;
+        }
+
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
@@ -515,8 +536,6 @@ namespace DynamicPathPlanner
                 double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_startX.Text = ((int)x).ToString();
                 txt_startY.Text = ((int)y).ToString();
-
-              //  interfaceManager.updateRoverSlideStartPosition((int)x, (int)y);
             }
             else if (e.RightButton == MouseButtonState.Pressed)
             {
@@ -525,8 +544,6 @@ namespace DynamicPathPlanner
                 double y = (pos.Y / (float)interfaceManager.getHazardSectorSize() * ((float)interfaceManager.getAreaSize() / 256));
                 txt_targetX.Text = ((int)x).ToString();
                 txt_targetY.Text = ((int)y).ToString();
-
-              //  interfaceManager.updateRoverSlideTargetPosition((int)x, (int)y);
             }
         }
 
@@ -536,10 +553,9 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isSimulationComplete())
             {
-                interfaceManager.runCompareSimulation();
-                lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]  [All Known: " + interfaceManager.getDKnownSteps() + "]";
-                lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
-                nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
+                simulation_wait.Begin();
+                btn_simulationNext.IsEnabled = false;
+                result_worker.RunWorkerAsync();
             }
         }
 
