@@ -572,7 +572,14 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y = 0; y < height; y++)
                 {
-                    sensorManager.updateOwnLocation(x, y);
+                    double value = sensorManager.getSlopeValue(x, y);
+                    int v = 1;
+                    if( value > 1f)
+                    {
+                        v = 99999999;
+                    }
+                    setNode(x, y, v);
+                    // sensorManager.updateOwnLocation(x, y);
                 }
             }
         }

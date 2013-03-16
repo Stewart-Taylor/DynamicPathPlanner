@@ -285,9 +285,6 @@ namespace DynamicPathPlanner.Code
             distance = (Math.Abs(currentX - target.x) + Math.Abs(currentY - target.y));
 
             return distance;
-
-    
-
         }
 
 

@@ -35,11 +35,6 @@ namespace DynamicPathPlanner.Code
             return height;
         }
 
-        public double getTileValue(int x, int y)
-        {
-            double value = navigationMap.getHazardModel()[x, y];
-            return value;
-        }
 
         public double getSlopeValue(int x, int y)
         {
