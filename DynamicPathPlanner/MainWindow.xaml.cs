@@ -493,13 +493,16 @@ namespace DynamicPathPlanner
         {
             if (simulationRunning == false)
             {
+                btn_simulationStart.Content = "Pause";
                 simulationRunning = true;
                 dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, simulationInterval);
                 dispatcherTimer.Start();
             }
             else
             {
+                btn_simulationStart.Content = "Start";
                 simulationRunning = false;
+                dispatcherTimer.Stop();
             }
         }
 
