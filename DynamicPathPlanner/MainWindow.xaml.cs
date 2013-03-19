@@ -102,16 +102,16 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            fastSetup(); // Testing Only
+           // fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
         {
             interfaceManager = new InterfaceManager(txt_simulationConsole);
 
-            grid_startup_slide.Visibility = Visibility.Visible;
+            grid_startup_slide.Visibility = Visibility.Hidden;
             grid_elevation_slide.Visibility = Visibility.Hidden;
-            grid_pangu_slide.Visibility = Visibility.Hidden;
+            grid_pangu_slide.Visibility = Visibility.Visible;
             grid_slope_slide.Visibility = Visibility.Hidden;
             grid_hazard_slide.Visibility = Visibility.Hidden;
             grid_rover_slide.Visibility = Visibility.Hidden;
@@ -129,8 +129,8 @@ namespace DynamicPathPlanner
 
             if (startSlideIn == null)
             {
-                startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Startup_SlideIn");
-                startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
+                startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Pangu_SlideIn");
+              //  startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
             }
            
             BeginStoryboard(startSlideIn);
@@ -142,7 +142,8 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.connectToPANGU() == true)
             {
-                //System.Threading.Thread.Sleep(2000); // REMOVE
+                System.Threading.Thread.Sleep(2000); // REMOVE
+
             }
         }
 
@@ -205,7 +206,10 @@ namespace DynamicPathPlanner
 
         private void startup_worker_complete(object sender, EventArgs e)
         {
-            nextSlide(grid_startup_slide, grid_pangu_slide, "Startup_SlideOut", "Pangu_SlideIn");
+            img_elevationSlide.Source = interfaceManager.getQuickView();
+            btn_elevationNext.Visibility = Visibility.Hidden;
+            nextSlide(grid_startup_slide, grid_elevation_slide, "Startup_SlideOut", "Elevation_SlideIn");
+
             startup_wait.Stop();
         }
 
@@ -272,6 +276,8 @@ namespace DynamicPathPlanner
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+
+
             bool valid = false;
 
             String selectedText = "";
@@ -292,10 +298,12 @@ namespace DynamicPathPlanner
             {
                 interfaceManager.setEnviornmentString(selectedText);
 
-                img_elevationSlide.Source = interfaceManager.getQuickView();
-                btn_elevationNext.Visibility = Visibility.Hidden;
-                nextSlide(grid_pangu_slide, grid_elevation_slide, "Pangu_SlideOut", "Elevation_SlideIn");
+             //   img_elevationSlide.Source = interfaceManager.getQuickView();
+             //   btn_elevationNext.Visibility = Visibility.Hidden;
+                nextSlide(grid_pangu_slide, grid_startup_slide, "Pangu_SlideOut", "Startup_SlideIn");
+                startSlideIn_Completed(null, null);
             }
+          
         }
 
         private void btn_roverNext_Click(object sender, System.Windows.RoutedEventArgs e)
