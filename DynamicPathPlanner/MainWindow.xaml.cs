@@ -635,15 +635,17 @@ namespace DynamicPathPlanner
 
         private void sld_simulationYaw_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
-        	// TODO: Add event handler implementation here.
             try
             {
-                float yaw = (float)sld_simulationYaw.Value;
-                float pitch = (float)sld_simulationPitch.Value;
+                if (simulationRunning == false)
+                {
+                    float yaw = (float)sld_simulationYaw.Value;
+                    float pitch = (float)sld_simulationPitch.Value;
 
-                interfaceManager.updateRoverCam(pitch, yaw);
+                    interfaceManager.updateRoverCam(pitch, yaw);
 
-              img_simulationRover.Source =  interfaceManager.getRoverCam();
+                    img_simulationRover.Source = interfaceManager.getRoverCam();
+                }
             }
             catch
             {
@@ -653,16 +655,17 @@ namespace DynamicPathPlanner
 
         private void sld_simulationPitch_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
-        	// TODO: Add event handler implementation here.
-
             try
             {
-                float yaw = (float)sld_simulationYaw.Value;
-                float pitch = (float)sld_simulationPitch.Value;
+                if (simulationRunning == false)
+                {
+                    float yaw = (float)sld_simulationYaw.Value;
+                    float pitch = (float)sld_simulationPitch.Value;
 
-                interfaceManager.updateRoverCam(pitch, yaw);
+                    interfaceManager.updateRoverCam(pitch, yaw);
 
-                img_simulationRover.Source = interfaceManager.getRoverCam();
+                    img_simulationRover.Source = interfaceManager.getRoverCam();
+                }
             }
             catch
             {
