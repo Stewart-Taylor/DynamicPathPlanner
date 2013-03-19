@@ -5,7 +5,7 @@
  * It will access the sensorManager to get enviorment data (Simulates Sensors)
  * It will use it's own internal hazard map for pathfinding only!
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 19/03/2013
 */
 
 using System;
@@ -52,9 +52,11 @@ namespace DynamicPathPlanner.Code
         private float distanceStep;
 
         private int cameraPitch = -10;
+        private int cameraYaw = 0;
+        private int cameraRoll = 0;
         private int cameraHeight = 17;
 
-        private bool roverCamEnabled = false;
+        private bool roverCamEnabled = true;
 
 
         #region GET
@@ -408,7 +410,6 @@ namespace DynamicPathPlanner.Code
 
         public void generatePathImage()
         {
-
              pathBitmap = new Bitmap(map.getAdjustWidth(), map.getAdjustHeight());
 
                 BitmapHelper b = new BitmapHelper(pathBitmap);
@@ -528,7 +529,7 @@ namespace DynamicPathPlanner.Code
             return null;
         }
 
-
+        //Used while rover is moving
         private void generateRoverImage()
         {
             if (roverCamEnabled == true)
@@ -546,7 +547,22 @@ namespace DynamicPathPlanner.Code
                 yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
                 yaw -= 45;
 
-                camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, roll, 70.0f);
+                camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, cameraRoll, 70.0f);
+            }
+        }
+
+
+        //Manual camera control
+        public void updateRoverImage(float pitch , float yaw)
+        {
+            if (roverCamEnabled == true)
+            {
+                int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
+                int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
+                int z = cameraHeight;
+
+
+                camBitmap = PANGU_Manager.getImageView(x, y, z, -yaw, pitch, cameraRoll, 70.0f);
             }
         }
 

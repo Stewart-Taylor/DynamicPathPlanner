@@ -309,6 +309,11 @@ namespace DynamicPathPlanner
             }
         }
 
+        public void updateRoverCam(float pitch, float yaw)
+        {
+            simulationManager.updateRoverCam(pitch, yaw);
+        }
+
         public ImageSource getRoverSlideImage()
         {
             MemoryStream ms = new MemoryStream();

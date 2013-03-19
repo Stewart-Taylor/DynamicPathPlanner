@@ -995,7 +995,10 @@ namespace DynamicPathPlanner.Code
         }
 
 
-
+        public void updateRoverCam(float pitch, float yaw)
+        {
+            rover.updateRoverImage(pitch, yaw);
+        }
 
 
 

@@ -102,7 +102,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-           // fastSetup(); // Testing Only
+            fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -632,6 +632,44 @@ namespace DynamicPathPlanner
             Window settingsWindow = new SettingsScreen();
             settingsWindow.Show();
         }
+
+        private void sld_simulationYaw_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+        	// TODO: Add event handler implementation here.
+            try
+            {
+                float yaw = (float)sld_simulationYaw.Value;
+                float pitch = (float)sld_simulationPitch.Value;
+
+                interfaceManager.updateRoverCam(pitch, yaw);
+
+              img_simulationRover.Source =  interfaceManager.getRoverCam();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void sld_simulationPitch_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+        	// TODO: Add event handler implementation here.
+
+            try
+            {
+                float yaw = (float)sld_simulationYaw.Value;
+                float pitch = (float)sld_simulationPitch.Value;
+
+                interfaceManager.updateRoverCam(pitch, yaw);
+
+                img_simulationRover.Source = interfaceManager.getRoverCam();
+            }
+            catch
+            {
+
+            }
+        }
+
 
         #endregion
 
