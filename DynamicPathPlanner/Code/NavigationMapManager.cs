@@ -27,32 +27,7 @@ namespace DynamicPathPlanner.Code
         private float distanceStep;
         private int areaSize;
 
-        public NavigationMapManager()
-        {
-
-        }
-
-        public void setEnvironmentText(String environment)
-        {
-            environmentText = environment;
-        }
-        public void generateElevationModel(float distance , int size)
-        {
-            distanceStep = distance;
-            areaSize = size;
-            elevationModel = new ElevationModel();
-            elevationModel.load(environmentText, distance, size);
-        }
-
-        public void generateSlopeModel(String type)
-        {
-            slopeModel = new SlopeModel(elevationModel.getModel(), type);
-        }
-
-        public void generateHazardModel(int size)
-        {
-            hazardModel = new HazardModel(slopeModel.getModel(), size);
-        }
+        #region GET
 
         public float getDistanceStep()
         {
@@ -143,6 +118,43 @@ namespace DynamicPathPlanner.Code
         {
             return hazardModel.getBitmap();
         }
+
+        #endregion
+
+
+        #region SET
+
+
+        #endregion
+
+        public NavigationMapManager()
+        {
+
+        }
+
+        public void setEnvironmentText(String environment)
+        {
+            environmentText = environment;
+        }
+        public void generateElevationModel(float distance , int size)
+        {
+            distanceStep = distance;
+            areaSize = size;
+            elevationModel = new ElevationModel();
+            elevationModel.load(environmentText, distance, size);
+        }
+
+        public void generateSlopeModel(String type)
+        {
+            slopeModel = new SlopeModel(elevationModel.getModel(), type);
+        }
+
+        public void generateHazardModel(int size)
+        {
+            hazardModel = new HazardModel(slopeModel.getModel(), size);
+        }
+
+
 
     }
 }
