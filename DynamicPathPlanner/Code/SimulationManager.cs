@@ -994,12 +994,10 @@ namespace DynamicPathPlanner.Code
             return compareBitmap;
         }
 
-
         public void updateRoverCam(float pitch, float yaw)
         {
             rover.updateRoverImage(pitch, yaw);
         }
-
 
 
     }

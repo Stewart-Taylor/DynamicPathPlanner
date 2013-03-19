@@ -979,11 +979,11 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0" Text="Simulation"/>
     			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_simulationInstant" Content="Instant" Margin="0,8,29,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationInstant_Click" HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Top"/>
-    				<Button x:Name="btn_pause1" Content="Back" Margin="97,8,83,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click" Height="50" VerticalAlignment="Top"/>
-    				<Button x:Name="btn_simulationStart" Content="Play"  Margin="43,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click"/>
-    				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,8" Background="#FF52A525" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom"/>
+    				<Button x:Name="btn_simulationInstant" Content="Instant" Margin="62,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationInstant_Click" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top"/>
+    				<Button x:Name="btn_simulationStart" Content="Play"  Margin="8,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click" HorizontalAlignment="Left" Width="50"/>
+    				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,7.999" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom"/>
     				<TextBlock x:Name="lbl_simulationWait" HorizontalAlignment="Left" Margin="10.016,0,0,9.305" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
+    				<Button x:Name="btn_pause1" Content="Back" Margin="8,0,0,7.998" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_pause1_Click" HorizontalAlignment="Left" Width="50" VerticalAlignment="Bottom"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1017,10 +1017,12 @@
     						<TextBlock TextWrapping="Wrap" Text="RoverCam" Foreground="White" FontSize="16" VerticalAlignment="Top" Grid.Column="1" Margin="8,0,0,0"/>
     						<Image x:Name="img_simulationInternal" Margin="8,25.28,8,150.218" Source="ImageLoad.png"/>
     						<Image x:Name="img_simulationRover" Grid.Column="1" Margin="8,25.28,8,150.218" Source="ImageLoad.png"/>
-    						<Grid Height="138.218" Margin="8,0,8,8" VerticalAlignment="Bottom" Grid.Column="1" Background="#FF707070">
-    							<Slider x:Name="sld_simulationPitch" Margin="0,8,8,8" Orientation="Vertical" HorizontalAlignment="Right" Width="23.57" ValueChanged="sld_simulationPitch_ValueChanged" IsSnapToTickEnabled="True" Minimum="-90" Maximum="90" Foreground="{x:Null}" Background="{x:Null}"/>
+    						<Grid Height="138.218" Margin="8,0,8,8" VerticalAlignment="Bottom" Grid.Column="1">
+    							<Slider x:Name="sld_simulationPitch" Margin="0,25,8,8" Orientation="Vertical" HorizontalAlignment="Right" Width="23.57" ValueChanged="sld_simulationPitch_ValueChanged" IsSnapToTickEnabled="True" Minimum="-90" Maximum="90" Foreground="{x:Null}" Background="{x:Null}"/>
     							<Slider x:Name="sld_simulationYaw" Margin="8,0,35.57,8" ValueChanged="sld_simulationYaw_ValueChanged" SmallChange="1" Maximum="180" Minimum="-180" IsSnapToTickEnabled="True" Foreground="{x:Null}" Background="{x:Null}" VerticalAlignment="Bottom"/>
-    							<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Camera Control" VerticalAlignment="Top" FontSize="21.333" Foreground="White"/>
+    							<TextBlock HorizontalAlignment="Left" Margin="20,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="21.333" Foreground="White"><Run Text="Camera Control"/></TextBlock>
+    							<TextBlock HorizontalAlignment="Left" Margin="20,0,0,30" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White"><Run Language="en-gb" Text="Yaw"/></TextBlock>
+    							<TextBlock TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Right" Margin="0,5.04,5.543,0" VerticalAlignment="Top" Text="Pitch"/>
     						</Grid>
     					</Grid>
     				</Grid>
@@ -1095,7 +1097,6 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Slider HorizontalAlignment="Left" VerticalAlignment="Top"/>
         
     </Grid>
 </Window>
