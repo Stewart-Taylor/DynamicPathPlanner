@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace DynamicPathPlanner.Code
 {
@@ -46,9 +47,9 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        private void printToConsole(String entry)
+        public  void printToConsole(String entry)
         {
-         //   textConsole.Text += '\r' + entry ;
+           textConsole.Text += '\r' + entry ;
 
         }
 

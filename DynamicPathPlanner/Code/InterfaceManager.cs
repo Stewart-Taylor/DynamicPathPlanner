@@ -374,10 +374,10 @@ namespace DynamicPathPlanner
 
         public void startSimulation()
         {
-            logManager.addEntry("Simulation Started");
+         //   logManager.addEntry("Simulation Started");
             simulationManager.setSimulation(navigationMapManager , PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()));
             simulationManager.startSimulation();
-            logManager.addEntry("Simulation Complete");
+         //   logManager.addEntry("Simulation Complete");
         }
 
 

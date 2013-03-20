@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 16/03/2013
+ * Last Updated: 20/03/2013
 */
 
 using System;
@@ -336,8 +336,8 @@ namespace DynamicPathPlanner
                 if (interfaceManager.vehicleValuesValid(startX, startY , targetX , targetY))
                 {
                     interfaceManager.setVehicleValues(startX, startY, targetX, targetY, "a_star", false);
-                   // nextSlide(grid_rover_slide, grid_layout, "Rover_SlideOut", "Main_SlideIn");
                     nextSlide(grid_rover_slide, grid_simulation , "Rover_SlideOut", "Simulation_SlideIn");
+                    img_simulationMain.Source = interfaceManager.getSimulationElevationImage();
                 }
             }
             catch
@@ -505,9 +505,10 @@ namespace DynamicPathPlanner
             runSimulation();
         }
 
-        private void btn_pause1_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btn_back_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             interfaceManager.resetSimulation();
+            img_roverSlide.Source = interfaceManager.getHazardModelImage();
             nextSlide(grid_simulation, grid_rover_slide, "Simulation_SlideOut", "Rover_SlideIn");
         }
 
@@ -672,6 +673,8 @@ namespace DynamicPathPlanner
 
             }
         }
+
+    
 
 
         #endregion
