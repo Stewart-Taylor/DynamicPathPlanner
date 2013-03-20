@@ -102,7 +102,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            fastSetup(); // Testing Only
+         //   fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -112,6 +112,7 @@ namespace DynamicPathPlanner
             grid_startup_slide.Visibility = Visibility.Hidden;
             grid_elevation_slide.Visibility = Visibility.Hidden;
             grid_pangu_slide.Visibility = Visibility.Visible;
+            grid_roverSetup_Slide.Visibility = Visibility.Hidden;
             grid_slope_slide.Visibility = Visibility.Hidden;
             grid_hazard_slide.Visibility = Visibility.Hidden;
             grid_rover_slide.Visibility = Visibility.Hidden;
@@ -368,7 +369,8 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isElevationMapGenerated())
             {
-                nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
+               // nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
+                nextSlide(grid_elevation_slide, grid_roverSetup_Slide, "Elevation_SlideOut", "RoverSetup_SlideIn");
             }
         }
 
@@ -672,6 +674,18 @@ namespace DynamicPathPlanner
             {
 
             }
+        }
+
+        private void btn_roverSetup_next_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //Validate Rover Size and set it
+            nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
+        }
+
+        private void slider_roverSize_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            //Set rover size here
+            // Might not need?
         }
 
     

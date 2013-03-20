@@ -790,9 +790,31 @@
 				<DiscreteStringKeyFrame KeyTime="0:0:1.5" Value="Please Wait ..."/>
 			</StringAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="RoverSetup_SlideIn">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_startupContainer1">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-1208"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="28">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="RoverSetup_SlideOut">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid_startupContainer1">
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1340">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<CubicEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource RoverSetup_SlideIn}"/>
+			<BeginStoryboard Storyboard="{StaticResource RoverSetup_SlideOut}"/>
+		</EventTrigger>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5">
@@ -854,7 +876,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" d:IsHidden="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -865,19 +887,40 @@
     				</TransformGroup>
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Elevation"/></TextBlock>
-    			<TextBlock Margin="8,120.689,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Distance Step" Width="118.257"/>
+    			<TextBlock Margin="8,120.689,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Distance Step" Width="118.257" Visibility="Hidden"/>
     			<Button x:Name="btn_elevationNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationNext_Click"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError2" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png"/>
     			<TextBlock x:Name="lbl_elevationWait" Margin="284.036,0,152.885,16" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..."/>
-    			<TextBox x:Name="txt_elevationDistance" Margin="142.731,120.689,0,0" TextWrapping="Wrap" Text="0.1" VerticalAlignment="Top" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" Height="30" HorizontalAlignment="Left" Width="50"/>
+    			<TextBox x:Name="txt_elevationDistance" Margin="142.731,120.689,0,0" TextWrapping="Wrap" Text="0.1" VerticalAlignment="Top" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" Height="30" HorizontalAlignment="Left" Width="50" Visibility="Hidden"/>
     			<TextBox x:Name="txt_elevationSize" Margin="142.731,176.25,0,193.75" TextWrapping="Wrap" Text="128" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="50" Height="30"/>
     			<TextBlock Margin="6.686,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Elevation Size" Width="118.257" d:LayoutOverrides="Height"/>
     			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="154.331,0,0,138.948" HorizontalAlignment="Left" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" VerticalAlignment="Bottom"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252">
+    		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
+    			<Grid.RenderTransform>
+    				<TransformGroup>
+    					<ScaleTransform/>
+    					<SkewTransform/>
+    					<RotateTransform/>
+    					<TranslateTransform/>
+    				</TransformGroup>
+    			</Grid.RenderTransform>
+    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Rover Setup"/></TextBlock>
+    			<TextBlock Margin="8,105.692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Height="26.318" Text="Rover Size (Metres)"/>
+    			<Button x:Name="btn_roverSetup_next" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_roverSetup_next_Click"/>
+    			<TextBlock x:Name="lbl_hazardWait1" Margin="111.152,0,0,50.114" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="162.914"/>
+    			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
+    			<TextBlock x:Name="lbl_connectError6" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
+    			<Slider x:Name="slider_roverSize" Margin="8,136.01,44.6,0" VerticalAlignment="Top" Minimum="0.1" Value="1" IsSnapToTickEnabled="True" ValueChanged="slider_roverSize_ValueChanged" LargeChange="0.1" Height="26.318" TickFrequency="0.1"/>
+    			<TextBlock x:Name="lbl_sectorSize1" Margin="0,136.01,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSize}"/>
+    			<TextBlock x:Name="lbl_sectorSize_Copy1" Margin="278.066,0,268,159.529" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" VerticalAlignment="Bottom" Text="{Binding Value, ElementName=slider_hazardGradient}"/>
+    		</Grid>
+    	</Grid>
+    	<Grid x:Name="grid_slope_slide" Background="#FF525252" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer2" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -923,7 +966,7 @@
     			<TextBlock x:Name="lbl_sectorSize_Copy" Margin="278.066,0,268,159.529" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" VerticalAlignment="Bottom" Text="{Binding Value, ElementName=slider_hazardGradient}"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_rover_slide" Background="#FF525252" d:IsHidden="True">
+    	<Grid x:Name="grid_rover_slide" Background="#FF525252" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer4" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -951,7 +994,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
