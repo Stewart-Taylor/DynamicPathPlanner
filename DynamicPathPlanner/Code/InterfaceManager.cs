@@ -292,6 +292,11 @@ namespace DynamicPathPlanner
             simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
         }
 
+        public void setRoverSize()
+        {
+
+        }
+
         #endregion
 
 

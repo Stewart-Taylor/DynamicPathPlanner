@@ -679,16 +679,10 @@ namespace DynamicPathPlanner
         private void btn_roverSetup_next_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //Validate Rover Size and set it
+            float value = (float)slider_roverSize.Value;
+            interfaceManager.setRoverSize(value);
             nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
         }
-
-        private void slider_roverSize_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-        {
-            //Set rover size here
-            // Might not need?
-        }
-
-    
 
 
         #endregion

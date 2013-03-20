@@ -63,6 +63,7 @@ namespace DynamicPathPlanner.Code
         private bool pathGenerated = false;
         private bool simulationInProgress = false;
         private bool stepSet = false;
+        private float roverSize;
 
         private float pathLikeness = 0f;
 
@@ -318,11 +319,20 @@ namespace DynamicPathPlanner.Code
             return hazardPathBitmap;
         }
 
+        public float getRoverSize()
+        {
+            return roverSize;
+        }
+
         #endregion
 
 
         #region SET
 
+        public void setRoverSize(float size)
+        {
+            roverSize = size;
+        }
 
 
         #endregion

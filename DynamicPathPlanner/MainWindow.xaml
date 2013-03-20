@@ -915,7 +915,7 @@
     			<TextBlock x:Name="lbl_hazardWait1" Margin="111.152,0,0,50.114" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="162.914"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError6" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
-    			<Slider x:Name="slider_roverSize" Margin="8,136.01,44.6,0" VerticalAlignment="Top" Minimum="0.1" Value="1" IsSnapToTickEnabled="True" ValueChanged="slider_roverSize_ValueChanged" LargeChange="0.1" Height="26.318" TickFrequency="0.1"/>
+    			<Slider x:Name="slider_roverSize" Margin="8,136.01,44.6,0" VerticalAlignment="Top" Minimum="0.1" Value="1" IsSnapToTickEnabled="True" LargeChange="0.1" Height="26.318" TickFrequency="0.1"/>
     			<TextBlock x:Name="lbl_sectorSize1" Margin="0,136.01,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSize}"/>
     			<TextBlock x:Name="lbl_sectorSize_Copy1" Margin="278.066,0,268,159.529" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" VerticalAlignment="Bottom" Text="{Binding Value, ElementName=slider_hazardGradient}"/>
     		</Grid>
