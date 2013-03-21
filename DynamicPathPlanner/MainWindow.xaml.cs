@@ -55,7 +55,6 @@ namespace DynamicPathPlanner
         private BackgroundWorker result_worker = new BackgroundWorker();
 
         private bool started = false;
-        private float elevationDistance;
         private int elevationSize;
         private int hazardSectorSize;
         private String slopeType;
@@ -262,6 +261,7 @@ namespace DynamicPathPlanner
 
         private void elevationScreen(object sender, EventArgs e)
         {
+            float elevationDistance = Properties.Settings.Default.distanceStep;
             interfaceManager.generateElevationModel(elevationDistance, elevationSize);
         }
 
@@ -463,15 +463,11 @@ namespace DynamicPathPlanner
 
         private void btn_elevationUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            String distanceTemp;
             String sizeTemp;
 
             try
             {
-                distanceTemp = txt_elevationDistance.Text;
                 sizeTemp = txt_elevationSize.Text;
-
-                elevationDistance = float.Parse(distanceTemp);
                 elevationSize = int.Parse(sizeTemp);
                
                 elevation_worker.RunWorkerAsync();
