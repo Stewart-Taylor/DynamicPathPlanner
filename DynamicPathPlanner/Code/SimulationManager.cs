@@ -64,6 +64,7 @@ namespace DynamicPathPlanner.Code
         private bool simulationInProgress = false;
         private bool stepSet = false;
         private float roverSize;
+        private float roverSlope;
 
         private float pathLikeness = 0f;
 
@@ -324,6 +325,11 @@ namespace DynamicPathPlanner.Code
             return roverSize;
         }
 
+        public float getRoverSlope()
+        {
+            return roverSlope;
+        }
+
         #endregion
 
 
@@ -332,6 +338,11 @@ namespace DynamicPathPlanner.Code
         public void setRoverSize(float size)
         {
             roverSize = size;
+        }
+
+        public void setRoverSlope(float slope)
+        {
+            roverSlope = slope;
         }
 
 

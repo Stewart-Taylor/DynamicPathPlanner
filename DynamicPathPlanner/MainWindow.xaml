@@ -859,7 +859,7 @@
     			</ListBox>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_startup_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_startup_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -876,7 +876,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -896,7 +896,7 @@
     			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533">
     		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -913,8 +913,10 @@
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError6" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<Slider x:Name="slider_roverSize" Margin="8,136.01,44.6,0" VerticalAlignment="Top" Minimum="0.1" Value="1" IsSnapToTickEnabled="True" LargeChange="0.1" Height="26.318" TickFrequency="0.1"/>
-    			<TextBlock x:Name="lbl_sectorSize1" Margin="0,136.01,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSize}"/>
-    			<TextBlock x:Name="lbl_sectorSize_Copy1" Margin="278.066,0,268,159.529" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" VerticalAlignment="Bottom" Text="{Binding Value, ElementName=slider_hazardGradient}"/>
+    			<TextBlock x:Name="lbl_sectorSize1" Margin="0,136.01,8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSize}" Width="32.6"/>
+    			<TextBlock Margin="8,0,0,163.634" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Height="26.318" Text="Maximum Operational Slope (Degrees)"/>
+    			<Slider x:Name="slider_roverSlope" Margin="8,0,44.6,129.211" VerticalAlignment="Bottom" Minimum="5" Value="15" IsSnapToTickEnabled="True" LargeChange="0.1" Height="26.318" TickFrequency="0.1" Maximum="60"/>
+    			<TextBlock x:Name="lbl_sectorSize1_Copy" Margin="0,0,0,129.211" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSlope}" Width="40.6"/>
     		</Grid>
     	</Grid>
     	<Grid x:Name="grid_slope_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
@@ -991,7 +993,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>

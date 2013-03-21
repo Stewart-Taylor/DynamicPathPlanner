@@ -681,7 +681,9 @@ namespace DynamicPathPlanner
         {
             //Validate Rover Size and set it
             float value = (float)slider_roverSize.Value;
+            float roverSlope = (float)slider_roverSlope.Value;
             interfaceManager.setRoverSize(value);
+            interfaceManager.setRoverSlope(roverSlope);
             nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
         }
     }
