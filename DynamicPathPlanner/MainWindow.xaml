@@ -837,7 +837,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -892,12 +892,12 @@
     			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png"/>
     			<TextBlock x:Name="lbl_elevationWait" Margin="284.036,0,152.885,16" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..."/>
     			<TextBox x:Name="txt_elevationSize" Margin="135.7,176.25,0,193.75" TextWrapping="Wrap" Text="1024" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="93.245" Height="30" TextAlignment="Right"/>
-    			<TextBlock Margin="6.686,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Elevation Size" Width="118.257" d:LayoutOverrides="Height"/>
+    			<TextBlock Margin="8,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Area Size" Width="116.943" d:LayoutOverrides="Height" TextAlignment="Right"/>
     			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244" Focusable="False"/>
     			<TextBlock Margin="0,62.069,16,0" TextWrapping="Wrap" Foreground="#FFE2E2E2" Text="Generate an elevation model form PANGU" VerticalAlignment="Top"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -920,7 +920,7 @@
     			<TextBlock x:Name="lbl_sectorSize1_Copy" Margin="0,0,0,129.211" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSlope}" Width="40.6"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_slope_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_slope_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
     		<Grid x:Name="grid_startupContainer2" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>

@@ -322,6 +322,7 @@ namespace DynamicPathPlanner.Code
             } while (atTarget == false);
 
             generatePathImage();
+            generateRoverImage();
         }
 
 
