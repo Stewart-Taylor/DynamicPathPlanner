@@ -1075,7 +1075,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1129,6 +1129,7 @@
     						<TextBlock Margin="8,0,0,104.125" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FF001BFF" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Text="Simulation"/></TextBlock>
     						<TextBlock Margin="8,0,0,57.561" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FF86F9F6" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="Optimal Path"/></TextBlock>
     						<TextBlock Margin="8,0,0,10.997" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FFCC5F20" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="D Star Known"/></TextBlock>
+    						<TextBlock x:Name="lbl_resultLikeness_Copy" Margin="8.447,155.842,0,0" TextWrapping="Wrap" Text="This is how similar the simulation path is to the optimal path" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Width="563.136" FontSize="13.333"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
