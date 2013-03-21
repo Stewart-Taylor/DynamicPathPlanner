@@ -994,7 +994,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1073,7 +1073,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1125,7 +1125,7 @@
     						<TextBlock x:Name="lbl_resultSteps" Margin="8,8,0,0" TextWrapping="Wrap" Text="Steps:  [Simulation: 345]  [Optimal: 310]" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Width="563.136"/>
     						<TextBlock x:Name="lbl_resultLikeness" Margin="8,125.055,0,0" TextWrapping="Wrap" Text="Path Likeness: 67%" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Width="563.136"/>
     						<TextBlock Margin="8,0,0,104.125" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FF001BFF" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Text="Simulation"/></TextBlock>
-    						<TextBlock Margin="8,0,0,57.561" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FFF7CFFB" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="Optimal Path"/></TextBlock>
+    						<TextBlock Margin="8,0,0,57.561" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FF86F9F6" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="Optimal Path"/></TextBlock>
     						<TextBlock Margin="8,0,0,10.997" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FFCC5F20" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="D Star Known"/></TextBlock>
     					</Grid>
     				</Grid>
