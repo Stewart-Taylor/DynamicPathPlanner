@@ -469,11 +469,14 @@ namespace DynamicPathPlanner
             {
                 sizeTemp = txt_elevationSize.Text;
                 elevationSize = int.Parse(sizeTemp);
-               
-                elevation_worker.RunWorkerAsync();
-                BeginStoryboard(elevation_wait);
-                btn_elevationNext.Visibility = Visibility.Hidden;
-                elevation_wait.Begin();
+
+                if ( (elevationSize >= 100) && (elevationSize <= 100000))
+                {
+                    elevation_worker.RunWorkerAsync();
+                    BeginStoryboard(elevation_wait);
+                    btn_elevationNext.Visibility = Visibility.Hidden;
+                    elevation_wait.Begin();
+                }
             }
             catch { }
         }
