@@ -39,7 +39,6 @@ namespace DynamicPathPlanner.Code
 
         }
 
-
         public void load(String environment, float distance, int size)
         {
             elevationModel = loader.load_DEM(environment, distance, size);
@@ -61,7 +60,6 @@ namespace DynamicPathPlanner.Code
                 }
             }
         }
-
 
         public void load_PANGU_DEM(int distance, int size)
         {
