@@ -21,6 +21,7 @@ namespace DynamicPathPlanner.Code
     static class PANGU_Manager
     {
         private static bool connectionExists = false;
+        private static String panguProcessName = "viewer";
 
         private static PANGU_Connector connector = new PANGU_Connector();
 
@@ -38,6 +39,21 @@ namespace DynamicPathPlanner.Code
                 return true;
             }
             return false;
+        }
+
+        //Best method name ever!
+        public static void killPANGU()
+        {
+            foreach (System.Diagnostics.Process myProc in System.Diagnostics.Process.GetProcesses())
+            {
+                if (myProc.ProcessName == panguProcessName)
+                {
+                    myProc.Kill();
+                    connectionExists = false;
+                }
+            }
+
+
         }
 
         public static double[,] getElevationModel(float distance, int width, int height)

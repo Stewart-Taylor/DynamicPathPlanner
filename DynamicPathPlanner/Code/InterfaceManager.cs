@@ -307,6 +307,7 @@ namespace DynamicPathPlanner
 
         public InterfaceManager(TextBox tBox)
         {
+            PANGU_Manager.killPANGU();
             navigationMapManager = new NavigationMapManager();
             logManager = new LogManager(tBox);
         }
