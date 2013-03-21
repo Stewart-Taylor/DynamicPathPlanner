@@ -435,7 +435,7 @@ namespace DynamicPathPlanner.Code
 
                     foreach (PathNode u in usedPoints)
                     {
-                        if (u == p)
+                        if (u == a)
                         {
                             isUsed = true;
                         }

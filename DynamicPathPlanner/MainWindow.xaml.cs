@@ -67,6 +67,7 @@ namespace DynamicPathPlanner
 
         public MainWindow()
         {
+            PANGU_Manager.killPANGU();
             InitializeComponent();
            
             //Set Storyboards
@@ -101,12 +102,11 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            fastSetup(); // Testing Only
+         //   fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
         {
-            PANGU_Manager.killPANGU();
             interfaceManager = new InterfaceManager(txt_simulationConsole);
 
             grid_startup_slide.Visibility = Visibility.Hidden;
