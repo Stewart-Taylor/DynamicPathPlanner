@@ -106,6 +106,7 @@ namespace DynamicPathPlanner
 
         private void applicationSetUp()
         {
+            PANGU_Manager.killPANGU();
             interfaceManager = new InterfaceManager(txt_simulationConsole);
 
             grid_startup_slide.Visibility = Visibility.Hidden;
@@ -140,7 +141,7 @@ namespace DynamicPathPlanner
 
         private void panguStartUp(object sender, EventArgs e)
         {
-            if (interfaceManager.connectToPANGU() == true)
+            if (interfaceManager.connectToPANGU( interfaceManager.getEnvironmentString()) == true)
             {
                 System.Threading.Thread.Sleep(2000); // REMOVE
 
@@ -150,8 +151,8 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-          interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
+          interfaceManager.connectToPANGU(interfaceManager.getEnvironmentString());
            interfaceManager.generateElevationModel(0.1f, 1024);
            interfaceManager.setRoverSize(1.0f);
            interfaceManager.setRoverSlope(0.261f);
@@ -281,8 +282,6 @@ namespace DynamicPathPlanner
 
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
-
             bool valid = false;
 
             String selectedText = "";
@@ -294,7 +293,7 @@ namespace DynamicPathPlanner
                 selectedText = temp.Text;
             }
 
-            if (selectedText == "Moon.pan")
+            if (selectedText.Length > 0)
             {
                 valid = true;
             }

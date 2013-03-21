@@ -41,6 +41,7 @@ namespace DynamicPathPlanner.Code
             return false;
         }
 
+
         //Best method name ever!
         public static void killPANGU()
         {
@@ -52,8 +53,6 @@ namespace DynamicPathPlanner.Code
                     connectionExists = false;
                 }
             }
-
-
         }
 
         public static double[,] getElevationModel(float distance, int width, int height)

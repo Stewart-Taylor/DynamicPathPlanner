@@ -119,6 +119,11 @@ namespace DynamicPathPlanner.Code
             return hazardModel.getBitmap();
         }
 
+        public String getEnvironementString()
+        {
+            return environmentText;
+        }
+
         #endregion
 
 

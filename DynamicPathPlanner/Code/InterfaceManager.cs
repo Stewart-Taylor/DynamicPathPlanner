@@ -275,6 +275,11 @@ namespace DynamicPathPlanner
             return simulationManager.getRoverCamImage();
         }
 
+        public String getEnvironmentString()
+        {
+            return navigationMapManager.getEnvironementString();
+        }
+
         #endregion
 
 
@@ -307,21 +312,21 @@ namespace DynamicPathPlanner
 
         public InterfaceManager(TextBox tBox)
         {
-            PANGU_Manager.killPANGU();
             navigationMapManager = new NavigationMapManager();
             logManager = new LogManager(tBox);
         }
 
 
-        public bool connectToPANGU()
+        public bool connectToPANGU(String pan)
         {
+
             String hostname = "localhost";
             int portNumber = 10363;
 
             Process[] pname = Process.GetProcessesByName("viewer");
             if (pname.Length == 0)
             {
-                startPANGU();
+                startPANGU(pan);
             }
 
             //if connection was established connect
@@ -334,14 +339,15 @@ namespace DynamicPathPlanner
             return false;
         }
 
-        private void startPANGU()
+        private void startPANGU(String pan)
         {
-            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/viewer.bat"; // GET FROM CONFIG
+            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/PanguServer.bat"; // GET FROM CONFIG
 
             System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
             proc.StartInfo.FileName = filename;
             proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
             proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.Arguments = pan;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
 
