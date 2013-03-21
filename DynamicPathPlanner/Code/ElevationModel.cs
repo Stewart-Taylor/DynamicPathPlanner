@@ -56,7 +56,11 @@ namespace DynamicPathPlanner.Code
             {
                 for (int y =0; y < height; y++)
                 {
+<<<<<<< HEAD
                      elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE  Use Rover Size
+=======
+                    // elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE  Use Rover Size
+>>>>>>> 54e0d4a0720e8367006cfbbd1513dd004e57ff90
                 }
             }
         }

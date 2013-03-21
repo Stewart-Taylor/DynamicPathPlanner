@@ -896,7 +896,11 @@
     			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244"/>
     		</Grid>
     	</Grid>
+<<<<<<< HEAD
     	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsLocked="True" d:IsHidden="True">
+=======
+    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsLocked="True">
+>>>>>>> 54e0d4a0720e8367006cfbbd1513dd004e57ff90
     		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
