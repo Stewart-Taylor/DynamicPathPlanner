@@ -22,6 +22,16 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
+				<TextBlock Margin="0,41.024,166,0" TextWrapping="Wrap" Text="Elevation Model Distance Step (m)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
+				<TextBox x:Name="txt_distanceStep" HorizontalAlignment="Right" Margin="0,41.024,8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+					<TextBox.BorderBrush>
+						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+							<GradientStop Color="#FFABADB3" Offset="0.05"/>
+							<GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+							<GradientStop Color="White" Offset="1"/>
+						</LinearGradientBrush>
+					</TextBox.BorderBrush>
+				</TextBox>
 			</Grid>
 			<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="29.333" Foreground="White" FontFamily="Segoe UI Light" Width="218.823"/>
 			<TextBlock HorizontalAlignment="Left" Margin="8,47.016,0,0" TextWrapping="Wrap" Text="//////////////////////////" VerticalAlignment="Top" Foreground="#FFD8D8D8"/>

@@ -636,6 +636,11 @@ namespace DynamicPathPlanner
             settingsWindow.Show();
         }
 
+
+
+        #endregion
+
+
         private void sld_simulationYaw_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             try
@@ -683,9 +688,5 @@ namespace DynamicPathPlanner
             interfaceManager.setRoverSize(value);
             nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
         }
-
-
-        #endregion
-
     }
 }

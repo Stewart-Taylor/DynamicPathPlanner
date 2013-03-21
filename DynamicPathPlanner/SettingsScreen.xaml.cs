@@ -2,8 +2,9 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class is used to control the System Settings
+ * It will load in settings and allow them to be adjusted and then saved
  * 
- * Last Updated: 16/03/2013
+ * Last Updated: 21/03/2013
 */
 
 using System;
@@ -22,6 +23,8 @@ namespace DynamicPathPlanner
 {
 	public partial class SettingsScreen : Window
 	{
+        private bool saveValid = false;
+
 		public SettingsScreen()
 		{
 			this.InitializeComponent();
@@ -32,13 +35,18 @@ namespace DynamicPathPlanner
         private void setValues()
         {
             txt_intervalTime.Text = Properties.Settings.Default.IntervalTime.ToString();
+            txt_distanceStep.Text = Properties.Settings.Default.distanceStep.ToString();
         }
 
-		private void btn_okay_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
+        private void btn_okay_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
             saveSettings();
-            this.Close();
-		}
+
+            if (saveValid == true)
+            {
+                this.Close();
+            }
+        }
 
 		private void btn_cancel_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
@@ -47,8 +55,14 @@ namespace DynamicPathPlanner
 
         private void saveSettings()
         {
+            saveValid = true;
             saveInterval();
-            Properties.Settings.Default.Save();
+            saveDistanceStep();
+
+            if (saveValid == true)
+            {
+                Properties.Settings.Default.Save();
+            }
         }
 
         private void saveInterval()
@@ -63,6 +77,23 @@ namespace DynamicPathPlanner
             catch
             {
                 lbl_error.Text = "Error: Not a valid Interval value";
+                saveValid = false;
+            }
+        }
+
+        private void saveDistanceStep()
+        {
+            String distanceText = txt_distanceStep.Text;
+
+            try
+            {
+                float distance = float.Parse(distanceText);
+                Properties.Settings.Default.distanceStep = distance;
+            }
+            catch
+            {
+                lbl_error.Text = "Error: Not a valid Distance Step value";
+                saveValid = false;
             }
         }
 

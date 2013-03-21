@@ -292,9 +292,9 @@ namespace DynamicPathPlanner
             simulationManager.setSimulationValues(startX, startY, targetX, targetY, algorithm, knownMap);
         }
 
-        public void setRoverSize()
+        public void setRoverSize(float roverSize)
         {
-
+            simulationManager.setRoverSize(roverSize);
         }
 
         #endregion
