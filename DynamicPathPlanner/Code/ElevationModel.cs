@@ -58,9 +58,6 @@ namespace DynamicPathPlanner.Code
                 {
 
                      elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE  Use Rover Size
-
-                    // elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE  Use Rover Size
-
                 }
             }
         }
