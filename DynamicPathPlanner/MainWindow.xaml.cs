@@ -101,7 +101,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-         //   fastSetup(); // Testing Only
+            fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()

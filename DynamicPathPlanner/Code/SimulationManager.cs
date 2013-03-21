@@ -70,8 +70,8 @@ namespace DynamicPathPlanner.Code
         private bool compareCompleted;
 
         private System.Drawing.Color pathColor = System.Drawing.Color.Blue;
-        private System.Drawing.Color compareColor = System.Drawing.Color.AntiqueWhite;
-        private System.Drawing.Color compareDColor = System.Drawing.Color.RosyBrown;
+        private System.Drawing.Color compareColor = System.Drawing.Color.DarkCyan;
+        private System.Drawing.Color compareDColor = System.Drawing.Color.LightCoral;
         private System.Drawing.Color startColor = System.Drawing.Color.MediumAquamarine;
         private System.Drawing.Color targetColor = System.Drawing.Color.MediumAquamarine;
 
@@ -624,17 +624,16 @@ namespace DynamicPathPlanner.Code
 
                 foreach (PathNode p in rover.getPathPoints())
                 {
-                    System.Drawing.Color color = System.Drawing.Color.Blue;
                     int x = p.x * hazardSectorSize;
                     int y = p.y * hazardSectorSize;
 
-                    comboPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, color);
-                    System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Blue, 5);
+                    comboPathBitmap.SetPixel(p.x * hazardSectorSize, p.y * hazardSectorSize, pathColor);
+                    System.Drawing.Pen pen = new System.Drawing.Pen(pathColor, 5);
 
                     using (var graphics = Graphics.FromImage(comboPathBitmap))
                     {
                         if ((xPrev != -1) && (yPrev != -1))
-                            graphics.DrawLine(blackPen, x, y, xPrev, yPrev);
+                            graphics.DrawLine(pen, x, y, xPrev, yPrev);
                     }
 
                     xPrev = x;
@@ -678,7 +677,6 @@ namespace DynamicPathPlanner.Code
                 int tY = targetY * hazardSectorSize;
 
                 int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
                 for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
                 {
                     for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
@@ -687,14 +685,13 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < pathBitmap.Width) && (b < pathBitmap.Height))
                             {
-                                pathBitmap.SetPixel(a, b, color);
+                                pathBitmap.SetPixel(a, b, startColor);
                             }
                         }
                     }
                 }
 
                 size = (int)((float)areaSize * 0.02f);
-                color = System.Drawing.Color.BlueViolet;
                 for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
                 {
                     for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
@@ -703,7 +700,7 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < pathBitmap.Width) && (b < pathBitmap.Height))
                             {
-                                pathBitmap.SetPixel(a, b, color);
+                                pathBitmap.SetPixel(a, b, targetColor);
                             }
                         }
                     }
@@ -750,7 +747,6 @@ namespace DynamicPathPlanner.Code
                 int tY = (int)((float)targetY * ((float)hazardSectorSize / ((float)areaSize / (float)skyPathBitmap.Height)));
 
                 int size = (int)((float)areaSize * 0.01f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
                 for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
                 {
                     for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
@@ -759,14 +755,13 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < skyPathBitmap.Width) && (b < skyPathBitmap.Height))
                             {
-                                skyPathBitmap.SetPixel(a, b, color);
+                                skyPathBitmap.SetPixel(a, b, startColor);
                             }
                         }
                     }
                 }
 
                 size = (int)((float)areaSize * 0.01f);
-                color = System.Drawing.Color.BlueViolet;
                 for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
                 {
                     for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
@@ -775,7 +770,7 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < skyPathBitmap.Width) && (b < skyPathBitmap.Height))
                             {
-                                skyPathBitmap.SetPixel(a, b, color);
+                                skyPathBitmap.SetPixel(a, b, targetColor);
                             }
                         }
                     }
@@ -861,7 +856,6 @@ namespace DynamicPathPlanner.Code
                 int tY = (int)((float)targetY * ((float)hazardSectorSize / ((float)areaSize / (float)aerialCompareBitmap.Height)));
 
                 int size = (int)((float)areaSize * 0.01f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
                 for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
                 {
                     for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
@@ -870,14 +864,13 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < aerialCompareBitmap.Width) && (b < aerialCompareBitmap.Height))
                             {
-                                aerialCompareBitmap.SetPixel(a, b, color);
+                                aerialCompareBitmap.SetPixel(a, b, startColor);
                             }
                         }
                     }
                 }
 
                 size = (int)((float)areaSize * 0.01f);
-                color = System.Drawing.Color.BlueViolet;
                 for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
                 {
                     for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
@@ -886,7 +879,7 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < aerialCompareBitmap.Width) && (b < aerialCompareBitmap.Height))
                             {
-                                aerialCompareBitmap.SetPixel(a, b, color);
+                                aerialCompareBitmap.SetPixel(a, b, targetColor);
                             }
                         }
                     }
@@ -969,7 +962,6 @@ namespace DynamicPathPlanner.Code
                 int tY = targetY * hazardSectorSize;
 
                 int size = (int)((float)areaSize * 0.02f);
-                System.Drawing.Color color = System.Drawing.Color.BlueViolet;
                 for (int a = (sX - (size / 2)); a < (sX + (size / 2)); a++)
                 {
                     for (int b = (sY - (size / 2)); b < (sY + (size / 2)); b++)
@@ -978,14 +970,13 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < compareBitmap.Width) && (b < compareBitmap.Height))
                             {
-                                compareBitmap.SetPixel(a, b, color);
+                                compareBitmap.SetPixel(a, b, startColor);
                             }
                         }
                     }
                 }
 
                 size = (int)((float)areaSize * 0.02f);
-                color = System.Drawing.Color.BlueViolet;
                 for (int a = (tX - (size / 2)); a < (tX + (size / 2)); a++)
                 {
                     for (int b = (tY - (size / 2)); b < (tY + (size / 2)); b++)
@@ -994,7 +985,7 @@ namespace DynamicPathPlanner.Code
                         {
                             if ((a < compareBitmap.Width) && (b < compareBitmap.Height))
                             {
-                                compareBitmap.SetPixel(a, b, color);
+                                compareBitmap.SetPixel(a, b, targetColor);
                             }
                         }
                     }
