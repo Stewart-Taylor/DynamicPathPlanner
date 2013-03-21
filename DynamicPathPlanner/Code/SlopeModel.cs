@@ -4,7 +4,7 @@
  * This class is used to generate a slope model
  * It also generates A visual output of the slope model
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/03/2013
 */
 
 using System;
@@ -64,7 +64,7 @@ namespace DynamicPathPlanner.Code
             }
             else if (algorithmType == SlopeHorn.ALGORITHM)
             {
-                slopeAlgortihm = new SlopeAverage(model);
+                slopeAlgortihm = new SlopeHorn(model);
             }
             else
             {

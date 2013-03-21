@@ -101,7 +101,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            fastSetup(); // Testing Only
+           // fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -153,21 +153,25 @@ namespace DynamicPathPlanner
           interfaceManager.connectToPANGU();
             interfaceManager.setEnviornmentString("Moon.pan");
            interfaceManager.generateElevationModel(0.1f, 1024);
-           interfaceManager.generateSlopeModel("HORN");
+           interfaceManager.setRoverSize(1.0f);
+           interfaceManager.setRoverSlope(0.261f);
+           interfaceManager.generateSlopeModel("AVERAGE");
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-           
-       
-           /*
-            interfaceManager.connectToPANGU();
-            interfaceManager.setEnviornmentString("Moon.pan");
-            interfaceManager.generateElevationModel(0.1f, 1024);
-            interfaceManager.generateSlopeModel("HORN");
-            interfaceManager.generateHazardModel(1);
-            interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
-            nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-   */
+
+
+            /*
+             interfaceManager.connectToPANGU();
+             interfaceManager.setEnviornmentString("Moon.pan");
+             interfaceManager.generateElevationModel(0.1f, 1024);
+           interfaceManager.setRoverSize(1.0f);
+           interfaceManager.setRoverSlope(0.261f);
+             interfaceManager.generateSlopeModel("HORN");
+             interfaceManager.generateHazardModel(1);
+             interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
+             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
+    */
         }
 
         private void resultScreen(object sender, EventArgs e)
@@ -370,7 +374,10 @@ namespace DynamicPathPlanner
             if (interfaceManager.isElevationMapGenerated())
             {
                // nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
-                nextSlide(grid_elevation_slide, grid_roverSetup_Slide, "Elevation_SlideOut", "RoverSetup_SlideIn");
+                interfaceManager.setRoverSize(1.0f);
+                interfaceManager.setRoverSlope(0.3f);
+                nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
+              //  nextSlide(grid_elevation_slide, grid_roverSetup_Slide, "Elevation_SlideOut", "RoverSetup_SlideIn");
             }
         }
 
@@ -469,11 +476,14 @@ namespace DynamicPathPlanner
             {
                 sizeTemp = txt_elevationSize.Text;
                 elevationSize = int.Parse(sizeTemp);
-               
-                elevation_worker.RunWorkerAsync();
-                BeginStoryboard(elevation_wait);
-                btn_elevationNext.Visibility = Visibility.Hidden;
-                elevation_wait.Begin();
+
+                if ( (elevationSize >= 100) && (elevationSize <= 100000))
+                {
+                    elevation_worker.RunWorkerAsync();
+                    BeginStoryboard(elevation_wait);
+                    btn_elevationNext.Visibility = Visibility.Hidden;
+                    elevation_wait.Begin();
+                }
             }
             catch { }
         }
@@ -682,6 +692,8 @@ namespace DynamicPathPlanner
             //Validate Rover Size and set it
             float value = (float)slider_roverSize.Value;
             float roverSlope = (float)slider_roverSlope.Value;
+            roverSlope = (float)Math.PI * roverSlope / 180.0f; // Convert to Radians
+
             interfaceManager.setRoverSize(value);
             interfaceManager.setRoverSlope(roverSlope);
             nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
