@@ -837,7 +837,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -849,7 +849,7 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="PANGU"/></TextBlock>
     			<TextBlock Margin="0,67.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2"><Run Language="en-gb" Text="Please select an environment"/></TextBlock>
-    			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click"/>
+    			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click" Focusable="False"/>
     			<TextBlock Margin="0,89.269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<ListBox x:Name="lst_environment" Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White">
@@ -876,7 +876,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -887,17 +887,17 @@
     				</TransformGroup>
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Elevation"/></TextBlock>
-    			<Button x:Name="btn_elevationNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationNext_Click"/>
+    			<Button x:Name="btn_elevationNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationNext_Click" Focusable="False"/>
     			<TextBlock Margin="0,83.803,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png"/>
     			<TextBlock x:Name="lbl_elevationWait" Margin="284.036,0,152.885,16" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..."/>
     			<TextBox x:Name="txt_elevationSize" Margin="135.7,176.25,0,193.75" TextWrapping="Wrap" Text="1024" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="93.245" Height="30" TextAlignment="Right"/>
     			<TextBlock Margin="6.686,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Elevation Size" Width="118.257" d:LayoutOverrides="Height"/>
-    			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244"/>
+    			<Button x:Name="btn_elevationUpdate" Content="Update" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244" Focusable="False"/>
     			<TextBlock Margin="0,62.069,16,0" TextWrapping="Wrap" Foreground="#FFE2E2E2" Text="Generate an elevation model form PANGU" VerticalAlignment="Top"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer1" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -909,7 +909,7 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Rover Setup"/></TextBlock>
     			<TextBlock Margin="8,105.692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Height="26.318" Text="Rover Size (Metres)"/>
-    			<Button x:Name="btn_roverSetup_next" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_roverSetup_next_Click"/>
+    			<Button x:Name="btn_roverSetup_next" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_roverSetup_next_Click" Focusable="False"/>
     			<TextBlock x:Name="lbl_hazardWait1" Margin="111.152,0,0,50.114" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="162.914"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError6" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
@@ -931,7 +931,7 @@
     				</TransformGroup>
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Slope"/></TextBlock>
-    			<Button x:Name="btn_slopeNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_slopeNext_Click"/>
+    			<Button x:Name="btn_slopeNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_slopeNext_Click" Focusable="False"/>
     			<TextBlock x:Name="lbl_slopeWait" Margin="102.187,0,0,125.934" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError3" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
@@ -956,7 +956,7 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Hazard"/></TextBlock>
     			<TextBlock Margin="8,105.692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Height="26.318"><Run Language="en-gb" Text="Sector Size"/><LineBreak/><Run Language="en-gb"/></TextBlock>
-    			<Button x:Name="btn_hazardNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_hazardNext_Click"/>
+    			<Button x:Name="btn_hazardNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_hazardNext_Click" Focusable="False"/>
     			<TextBlock x:Name="lbl_hazardWait" Margin="111.152,0,0,50.114" TextWrapping="Wrap" FontSize="18.667" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="162.914"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError4" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
@@ -978,7 +978,7 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843"><Run Language="en-gb" Text="Rover"/><LineBreak/><Run Language="en-gb"/></TextBlock>
     			<TextBlock Margin="8,96.411,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Start Position"/>
-    			<Button x:Name="btn_roverNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_roverNext_Click"/>
+    			<Button x:Name="btn_roverNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF339933" BorderBrush="{x:Null}" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_roverNext_Click" Focusable="False"/>
     			<TextBlock Margin="0,63.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError5" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<TextBlock Margin="9.003,197.079,0,181.64" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Text="Target Position" HorizontalAlignment="Left" RenderTransformOrigin="0.506,-1.088" d:LayoutOverrides="Height"/>
@@ -994,7 +994,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1022,11 +1022,11 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light" Height="59.843" Margin="12.932,8,0,0" Text="Simulation"/>
     			<TextBlock Margin="12.932,71.843,395.068,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<Grid x:Name="grid_controls1" HorizontalAlignment="Right" Width="230" Margin="0,9.119,0,0" Grid.Row="1">
-    				<Button x:Name="btn_simulationInstant" Content="Instant" Margin="62,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationInstant_Click" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top"/>
-    				<Button x:Name="btn_simulationStart" Content="Play"  Margin="8,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click" HorizontalAlignment="Left" Width="50"/>
-    				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,7.999" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom"/>
+    				<Button x:Name="btn_simulationInstant" Content="Instant" Margin="62,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationInstant_Click" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Focusable="False"/>
+    				<Button x:Name="btn_simulationStart" Content="Play"  Margin="8,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Height="50" VerticalAlignment="Top" d:LayoutOverrides="Height" Click="btn_simulationStart_Click" HorizontalAlignment="Left" Width="50" Focusable="False"/>
+    				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,7.999" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom" Focusable="False"/>
     				<TextBlock x:Name="lbl_simulationWait" Margin="8,0,8,33.957" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
-    				<Button x:Name="btn_back" Content="Back" Margin="8,0,0,7.998" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_back_Click" HorizontalAlignment="Left" Width="50" VerticalAlignment="Bottom"/>
+    				<Button x:Name="btn_back" Content="Back" Margin="8,0,0,7.998" Background="#FF2AA511" Foreground="White" BorderBrush="{x:Null}" Click="btn_back_Click" HorizontalAlignment="Left" Width="50" VerticalAlignment="Bottom" Focusable="False"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1043,10 +1043,10 @@
     					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
     						<Image x:Name="img_simulationMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
-    						<Button x:Name="btn_simulationSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click"/>
-    						<Button x:Name="btn_simulationElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click"/>
-    						<Button x:Name="btn_simulationSky" Content="Aerial" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click"/>
-    						<Button x:Name="btn_simulationHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click"/>
+    						<Button x:Name="btn_simulationSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_simulationSlope_Click" Focusable="False"/>
+    						<Button x:Name="btn_simulationElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationElevation_Click" Focusable="False"/>
+    						<Button x:Name="btn_simulationSky" Content="Aerial" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationSky_Click" Focusable="False"/>
+    						<Button x:Name="btn_simulationHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_simulationHazard_Click" Focusable="False"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="8" Grid.Column="1">
@@ -1073,7 +1073,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1109,10 +1109,10 @@
     					<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
     						<Image x:Name="img_resultsMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
-    						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_resultsSlope_Click"/>
-    						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsElevation_Click"/>
-    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsSky_Click"/>
-    						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsHazard_Click"/>
+    						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_resultsSlope_Click" Focusable="False"/>
+    						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsElevation_Click" Focusable="False"/>
+    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsSky_Click" Focusable="False"/>
+    						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsHazard_Click" Focusable="False"/>
     					</Grid>
     				</Grid>
     				<Grid Margin="8" Grid.Column="1">
