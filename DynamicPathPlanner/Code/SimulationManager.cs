@@ -446,7 +446,7 @@ namespace DynamicPathPlanner.Code
                         if ((p.x == a.x) && (p.x == a.y))
                         {
                             count++;
-                            usedPoints.Add(p);
+                            usedPoints.Add(a);
                         }
                     }
                 }
