@@ -697,5 +697,10 @@ namespace DynamicPathPlanner
             interfaceManager.setRoverSlope(roverSlope);
             nextSlide(grid_roverSetup_Slide, grid_slope_slide, "RoverSetup_SlideOut", "Slope_SlideIn");
         }
+
+        private void btn_resultsExport_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            interfaceManager.exportResults("Test");
+        }
     }
 }

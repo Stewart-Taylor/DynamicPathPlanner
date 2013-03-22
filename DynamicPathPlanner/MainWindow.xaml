@@ -876,7 +876,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -1075,7 +1075,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1131,6 +1131,7 @@
     						<TextBlock Margin="8,0,0,10.997" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White" FontSize="18.667" HorizontalAlignment="Left" Width="242.822"><Run Text=" "/><Run Foreground="#FFCC5F20" FontSize="32" Text="-"/><Run Foreground="Red" FontSize="32" Text=" "/><Run Language="en-gb" Text="D Star Known"/></TextBlock>
     						<TextBlock x:Name="lbl_resultLikeness_Copy" Margin="8.447,155.842,0,0" TextWrapping="Wrap" Text="This is how similar the simulation path is to the optimal path" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Width="563.136" FontSize="13.333"/>
     					</Grid>
+    					<Button x:Name="btn_resultsExport" Content="Export Results" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsExport_Click" Focusable="False" Padding="5,1"/>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
     			</Grid>
