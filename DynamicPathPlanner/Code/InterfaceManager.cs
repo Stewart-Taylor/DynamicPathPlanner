@@ -537,5 +537,10 @@ namespace DynamicPathPlanner
         }
 
 
+        public void exportResults(String simulationName)
+        {
+         ResultManager results = new ResultManager();
+        }
+
     }
 }
