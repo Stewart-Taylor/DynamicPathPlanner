@@ -175,28 +175,31 @@ namespace DynamicPathPlanner.Code
         //returns bitmap image converted from the PANGU stream
         public Bitmap getImage(float x, float y, float z, float yaw, float pitch, float roll , float fov)
         {
-            unsafe
+            try
             {
-                pan_protocol_set_aspect_ratio(sock, 1); //set aspect ratio
-                pan_protocol_set_boulder_view(sock, 1, 0);//turn boulders off
-                pan_protocol_set_field_of_view(sock, fov);//set field of view
+                unsafe
+                {
+                    pan_protocol_set_aspect_ratio(sock, 1);     //sets aspect ratio
+                    pan_protocol_set_boulder_view(sock, 1, 0);  //view boulders
+                    pan_protocol_set_field_of_view(sock, fov);  //set field of view
 
-                ulong t = 1024;
-                char* img;
-                //  pan_protocol_set_viewpoint_by_angle(sock, 0, 0, 1866, -90, -90, 0); //set the image
-                img = pan_protocol_get_viewpoint_by_angle(sock, x, y, z, yaw, pitch, roll, &t); //get the image
-                UnmanagedMemoryStream readStream = new UnmanagedMemoryStream((byte*)img, (long)t);
+                    ulong t = 1024;
+                    char* img;
+                    img = pan_protocol_get_viewpoint_by_angle(sock, x, y, z, yaw, pitch, roll, &t); //gets the image
+                    UnmanagedMemoryStream readStream = new UnmanagedMemoryStream((byte*)img, (long)t);
 
-                Bitmap bitmap = fetchImage(readStream);
-                readStream.Close(); //tidy up
-                readStream.Dispose();//tidy up
-                return bitmap;
+                    Bitmap bitmap = fetchImage(readStream);
+                    readStream.Close(); 
+                    readStream.Dispose();
+                    return bitmap;
+                }
+            }
+            catch
+            {
+                //Error at PANGU end. 
+                return null;
             }
         }
-
-
-
-
 
         private Bitmap fetchImage(UnmanagedMemoryStream memStream)
         {
