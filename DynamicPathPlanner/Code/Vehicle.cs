@@ -5,7 +5,7 @@
  * It will access the sensorManager to get enviorment data (Simulates Sensors)
  * It will use it's own internal hazard map for pathfinding only!
  *
- * Last Updated: 19/03/2013
+ * Last Updated: 21/03/2013
 */
 
 using System;
@@ -33,6 +33,10 @@ namespace DynamicPathPlanner.Code
         private int previousX;
         private int previousY;
 
+        private float realPositionX;
+        private float realPositionY;
+        private float roverAngle;
+
         private int startX;
         private int startY;
         private int targetX;
@@ -58,6 +62,7 @@ namespace DynamicPathPlanner.Code
 
         private bool roverCamEnabled = true;
 
+        private bool atNextPoint = false;
 
         #region GET
 
@@ -558,8 +563,8 @@ namespace DynamicPathPlanner.Code
         {
             if (roverCamEnabled == true)
             {
-                int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
-                int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
+                int x = (int)( ((float)positionX - ((float)areaSize /2f))  );
+                int y = -(int)((float)positionY - (((float)areaSize /2f)) );
                 int z = cameraHeight;
 
 
