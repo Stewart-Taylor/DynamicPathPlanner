@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 23/03/2013
 */
 
 using System;
@@ -540,6 +540,10 @@ namespace DynamicPathPlanner
         public void exportResults(String simulationName)
         {
             ResultManager results = new ResultManager(simulationName);
+            results.createSimulationDetails();
+            results.createSimulationLog();
+            results.createSimulationData();
+            results.createSimulationImages();
         }
 
     }
