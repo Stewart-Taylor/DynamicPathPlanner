@@ -52,7 +52,7 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        public void createSimulationDetails()
+        public void createSimulationDetails(String environment, int areaSize, float distanceStep, String slopeAlgorithm, int hazardSectorSize , int startX , int startY , int targetX , int targetY ,int simulationSteps ,int knownSteps, int optimalSteps , int likeness)
         {
             string path = Path.Combine(resultFolderPath + "/" + simulationName, detailsFilename);
 
@@ -66,20 +66,20 @@ namespace DynamicPathPlanner.Code
                 sw.WriteLine("---------------------------------------------");
                 sw.WriteLine("SETTINGS");
                 sw.WriteLine("---------------------------------------------");
-                sw.WriteLine("Environment: Moon.pan");
-                sw.WriteLine("Elevation Area Size: 1024");
-                sw.WriteLine("Distance Step: 0.1");
-                sw.WriteLine("Slope Algortihm: Horn");
-                sw.WriteLine("Hazard Sector Size: 10");
-                sw.WriteLine("Start Position: (10,10)");
-                sw.WriteLine("Target Position: (60,50)");
+                sw.WriteLine("Environment: " + environment);
+                sw.WriteLine("Elevation Area Size: " + areaSize);
+                sw.WriteLine("Distance Step: " + distanceStep);
+                sw.WriteLine("Slope Algortihm: " + slopeAlgorithm);
+                sw.WriteLine("Hazard Sector Size: " + hazardSectorSize);
+                sw.WriteLine("Start Position: (" + startX + "," + startY + ")");
+                sw.WriteLine("Target Position: (" + targetX + "," + targetY + ")");
                 sw.WriteLine("---------------------------------------------");
                 sw.WriteLine("Results");
                 sw.WriteLine("---------------------------------------------");
-                sw.WriteLine("Simulation Steps: 183");
-                sw.WriteLine("Simulation Known Steps: 87");
-                sw.WriteLine("Optimal Steps: 82");
-                sw.WriteLine("Path Likeness: 24%");
+                sw.WriteLine("Simulation Steps: " + simulationSteps);
+                sw.WriteLine("Simulation Known Steps: " + knownSteps);
+                sw.WriteLine("Optimal Steps: " + optimalSteps);
+                sw.WriteLine("Path Likeness: " + likeness + "%");
                 sw.WriteLine("---------------------------------------------");
             }
 

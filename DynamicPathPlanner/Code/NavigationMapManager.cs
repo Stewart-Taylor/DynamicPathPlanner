@@ -4,7 +4,7 @@
  * This is used to manage all of the navigational data 
  * It is used to manage and generate the elevation, slope and hazard models
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 23/03/2013
 */
 
 using System;
@@ -122,6 +122,11 @@ namespace DynamicPathPlanner.Code
         public String getEnvironementString()
         {
             return environmentText;
+        }
+
+        public String getSlopeAlgorithm()
+        {
+            return slopeModel.getSlopeAlgorithm();
         }
 
         #endregion

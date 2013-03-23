@@ -4,7 +4,7 @@
  * This class is used to generate a slope model
  * It also generates A visual output of the slope model
  *
- * Last Updated: 21/03/2013
+ * Last Updated: 23/03/2013
 */
 
 using System;
@@ -33,6 +33,10 @@ namespace DynamicPathPlanner.Code
 
         private string algorithmType;
 
+        public String getSlopeAlgorithm()
+        {
+            return algorithmType;
+        }
 
         public SlopeModel(double[,] modelT, string type)
         {
