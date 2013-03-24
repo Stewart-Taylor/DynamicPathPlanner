@@ -23,6 +23,7 @@ namespace DynamicPathPlanner.Code
 
         private String resultFolderPath = "Results";
         private String imageFolder = "Images";
+        private String dataFolder = "Data";
         private String simulationName;
         private String detailsFilename = "Details.txt";
         private String logFilename = "Log.txt";
@@ -56,6 +57,12 @@ namespace DynamicPathPlanner.Code
             if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + imageFolder))
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + imageFolder);
+            }
+
+            // Data Folder
+            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + dataFolder))
+            {
+                Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + dataFolder);
             }
 
         }
@@ -128,7 +135,8 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        public void createSimulationData()
+
+        public void createSimulationData(double[,] elevation, double[,] slope, int[,] hazard, float[,] internalMap, List<int[,]> path)
         {
             createElevationFile();
             createSlopeFile();
