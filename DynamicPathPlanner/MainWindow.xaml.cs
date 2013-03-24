@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 21/03/2013
+ * Last Updated: 24/03/2013
 */
 
 using System;

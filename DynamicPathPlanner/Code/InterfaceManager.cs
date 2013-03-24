@@ -335,7 +335,7 @@ namespace DynamicPathPlanner
             //if connection was established connect
             if (PANGU_Manager.connect(hostname, portNumber) == true)
             {
-                addLogEntry("Pangu Started");
+                addLogEntry("Pangu Connection Established");
                 return true;
             }
 
@@ -345,6 +345,8 @@ namespace DynamicPathPlanner
         private void startPANGU(String pan)
         {
             String filename = Properties.Settings.Default.panguDirectory;
+
+            addLogEntry("Starting PANGU : " + filename);
 
             System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
             proc.StartInfo.FileName = filename;
