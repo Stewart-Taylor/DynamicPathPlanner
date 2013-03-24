@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace DynamicPathPlanner.Code
 {
@@ -21,6 +22,7 @@ namespace DynamicPathPlanner.Code
     {
 
         private String resultFolderPath = "Results";
+        private String imageFolder = "Images";
         private String simulationName;
         private String detailsFilename = "Details.txt";
         private String logFilename = "Log.txt";
@@ -48,6 +50,12 @@ namespace DynamicPathPlanner.Code
             if (!Directory.Exists(resultFolderPath + "/" + simulationName))
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName);
+            }
+
+            // Images Folder
+            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + imageFolder))
+            {
+                Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + imageFolder);
             }
 
         }
@@ -101,12 +109,23 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        public void createSimulationImages()
+        public void createSimulationImages(Bitmap aerial, Bitmap elevation, Bitmap slope, Bitmap hazard, Bitmap aerialPath, Bitmap elevationPath, Bitmap slopePath, Bitmap hazardPath, Bitmap aerialCompare, Bitmap elevationCompare, Bitmap slopeCompare, Bitmap hazardCompare, Bitmap internalMap)
         {
 
+            aerial.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Aerial.png"), ImageFormat.Png);
+            elevation.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Elevation.png"), ImageFormat.Png);
+            slope.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Slope.png"), ImageFormat.Png);
+            hazard.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Hazard.png"), ImageFormat.Png);
+            aerialPath.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/aerialPath.png"), ImageFormat.Png);
+            elevationPath.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/elevationPath.png"), ImageFormat.Png);
+            slopePath.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/slopePath.png"), ImageFormat.Png);
+            hazardPath.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/hazardPath.png"), ImageFormat.Png);
+            aerialCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/aerialCompare.png"), ImageFormat.Png);
+            elevationCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/elevationCompare.png"), ImageFormat.Png);
+            slopeCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/slopeCompare.png"), ImageFormat.Png);
+            hazardCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/hazardCompare.png"), ImageFormat.Png);
+            internalMap.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/internalMap.png"), ImageFormat.Png);
 
-            //     Bitmap bmp1 = new Bitmap(typeof(Button), "Button.bmp");
-            //     bmp1.Save(@"c:\button.png", ImageFormat.Png);
         }
 
         public void createSimulationData()

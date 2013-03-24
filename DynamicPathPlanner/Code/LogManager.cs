@@ -45,21 +45,15 @@ namespace DynamicPathPlanner.Code
 
         private void printToLogFile(String entry)
         {
-            
-
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filepath))
             {
                     file.WriteLine(entry);
             }
-
         }
 
         public  void printToConsole(String entry)
         {
          //  textConsole.Text += '\r' + entry ;
-
-          
-
         }
 
     }

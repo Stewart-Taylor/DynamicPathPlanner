@@ -359,6 +359,7 @@ namespace DynamicPathPlanner
 
         public void disconnectFromPANGU()
         {
+            addLogEntry("Disconnected from PANGU");
             PANGU_Manager.endConnection();
         }
 
@@ -369,16 +370,19 @@ namespace DynamicPathPlanner
 
         public void generateElevationModel(float distance , int size)
         {
+            addLogEntry("Generating Elevation Model");
             navigationMapManager.generateElevationModel(distance , size);
         }
 
         public void generateSlopeModel(String type)
         {
+            addLogEntry("Generating Slope Model");
             navigationMapManager.generateSlopeModel(type);
         }
 
         public void generateHazardModel(int size)
         {
+            addLogEntry("Generating Hazard Model");
             navigationMapManager.generateHazardModel(size);
         }
 
@@ -392,10 +396,10 @@ namespace DynamicPathPlanner
 
         public void startSimulation()
         {
-         //   logManager.addEntry("Simulation Started");
+            logManager.addEntry("Simulation Started");
             simulationManager.setSimulation(navigationMapManager , PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()));
             simulationManager.startSimulation();
-         //   logManager.addEntry("Simulation Complete");
+            logManager.addEntry("Simulation Complete");
         }
 
 
@@ -464,16 +468,19 @@ namespace DynamicPathPlanner
         {
             if ((startX <= 0) || (startY <= 0) || (targetX <= 0) || (targetY <= 0)) 
             {
+                addLogEntry("Vehicle Positions Not Valid");
                 return false;
             }
 
             if ((startX >= navigationMapManager.getHazardWidth()) || (startY >= navigationMapManager.getHazardHeight()) || (targetX >= navigationMapManager.getHazardWidth()) || (targetY >= navigationMapManager.getHazardHeight()))
             {
+                addLogEntry("Vehicle Positions Not Valid");
                 return false;
             }
 
             if ((startX == targetX) && (startY == targetY))
             {
+                addLogEntry("Vehicle Positions Not Valid");
                 return false;
             }
 
@@ -528,22 +535,27 @@ namespace DynamicPathPlanner
 
         public void resetSimulation()
         {
+            addLogEntry("Simulation Reset");
             simulationManager = new SimulationManager(); 
         }
 
         public void runCompareSimulation()
         {
+            addLogEntry("Simulation Compare Started");
             simulationManager.runCompareSimulation();
+            addLogEntry("Simulation Compare Complete");
         }
 
 
         public void exportResults(String simulationName)
         {
+            addLogEntry("Result Export Started");
             ResultManager results = new ResultManager(simulationName);
             results.createSimulationDetails(navigationMapManager.getEnvironementString(), navigationMapManager.getAreaSize(), navigationMapManager.getDistanceStep(), navigationMapManager.getSlopeAlgorithm(), navigationMapManager.getHazardSectorSize(), simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getSteps(), simulationManager.getDKnownSteps(), simulationManager.getOptimalSteps(), simulationManager.getPathLikeness()); 
             results.createSimulationLog(logManager.getEntries());
             results.createSimulationData();
-            results.createSimulationImages();
+            results.createSimulationImages(PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()), navigationMapManager.getElevationBitmap(), navigationMapManager.getSlopeBitmap(),navigationMapManager.getHazardBitmap(), simulationManager.getAerialPathImage(), simulationManager.getElevationPathImage(), simulationManager.getSlopePathImage(), simulationManager.getHazardPathImage(), simulationManager.getAerialCompareImage(), simulationManager.getElevationCompareImage(), simulationManager.getSlopeCompareImage(), simulationManager.getHazardCompareImage(), simulationManager.getVehicleInternalBitmap());
+            
         }
 
     }

@@ -104,6 +104,11 @@ namespace DynamicPathPlanner.Code
             return bitmap;
         }
 
+        public Bitmap getPathBitmap()
+        {
+            return pathBitmap;
+        }
+
         #endregion
 
         #region SET
