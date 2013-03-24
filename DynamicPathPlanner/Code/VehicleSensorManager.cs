@@ -88,7 +88,7 @@ namespace DynamicPathPlanner.Code
         {
             if ((x >= 0) && (y >= 0))
             {
-                if ((x <= width) && (y <= height))
+                if ((x < width) && (y < height))
                 {
                     int value = realMap[x, y];
                     vehicle.setNode(x, y, value);

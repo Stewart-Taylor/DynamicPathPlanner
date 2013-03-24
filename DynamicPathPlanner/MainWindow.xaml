@@ -837,7 +837,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -852,7 +852,7 @@
     			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click" Focusable="False"/>
     			<TextBlock Margin="0,89.269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
-    			<ListBox x:Name="lst_environment" Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White">
+    			<ListBox x:Name="lst_environment" Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White" FontSize="16">
     				<TextBlock TextWrapping="Wrap" Text="World1.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     				<TextBlock TextWrapping="Wrap" Text="Moon.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     				<TextBlock TextWrapping="Wrap" Text="Mars.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
@@ -1075,7 +1075,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>

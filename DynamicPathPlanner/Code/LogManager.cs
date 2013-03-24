@@ -23,7 +23,7 @@ namespace DynamicPathPlanner.Code
 
         private String filepath = "Log.txt";
         private TextBox textConsole;
-        private List<String> entries = new List<string>();
+        private List<String> entries = new List<String>();
 
         public List<String> getEntries()
         {
@@ -36,6 +36,10 @@ namespace DynamicPathPlanner.Code
             textConsole = tBox;
         }
 
+        public void clearSimulationLog()
+        {
+            entries.Clear();
+        }
 
         public void addEntry(String entryText)
         {

@@ -130,13 +130,41 @@ namespace DynamicPathPlanner
 
             if (startSlideIn == null)
             {
+                populateEnvironment();
+
                 startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Pangu_SlideIn");
               //  startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
+
             }
            
             BeginStoryboard(startSlideIn);
 
             started = true;
+        }
+
+
+
+        private void populateEnvironment()
+        {
+            lst_environment.Items.Clear();
+            btn_environmentNext.IsEnabled = true;
+
+            try
+            {
+                String dir = Properties.Settings.Default.panDirectory;
+
+                foreach (string file in Directory.EnumerateFiles(dir, "*.pan"))
+                {
+                    lst_environment.Items.Add(file);
+                }
+            }
+            catch
+            {
+                String errorMsg = "Error Accessing Environment Folder";
+                lst_environment.Items.Add(errorMsg);
+                btn_environmentNext.IsEnabled = false;
+                interfaceManager.addLogEntry("Unable to access environement folder");
+            }
         }
 
         private void panguStartUp(object sender, EventArgs e)
@@ -289,8 +317,11 @@ namespace DynamicPathPlanner
 
             if (lst_environment.SelectedValue != null)
             {
-                TextBlock temp = (TextBlock)lst_environment.SelectedItem;
-                selectedText = temp.Text;
+                String temp = (String)lst_environment.SelectedItem;
+                selectedText = temp;
+
+               // TextBlock temp = (TextBlock)lst_environment.SelectedItem;
+              //  selectedText = temp.Text;
             }
 
             if (selectedText.Length > 0)
@@ -300,7 +331,9 @@ namespace DynamicPathPlanner
 
             if (valid == true)
             {
-                interfaceManager.setEnviornmentString(selectedText);
+
+                String absolute = System.IO.Path.GetFullPath(selectedText);
+                interfaceManager.setEnviornmentString(absolute);
 
              //   img_elevationSlide.Source = interfaceManager.getQuickView();
              //   btn_elevationNext.Visibility = Visibility.Hidden;

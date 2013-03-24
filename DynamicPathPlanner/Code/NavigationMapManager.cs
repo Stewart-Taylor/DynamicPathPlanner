@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Drawing;
+using System.IO;
 
 namespace DynamicPathPlanner.Code
 {
@@ -121,6 +122,12 @@ namespace DynamicPathPlanner.Code
 
         public String getEnvironementString()
         {
+            String name = Path.GetFileName(environmentText);
+            return name;
+        }
+
+        public String getEnvironementPath()
+        {
             return environmentText;
         }
 
@@ -151,7 +158,7 @@ namespace DynamicPathPlanner.Code
             distanceStep = distance;
             areaSize = size;
             elevationModel = new ElevationModel();
-            elevationModel.load(environmentText, distance, size);
+            elevationModel.load(getEnvironementString(), distance, size);
         }
 
         public void generateSlopeModel(String type)

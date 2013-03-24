@@ -46,5 +46,30 @@ namespace DynamicPathPlanner.Properties {
                 this["distanceStep"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/PanguServer" +
+            ".bat")]
+        public string panguDirectory {
+            get {
+                return ((string)(this["panguDirectory"]));
+            }
+            set {
+                this["panguDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Stewart\\Desktop\\testFof")]
+        public string panDirectory {
+            get {
+                return ((string)(this["panDirectory"]));
+            }
+            set {
+                this["panDirectory"] = value;
+            }
+        }
     }
 }

@@ -36,6 +36,8 @@ namespace DynamicPathPlanner
         {
             txt_intervalTime.Text = Properties.Settings.Default.IntervalTime.ToString();
             txt_distanceStep.Text = Properties.Settings.Default.distanceStep.ToString();
+            txt_panguPath.Text = Properties.Settings.Default.panguDirectory;
+            txt_environmentPath.Text = Properties.Settings.Default.panDirectory;
         }
 
         private void btn_okay_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -58,6 +60,8 @@ namespace DynamicPathPlanner
             saveValid = true;
             saveInterval();
             saveDistanceStep();
+            savePanguDirectory();
+            saveEnvironementDirectory();
 
             if (saveValid == true)
             {
@@ -97,7 +101,36 @@ namespace DynamicPathPlanner
             }
         }
 
+        private void savePanguDirectory()
+        {
+            String dirText = txt_panguPath.Text;
 
+            try
+            {
+                //Maybe A PANGU Start Check?
+                Properties.Settings.Default.panguDirectory = dirText;
+            }
+            catch
+            {
+                lbl_error.Text = "Error: Not a valid PANGU Directory";
+                saveValid = false;
+            }
+        }
+
+        private void saveEnvironementDirectory()
+        {
+            String dirText = txt_environmentPath.Text;
+
+            try
+            {
+                Properties.Settings.Default.panDirectory = dirText;
+            }
+            catch
+            {
+                lbl_error.Text = "Error: Not a valid Environment Directory";
+                saveValid = false;
+            }
+        }
  
 
 	}

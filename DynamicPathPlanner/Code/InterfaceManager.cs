@@ -315,7 +315,9 @@ namespace DynamicPathPlanner
             PANGU_Manager.killPANGU();
             navigationMapManager = new NavigationMapManager();
             logManager = new LogManager(tBox);
+            logManager.clearSimulationLog();
         }
+
 
 
         public bool connectToPANGU(String pan)
@@ -342,7 +344,7 @@ namespace DynamicPathPlanner
 
         private void startPANGU(String pan)
         {
-            String filename = "C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/PanguServer.bat"; // GET FROM CONFIG
+            String filename = Properties.Settings.Default.panguDirectory;
 
             System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
             proc.StartInfo.FileName = filename;
