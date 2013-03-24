@@ -541,7 +541,7 @@ namespace DynamicPathPlanner
         {
             ResultManager results = new ResultManager(simulationName);
             results.createSimulationDetails(navigationMapManager.getEnvironementString(), navigationMapManager.getAreaSize(), navigationMapManager.getDistanceStep(), navigationMapManager.getSlopeAlgorithm(), navigationMapManager.getHazardSectorSize(), simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getSteps(), simulationManager.getDKnownSteps(), simulationManager.getOptimalSteps(), simulationManager.getPathLikeness()); 
-            results.createSimulationLog();
+            results.createSimulationLog(logManager.getEntries());
             results.createSimulationData();
             results.createSimulationImages();
         }

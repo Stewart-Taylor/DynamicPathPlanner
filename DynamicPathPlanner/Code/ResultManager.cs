@@ -85,7 +85,7 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        public void createSimulationLog()
+        public void createSimulationLog(List<String> entries)
         {
             string path = Path.Combine(resultFolderPath + "/" + simulationName, logFilename);
           
@@ -94,11 +94,11 @@ namespace DynamicPathPlanner.Code
                 sw.WriteLine("---------------------------------------------");
                 sw.WriteLine("SIMULATION LOG");
                 sw.WriteLine("---------------------------------------------");
-                sw.WriteLine("Something happens 232");
-                sw.WriteLine("Something happens again 232");
-                sw.WriteLine("ex cet ra");
+                foreach (String s in entries)
+                {
+                    sw.WriteLine(s);
+                }
             }
-
         }
 
         public void createSimulationImages()

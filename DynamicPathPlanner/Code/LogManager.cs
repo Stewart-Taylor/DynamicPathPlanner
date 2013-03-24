@@ -5,9 +5,8 @@
  * It will print out all the information to PathPlannerLog.txt
  * This class can also be used to provide information to a output console
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 24/03/2013
 */
-
 
 using System;
 using System.Collections.Generic;
@@ -21,8 +20,15 @@ namespace DynamicPathPlanner.Code
     class LogManager
     {
 
-        String filepath = "Log.txt";
-        TextBox textConsole;
+        private String filepath = "Log.txt";
+        private TextBox textConsole;
+        private List<String> entries = new List<string>();
+
+        public List<String> getEntries()
+        {
+            return entries;
+        }
+
 
         public LogManager(TextBox tBox)
         {
@@ -32,6 +38,7 @@ namespace DynamicPathPlanner.Code
 
         public void addEntry(String entryText)
         {
+            entries.Add(entryText);
             printToLogFile(entryText);
             printToConsole(entryText);
         }
