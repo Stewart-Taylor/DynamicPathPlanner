@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows;
+using System.IO;
 
 namespace DynamicPathPlanner.Code
 {
@@ -45,9 +46,9 @@ namespace DynamicPathPlanner.Code
 
         private void printToLogFile(String entry)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filepath))
+            using (StreamWriter w = File.AppendText(filepath))
             {
-                    file.WriteLine(entry);
+                w.WriteLine(entry);
             }
         }
 
