@@ -595,21 +595,25 @@ namespace DynamicPathPlanner
 
         private void btn_resultsSky_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            lbl_resultsMain.Text = "Aerial";
             img_resultsMain.Source = interfaceManager.getResultsAerial();
         }
 
         private void btn_resultsElevation_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            lbl_resultsMain.Text = "Elevation";
             img_resultsMain.Source = interfaceManager.getResultsElevation();
         }
 
         private void btn_resultsSlope_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            lbl_resultsMain.Text = "Slope";
             img_resultsMain.Source = interfaceManager.getResultsSlope();
         }
 
         private void btn_resultsHazard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            lbl_resultsMain.Text = "Hazard";
             img_resultsMain.Source = interfaceManager.getResultsHazard();
         }
 
