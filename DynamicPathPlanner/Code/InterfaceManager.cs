@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 23/03/2013
+ * Last Updated: 25/03/2013
 */
 
 using System;
@@ -573,7 +573,7 @@ namespace DynamicPathPlanner
             ResultManager results = new ResultManager(simulationName);
             results.createSimulationDetails(navigationMapManager.getEnvironementString(), navigationMapManager.getAreaSize(), navigationMapManager.getDistanceStep(), navigationMapManager.getSlopeAlgorithm(), navigationMapManager.getHazardSectorSize(), simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getSteps(), simulationManager.getDKnownSteps(), simulationManager.getOptimalSteps(), simulationManager.getPathLikeness()); 
             results.createSimulationLog(logManager.getEntries());
-            results.createSimulationData(navigationMapManager.getElevationModel(), navigationMapManager.getSlopeModel(), navigationMapManager.getHazardModel() , null , null);
+            results.createSimulationData(navigationMapManager.getElevationModel(), navigationMapManager.getSlopeModel(), navigationMapManager.getHazardModel() , simulationManager.getRoverInternalMap() , simulationManager.getPath());
             results.createSimulationImages(PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()), navigationMapManager.getElevationBitmap(), navigationMapManager.getSlopeBitmap(),navigationMapManager.getHazardBitmap(), simulationManager.getAerialPathImage(), simulationManager.getElevationPathImage(), simulationManager.getSlopePathImage(), simulationManager.getHazardPathImage(), simulationManager.getAerialCompareImage(), simulationManager.getElevationCompareImage(), simulationManager.getSlopeCompareImage(), simulationManager.getHazardCompareImage(), simulationManager.getVehicleInternalBitmap());
             
         }

@@ -5,7 +5,7 @@
  * It handles the results of the simulation
  * and generates visual output
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 25/03/2013
 */
 
 using System;
@@ -333,6 +333,16 @@ namespace DynamicPathPlanner.Code
         public float getRoverSlope()
         {
             return roverSlope;
+        }
+
+        public int[,] getRoverInternalMap()
+        {
+            return rover.getInternalMap();
+        }
+
+        public List<int[]> getPath()
+        {
+            return rover.getPath();
         }
 
         #endregion

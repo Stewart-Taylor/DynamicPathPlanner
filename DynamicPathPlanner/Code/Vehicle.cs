@@ -86,6 +86,21 @@ namespace DynamicPathPlanner.Code
             return takenPath;
         }
 
+        public List<int[]> getPath()
+        {
+            List<int[]> pList = new List<int[]>();
+
+            foreach (PathNode p in takenPath)
+            {
+                int[] t = new int[2];
+                t[0] = p.x;
+                t[1] = p.y;
+                pList.Add(t);
+            }
+
+            return pList;
+        }
+
         public bool reachedTarget()
         {
             return atTarget;
@@ -107,6 +122,11 @@ namespace DynamicPathPlanner.Code
         public Bitmap getPathBitmap()
         {
             return pathBitmap;
+        }
+
+        public int[,] getInternalMap()
+        {
+            return map.getMap();
         }
 
         #endregion

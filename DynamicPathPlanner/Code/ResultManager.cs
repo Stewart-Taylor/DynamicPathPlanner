@@ -136,7 +136,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public void createSimulationData(double[,] elevation, double[,] slope, int[,] hazard, float[,] internalMap, List<int[,]> path)
+        public void createSimulationData(double[,] elevation, double[,] slope, int[,] hazard, int[,] internalMap, List<int[]> path)
         {
             createElevationFile(elevation);
             createSlopeFile(slope);
@@ -214,7 +214,7 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        private void createInternalMapFile(float[,] internalMap)
+        private void createInternalMapFile(int[,] internalMap)
         {
             try
             {
@@ -237,11 +237,17 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        private void createPathFile(List<int[,]> path)
+        private void createPathFile(List<int[]> path)
         {
             try
             {
-
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "/Path.txt"))
+                {
+                    foreach (int[] p in path)
+                    {
+                        file.WriteLine("(" + p[0] + "," + p[1] + ")");
+                    }
+                }
             }
             catch
             {
