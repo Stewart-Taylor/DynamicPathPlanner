@@ -75,7 +75,8 @@ namespace DynamicPathPlanner.Code
 
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.WriteLine("TEST");
+                sw.WriteLine(simulationName);
+                sw.WriteLine("---------------------------------------------");
                 sw.WriteLine("Simulation Details File");
                 sw.WriteLine("Created " + date); 
                 sw.WriteLine("---------------------------------------------");
