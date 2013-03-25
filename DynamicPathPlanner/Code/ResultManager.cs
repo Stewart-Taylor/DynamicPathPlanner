@@ -147,40 +147,106 @@ namespace DynamicPathPlanner.Code
 
         private void createElevationFile(double[,] elevation)
         {
-
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "elevationData.txt"))
+            try
             {
-                for (int y = 0; y < elevation.GetLength(1); y++)
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "/Elevation.txt"))
                 {
-                    for (int x = 0; x < elevation.GetLength(0); x++)
+                    for (int y = 0; y < elevation.GetLength(1); y++)
                     {
-                        file.Write(elevation[x, y].ToString());
-                        file.Write(",");
+                        for (int x = 0; x < elevation.GetLength(0); x++)
+                        {
+                            file.Write(elevation[x, y].ToString());
+                            file.Write(",");
+                        }
+                        file.WriteLine();
                     }
-                    file.WriteLine();
                 }
             }
+            catch
+            {
 
+            }
         }
 
         private void createSlopeFile(double[,] slope)
         {
+            try
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "/Slope.txt"))
+                {
+                    for (int y = 0; y < slope.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < slope.GetLength(0); x++)
+                        {
+                            file.Write(slope[x, y].ToString());
+                            file.Write(",");
+                        }
+                        file.WriteLine();
+                    }
+                }
+            }
+            catch
+            {
 
+            }
         }
 
         private void createHazardFile(int[,] hazzard)
         {
+            try
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "/Hazzard.txt"))
+                {
+                    for (int y = 0; y < hazzard.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < hazzard.GetLength(0); x++)
+                        {
+                            file.Write(hazzard[x, y].ToString());
+                            file.Write(",");
+                        }
+                        file.WriteLine();
+                    }
+                }
+            }
+            catch
+            {
 
+            }
         }
 
         private void createInternalMapFile(float[,] internalMap)
         {
+            try
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "/InternalMap.txt"))
+                {
+                    for (int y = 0; y < internalMap.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < internalMap.GetLength(0); x++)
+                        {
+                            file.Write(internalMap[x, y].ToString());
+                            file.Write(",");
+                        }
+                        file.WriteLine();
+                    }
+                }
+            }
+            catch
+            {
 
+            }
         }
 
         private void createPathFile(List<int[,]> path)
         {
+            try
+            {
 
+            }
+            catch
+            {
+
+            }
         }
 
     
