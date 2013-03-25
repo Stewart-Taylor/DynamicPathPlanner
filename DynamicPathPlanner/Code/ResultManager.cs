@@ -5,7 +5,7 @@
  * The data produced can then be used for more in depth analysis
  * Creates a new folder with a Details file, full simulation log, images, map data , path data
  *
- * Last Updated: 23/03/2013
+ * Last Updated: 25/03/2013
 */
 
 using System;
@@ -138,34 +138,47 @@ namespace DynamicPathPlanner.Code
 
         public void createSimulationData(double[,] elevation, double[,] slope, int[,] hazard, float[,] internalMap, List<int[,]> path)
         {
-            createElevationFile();
-            createSlopeFile();
-            createHazardFile();
-            createInternalMapFile();
-            createPathFile();
+            createElevationFile(elevation);
+            createSlopeFile(slope);
+            createHazardFile(hazard);
+            createInternalMapFile(internalMap);
+            createPathFile(path);
         }
 
-        private void createElevationFile()
+        private void createElevationFile(double[,] elevation)
+        {
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(resultFolderPath + "/" + simulationName + "/" + dataFolder + "elevationData.txt"))
+            {
+                for (int y = 0; y < elevation.GetLength(1); y++)
+                {
+                    for (int x = 0; x < elevation.GetLength(0); x++)
+                    {
+                        file.Write(elevation[x, y].ToString());
+                        file.Write(",");
+                    }
+                    file.WriteLine();
+                }
+            }
+
+        }
+
+        private void createSlopeFile(double[,] slope)
         {
 
         }
 
-        private void createSlopeFile()
+        private void createHazardFile(int[,] hazzard)
         {
 
         }
 
-        private void createHazardFile()
+        private void createInternalMapFile(float[,] internalMap)
         {
 
         }
 
-        private void createInternalMapFile()
-        {
-
-        }
-
-        private void createPathFile()
+        private void createPathFile(List<int[,]> path)
         {
 
         }

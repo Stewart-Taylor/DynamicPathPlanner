@@ -29,6 +29,8 @@ namespace DynamicPathPlanner
 
         private Bitmap roverSlideBitmap;
 
+        private bool panguStartError = false;
+
 
         #region GET
 
@@ -322,6 +324,7 @@ namespace DynamicPathPlanner
 
         public bool connectToPANGU(String pan)
         {
+            panguStartError = false;
 
             String hostname = "localhost";
             int portNumber = 10363;
@@ -332,11 +335,14 @@ namespace DynamicPathPlanner
                 startPANGU(pan);
             }
 
-            //if connection was established connect
-            if (PANGU_Manager.connect(hostname, portNumber) == true)
+            if (panguStartError == false)
             {
-                addLogEntry("Pangu Connection Established");
-                return true;
+                //if connection was established connect
+                if (PANGU_Manager.connect(hostname, portNumber) == true)
+                {
+                    addLogEntry("Pangu Connection Established");
+                    return true;
+                }
             }
 
             return false;
@@ -344,20 +350,30 @@ namespace DynamicPathPlanner
 
         private void startPANGU(String pan)
         {
-            String filename = Properties.Settings.Default.panguDirectory;
 
-            addLogEntry("Starting PANGU : " + filename);
+            try
+            {
+                String filename = Properties.Settings.Default.panguDirectory;
 
-            System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
-            proc.StartInfo.FileName = filename;
-            proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
-            proc.StartInfo.RedirectStandardError = true;
-            proc.StartInfo.Arguments = pan;
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.UseShellExecute = false;
+                addLogEntry("Starting PANGU : " + filename);
 
-            proc.Start();
-            System.Threading.Thread.Sleep(1000);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
+                proc.StartInfo.FileName = filename;
+                proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
+                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.Arguments = pan;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.UseShellExecute = false;
+
+                proc.Start();
+                System.Threading.Thread.Sleep(1000);
+
+            }
+            catch
+            {
+                panguStartError = true;
+                addLogEntry("ERROR: Could not start PANGU Server!");
+            }
         }
 
 
