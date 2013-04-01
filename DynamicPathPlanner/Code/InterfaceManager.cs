@@ -571,7 +571,7 @@ namespace DynamicPathPlanner
         {
             addLogEntry("Result Export Started");
 
-            String simName = navigationMapManager.getEnvironementString() + " " + DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+            String simName = navigationMapManager.getEnvironementString() + " " + DateTime.Now.ToString("dd-MM-yyyy-HH-mm");
 
             ResultManager results = new ResultManager(simName);
             results.createSimulationDetails(navigationMapManager.getEnvironementString(), navigationMapManager.getAreaSize(), navigationMapManager.getDistanceStep(), navigationMapManager.getSlopeAlgorithm(), navigationMapManager.getHazardSectorSize(), simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getSteps(), simulationManager.getDKnownSteps(), simulationManager.getOptimalSteps(), simulationManager.getPathLikeness()); 
