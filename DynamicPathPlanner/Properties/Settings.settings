@@ -12,7 +12,7 @@
       <Value Profile="(Default)">C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/PanguServer.bat</Value>
     </Setting>
     <Setting Name="panDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Stewart\Desktop\testFof</Value>
+      <Value Profile="(Default)">C:\Users\Stewart\Desktop\Worlds</Value>
     </Setting>
   </Settings>
 </SettingsFile>
