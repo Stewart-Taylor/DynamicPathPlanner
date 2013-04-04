@@ -4,7 +4,7 @@
  * This class is used to generate a slope model from elevation data
  * It uses the HORN method. 
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 04/04/2013
 */
 
 
@@ -31,28 +31,32 @@ namespace DynamicPathPlanner.Code.Slope
 
         protected override double calculateSlopeValue(int x, int y)
         {
+            double horzSize = 0.1f;
 
-            double a = getTopLeft(x, y);
-            double b = getTopMiddle(x, y);
-            double c = getTopRight(x, y);
+            double a = getTopLeft(x, y) * horzSize;
+            double b = getTopMiddle(x, y) * horzSize;
+            double c = getTopRight(x, y) * horzSize;
 
-            double d = getMiddleLeft(x, y);
-            double f = getMiddleRight(x, y);
+            double d = getMiddleLeft(x, y) * horzSize;
+            double f = getMiddleRight(x, y) * horzSize;
 
-            double g = getBottomLeft(x, y);
-            double h = getBottomMiddle(x, y);
-            double i = getBottomRight(x, y);
+            double g = getBottomLeft(x, y) * horzSize;
+            double h = getBottomMiddle(x, y) * horzSize;
+            double i = getBottomRight(x, y) * horzSize;
 
 
             double x_cell_size = 0.1f;
             double y_cell_size = 0.1f;
 
-            double deltaX = ((c + (2 * f) + i) - (a + (2 * d) + g)) / (8 * x_cell_size);
-            double deltaY = ((g + (2 * h) + i) - (a + (2 * b) + c)) / (8 * y_cell_size);
+            double fx = (i - g + 2*(f - d) + c - a);
+            double fy = (a - g + 2 * (b - h) + c - i);
 
-            double value = deltaY / deltaX;
+            fx = Math.Abs(fx);
+            fy = Math.Abs(fy);
 
-            return value;
+            double slope = Math.Atan( Math.Pow( Math.Pow(fx, 2) + Math.Pow(fy, 2), 0.5));
+
+            return slope;
         }
 
 
