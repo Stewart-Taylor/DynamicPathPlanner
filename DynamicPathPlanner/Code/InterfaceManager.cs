@@ -282,6 +282,11 @@ namespace DynamicPathPlanner
             return navigationMapManager.getEnvironementString();
         }
 
+        public String getEnvironmentPath()
+        {
+            return navigationMapManager.getEnvironementPath();
+        }
+
         #endregion
 
 
@@ -291,6 +296,11 @@ namespace DynamicPathPlanner
         public void setEnviornmentString(String environment)
         {
             navigationMapManager.setEnvironmentText(environment);
+        }
+
+        public void setEnviornmentPath(String environmentPath)
+        {
+            navigationMapManager.setEnvironmentPath(environmentPath);
         }
 
         public void setVehicleValues(int startX, int startY, int targetX, int targetY, String algorithm, bool knownMap)
@@ -360,6 +370,7 @@ namespace DynamicPathPlanner
                 System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
                 proc.StartInfo.FileName = filename;
                 proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
+             //   proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(pan);
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.Arguments = pan;
                 proc.StartInfo.RedirectStandardOutput = true;

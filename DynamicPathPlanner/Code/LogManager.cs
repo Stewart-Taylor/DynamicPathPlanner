@@ -57,9 +57,16 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        public  void printToConsole(String entry)
+        public void printToConsole(String entry)
         {
-         //  textConsole.Text += '\r' + entry ;
+            try
+            {
+                textConsole.Text += '\r' + entry;
+            }
+            catch
+            {
+
+            }
         }
 
     }

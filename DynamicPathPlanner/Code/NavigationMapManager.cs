@@ -24,6 +24,7 @@ namespace DynamicPathPlanner.Code
         public HazardModel hazardModel; // CHANGE
 
         private String environmentText;
+        private String environmentPath;
 
         private float distanceStep;
         private int areaSize;
@@ -128,7 +129,7 @@ namespace DynamicPathPlanner.Code
 
         public String getEnvironementPath()
         {
-            return environmentText;
+            return environmentPath;
         }
 
         public String getSlopeAlgorithm()
@@ -153,6 +154,12 @@ namespace DynamicPathPlanner.Code
         {
             environmentText = environment;
         }
+
+        public void setEnvironmentPath(String environment)
+        {
+            environmentPath = environment;
+        }
+
         public void generateElevationModel(float distance , int size)
         {
             distanceStep = distance;

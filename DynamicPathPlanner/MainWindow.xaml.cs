@@ -102,7 +102,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-      //      fastSetup(); // Testing Only
+            fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -169,7 +169,7 @@ namespace DynamicPathPlanner
 
         private void panguStartUp(object sender, EventArgs e)
         {
-            if (interfaceManager.connectToPANGU( interfaceManager.getEnvironmentString()) == true)
+            if (interfaceManager.connectToPANGU( interfaceManager.getEnvironmentPath()) == true)
             {
                 System.Threading.Thread.Sleep(2000); // REMOVE
 
@@ -180,7 +180,8 @@ namespace DynamicPathPlanner
         private void fastSetup()
         {
             interfaceManager.setEnviornmentString("Moon.pan");
-          interfaceManager.connectToPANGU(interfaceManager.getEnvironmentString());
+            interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/Moon.pan");
+          interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
            interfaceManager.generateElevationModel(0.1f, 1024);
            interfaceManager.setRoverSize(1.0f);
            interfaceManager.setRoverSlope(0.261f);
@@ -334,6 +335,7 @@ namespace DynamicPathPlanner
 
                 String absolute = System.IO.Path.GetFullPath(selectedText);
                 interfaceManager.setEnviornmentString(absolute);
+                interfaceManager.setEnviornmentPath(selectedText);
 
              //   img_elevationSlide.Source = interfaceManager.getQuickView();
              //   btn_elevationNext.Visibility = Visibility.Hidden;

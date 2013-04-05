@@ -71,5 +71,17 @@ namespace DynamicPathPlanner.Properties {
                 this["panDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Results")]
+        public string resultsPath {
+            get {
+                return ((string)(this["resultsPath"]));
+            }
+            set {
+                this["resultsPath"] = value;
+            }
+        }
     }
 }
