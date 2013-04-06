@@ -369,8 +369,7 @@ namespace DynamicPathPlanner
 
                 System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
                 proc.StartInfo.FileName = filename;
-                proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName("C:/Users/Stewart/Desktop/Pangu3.30/Pangu3.30/models/PathPlanner_Model/"); // GET FROM CONFIG
-             //   proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(pan);
+                proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(filename); // GET FROM CONFIG
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.Arguments = pan;
                 proc.StartInfo.RedirectStandardOutput = true;
@@ -578,7 +577,7 @@ namespace DynamicPathPlanner
         }
 
 
-        public void exportResults(String simulationName)
+        public void exportResults()
         {
             addLogEntry("Result Export Started");
 

@@ -54,6 +54,7 @@ namespace DynamicPathPlanner.Code
 
         private int areaSize;
         private float distanceStep;
+        private int hazardSectorSize;
 
         private int cameraPitch = -10;
         private int cameraYaw = 0;
@@ -156,6 +157,7 @@ namespace DynamicPathPlanner.Code
             sensorManager = new VehicleSensorManager(this, mapManager);
             areaSize = mapManager.getAreaSize();
             distanceStep = mapManager.getDistanceStep();
+            hazardSectorSize = mapManager.getHazardSectorSize();
             width = mapManager.getHazardModel().GetLength(0);
             height = mapManager.getHazardModel().GetLength(1);
             map = new VehicleHazardMap(width, height);
@@ -565,8 +567,13 @@ namespace DynamicPathPlanner.Code
         {
             if (roverCamEnabled == true)
             {
-                int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
-                int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
+           //     int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
+            //    int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
+
+                int x  = getCameraX();
+                int y = getCameraY();
+
+
                 int z = cameraHeight;
                 float yaw = 0;
                 int pitch = cameraPitch;
@@ -578,22 +585,51 @@ namespace DynamicPathPlanner.Code
                 yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
                 yaw -= 45;
 
-                camBitmap = PANGU_Manager.getImageView(x, y, z, yaw, pitch, cameraRoll, 70.0f);
+                camBitmap = PANGU_Manager.getImageView(y, x, z, yaw, pitch, cameraRoll, 70.0f);
             }
         }
 
+        private int getCameraX()
+        {
+         //   positionX = 32;
+
+           // int x = (int)( (float)positionX  - (((areaSize / 2f)) * distanceStep));
+          //  int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
+
+            int x = (int)( (float)(positionX -16f) * 2f );
+
+           //  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
+
+          //  x = 32;
+            return x;
+        }
+
+        private int getCameraY()
+        {
+
+         //   positionY = 32;
+
+       //     int y = (int)((float)positionX - (((areaSize / 2f)) * distanceStep));
+          //  int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
+
+            int y = (int)((float)(positionY -16f) * 2f);
+
+          //  int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
+
+           // y = 32;
+            return y;
+        }
 
         //Manual camera control
         public void updateRoverImage(float pitch , float yaw)
         {
             if (roverCamEnabled == true)
             {
-                int x = (int)( ((float)positionX - ((float)areaSize /2f))  );
-                int y = -(int)((float)positionY - (((float)areaSize /2f)) );
+                int x = getCameraX();
+                int y = getCameraY();
                 int z = cameraHeight;
-
-
-                camBitmap = PANGU_Manager.getImageView(x, y, z, -yaw, pitch, cameraRoll, 70.0f);
+    
+                camBitmap = PANGU_Manager.getImageView(y, x, z, -yaw, pitch, cameraRoll, 70.0f);
             }
         }
 

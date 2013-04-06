@@ -809,12 +809,17 @@
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="Export_Wait" RepeatBehavior="Forever">
+			<StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="lbl_exportWait">
+				<DiscreteStringKeyFrame KeyTime="0" Value="Saving."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:0.5" Value="Saving.."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1" Value="Saving..."/>
+				<DiscreteStringKeyFrame KeyTime="0:0:1.7" Value="Saving..."/>
+			</StringAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
 	<Window.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-			<BeginStoryboard Storyboard="{StaticResource RoverSetup_SlideIn}"/>
-			<BeginStoryboard Storyboard="{StaticResource RoverSetup_SlideOut}"/>
-		</EventTrigger>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
 	</Window.Triggers>
     <Grid x:Name="grid_main" Background="White">
     	<Menu x:Name="menu_main"  VerticalAlignment="Top" BorderBrush="{x:Null}" Background="#FF494949" RenderTransformOrigin="0.5,0.5" d:IsLocked="True">
@@ -837,7 +842,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -1075,7 +1080,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1132,6 +1137,7 @@
     						<TextBlock x:Name="lbl_resultLikeness_Copy" Margin="8.447,155.842,0,0" TextWrapping="Wrap" Text="This is how similar the simulation path is to the optimal path" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Width="563.136" FontSize="13.333"/>
     					</Grid>
     					<Button x:Name="btn_resultsExport" Content="Export Results" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsExport_Click" Focusable="False" Padding="5,1"/>
+    					<TextBlock x:Name="lbl_exportWait" HorizontalAlignment="Right" Margin="0,0,222.376,10.317" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="White"/>
     				</Grid>
     				<Grid Margin="0,56.086,0,0" HorizontalAlignment="Right" Width="4" Background="#FF707070"/>
     			</Grid>

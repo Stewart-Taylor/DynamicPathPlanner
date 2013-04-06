@@ -45,6 +45,7 @@ namespace DynamicPathPlanner
         private Storyboard slope_wait;
         private Storyboard hazard_wait;
         private Storyboard simulation_wait;
+        private Storyboard export_wait;
 
         private BackgroundWorker startup_worker = new BackgroundWorker();
         private BackgroundWorker elevation_worker = new BackgroundWorker();
@@ -53,6 +54,7 @@ namespace DynamicPathPlanner
         private BackgroundWorker step_worker = new BackgroundWorker();
         private BackgroundWorker simulation_worker = new BackgroundWorker();
         private BackgroundWorker result_worker = new BackgroundWorker();
+        private BackgroundWorker exporter_worker = new BackgroundWorker();
 
         private bool started = false;
         private int elevationSize;
@@ -76,6 +78,7 @@ namespace DynamicPathPlanner
             slope_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Slope_Wait");
             hazard_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Hazard_Wait");
             simulation_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Simulation_Wait");
+            export_wait = (System.Windows.Media.Animation.Storyboard)FindResource("Export_Wait");
 
             //Set Events
             hazard_worker.DoWork += new DoWorkEventHandler(hazardScreen);
@@ -97,6 +100,9 @@ namespace DynamicPathPlanner
 
             simulation_worker.DoWork += new DoWorkEventHandler(instantSimulation);
             simulation_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(simulation_worker_complete);
+
+            exporter_worker.DoWork += new DoWorkEventHandler(exportResults);
+            exporter_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(exporter_worker_complete);
 
             loadImage = img_hazardSlide.Source;
 
@@ -179,6 +185,18 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
+            interfaceManager.setEnviornmentString("test.pan");
+            interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/test.pan");
+            interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
+            interfaceManager.generateElevationModel(0.1f, 1024);
+            interfaceManager.setRoverSize(1.0f);
+            interfaceManager.setRoverSlope(0.261f);
+            interfaceManager.generateSlopeModel("AVERAGE");
+            interfaceManager.generateHazardModel(20);
+            interfaceManager.setVehicleValues(4, 4, 38, 46, "D_STAR", false);
+            nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
+
+            /*
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/Moon.pan");
           interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -189,7 +207,7 @@ namespace DynamicPathPlanner
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-
+            */
 
             /*
              interfaceManager.connectToPANGU();
@@ -216,6 +234,18 @@ namespace DynamicPathPlanner
             lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
             nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
             btn_simulationNext.IsEnabled = true;
+        }
+
+
+        private void exportResults(object sender, EventArgs e)
+        {
+            interfaceManager.exportResults();
+        }
+
+        private void exporter_worker_complete(object sender, EventArgs e)
+        {
+            export_wait.Stop();
+            btn_resultsExport.IsEnabled = true;
         }
 
         private void instantSimulation(object sender, EventArgs e)
@@ -743,7 +773,9 @@ namespace DynamicPathPlanner
 
         private void btn_resultsExport_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            interfaceManager.exportResults("Test");
+            exporter_worker.RunWorkerAsync();
+            export_wait.Begin();
+            btn_resultsExport.IsEnabled = false;
         }
     }
 }
