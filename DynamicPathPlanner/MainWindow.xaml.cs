@@ -175,7 +175,7 @@ namespace DynamicPathPlanner
 
         private void panguStartUp(object sender, EventArgs e)
         {
-            if (interfaceManager.connectToPANGU( interfaceManager.getEnvironmentPath()) == true)
+            if (interfaceManager.connectToPANGU( System.IO.Path.GetFullPath(interfaceManager.getEnvironmentPath() )) == true)
             {
                 System.Threading.Thread.Sleep(2000); // REMOVE
 
