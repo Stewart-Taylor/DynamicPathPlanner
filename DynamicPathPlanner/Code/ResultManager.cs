@@ -5,7 +5,7 @@
  * The data produced can then be used for more in depth analysis
  * Creates a new folder with a Details file, full simulation log, images, map data , path data
  *
- * Last Updated: 25/03/2013
+ * Last Updated: 06/04/2013
 */
 
 using System;

@@ -5,7 +5,7 @@
  * It will access the sensorManager to get enviorment data (Simulates Sensors)
  * It will use it's own internal hazard map for pathfinding only!
  *
- * Last Updated: 21/03/2013
+ * Last Updated: 06/04/2013
 */
 
 using System;
@@ -582,8 +582,8 @@ namespace DynamicPathPlanner.Code
                 float deltaX = (float)positionX - (float)previousX;
                 float deltaY = (float)positionY - (float)previousY;
 
-                yaw = (float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
-                yaw -= 45;
+                yaw = -(float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
+                
 
                 camBitmap = PANGU_Manager.getImageView(y, x, z, yaw, pitch, cameraRoll, 70.0f);
             }
