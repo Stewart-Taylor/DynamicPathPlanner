@@ -21,7 +21,7 @@ namespace DynamicPathPlanner.Code
     class ResultManager
     {
 
-        private String resultFolderPath = "Results";
+        private String resultFolderPath = Properties.Settings.Default.resultsPath;
         private String imageFolder = "Images";
         private String dataFolder = "Data";
         private String simulationName;

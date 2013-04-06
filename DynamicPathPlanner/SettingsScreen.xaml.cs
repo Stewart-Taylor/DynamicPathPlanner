@@ -4,7 +4,7 @@
  * This class is used to control the System Settings
  * It will load in settings and allow them to be adjusted and then saved
  * 
- * Last Updated: 21/03/2013
+ * Last Updated: 06/04/2013
 */
 
 using System;
@@ -38,6 +38,7 @@ namespace DynamicPathPlanner
             txt_distanceStep.Text = Properties.Settings.Default.distanceStep.ToString();
             txt_panguPath.Text = Properties.Settings.Default.panguDirectory;
             txt_environmentPath.Text = Properties.Settings.Default.panDirectory;
+            txt_resultsPath.Text = Properties.Settings.Default.resultsPath;
         }
 
         private void btn_okay_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -62,6 +63,7 @@ namespace DynamicPathPlanner
             saveDistanceStep();
             savePanguDirectory();
             saveEnvironementDirectory();
+            saveResultsDirectory();
 
             if (saveValid == true)
             {
@@ -128,6 +130,21 @@ namespace DynamicPathPlanner
             catch
             {
                 lbl_error.Text = "Error: Not a valid Environment Directory";
+                saveValid = false;
+            }
+        }
+
+        private void saveResultsDirectory()
+        {
+            String dirText = txt_resultsPath.Text;
+
+            try
+            {
+                Properties.Settings.Default.resultsPath = dirText;
+            }
+            catch
+            {
+                lbl_error.Text = "Error: Not a valid Results Directory";
                 saveValid = false;
             }
         }
