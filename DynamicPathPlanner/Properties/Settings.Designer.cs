@@ -62,7 +62,7 @@ namespace DynamicPathPlanner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Stewart\\Desktop\\Worlds")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Worlds")]
         public string panDirectory {
             get {
                 return ((string)(this["panDirectory"]));
