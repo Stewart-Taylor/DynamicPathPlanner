@@ -185,8 +185,8 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-            interfaceManager.setEnviornmentString("test.pan");
-            interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/test.pan");
+            interfaceManager.setEnviornmentString("TestWorld.pan");
+            interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/TestWorld.pan");
             interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
             interfaceManager.generateElevationModel(0.1f, 1024);
             interfaceManager.setRoverSize(1.0f);
@@ -231,7 +231,16 @@ namespace DynamicPathPlanner
         {
             simulation_wait.Stop();
             lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]  [All Known: " + interfaceManager.getDKnownSteps() + "]";
-            lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
+            
+            //Similarity Table
+            lbl_simtableDknownA.Text = interfaceManager.getPathLikenessDknownToA().ToString() + "%";
+            lbl_simtableDunknownA.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
+            lbl_simtableAknownD.Text = interfaceManager.getPathLikeness().ToString() + "%";
+            lbl_simtableDtoD.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
+            lbl_simtableDunknownA2.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
+            lbl_simtableDtoD2.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
+            
+          //  lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
             nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
             btn_simulationNext.IsEnabled = true;
         }

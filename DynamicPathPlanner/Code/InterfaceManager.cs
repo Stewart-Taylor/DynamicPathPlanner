@@ -173,6 +173,21 @@ namespace DynamicPathPlanner
             return simulationManager.getPathLikeness();
         }
 
+        public float getPathLikenessDknownToA()
+        {
+            return simulationManager.getPathLikenessDknownToA();
+        }
+
+        public float getPathLikenessDunknownToA()
+        {
+            return simulationManager.getPathLikenessDunknownToA();
+        }
+
+        public float getPathLikenessDunknownToDknown()
+        {
+            return simulationManager.getPathLikenessDunknownToDknown();
+        }
+
         public int getHazardSectorSize()
         {
             return navigationMapManager.getHazardSectorSize();
@@ -367,9 +382,9 @@ namespace DynamicPathPlanner
 
                 addLogEntry("Starting PANGU : " + filename);
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process(); // Declare New Process
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo.FileName = filename;
-                proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(filename); // GET FROM CONFIG
+                proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(filename); 
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.Arguments = pan;
                 proc.StartInfo.RedirectStandardOutput = true;

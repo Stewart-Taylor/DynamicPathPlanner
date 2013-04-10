@@ -68,6 +68,10 @@ namespace DynamicPathPlanner.Code
 
         private float pathLikeness = 0f;
 
+        private float likenessDknownToA = 0f;
+        private float likenessDunknownToA = 0f;
+        private float likenessDunknownToDknown = 0f;
+
         private bool compareCompleted;
 
         private System.Drawing.Color pathColor = System.Drawing.Color.Blue;
@@ -264,6 +268,21 @@ namespace DynamicPathPlanner.Code
             return (int)pathLikeness;
         }
 
+        public float getPathLikenessDknownToA()
+        {
+            return (int)likenessDknownToA;
+        }
+
+        public float getPathLikenessDunknownToA()
+        {
+            return (int)likenessDunknownToA;
+        }
+
+        public float getPathLikenessDunknownToDknown()
+        {
+            return (int)likenessDunknownToDknown;
+        }
+
         private Bitmap getElevationCompareBitmap()
         {
             if (elevationCompareBitmap == null)
@@ -431,20 +450,23 @@ namespace DynamicPathPlanner.Code
                 compareRoverD.fullEnvironment();
                 compareRoverD.traverseMapDstar(startX, startY, targetX, targetY);
 
-                comparePaths();
+                likenessDknownToA = comparePaths(compareRover.getPathPoints(), compareRoverD.getPathPoints());
+                likenessDunknownToA = comparePaths(rover.getPathPoints(), compareRover.getPathPoints());
+                likenessDunknownToDknown = comparePaths(compareRoverD.getPathPoints(), rover.getPathPoints());
+
                 compareCompleted = true;
             }
         }
 
-        private void comparePaths()
+        private float comparePaths(List<PathNode> path1 , List<PathNode> path2)
         {
             int count = 0;
-            int length = compareRover.getPathPoints().Count;
+            int length = path1.Count;
             List<PathNode> usedPoints = new List<PathNode>();
 
-            foreach (PathNode p in rover.getPathPoints())
+            foreach (PathNode p in path2)
             {
-                foreach (PathNode a in compareRover.getPathPoints())
+                foreach (PathNode a in path2)
                 {
                     bool isUsed = false;
 
@@ -467,8 +489,10 @@ namespace DynamicPathPlanner.Code
                 }
             }
 
-            pathLikeness = (float)count / (float)length;
-            pathLikeness = pathLikeness * 100f;
+           float likeness = (float)count / (float)length;
+           likeness = likeness * 100f;
+
+            return likeness;
         }
 
         public void startSimulationKnownMap(int startX, int startY, int endX, int endY)
