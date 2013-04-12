@@ -82,8 +82,82 @@ namespace DynamicPathPlanner.Code
         }
 
 
+        private void addHazardPadding()
+        {
+            int hazardThreshold = 20;
+            int padValue = 10;
+
+            int width = hazardModel.GetLength(0);
+            int height = hazardModel.GetLength(1);
+
+            int[,] padMap = hazardModel;
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (getMaxAdjacentValue(x, y) > hazardThreshold)
+                    {
+                        if (hazardModel[x, y] < padValue)
+                        {
+                            padMap[x, y] = padValue;
+                        }
+                        else
+                        {
+                            padMap[x, y] = hazardModel[x, y];
+                        }
+                    }
+                }
+            }
+
+            hazardModel = padMap;
+        }
 
 
+        private int getMaxAdjacentValue(int x , int y)
+        {
+            int value = 0;
+
+            int topLeft = getTileValue(x-1, y-1);
+            int topMid = getTileValue(x, y-1);
+            int topRight = getTileValue(x+1, y-1);
+
+            int midLeft = getTileValue(x-1, y);
+            int midRight = getTileValue(x+1, y);
+
+            int botLeft = getTileValue(x-1, y+1);
+            int botMid = getTileValue(x, y+1);
+            int botRight = getTileValue(x+1, y+1);
+
+            int high = 0;
+
+            if (topLeft >= high) { high = topLeft; }
+            if (topMid >= high) { high = topMid; }
+            if (topRight >= high) { high = topRight; }
+            if (midLeft >= high) { high = midLeft; }
+            if (midRight >= high) { high = midRight; }
+            if (botLeft >= high) { high = botLeft; }
+            if (botMid >= high) { high = botMid; }
+            if (botRight >= high) { high = botRight; }
+
+            value = high;
+            return value;
+        }
+
+        private int getTileValue(int x , int y)
+        {
+            int value = 0;
+
+            if( (x > 0) && ( x < width))
+            {
+                if ( (y>0) && (y < height))
+                {
+                    return hazardModel[x,y];
+                }
+            }
+
+            return value;
+        }
 
         private void generateHazardModel()
         {
