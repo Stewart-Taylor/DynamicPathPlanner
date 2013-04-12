@@ -451,7 +451,7 @@ namespace DynamicPathPlanner.Code
                 compareRoverD.traverseMapDstar(startX, startY, targetX, targetY);
 
                 likenessDknownToA = comparePaths(compareRover.getPathPoints(), compareRoverD.getPathPoints());
-                likenessDunknownToA = comparePaths(rover.getPathPoints(), compareRover.getPathPoints());
+                likenessDunknownToA = comparePaths(compareRover.getPathPoints(), rover.getPathPoints());
                 likenessDunknownToDknown = comparePaths(compareRoverD.getPathPoints(), rover.getPathPoints());
 
                 compareCompleted = true;
@@ -466,7 +466,7 @@ namespace DynamicPathPlanner.Code
 
             foreach (PathNode p in path2)
             {
-                foreach (PathNode a in path2)
+                foreach (PathNode a in path1)
                 {
                     bool isUsed = false;
 

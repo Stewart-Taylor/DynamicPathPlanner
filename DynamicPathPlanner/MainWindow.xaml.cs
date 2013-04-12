@@ -235,7 +235,7 @@ namespace DynamicPathPlanner
             //Similarity Table
             lbl_simtableDknownA.Text = interfaceManager.getPathLikenessDknownToA().ToString() + "%";
             lbl_simtableDunknownA.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
-            lbl_simtableAknownD.Text = interfaceManager.getPathLikeness().ToString() + "%";
+            lbl_simtableAknownD.Text = interfaceManager.getPathLikenessDknownToA().ToString() + "%";
             lbl_simtableDtoD.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
             lbl_simtableDunknownA2.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
             lbl_simtableDtoD2.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
