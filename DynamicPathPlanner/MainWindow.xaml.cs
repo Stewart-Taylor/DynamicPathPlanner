@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 25/03/2013
+ * Last Updated: 15/04/2013
 */
 
 using System;
@@ -239,8 +239,8 @@ namespace DynamicPathPlanner
             lbl_simtableDtoD.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
             lbl_simtableDunknownA2.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
             lbl_simtableDtoD2.Text = interfaceManager.getPathLikenessDunknownToDknown().ToString() + "%";
-            
-          //  lbl_resultLikeness.Text = "Path Likeness: " + interfaceManager.getPathLikeness() + "%";
+
+            img_resultsMain.Source = interfaceManager.getResultsAerial();
             nextSlide(grid_simulation, grid_results, "Simulation_SlideOut", "Results_SlideIn");
             btn_simulationNext.IsEnabled = true;
         }
