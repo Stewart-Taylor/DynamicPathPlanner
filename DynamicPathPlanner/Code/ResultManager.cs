@@ -5,7 +5,7 @@
  * The data produced can then be used for more in depth analysis
  * Creates a new folder with a Details file, full simulation log, images, map data , path data
  *
- * Last Updated: 06/04/2013
+ * Last Updated: 15/04/2013
 */
 
 using System;
@@ -67,7 +67,7 @@ namespace DynamicPathPlanner.Code
 
         }
 
-        public void createSimulationDetails(String environment, int areaSize, float distanceStep, String slopeAlgorithm, int hazardSectorSize , int startX , int startY , int targetX , int targetY ,int simulationSteps ,int knownSteps, int optimalSteps , int likeness)
+        public void createSimulationDetails(String environment, int areaSize, float distanceStep, String slopeAlgorithm, int hazardSectorSize , int startX , int startY , int targetX , int targetY ,int simulationSteps ,int knownSteps, int optimalSteps , int aKnownLikeness , int aUnkownLikeness , int dTodLikeness)
         {
             string path = Path.Combine(resultFolderPath + "/" + simulationName, detailsFilename);
 
@@ -95,7 +95,17 @@ namespace DynamicPathPlanner.Code
                 sw.WriteLine("Simulation Steps: " + simulationSteps);
                 sw.WriteLine("Simulation Known Steps: " + knownSteps);
                 sw.WriteLine("Optimal Steps: " + optimalSteps);
-                sw.WriteLine("Path Likeness: " + likeness + "%");
+                sw.WriteLine("---------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("Path Similarity");
+                sw.WriteLine("----------------------------------------------------");
+                sw.WriteLine("| Algorithm     | A*   | D* (Known) | D* (Unknown) | ");
+                sw.WriteLine("| A*            | 100% | " + aKnownLikeness.ToString("000") + "%       | " + aUnkownLikeness.ToString("000") + "%         |");
+                sw.WriteLine("| D* (Known)    | " + aKnownLikeness.ToString("000") + "% | 100%       | " + dTodLikeness.ToString("000") + "%         |");
+                sw.WriteLine("| D* (Unknown)  | " + aUnkownLikeness.ToString("000") + "% | " + dTodLikeness.ToString("000") + "%       | 100%         |");
+                sw.WriteLine("----------------------------------------------------");
+                sw.WriteLine("");
+
                 sw.WriteLine("---------------------------------------------");
             }
 
@@ -252,7 +262,7 @@ namespace DynamicPathPlanner.Code
             }
             catch
             {
-
+        
             }
         }
 
