@@ -4,8 +4,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	x:Class="DynamicPathPlanner.SettingsScreen"
 	x:Name="Window"
-	Title="SettingsScreen"
-	Width="420" Height="400" ResizeMode="NoResize">
+	Title="Settings"
+	Width="420" Height="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Topmost="True" Icon="pack://siteoforigin:,,,/Dicon.ico">
 
 	<Grid x:Name="LayoutRoot">
 		<Grid Background="#FF484848">
