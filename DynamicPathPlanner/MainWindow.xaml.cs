@@ -372,15 +372,18 @@ namespace DynamicPathPlanner
 
             if (valid == true)
             {
-
                 String absolute = System.IO.Path.GetFullPath(selectedText);
                 interfaceManager.setEnviornmentString(absolute);
                 interfaceManager.setEnviornmentPath(selectedText);
 
-             //   img_elevationSlide.Source = interfaceManager.getQuickView();
-             //   btn_elevationNext.Visibility = Visibility.Hidden;
+                //   img_elevationSlide.Source = interfaceManager.getQuickView();
+                //   btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_startup_slide, "Pangu_SlideOut", "Startup_SlideIn");
                 startSlideIn_Completed(null, null);
+            }
+            else
+            {
+                lbl_environmentFeedback.Content = "Please select a valid environment!";
             }
           
         }
@@ -503,6 +506,7 @@ namespace DynamicPathPlanner
                 }
             }
         }
+
 
         private void roverPositionsUpdated(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {

@@ -51,7 +51,16 @@ namespace DynamicPathPlanner
 
         public ImageSource getQuickView()
         {
-            return PANGU_Manager.getSkyView(0.1f, 512);
+            Bitmap bitmap = PANGU_Manager.getImageView(0, -150, 200, 10, -40, 0);
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
         }
 
         public ImageSource getAerialView()
