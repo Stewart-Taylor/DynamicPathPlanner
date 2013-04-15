@@ -395,7 +395,7 @@ namespace DynamicPathPlanner
                 proc.StartInfo.FileName = filename;
                 proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(filename); 
                 proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.Arguments =  "-server " + pan ;
+                proc.StartInfo.Arguments = "-server \"" + pan + "\"";
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();
