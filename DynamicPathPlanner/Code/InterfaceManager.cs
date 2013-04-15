@@ -387,7 +387,7 @@ namespace DynamicPathPlanner
 
             try
             {
-                String filename = Properties.Settings.Default.panguDirectory;
+                 String filename = Properties.Settings.Default.panguDirectory + "/bin/viewer.exe";
 
                 addLogEntry("Starting PANGU : " + filename);
 
@@ -395,10 +395,9 @@ namespace DynamicPathPlanner
                 proc.StartInfo.FileName = filename;
                 proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(filename); 
                 proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.Arguments = pan;
+                proc.StartInfo.Arguments =  "-server " + pan ;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.UseShellExecute = false;
-
                 proc.Start();
                 System.Threading.Thread.Sleep(1000);
 
