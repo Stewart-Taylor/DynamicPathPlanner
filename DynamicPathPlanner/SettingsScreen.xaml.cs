@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace DynamicPathPlanner
 {
@@ -147,6 +148,21 @@ namespace DynamicPathPlanner
                 lbl_error.Text = "Error: Not a valid Results Directory";
                 saveValid = false;
             }
+        }
+
+
+        private void btn_worldBrowse_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            txt_environmentPath.Text = dialog.SelectedPath;
+        }
+
+        private void btn_panguBrowse_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            txt_panguPath.Text = dialog.SelectedPath;
         }
  
 

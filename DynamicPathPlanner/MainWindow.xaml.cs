@@ -134,13 +134,11 @@ namespace DynamicPathPlanner
             img_simulationInternal.Source = loadImage;
             img_simulationRover.Source = loadImage;
 
+            populateEnvironment();
+
             if (startSlideIn == null)
             {
-                populateEnvironment();
-
                 startSlideIn = (System.Windows.Media.Animation.Storyboard)FindResource("Pangu_SlideIn");
-              //  startSlideIn.Completed += new EventHandler(startSlideIn_Completed);
-
             }
            
             BeginStoryboard(startSlideIn);
@@ -159,9 +157,19 @@ namespace DynamicPathPlanner
             {
                 String dir = Properties.Settings.Default.panDirectory;
 
+                int count = 0;
                 foreach (string file in Directory.EnumerateFiles(dir, "*.pan"))
                 {
+                    count++;
                     lst_environment.Items.Add(file);
+                }
+
+                if (count == 0)
+                {
+                    String errorMsg = "No Environments Found!";
+                    lst_environment.Items.Add(errorMsg);
+                    btn_environmentNext.IsEnabled = false;
+                    interfaceManager.addLogEntry("No environments found");
                 }
             }
             catch

@@ -5,15 +5,15 @@
 	x:Class="DynamicPathPlanner.SettingsScreen"
 	x:Name="Window"
 	Title="Settings"
-	Width="420" Height="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Topmost="True" Icon="pack://siteoforigin:,,,/Dicon.ico">
+	Width="520" Height="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"  Icon="pack://siteoforigin:,,,/Dicon.ico">
 
 	<Grid x:Name="LayoutRoot">
 		<Grid Background="#FF484848">
 			<Button x:Name="btn_okay" Content="Ok" HorizontalAlignment="Right" Margin="0,0,87,8" VerticalAlignment="Bottom" Width="75" Click="btn_okay_Click" Background="#FF168D23" Foreground="White" BorderBrush="Black"/>
 			<Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="75" Click="btn_cancel_Click" Foreground="White" BorderBrush="Black" Background="#FF168D23"/>
 			<Grid Margin="8,66.976,8,33.96">
-				<TextBlock Margin="0,8,166,0" TextWrapping="Wrap" Text="Simulation Interval Update Time (ms)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
-				<TextBox x:Name="txt_intervalTime" HorizontalAlignment="Right" Margin="0,8,8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+				<TextBlock Margin="0,8,272.319,0" TextWrapping="Wrap" Text="Simulation Interval Update Time (ms)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
+				<TextBox x:Name="txt_intervalTime" HorizontalAlignment="Right" Margin="0,15.048,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -22,8 +22,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<TextBlock Margin="0,41.024,166,0" TextWrapping="Wrap" Text="Elevation Model Distance Step (m)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
-				<TextBox x:Name="txt_distanceStep" HorizontalAlignment="Right" Margin="0,41.024,8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+				<TextBlock Margin="0,44.048,288.162,0" TextWrapping="Wrap" Text="Elevation Model Distance Step (m)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
+				<TextBox x:Name="txt_distanceStep" HorizontalAlignment="Right" Margin="0,44.048,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -32,8 +32,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<TextBlock Margin="0,73.048,288.233,0"  VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" ><Run Language="en-gb" Text="PANGU Directory"/></TextBlock>
-				<TextBox x:Name="txt_panguPath" Margin="113.767,73.048,8,0"  VerticalAlignment="Top" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1">
+				<TextBlock Margin="0,73.048,388.233,0"  VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" ><Run Language="en-gb" Text="PANGU Directory"/></TextBlock>
+				<TextBox x:Name="txt_panguPath" Margin="114.32,73.048,82,0"  VerticalAlignment="Top" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1" >
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -42,8 +42,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<TextBlock Margin="0,106.048,303.65,0" TextWrapping="Wrap" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25" VerticalAlignment="Top"><Run Language="en-gb" Text=".PAN Directory"/></TextBlock>
-				<TextBox x:Name="txt_environmentPath" Margin="113.767,106.048,8,0" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1" Height="25" VerticalAlignment="Top">
+				<TextBlock Margin="0,106.048,403.65,0" TextWrapping="Wrap" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25" VerticalAlignment="Top"><Run Language="en-gb" Text=".PAN Directory"/></TextBlock>
+				<TextBox x:Name="txt_environmentPath" Margin="114.32,106.048,82,0" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1" Height="25" VerticalAlignment="Top">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -52,8 +52,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<TextBlock Margin="0,0,303.65,107.992" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="86.35" FontSize="10.667"><Run Language="en-gb" Text="Results Directory"/></TextBlock>
-				<TextBox x:Name="txt_resultsPath" Margin="113.767,0,8,107.992" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1" Height="25" VerticalAlignment="Bottom">
+				<TextBlock Margin="0,0,403.65,107.992" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="86.35" FontSize="10.667"><Run Language="en-gb" Text="Results Directory"/></TextBlock>
+				<TextBox x:Name="txt_resultsPath" Margin="114.32,0,81.447,107.992" FontSize="13.333" Foreground="White" Background="{x:Null}" MaxLines="1" Height="25" VerticalAlignment="Bottom">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -62,6 +62,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
+				<Button x:Name="btn_panguBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,74.136,8,0" VerticalAlignment="Top" Width="70" Click="btn_panguBrowse_Click"/>
+				<Button x:Name="btn_worldBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,109.088,8,0" VerticalAlignment="Top" Width="70" Click="btn_worldBrowse_Click"/>
 			</Grid>
 			<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="29.333" Foreground="White" FontFamily="Segoe UI Light" Width="218.823"/>
 			<TextBlock HorizontalAlignment="Left" Margin="8,47.016,0,0" TextWrapping="Wrap" Text="//////////////////////////" VerticalAlignment="Top" Foreground="#FFD8D8D8"/>
