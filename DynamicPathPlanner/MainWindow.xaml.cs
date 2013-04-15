@@ -454,8 +454,12 @@ namespace DynamicPathPlanner
                 hazardSectorSize = 10;
                 hazard_wait.Begin();
                 hazard_worker.RunWorkerAsync();
-
+                lbl_slopeFeedback.Content ="";
                 nextSlide(grid_slope_slide, grid_hazard_slide, "Slope_SlideOut", "Hazard_SlideIn");
+            }
+            else
+            {
+                lbl_slopeFeedback.Content = "Please Select a Slope Algorithm!";
             }
         }
 
