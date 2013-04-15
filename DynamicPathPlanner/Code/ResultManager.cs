@@ -20,14 +20,12 @@ namespace DynamicPathPlanner.Code
 {
     class ResultManager
     {
-
         private String resultFolderPath = Properties.Settings.Default.resultsPath;
         private String imageFolder = "Images";
         private String dataFolder = "Data";
         private String simulationName;
         private String detailsFilename = "Details.txt";
         private String logFilename = "Log.txt";
-
 
         public ResultManager(String name)
         {
@@ -36,7 +34,6 @@ namespace DynamicPathPlanner.Code
             createResultFolder();
             createSimulationResultsFolder();
         }
-
 
         public void createResultFolder()
         {
@@ -69,8 +66,7 @@ namespace DynamicPathPlanner.Code
 
         public void createSimulationDetails(String environment, int areaSize, float distanceStep, String slopeAlgorithm, int hazardSectorSize , int startX , int startY , int targetX , int targetY ,int simulationSteps ,int knownSteps, int optimalSteps , int aKnownLikeness , int aUnkownLikeness , int dTodLikeness)
         {
-            string path = Path.Combine(resultFolderPath + "/" + simulationName, detailsFilename);
-
+            String path = Path.Combine(resultFolderPath + "/" + simulationName, detailsFilename);
             String date = DateTime.Today.ToString("dd/MM/yyyy");
 
             using (StreamWriter sw = File.CreateText(path))
@@ -97,7 +93,7 @@ namespace DynamicPathPlanner.Code
                 sw.WriteLine("Optimal Steps: " + optimalSteps);
                 sw.WriteLine("---------------------------------------------");
                 sw.WriteLine("");
-                sw.WriteLine("Path Similarity");
+                sw.WriteLine("  Path Similarity");
                 sw.WriteLine("----------------------------------------------------");
                 sw.WriteLine("| Algorithm     | A*   | D* (Known) | D* (Unknown) | ");
                 sw.WriteLine("| A*            | 100% | " + aKnownLikeness.ToString("000") + "%       | " + aUnkownLikeness.ToString("000") + "%         |");
@@ -105,10 +101,8 @@ namespace DynamicPathPlanner.Code
                 sw.WriteLine("| D* (Unknown)  | " + aUnkownLikeness.ToString("000") + "% | " + dTodLikeness.ToString("000") + "%       | 100%         |");
                 sw.WriteLine("----------------------------------------------------");
                 sw.WriteLine("");
-
                 sw.WriteLine("---------------------------------------------");
             }
-
         }
 
         public void createSimulationLog(List<String> entries)
@@ -118,7 +112,7 @@ namespace DynamicPathPlanner.Code
             using (StreamWriter sw = File.CreateText(path))
             {
                 sw.WriteLine("---------------------------------------------");
-                sw.WriteLine("SIMULATION LOG");
+                sw.WriteLine(" SIMULATION LOG");
                 sw.WriteLine("---------------------------------------------");
                 foreach (String s in entries)
                 {
@@ -129,7 +123,6 @@ namespace DynamicPathPlanner.Code
 
         public void createSimulationImages(Bitmap aerial, Bitmap elevation, Bitmap slope, Bitmap hazard, Bitmap aerialPath, Bitmap elevationPath, Bitmap slopePath, Bitmap hazardPath, Bitmap aerialCompare, Bitmap elevationCompare, Bitmap slopeCompare, Bitmap hazardCompare, Bitmap internalMap)
         {
-
             aerial.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Aerial.png"), ImageFormat.Png);
             elevation.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Elevation.png"), ImageFormat.Png);
             slope.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/Slope.png"), ImageFormat.Png);
@@ -143,9 +136,7 @@ namespace DynamicPathPlanner.Code
             slopeCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/slopeCompare.png"), ImageFormat.Png);
             hazardCompare.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/hazardCompare.png"), ImageFormat.Png);
             internalMap.Save((resultFolderPath + "/" + simulationName + "/" + imageFolder + "/internalMap.png"), ImageFormat.Png);
-
         }
-
 
         public void createSimulationData(double[,] elevation, double[,] slope, int[,] hazard, int[,] internalMap, List<int[]> path)
         {
@@ -266,7 +257,6 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-    
 
     }
 }
