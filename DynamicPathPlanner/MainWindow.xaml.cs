@@ -108,7 +108,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            fastSetup(); // Testing Only
+            // fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -438,6 +438,11 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isSlopeMapGenerated() == true)
             {
+
+                hazardSectorSize = 10;
+                hazard_wait.Begin();
+                hazard_worker.RunWorkerAsync();
+
                 nextSlide(grid_slope_slide, grid_hazard_slide, "Slope_SlideOut", "Hazard_SlideIn");
             }
         }
@@ -446,11 +451,11 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isElevationMapGenerated())
             {
-               // nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
                 interfaceManager.setRoverSize(1.0f);
                 interfaceManager.setRoverSlope(0.3f);
+                
                 nextSlide(grid_elevation_slide, grid_slope_slide, "Elevation_SlideOut", "Slope_SlideIn");
-              //  nextSlide(grid_elevation_slide, grid_roverSetup_Slide, "Elevation_SlideOut", "RoverSetup_SlideIn");
+                //nextSlide(grid_elevation_slide, grid_roverSetup_Slide, "Elevation_SlideOut", "RoverSetup_SlideIn");
             }
         }
 

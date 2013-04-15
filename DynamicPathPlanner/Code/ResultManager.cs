@@ -61,7 +61,6 @@ namespace DynamicPathPlanner.Code
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + dataFolder);
             }
-
         }
 
         public void createSimulationDetails(String environment, int areaSize, float distanceStep, String slopeAlgorithm, int hazardSectorSize , int startX , int startY , int targetX , int targetY ,int simulationSteps ,int knownSteps, int optimalSteps , int aKnownLikeness , int aUnkownLikeness , int dTodLikeness)
