@@ -842,7 +842,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -862,6 +862,7 @@
     				<TextBlock TextWrapping="Wrap" Text="Moon.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     				<TextBlock TextWrapping="Wrap" Text="Mars.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
     			</ListBox>
+    			<Label x:Name="lbl_environmentFeedback" Content="" Margin="8,0,98.333,8" VerticalAlignment="Bottom" FontSize="13.333" Foreground="White"/>
     		</Grid>
     	</Grid>
     	<Grid x:Name="grid_startup_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
@@ -881,7 +882,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
