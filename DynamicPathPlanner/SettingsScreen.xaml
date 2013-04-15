@@ -62,8 +62,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<Button x:Name="btn_panguBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,74.136,8,0" VerticalAlignment="Top" Width="70" Click="btn_panguBrowse_Click"/>
-				<Button x:Name="btn_worldBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,109.088,8,0" VerticalAlignment="Top" Width="70" Click="btn_worldBrowse_Click"/>
+				<Button x:Name="btn_panguBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,74.136,8,0" VerticalAlignment="Top" Width="70" Click="btn_panguBrowse_Click" Foreground="White" BorderBrush="Black" Background="#FF168D23"/>
+				<Button x:Name="btn_worldBrowse" Content="Browse..." HorizontalAlignment="Right" Margin="0,109.088,8,0" VerticalAlignment="Top" Width="70" Click="btn_worldBrowse_Click" BorderBrush="Black" Foreground="White" Background="#FF168D23"/>
 			</Grid>
 			<TextBlock HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="29.333" Foreground="White" FontFamily="Segoe UI Light" Width="218.823"/>
 			<TextBlock HorizontalAlignment="Left" Margin="8,47.016,0,0" TextWrapping="Wrap" Text="//////////////////////////" VerticalAlignment="Top" Foreground="#FFD8D8D8"/>
