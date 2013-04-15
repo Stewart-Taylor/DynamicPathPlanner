@@ -280,7 +280,7 @@ namespace DynamicPathPlanner
         private void startup_worker_complete(object sender, EventArgs e)
         {
             img_elevationSlide.Source = interfaceManager.getQuickView();
-            btn_elevationNext.Visibility = Visibility.Hidden;
+            btn_elevationNext.IsEnabled = false;
             nextSlide(grid_startup_slide, grid_elevation_slide, "Startup_SlideOut", "Elevation_SlideIn");
 
             startup_wait.Stop();
@@ -292,7 +292,8 @@ namespace DynamicPathPlanner
             elevation_wait.Stop();
             lbl_elevationWait.Text = "";
             img_elevationSlide.Source = interfaceManager.getElevationModelImage();
-            btn_elevationNext.Visibility = Visibility.Visible;
+            btn_elevationNext.IsEnabled = true;
+            btn_elevationUpdate.IsEnabled = true;
         }
 
         private void slope_worker_complete(object sender, EventArgs e)
@@ -559,7 +560,7 @@ namespace DynamicPathPlanner
                 {
                     elevation_worker.RunWorkerAsync();
                     BeginStoryboard(elevation_wait);
-                    btn_elevationNext.Visibility = Visibility.Hidden;
+                    btn_elevationUpdate.IsEnabled = false;
                     elevation_wait.Begin();
                 }
             }
