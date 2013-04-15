@@ -1118,7 +1118,7 @@
     						<Image x:Name="img_resultsMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
     						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_resultsSlope_Click" Focusable="False"/>
     						<Button x:Name="btn_resultsElevation" Content="Elevation" HorizontalAlignment="Left" Margin="80.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsElevation_Click" Focusable="False"/>
-    						<Button x:Name="btn_resultsSky" Content="Sky" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsSky_Click" Focusable="False"/>
+    						<Button x:Name="btn_resultsSky" Content="Aerial" HorizontalAlignment="Left" Margin="6.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsSky_Click" Focusable="False"/>
     						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsHazard_Click" Focusable="False"/>
     					</Grid>
     				</Grid>
