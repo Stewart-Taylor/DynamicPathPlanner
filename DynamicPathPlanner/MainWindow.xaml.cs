@@ -687,9 +687,14 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isSimulationComplete())
             {
+                lbl_simulationFeedback.Text = "";
                 simulation_wait.Begin();
                 btn_simulationNext.IsEnabled = false;
                 result_worker.RunWorkerAsync();
+            }
+            else
+            {
+                lbl_simulationFeedback.Text = "Simulation Must Complete!";
             }
         }
 

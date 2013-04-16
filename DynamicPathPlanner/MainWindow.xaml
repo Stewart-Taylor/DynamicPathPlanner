@@ -1003,7 +1003,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1036,6 +1036,7 @@
     				<Button x:Name="btn_simulationNext" Content="Next" Margin="0,0,8,7.999" Background="#FF28A014" Foreground="White" BorderBrush="Black" Click="btn_simulationNext_Click" HorizontalAlignment="Right" Width="50" VerticalAlignment="Bottom" Focusable="False"/>
     				<TextBlock x:Name="lbl_simulationWait" Margin="8,0,8,33.957" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White"/>
     				<Button x:Name="btn_back" Content="Back" Margin="8,0,0,7.998" Background="#FF28A014" Foreground="White" BorderBrush="Black" Click="btn_back_Click" HorizontalAlignment="Left" Width="50" VerticalAlignment="Bottom" Focusable="False"/>
+    				<TextBlock x:Name="lbl_simulationFeedback" HorizontalAlignment="Right" Margin="0,8,8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="106" Foreground="White" Padding="2" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
     			</Grid>
     			<Grid x:Name="grid_console1" Margin="0,0,230,0" Background="#FF525252" Grid.Row="1" Width="770" HorizontalAlignment="Left" Height="140">
     				<Grid Margin="0" Background="#FF707070" Height="15" VerticalAlignment="Top" d:LayoutOverrides="VerticalMargin">
@@ -1082,7 +1083,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
