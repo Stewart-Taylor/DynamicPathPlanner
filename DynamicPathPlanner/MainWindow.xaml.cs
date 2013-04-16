@@ -112,7 +112,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-             fastSetup(); // Testing Only
+           //  fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -296,14 +296,24 @@ namespace DynamicPathPlanner
 
         private void startup_worker_complete(object sender, EventArgs e)
         {
-            img_elevationSlide.Source = interfaceManager.getQuickView();
-            btn_elevationNext.IsEnabled = false;
-            nextSlide(grid_startup_slide, grid_elevation_slide, "Startup_SlideOut", "Elevation_SlideIn");
+            ImageSource source = interfaceManager.getQuickView();
 
+            if (source != null)
+            {
+                img_elevationSlide.Source = interfaceManager.getQuickView();
+                btn_elevationNext.IsEnabled = false;
+                nextSlide(grid_startup_slide, grid_elevation_slide, "Startup_SlideOut", "Elevation_SlideIn");
+            }
+            else
+            {
+                lbl_pleaseConnect.Visibility = Visibility.Hidden;
+                lbl_pleaseConnect.Text = "";
+                lbl_connectFeedback.Text = "Could Not Connect to PANGU!";
+            }
             startup_wait.Stop();
         }
 
-      
+
         private void elevation_worker_complete(object sender, EventArgs e)
         {
             elevation_wait.Stop();
@@ -377,8 +387,6 @@ namespace DynamicPathPlanner
             if (lst_environment.SelectedValue != null)
             {
                 selectedText = environmentPaths[lst_environment.SelectedIndex];
-
-
             }
 
             if (selectedText.Length > 0)
@@ -391,7 +399,8 @@ namespace DynamicPathPlanner
                 String absolute = System.IO.Path.GetFullPath(selectedText);
                 interfaceManager.setEnviornmentString(absolute);
                 interfaceManager.setEnviornmentPath(selectedText);
-
+                lbl_pleaseConnect.Visibility = Visibility.Visible;
+                lbl_connectFeedback.Text = "";
                 nextSlide(grid_pangu_slide, grid_startup_slide, "Pangu_SlideOut", "Startup_SlideIn");
                 startSlideIn_Completed(null, null);
             }
@@ -456,7 +465,6 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isSlopeMapGenerated() == true)
             {
-
                 hazardSectorSize = 10;
                 hazard_wait.Begin();
                 hazard_worker.RunWorkerAsync();
@@ -643,7 +651,6 @@ namespace DynamicPathPlanner
                 interfaceManager.simulationStep();
                 dispatcherTimer.Stop();
             }
-
         }
 
         private void runSimulation()
