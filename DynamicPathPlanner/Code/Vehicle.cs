@@ -306,9 +306,12 @@ namespace DynamicPathPlanner.Code
 
                 givenPath = search.getPath();
 
+                  
                 do
                 {
+                  
                     sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
+                  
                     if (steps >= stepLimit)
                     {
                         atTarget = true;
@@ -345,7 +348,8 @@ namespace DynamicPathPlanner.Code
                     }
                     else
                     {
-                        search.updateVertex(nextNode.x, nextNode.y);
+                        givenPath.Clear();
+                        map.setNode(nextNode.x, nextNode.y, 99999);
                         sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                         break;
                     }
@@ -353,6 +357,7 @@ namespace DynamicPathPlanner.Code
                 } while (true);
             } while (atTarget == false);
 
+            sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
             generatePathImage();
             generateRoverImage();
         }
@@ -362,7 +367,7 @@ namespace DynamicPathPlanner.Code
         {
             if (atTarget == false)
             {
-                sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
+                tScan();
 
                 steps++;
 
@@ -430,19 +435,33 @@ namespace DynamicPathPlanner.Code
                     {
                         givenPath.Clear();
                         map.setNode(nextNode.x, nextNode.y, 99999);
-                        sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
                         sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                     }
                 }
             }
 
+            sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
             generateRoverImage();
             generatePathImage();
         }
 
 
+        private void tScan()
+        {
+            foreach (PathNode p in givenPath)
+            {
+                if (sensorManager.isAreaSafe(p) == false )
+                {
+                    givenPath.Clear();
+                    break;
+                }
+            }
+        }
+
         public void generatePathImage()
         {
+            if (( map.getAdjustWidth() >0 ) && (map.getAdjustHeight() > 0))
+            {
              pathBitmap = new Bitmap(map.getAdjustWidth(), map.getAdjustHeight());
 
                 BitmapHelper b = new BitmapHelper(pathBitmap);
@@ -466,6 +485,7 @@ namespace DynamicPathPlanner.Code
                 b.UnlockBitmap();
 
                 pathBitmap = b.Bitmap;
+            }
         }
 
         private System.Drawing.Color getVehicleColorValue(double gradient, int x, int y)

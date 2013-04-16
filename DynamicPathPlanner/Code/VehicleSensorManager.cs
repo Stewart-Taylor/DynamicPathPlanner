@@ -70,7 +70,7 @@ namespace DynamicPathPlanner.Code
                 else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(positionX, positionY); }
             }
 
-            areaScan(positionX, positionY, 5);
+         //  areaScan(positionX, positionY, 5);
         }
 
         private void areaScan(int positionX, int positionY, int size)
@@ -113,66 +113,74 @@ namespace DynamicPathPlanner.Code
 
         private void updateFacingTopLeft(int positionX , int positionY)
         {
-            updateNode(positionX - 1, positionY - 1);
-            updateNode(positionX - 2, positionY);
-            updateNode(positionX + 1, positionY + 1);
-            updateNode(positionX - 2, positionY - 2);
+            updateNode(positionX + 1, positionY -1);
+            updateNode(positionX , positionY -1);
+            updateNode(positionX -1, positionY - 1);
+            updateNode(positionX -1, positionY );
+            updateNode(positionX - 1, positionY + 1);
         }
 
         private void updateFacingTopMiddle(int positionX, int positionY)
         {
-            updateNode(positionX - 1, positionY - 1);
-            updateNode(positionX, positionY - 1);
+            updateNode(positionX - 1, positionY );
+            updateNode(positionX +1, positionY );
             updateNode(positionX + 1, positionY - 1);
-            updateNode(positionX, positionY - 2);
+            updateNode(positionX , positionY -1);
+            updateNode(positionX - 1, positionY - 1);
         }
 
         private void updateFacingTopRight(int positionX, int positionY)
         {
+            updateNode(positionX -1, positionY - 1);
+            updateNode(positionX, positionY - 1);
             updateNode(positionX + 1, positionY - 1);
-            updateNode(positionX, positionY - 2);
-            updateNode(positionX + 2, positionY);
-            updateNode(positionX + 2, positionY - 2);
+            updateNode(positionX + 1, positionY);
+            updateNode(positionX + 1, positionY + 1);
         }
 
         private void updateFacingMiddleLeft(int positionX, int positionY)
         {
-            updateNode(positionX - 1, positionY);
+            updateNode(positionX, positionY + 1);
+            updateNode(positionX, positionY + 1);
             updateNode(positionX - 1, positionY - 1);
+            updateNode(positionX - 1, positionY);
             updateNode(positionX - 1, positionY + 1);
-            updateNode(positionX - 2, positionY);
         }
 
         private void updateFacingMiddleRight(int positionX, int positionY)
         {
-            updateNode(positionX + 1, positionY);
+            updateNode(positionX , positionY + 1);
+            updateNode(positionX, positionY +1);
             updateNode(positionX + 1, positionY - 1);
-            updateNode(positionX + 1, positionY + 1);
-            updateNode(positionX + 2, positionY);
+            updateNode(positionX + 1, positionY);
+            updateNode(positionX + 1, positionY +1);
         }
 
         private void updateFacingBottomLeft(int positionX, int positionY)
         {
             updateNode(positionX - 1, positionY + 1);
-            updateNode(positionX - 2, positionY);
-            updateNode(positionX, positionY + 2);
-            updateNode(positionX - 2, positionY + 2);
+            updateNode(positionX , positionY + 1);
+            updateNode(positionX + 1, positionY + 1);
+            updateNode(positionX + 1, positionY );
+            updateNode(positionX - 1, positionY );
         }
 
         private void updateFacingBottomMiddle(int positionX, int positionY)
         {
-            updateNode(positionX, positionY + 1);
-            updateNode(positionX - 1, positionY + 1);
-            updateNode(positionX + 1, positionY + 1);
-            updateNode(positionX, positionY + 2);
+            updateNode(positionX +1, positionY );
+            updateNode(positionX - 1, positionY);
+            updateNode(positionX - 1, positionY +1);
+            updateNode(positionX , positionY +1);
+            updateNode(positionX +1, positionY +1);
         }
 
         private void updateFacingBottomRight(int positionX, int positionY)
         {
+            updateNode(positionX, positionY + 1);
+            updateNode(positionX - 1, positionY + 1);
             updateNode(positionX + 1, positionY + 1);
-            updateNode(positionX + 2, positionY);
-            updateNode(positionX, positionY + 2);
-            updateNode(positionX + 2, positionY + 2);
+            updateNode(positionX + 1, positionY);
+            updateNode(positionX + 1, positionY - 1);
         }
 
 

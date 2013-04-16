@@ -93,22 +93,50 @@ namespace DynamicPathPlanner.Code
 
         public void setMinX(int v)
         {
-            minX = v;
+            if ((v -4) > 0)
+            {
+                minX = v -4;
+            }
+            else
+            {
+                minX = 0;
+            }
         }
 
         public void setMaxX(int v)
         {
-            maxX = v;
+            if ((v + 4) < getWidth())
+            {
+                maxX = v + 4;
+            }
+            else
+            {
+                maxX = getWidth();
+            }
         }
 
         public void setMinY(int v)
         {
-            minY = v;
+            if ((v - 4) > 0)
+            {
+                minY = v - 4;
+            }
+            else
+            {
+                minY = 0;
+            }
         }
 
         public void setMaxY(int v)
         {
-            maxY = v;
+            if ((v + 4) < getHeight())
+            {
+                maxY = v + 4;
+            }
+            else
+            {
+                maxY = getHeight();
+            }
         }
 
         public void setNode(int x, int y, int value)
@@ -117,24 +145,24 @@ namespace DynamicPathPlanner.Code
             {
                 knownMap[x, y] = value;
 
-                if (x < minX)
+                if (x < minX+4)
                 {
-                    minX = x;
+                    setMinX(x);
                 }
 
-                if (x > maxX)
+                if (x > maxX-4)
                 {
-                    maxX = x;
+                    setMaxX(x);
                 }
 
-                if (y < minY)
+                if (y < minY+4)
                 {
-                    minY = y;
+                    setMinY(y);
                 }
 
-                if (y > maxY)
+                if (y > maxY-4)
                 {
-                    maxY = y;
+                    setMaxY(y);
                 }
 
             }

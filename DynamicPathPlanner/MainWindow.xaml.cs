@@ -110,7 +110,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-            // fastSetup(); // Testing Only
+             fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -159,13 +159,13 @@ namespace DynamicPathPlanner
             try
             {
                 String dir = Properties.Settings.Default.panDirectory;
-
                 int count = 0;
+
                 foreach (string file in Directory.EnumerateFiles(dir, "*.pan"))
                 {
                     count++;
                     environmentPaths.Add(file);
-                    lst_environment.Items.Add(System.IO.Path.GetFileName(file).Substring(0 ,System.IO.Path.GetFileName(file).Length -4) );
+                    lst_environment.Items.Add(System.IO.Path.GetFileName(file).Substring(0, System.IO.Path.GetFileName(file).Length - 4));
                 }
 
                 if (count == 0)
@@ -368,9 +368,12 @@ namespace DynamicPathPlanner
             String selectedText = "";
             lbl_elevationWait.Text = "";
 
+
             if (lst_environment.SelectedValue != null)
             {
                 selectedText = environmentPaths[lst_environment.SelectedIndex];
+
+
             }
 
             if (selectedText.Length > 0)

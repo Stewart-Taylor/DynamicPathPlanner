@@ -842,7 +842,7 @@
     			<MenuItem x:Name="men_about" Header="About" Background="#FF494949" Click="men_about_Click"/>
     		</MenuItem>
     	</Menu>
-    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True">
+    	<Grid x:Name="grid_pangu_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_panguConnect" Margin="0" Width="408" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -854,13 +854,13 @@
     			</Grid.RenderTransform>
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="PANGU"/></TextBlock>
     			<TextBlock Margin="0,67.843,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="#FFE2E2E2"><Run Language="en-gb" Text="Please select an environment"/></TextBlock>
-    			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click" Focusable="False"/>
+    			<Button x:Name="btn_environmentNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF46A014" BorderBrush="Black" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_connect_Click" Focusable="False"/>
     			<TextBlock Margin="0,89.269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
     			<TextBlock x:Name="lbl_connectError" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     			<ListBox x:Name="lst_environment" Margin="8,147.498,8,108.417" Background="{x:Null}" Foreground="White" FontSize="16">
-    				<TextBlock TextWrapping="Wrap" Text="World1.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
-    				<TextBlock TextWrapping="Wrap" Text="Moon.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
-    				<TextBlock TextWrapping="Wrap" Text="Mars.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10"/>
+    				<TextBlock TextWrapping="Wrap" Text="World1.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10" Background="#FF4B4B4B"/>
+    				<TextBlock TextWrapping="Wrap" Text="Moon.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10" Background="#FF505050"/>
+    				<TextBlock TextWrapping="Wrap" Text="Mars.pan" Width="384" FontSize="16" FontFamily="Segoe UI Light" Padding="5,10,0,10" Background="#FF4B4B4B"/>
     			</ListBox>
     			<Label x:Name="lbl_environmentFeedback" Content="" Margin="8,0,98.333,8" VerticalAlignment="Bottom" FontSize="13.333" Foreground="White"/>
     		</Grid>
@@ -882,7 +882,7 @@
     			<TextBlock x:Name="lbl_connectError1" Margin="8,0,8,44.83" TextWrapping="Wrap" Text="Error: Port number must be a number!" VerticalAlignment="Bottom" Foreground="White" Height="22.921" Visibility="Hidden"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -895,8 +895,8 @@
     			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontSize="48" VerticalAlignment="Top" FontFamily="Segoe UI Light"><Run Language="en-gb" Text="Elevation"/></TextBlock>
     			<Button x:Name="btn_elevationNext" Content="Next" Margin="0,0,20,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="18.667" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationNext_Click" Focusable="False"/>
     			<TextBlock Margin="0,83.803,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FFA7A6A6"><Run FontSize="10.667" Language="en-gb" Text="///////////////////////////////////////////////////////////////////////////"/></TextBlock>
-    			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png"/>
-    			<TextBlock x:Name="lbl_elevationWait" Margin="284.036,0,152.885,16" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..."/>
+    			<Image x:Name="img_elevationSlide" HorizontalAlignment="Right" Margin="0,82.029,8,61.97" Width="256" Height="256" Source="ImageLoad.png" d:LayoutOverrides="VerticalMargin"/>
+				<TextBlock x:Name="lbl_elevationWait" Margin="284.036,0,152.885,16" TextWrapping="Wrap" FontSize="18.667" Foreground="White" VerticalAlignment="Bottom" Text="Please Wait ..."/>
     			<TextBox x:Name="txt_elevationSize" Margin="135.7,176.25,0,193.75" TextWrapping="Wrap" Text="1024" RenderTransformOrigin="0.851,0.353" FontSize="16" Background="#FF8C8C8C" Foreground="White" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="93.245" Height="30" TextAlignment="Right"/>
     			<TextBlock Margin="8,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Area Size" Width="116.943" d:LayoutOverrides="Height" TextAlignment="Right"/>
     			<Button x:Name="btn_elevationUpdate" Content="Load" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244" Focusable="False"/>
@@ -926,7 +926,7 @@
     			<TextBlock x:Name="lbl_sectorSize1_Copy" Margin="0,0,0,129.211" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" HorizontalAlignment="Right" Text="{Binding Value, ElementName=slider_roverSlope}" Width="40.6"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_slope_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_slope_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer2" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>

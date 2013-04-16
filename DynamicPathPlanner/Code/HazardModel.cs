@@ -85,7 +85,7 @@ namespace DynamicPathPlanner.Code
         private void addHazardPadding()
         {
             int hazardThreshold = 20;
-            int padValue = 10;
+            int padValue = 2;
 
             int width = hazardModel.GetLength(0);
             int height = hazardModel.GetLength(1);
