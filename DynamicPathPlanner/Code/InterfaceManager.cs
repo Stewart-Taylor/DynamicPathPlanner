@@ -608,7 +608,6 @@ namespace DynamicPathPlanner
             results.createSimulationLog(logManager.getEntries());
             results.createSimulationData(navigationMapManager.getElevationModel(), navigationMapManager.getSlopeModel(), navigationMapManager.getHazardModel() , simulationManager.getRoverInternalMap() , simulationManager.getPath());
             results.createSimulationImages(PANGU_Manager.getSkyBitmap(navigationMapManager.getDistanceStep() , navigationMapManager.getAreaSize()), navigationMapManager.getElevationBitmap(), navigationMapManager.getSlopeBitmap(),navigationMapManager.getHazardBitmap(), simulationManager.getAerialPathImage(), simulationManager.getElevationPathImage(), simulationManager.getSlopePathImage(), simulationManager.getHazardPathImage(), simulationManager.getAerialCompareImage(), simulationManager.getElevationCompareImage(), simulationManager.getSlopeCompareImage(), simulationManager.getHazardCompareImage(), simulationManager.getVehicleInternalBitmap());
-            
         }
 
     }
