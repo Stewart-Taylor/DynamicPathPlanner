@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 15/04/2013
+ * Last Updated: 16/04/2013
 */
 
 using System;
@@ -66,6 +66,8 @@ namespace DynamicPathPlanner
         private ImageSource loadImage;
 
         private bool simulationRunning = false;
+
+        private List<String> environmentPaths = new List<String>();
 
         public MainWindow()
         {
@@ -150,6 +152,7 @@ namespace DynamicPathPlanner
 
         private void populateEnvironment()
         {
+            environmentPaths.Clear();
             lst_environment.Items.Clear();
             btn_environmentNext.IsEnabled = true;
 
@@ -161,7 +164,8 @@ namespace DynamicPathPlanner
                 foreach (string file in Directory.EnumerateFiles(dir, "*.pan"))
                 {
                     count++;
-                    lst_environment.Items.Add(file);
+                    environmentPaths.Add(file);
+                    lst_environment.Items.Add(System.IO.Path.GetFileName(file).Substring(0 ,System.IO.Path.GetFileName(file).Length -4) );
                 }
 
                 if (count == 0)
@@ -366,11 +370,7 @@ namespace DynamicPathPlanner
 
             if (lst_environment.SelectedValue != null)
             {
-                String temp = (String)lst_environment.SelectedItem;
-                selectedText = temp;
-
-               // TextBlock temp = (TextBlock)lst_environment.SelectedItem;
-              //  selectedText = temp.Text;
+                selectedText = environmentPaths[lst_environment.SelectedIndex];
             }
 
             if (selectedText.Length > 0)
@@ -384,8 +384,6 @@ namespace DynamicPathPlanner
                 interfaceManager.setEnviornmentString(absolute);
                 interfaceManager.setEnviornmentPath(selectedText);
 
-                //   img_elevationSlide.Source = interfaceManager.getQuickView();
-                //   btn_elevationNext.Visibility = Visibility.Hidden;
                 nextSlide(grid_pangu_slide, grid_startup_slide, "Pangu_SlideOut", "Startup_SlideIn");
                 startSlideIn_Completed(null, null);
             }
