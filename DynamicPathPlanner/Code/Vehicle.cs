@@ -594,7 +594,7 @@ namespace DynamicPathPlanner.Code
                 int y = getCameraY();
 
 
-                int z = cameraHeight;
+                int z = getCameraZ(x, y) ;
                 float yaw = 0;
                 int pitch = cameraPitch;
                 int roll = 0;
@@ -624,6 +624,14 @@ namespace DynamicPathPlanner.Code
             return x;
         }
 
+        private int getCameraZ(int x , int y)
+        {
+            float z = 1;
+            z = (int)PANGU_Manager.getPointHeight(x, y);
+            z += 7;
+            return (int)z;
+        }
+
         private int getCameraY()
         {
 
@@ -647,7 +655,7 @@ namespace DynamicPathPlanner.Code
             {
                 int x = getCameraX();
                 int y = getCameraY();
-                int z = cameraHeight;
+                int z = getCameraZ(x, y);
     
                 camBitmap = PANGU_Manager.getImageView(y, x, z, -yaw, pitch, cameraRoll, 70.0f);
             }

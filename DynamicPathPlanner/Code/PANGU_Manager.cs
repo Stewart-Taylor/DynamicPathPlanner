@@ -92,11 +92,11 @@ namespace DynamicPathPlanner.Code
         }
 
 
-
-      
-
-  
-
+        public static float getPointHeight(int x , int y)
+        {
+            float value = connector.getHeightPoint(x, y);
+            return value;
+        }
 
 
         public static Bitmap getSkyBitmap(float distance, int size)

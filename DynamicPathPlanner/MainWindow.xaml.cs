@@ -197,6 +197,7 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
+            /*
             interfaceManager.setEnviornmentString("TestWorld.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/TestWorld.pan");
             interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -207,8 +208,8 @@ namespace DynamicPathPlanner
             interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(4, 4, 38, 46, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-
-            /*
+            */
+            
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/Moon.pan");
           interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -219,7 +220,7 @@ namespace DynamicPathPlanner
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-            */
+            
 
             /*
              interfaceManager.connectToPANGU();

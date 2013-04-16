@@ -89,6 +89,11 @@ namespace DynamicPathPlanner.Code
         [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern void getElevationModel(void* s, char b, float d, int sizeX, int sizeY, float[] elevationGrid);
        
+        //Get Surface Elevation
+        [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+       public unsafe static extern float pan_protocol_get_surface_elevation(void* s, char b, float x, float y, char* err);
+
+
         //------------------------------------------------------------------------------------------------------------
 
         public PANGU_Connector()
@@ -170,6 +175,24 @@ namespace DynamicPathPlanner.Code
                 connected = false;
                 Console.WriteLine("Disconnected from PANGU server successfully");
             }
+        }
+
+
+        public float getHeightPoint(float x, float y)
+        {
+            double value = 0;
+
+            unsafe
+            {
+                ulong t = 1024;
+                char* p = null;
+
+              //  pan_protocol_get_viewpoint_by_angle(sock, x, y, 100, 0, 90, 0, &t);
+              //  value = pan_protocol_get_surface_elevation(sock, p);
+                value = pan_protocol_get_surface_elevation(sock, '0', x, y, p);
+            }
+
+            return (float)value;
         }
 
         //returns bitmap image converted from the PANGU stream
