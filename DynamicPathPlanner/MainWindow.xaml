@@ -1003,7 +1003,7 @@
     			<TextBlock Margin="0,0,451.018,10" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="#FFE2E2E2" HorizontalAlignment="Right" Text="Left Click: Start Right Click: Target" Width="140.982"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_simulation" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1083,7 +1083,7 @@
     			</Grid>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
+    	<Grid x:Name="grid_results" RenderTransformOrigin="0.5,0.5" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid.RenderTransform>
     			<TransformGroup>
     				<ScaleTransform/>
@@ -1115,7 +1115,7 @@
     					<ColumnDefinition Width="0.608*"/>
     				</Grid.ColumnDefinitions>
     				<Grid Margin="8,8,12,8">
-    					<TextBlock x:Name="lbl_resultsMain" HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" Text="Elevation" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
+    					<TextBlock x:Name="lbl_resultsMain" HorizontalAlignment="Left" Margin="8,11.586,0,0" TextWrapping="Wrap" Text="Aerial" VerticalAlignment="Top" FontSize="21.333" Foreground="White" FontFamily="Segoe UI Light"/>
     					<Grid Margin="8,39.96,8,8">
     						<Image x:Name="img_resultsMain" Source="ImageLoad.png" Margin="8,8,8,37"/>
     						<Button x:Name="btn_resultsSlope" Content="Slope" Margin="154.626,0,0,0" VerticalAlignment="Bottom" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Width="70" HorizontalAlignment="Left" Click="btn_resultsSlope_Click" Focusable="False"/>
@@ -1124,6 +1124,7 @@
     						<Button x:Name="btn_resultsHazard" Content="Hazard" HorizontalAlignment="Left" Margin="229.626,0,0,0" VerticalAlignment="Bottom" Width="70" Height="25" Background="#FF28A014" BorderBrush="Black" Foreground="White" FontSize="14.667" FontFamily="Segoe UI Semibold" Click="btn_resultsHazard_Click" Focusable="False"/>
     					</Grid>
     				</Grid>
+					
     				<Grid Margin="8,0,8,8" Grid.Column="1">
     					<TextBlock TextWrapping="Wrap" Text="Details" VerticalAlignment="Top" Margin="8,0,0,0" FontSize="26.667" Foreground="White" d:LayoutOverrides="Width" FontFamily="Segoe UI Light" Height="42.308"/>
     					<TextBlock HorizontalAlignment="Left" Margin="70.79,42.308,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -1131,11 +1132,17 @@
     						<Grid.ColumnDefinitions>
     							<ColumnDefinition/>
     						</Grid.ColumnDefinitions>
-    						<TextBlock x:Name="lbl_resultSteps" Margin="8,74.531,0,0" TextWrapping="Wrap" Text="Steps:  [Simulation: 345]  [Optimal: 310]" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="18.667" Width="563.136"/>
-    						<TextBlock x:Name="lbl_resultLikeness_Copy" Margin="8,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" FontSize="13.333"><Run Text="This is how similar the simulation path is to the optimal path"/></TextBlock>
+    						<TextBlock x:Name="lbl_resultLikeness_Copy" Margin="271.135,0,0,27.137" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" FontSize="13.333" Text="Similarity is based on path overlap" Width="300.001"/>
     				
+					
+					
+					
+					
+					
+					
+					
 				
-						<Grid x:Name="Similarity_Table" Margin="97.553,131.451,181.582,72.852" d:LayoutOverrides="Width, Height"  >
+						<Grid x:Name="Similarity_Table" Margin="271.135,155.431,8,48.871" d:LayoutOverrides="Width"  >
     
 	
 	<Grid.RowDefinitions>
@@ -1158,18 +1165,48 @@
     <TextBlock Grid.Row="1" Grid.Column="1" TextAlignment="Center" Margin="0,-0.001,0,0.001" Foreground="White" Background="#FF5A5A5A" FontSize="10.667"><Run Language="en-gb" Text="100%"/></TextBlock>
     <TextBlock x:Name="lbl_simtableDknownA" Grid.Row="1" Grid.Column="2" TextAlignment="Center" Margin="0,-0.001,0.001,0.001" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
     <TextBlock x:Name="lbl_simtableDunknownA" Grid.Row="1" Grid.Column="3" TextAlignment="Center" Margin="-0.001,-0.001,0.001,0.001" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
-    <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" Margin="0,-0.001,0,0.001" Foreground="White" Background="#FF464646" FontSize="10.667"><Run Language="en-gb" Text="D* (Known)"/></TextBlock>
-    <TextBlock x:Name="lbl_simtableAknownD" Grid.Row="2" Grid.Column="1" TextAlignment="Center" Margin="0,-0.001,0,0.001" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
-    <TextBlock Grid.Row="2" Grid.Column="2" TextAlignment="Center" Margin="0,-0.001,0.001,0.001" Foreground="White" Background="#FF5A5A5A" FontSize="10.667"><Run Language="en-gb" Text="100%"/></TextBlock>
-    <TextBlock x:Name="lbl_simtableDtoD" Grid.Row="2" Grid.Column="3" TextAlignment="Center" Margin="-0.001,-0.001,0.001,0.001" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
-	<TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" Margin="0,-0.001,0,0.002" Foreground="White" Background="#FF464646" FontSize="10.667"><Run Language="en-gb" Text="D* (Unknown)"/></TextBlock>
-    <TextBlock x:Name="lbl_simtableDunknownA2" Grid.Row="3" Grid.Column="1" TextAlignment="Center" Margin="0,-0.001,0,0.002" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
-    <TextBlock x:Name="lbl_simtableDtoD2" Grid.Row="3" Grid.Column="2" TextAlignment="Center" Margin="0,-0.001,0.001,0.002" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
-    <TextBlock Grid.Row="3" Grid.Column="3" TextAlignment="Center" Margin="-0.001,-0.001,0.001,0.002" Foreground="White" Background="#FF5A5A5A" FontSize="10.667"><Run Language="en-gb" Text="100%"/></TextBlock>
-    <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="0,0,0.001,0.001"/>
+    <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" Margin="0,-0.001,0,0.002" Foreground="White" Background="#FF464646" FontSize="10.667"><Run Language="en-gb" Text="D* (Known)"/></TextBlock>
+    <TextBlock x:Name="lbl_simtableAknownD" Grid.Row="2" Grid.Column="1" TextAlignment="Center" Margin="0,-0.001,0,0.002" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
+    <TextBlock Grid.Row="2" Grid.Column="2" TextAlignment="Center" Margin="0,-0.001,0.001,0.002" Foreground="White" Background="#FF5A5A5A" FontSize="10.667"><Run Language="en-gb" Text="100%"/></TextBlock>
+    <TextBlock x:Name="lbl_simtableDtoD" Grid.Row="2" Grid.Column="3" TextAlignment="Center" Margin="-0.001,-0.001,0.001,0.002" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
+	<TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" Margin="0,-0.002,0,0.003" Foreground="White" Background="#FF464646" FontSize="10.667"><Run Language="en-gb" Text="D* (Unknown)"/></TextBlock>
+    <TextBlock x:Name="lbl_simtableDunknownA2" Grid.Row="3" Grid.Column="1" TextAlignment="Center" Margin="0,-0.002,0,0.003" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
+    <TextBlock x:Name="lbl_simtableDtoD2" Grid.Row="3" Grid.Column="2" TextAlignment="Center" Margin="0,-0.002,0.001,0.003" Foreground="White" FontSize="10.667"><Run Language="en-gb" Text="0%"/></TextBlock>
+    <TextBlock Grid.Row="3" Grid.Column="3" TextAlignment="Center" Margin="-0.001,-0.002,0.001,0.003" Foreground="White" Background="#FF5A5A5A" FontSize="10.667"><Run Language="en-gb" Text="100%"/></TextBlock>
+    <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="0,0,0.001,0.002"/>
 
 </Grid>
 						<Label Content="The D* (Unknown) refers to the real time imulation on the previous screen." Margin="8,0" VerticalAlignment="Top" FontSize="13.333" Background="{x:Null}" Foreground="White"/>
+						<Grid x:Name="Length_Table" Margin="271.135,77.43,8,256.875" d:LayoutOverrides="HorizontalAlignment, Width, Height"  >
+    
+	
+							<Grid.RowDefinitions>
+								<RowDefinition Height="0.5*"/>
+								<RowDefinition Height="0.5*"/>
+
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="0.333*"/>
+								<ColumnDefinition Width="0.333*"/>
+								<ColumnDefinition Width="0.333*"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" Foreground="White" Background="#FF464646" FontSize="10.667" Margin="0,0,0,0.002" Text="D* (Unknown)"/>
+							<TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center" Foreground="White" Background="#FF4B4B4B" FontSize="10.667" Margin="0,0,0.001,0.002" Text="D* (Known)"/>
+							<TextBlock Grid.Row="0" Grid.Column="2" TextAlignment="Center" Foreground="White" Background="#FF464646" FontSize="10.667" Margin="-0.001,0,0.002,0.002" Text="A*"/>
+					
+							<TextBlock x:Name="lbl_lengthDUnkown" Grid.Row="1" Grid.Column="0" TextAlignment="Center" Margin="0,-0.002,0,0.002" Foreground="White" Background="#FF5A5A5A" FontSize="10.667" Text="3434"/>
+							<TextBlock x:Name="lbl_lengthDKnown" Grid.Row="1" Grid.Column="1" TextAlignment="Center" Margin="0,-0.002,0.001,0.002" Foreground="White" Background="#FF555555" FontSize="10.667" Text="34"/>
+							<TextBlock x:Name="lbl_lengthA" Grid.Row="1" Grid.Column="2" TextAlignment="Center" Margin="-0.001,-0.002,0.002,0.003" Foreground="White" Background="#FF5A5A5A" FontSize="10.667" d:LayoutOverrides="GridBox" Text="34"/>
+	
+							<Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="0,0,0.002,0.003"/>
+
+						</Grid>
+						<Grid Height="70" Margin="8,77.43,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="259.135">
+							<TextBlock Margin="8" TextWrapping="Wrap" Text="Path Length" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="21.333" Foreground="White"/>
+						</Grid>
+						<Grid Margin="8,155.431,0,48.871" HorizontalAlignment="Left" Width="259.135">
+							<TextBlock Margin="8" TextWrapping="Wrap" Text="Similarity Table" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="21.333"/>
+						</Grid>
 
 
     					</Grid>

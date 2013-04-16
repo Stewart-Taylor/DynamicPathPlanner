@@ -245,8 +245,10 @@ namespace DynamicPathPlanner
         private void result_worker_complete(object sender, EventArgs e)
         {
             simulation_wait.Stop();
-            lbl_resultSteps.Text = "Steps  [Simulation: " + interfaceManager.getSimulationSteps() + "]  [Optimal: " + interfaceManager.getOptimalSteps() + "]  [All Known: " + interfaceManager.getDKnownSteps() + "]";
-            
+            lbl_lengthDUnkown.Text = interfaceManager.getSimulationSteps().ToString();
+            lbl_lengthDKnown.Text = interfaceManager.getDKnownSteps().ToString();
+            lbl_lengthA.Text = interfaceManager.getOptimalSteps().ToString();
+
             //Similarity Table
             lbl_simtableDknownA.Text = interfaceManager.getPathLikenessDknownToA().ToString() + "%";
             lbl_simtableDunknownA.Text = interfaceManager.getPathLikenessDunknownToA().ToString() + "%";
