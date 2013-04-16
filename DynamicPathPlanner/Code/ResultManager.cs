@@ -35,6 +35,15 @@ namespace DynamicPathPlanner.Code
             createSimulationResultsFolder();
         }
 
+        public ResultManager(String name, String resultPath)
+        {
+            simulationName = name;
+            resultFolderPath = resultPath;
+
+            createResultFolder();
+            createSimulationResultsFolder();
+        }
+
         public void createResultFolder()
         {
             if (!Directory.Exists(resultFolderPath))

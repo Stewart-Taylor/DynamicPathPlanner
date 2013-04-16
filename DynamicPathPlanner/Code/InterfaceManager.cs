@@ -597,13 +597,13 @@ namespace DynamicPathPlanner
         }
 
 
-        public void exportResults()
+        public void exportResults(String path)
         {
             addLogEntry("Result Export Started");
 
             String simName = navigationMapManager.getEnvironementString() + " " + DateTime.Now.ToString("dd-MM-yyyy-HH-mm");
 
-            ResultManager results = new ResultManager(simName);
+            ResultManager results = new ResultManager(simName , path);
             results.createSimulationDetails(navigationMapManager.getEnvironementString(), navigationMapManager.getAreaSize(), navigationMapManager.getDistanceStep(), navigationMapManager.getSlopeAlgorithm(), navigationMapManager.getHazardSectorSize(), simulationManager.getStartX(), simulationManager.getStartY(), simulationManager.getTargetX(), simulationManager.getTargetY(), simulationManager.getSteps(), simulationManager.getDKnownSteps(), simulationManager.getOptimalSteps(), (int)simulationManager.getPathLikenessDknownToA(), (int)simulationManager.getPathLikenessDunknownToA(), (int)simulationManager.getPathLikenessDunknownToDknown()); 
             results.createSimulationLog(logManager.getEntries());
             results.createSimulationData(navigationMapManager.getElevationModel(), navigationMapManager.getSlopeModel(), navigationMapManager.getHazardModel() , simulationManager.getRoverInternalMap() , simulationManager.getPath());

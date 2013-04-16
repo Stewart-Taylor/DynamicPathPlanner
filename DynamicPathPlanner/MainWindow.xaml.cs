@@ -69,6 +69,8 @@ namespace DynamicPathPlanner
 
         private List<String> environmentPaths = new List<String>();
 
+        private String exportPath;
+
         public MainWindow()
         {
             PANGU_Manager.killPANGU();
@@ -261,7 +263,7 @@ namespace DynamicPathPlanner
 
         private void exportResults(object sender, EventArgs e)
         {
-            interfaceManager.exportResults();
+            interfaceManager.exportResults(exportPath);
         }
 
         private void exporter_worker_complete(object sender, EventArgs e)
@@ -806,9 +808,19 @@ namespace DynamicPathPlanner
 
         private void btn_resultsExport_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            exporter_worker.RunWorkerAsync();
-            export_wait.Begin();
-            btn_resultsExport.IsEnabled = false;
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+
+            exportPath = dialog.SelectedPath;
+
+            if (exportPath.Length > 0)
+            {
+                exporter_worker.RunWorkerAsync();
+                export_wait.Begin();
+                btn_resultsExport.IsEnabled = false;
+
+            }
+           
         }
     }
 }
