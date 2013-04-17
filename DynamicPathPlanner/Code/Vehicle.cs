@@ -613,14 +613,15 @@ namespace DynamicPathPlanner.Code
         {
          //   positionX = 32;
 
-            int x = (int)( (float)positionX  - (((areaSize / 3f)) * distanceStep));
-          //  int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
+            int x = positionX + 26;
+
+             x = (int)( (float)x  - (((areaSize/2f)) * distanceStep));
+         //   int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
 
      //       int x = (int)( (float)(positionX -16f) * 2f );
 
-           //  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
-
-            x = -30;
+       //    int  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
+             x = (int)((float)x * 2f);
           //  x = 32;
             return x;
         }
@@ -629,14 +630,16 @@ namespace DynamicPathPlanner.Code
         {
 
             //   positionY = 32;
+            int y = positionY + 26;
 
-                 int y = (int)((float)positionX - (((areaSize / 3f)) * distanceStep));
-          //    int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
+                  y = (int)((float)y - (((areaSize/2f )) * distanceStep));
+            //  int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
 
          //   int y = (int)((float)(positionY - 16f) * 2f);
 
-            //  int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
-                 y = -30;
+         //     int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
+
+                  y = (int)((float)y * 2f);
             // y = 32;
             return y;
         }
@@ -645,7 +648,7 @@ namespace DynamicPathPlanner.Code
         {
             float z = 1;
             z = (int)PANGU_Manager.getPointHeight(x, y);
-            z += 7;
+            z += 9;
             return (int)z;
         }
 
