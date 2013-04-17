@@ -613,15 +613,32 @@ namespace DynamicPathPlanner.Code
         {
          //   positionX = 32;
 
-           // int x = (int)( (float)positionX  - (((areaSize / 2f)) * distanceStep));
+            int x = (int)( (float)positionX  - (((areaSize / 3f)) * distanceStep));
           //  int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
 
-            int x = (int)( (float)(positionX -16f) * 2f );
+     //       int x = (int)( (float)(positionX -16f) * 2f );
 
            //  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
 
+            x = -30;
           //  x = 32;
             return x;
+        }
+
+        private int getCameraY()
+        {
+
+            //   positionY = 32;
+
+                 int y = (int)((float)positionX - (((areaSize / 3f)) * distanceStep));
+          //    int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
+
+         //   int y = (int)((float)(positionY - 16f) * 2f);
+
+            //  int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
+                 y = -30;
+            // y = 32;
+            return y;
         }
 
         private int getCameraZ(int x , int y)
@@ -632,21 +649,7 @@ namespace DynamicPathPlanner.Code
             return (int)z;
         }
 
-        private int getCameraY()
-        {
 
-         //   positionY = 32;
-
-       //     int y = (int)((float)positionX - (((areaSize / 2f)) * distanceStep));
-          //  int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
-
-            int y = (int)((float)(positionY -16f) * 2f);
-
-          //  int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
-
-           // y = 32;
-            return y;
-        }
 
         //Manual camera control
         public void updateRoverImage(float pitch , float yaw)

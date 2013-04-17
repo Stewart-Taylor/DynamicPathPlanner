@@ -43,10 +43,10 @@ namespace DynamicPathPlanner.Code
 
         public void addEntry(String entryText)
         {
+            printToConsole(entryText);
             entryText = DateTime.Now + " | " + entryText;
             entries.Add(entryText);
             printToLogFile(entryText);
-            printToConsole(entryText);
         }
 
         private void printToLogFile(String entry)

@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 16/04/2013
+ * Last Updated: 17/04/2013
 */
 
 using System;
@@ -33,7 +33,6 @@ namespace DynamicPathPlanner
 {
     public partial class MainWindow : Window 
     {
-
         private InterfaceManager interfaceManager;
         private Grid oldGrid;
         private Grid activeGrid;
@@ -112,7 +111,7 @@ namespace DynamicPathPlanner
 
             applicationSetUp();
 
-           //  fastSetup(); // Testing Only
+             fastSetup(); // Testing Only
         }
 
         private void applicationSetUp()
@@ -199,7 +198,7 @@ namespace DynamicPathPlanner
         //Used for testing 
         private void fastSetup()
         {
-            /*
+            
             interfaceManager.setEnviornmentString("TestWorld.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/TestWorld.pan");
             interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -208,10 +207,10 @@ namespace DynamicPathPlanner
             interfaceManager.setRoverSlope(0.261f);
             interfaceManager.generateSlopeModel("AVERAGE");
             interfaceManager.generateHazardModel(20);
-            interfaceManager.setVehicleValues(4, 4, 38, 46, "D_STAR", false);
+            interfaceManager.setVehicleValues(16, 17, 38, 46, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-            */
             
+            /*
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/Moon.pan");
           interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -222,9 +221,7 @@ namespace DynamicPathPlanner
            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-            
-
-            /*
+           
              interfaceManager.connectToPANGU();
              interfaceManager.setEnviornmentString("Moon.pan");
              interfaceManager.generateElevationModel(0.1f, 1024);
