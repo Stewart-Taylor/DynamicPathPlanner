@@ -613,7 +613,7 @@ namespace DynamicPathPlanner.Code
         {
          //   positionX = 32;
 
-            int x = positionX + 26;
+            int x = positionX + (int)((float)map.getWidth()/2f);
 
              x = (int)( (float)x  - (((areaSize/2f)) * distanceStep));
          //   int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
@@ -630,7 +630,7 @@ namespace DynamicPathPlanner.Code
         {
 
             //   positionY = 32;
-            int y = positionY + 26;
+            int y = positionY + (int)((float)map.getHeight() / 2f);
 
                   y = (int)((float)y - (((areaSize/2f )) * distanceStep));
             //  int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
