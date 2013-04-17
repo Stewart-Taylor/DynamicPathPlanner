@@ -435,16 +435,22 @@ namespace DynamicPathPlanner
                 targetX = int.Parse(textTargetX);
                 targetY = int.Parse(textTargetY);
 
-                if (interfaceManager.vehicleValuesValid(startX, startY , targetX , targetY))
+                if (interfaceManager.vehicleValuesValid(startX, startY, targetX, targetY))
                 {
                     interfaceManager.setVehicleValues(startX, startY, targetX, targetY, "a_star", false);
-                    nextSlide(grid_rover_slide, grid_simulation , "Rover_SlideOut", "Simulation_SlideIn");
+                    lbl_roverScreenFeedback.Text = "";
+                    nextSlide(grid_rover_slide, grid_simulation, "Rover_SlideOut", "Simulation_SlideIn");
                     img_simulationMain.Source = interfaceManager.getSimulationElevationImage();
+                }
+                else
+                {
+                    lbl_roverScreenFeedback.Text = "Positions are not Valid!";
                 }
             }
             catch
             {
                 //Error message
+                lbl_roverScreenFeedback.Text = "Positions are not Valid!";
             }
         }
 
