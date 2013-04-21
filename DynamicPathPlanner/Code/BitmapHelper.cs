@@ -4,7 +4,7 @@
  * This class is used to render bitmaps quicker
  * 
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -23,10 +23,10 @@ namespace DynamicPathPlanner.Code
        private IntPtr Iptr = IntPtr.Zero;
        private BitmapData bitmapData = null;
 
-        public byte[] Pixels { get; set; }
-        public int Depth { get; private set; }
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+       public byte[] Pixels { get; set; }
+       public int Depth { get; private set; }
+       public int Width { get; private set; }
+       public int Height { get; private set; }
 
 
         public Bitmap Bitmap

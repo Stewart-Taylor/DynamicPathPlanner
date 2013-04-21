@@ -6,7 +6,7 @@
  * If no copy exists in the cache it will fetch the elevation model from PANGU
  * Fetching the DEM from PANGU can be slow, hence the cache system.
  *
- * Last Updated: 09/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -117,12 +117,6 @@ namespace DynamicPathPlanner.Code
                     file.WriteLine();
                 }
             }
-        }
-
-        // TODO
-        public double[,] getPPM_DEM()
-        {
-            return null;
         }
 
     }
