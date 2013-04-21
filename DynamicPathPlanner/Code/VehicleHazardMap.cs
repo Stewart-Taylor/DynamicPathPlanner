@@ -1,10 +1,11 @@
 ﻿/*      VehicleHazardMap Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
- * This class contains the data the vehicle stores for it's own map
+ * This class contains the data the vehicle stores for it's own internal map
  * It is what the rover uses for pathfinding. This keeps it seperate from the simulated enivorment data
- *
- * Last Updated: 16/03/2013
+ * 
+ * 
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -22,7 +23,7 @@ namespace DynamicPathPlanner.Code
         private int maxX;
         private int minY;
         private int maxY;
-
+        private int mapPad = 4; // Used to provide access to a region slightly outside what is known
 
         #region GET
 
@@ -73,12 +74,10 @@ namespace DynamicPathPlanner.Code
 
         public int getValue(int x, int y)
         {
-
             return knownMap[x, y];
         }
 
         #endregion
-
 
 
         #region SET
@@ -93,9 +92,9 @@ namespace DynamicPathPlanner.Code
 
         public void setMinX(int v)
         {
-            if ((v -4) > 0)
+            if ((v - mapPad) > 0)
             {
-                minX = v -4;
+                minX = v - mapPad;
             }
             else
             {
@@ -105,9 +104,9 @@ namespace DynamicPathPlanner.Code
 
         public void setMaxX(int v)
         {
-            if ((v + 4) < getWidth())
+            if ((v + mapPad) < getWidth())
             {
-                maxX = v + 4;
+                maxX = v + mapPad;
             }
             else
             {
@@ -117,9 +116,9 @@ namespace DynamicPathPlanner.Code
 
         public void setMinY(int v)
         {
-            if ((v - 4) > 0)
+            if ((v - mapPad) > 0)
             {
-                minY = v - 4;
+                minY = v - mapPad;
             }
             else
             {
@@ -129,9 +128,9 @@ namespace DynamicPathPlanner.Code
 
         public void setMaxY(int v)
         {
-            if ((v + 4) < getHeight())
+            if ((v + mapPad) < getHeight())
             {
-                maxY = v + 4;
+                maxY = v + mapPad;
             }
             else
             {
@@ -145,22 +144,22 @@ namespace DynamicPathPlanner.Code
             {
                 knownMap[x, y] = value;
 
-                if (x < minX+4)
+                if (x < minX + mapPad)
                 {
                     setMinX(x);
                 }
 
-                if (x > maxX-4)
+                if (x > maxX - mapPad)
                 {
                     setMaxX(x);
                 }
 
-                if (y < minY+4)
+                if (y < minY + mapPad)
                 {
                     setMinY(y);
                 }
 
-                if (y > maxY-4)
+                if (y > maxY - mapPad)
                 {
                     setMaxY(y);
                 }
@@ -174,8 +173,5 @@ namespace DynamicPathPlanner.Code
         {
             knownMap = new int[width, height];
         }
-
-
-
     }
 }
