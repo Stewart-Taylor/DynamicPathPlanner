@@ -4,7 +4,7 @@
  * This class is used to provide a path to a specified target using the map it is given
  * Can use a search algorithm given to it to find the path
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -22,24 +22,43 @@ namespace DynamicPathPlanner.Code
     {
         private int width;
         private int height;
-
-
-        private Bitmap pathBitmap;
-        private int[,] hazardModel;
-        private double[,] hazardImageModel;
-
-        private List<PathNode> pathNodes = new List<PathNode>();
-
         private int startX;
         private int startY;
         private int targetX;
         private int targetY;
+        private int[,] hazardModel;
+        private double[,] hazardImageModel;
 
+        private Bitmap pathBitmap;
+        private List<PathNode> pathNodes = new List<PathNode>();
+
+        #region GET
 
         public int getSteps()
         {
             return pathNodes.Count;
         }
+
+        public List<PathNode> getPath()
+        {
+            return pathNodes;
+        }
+
+        public ImageSource getPathImage()
+        {
+            MemoryStream ms = new MemoryStream();
+            pathBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        #endregion
+
 
         public Pathfinder(int[,] hazardModelT, double[,] hazardImageModelT, int startXT, int startYT, int targetXT, int targetYT)
         {
@@ -57,20 +76,11 @@ namespace DynamicPathPlanner.Code
             pathBitmap = new Bitmap(width, height);
         }
 
-
-        public List<PathNode> getPath()
-        {
-            return pathNodes;
-        }
-
-
         public void findPath(int startX, int startY, int targetX, int targetY)
         {
             SearchAlgorithm aStar = new A_Star(hazardModel, startX, startY, targetX, targetY);
-
             pathNodes = aStar.getPath();
         }
-
 
         public void generatePathImage()
         {
@@ -88,7 +98,6 @@ namespace DynamicPathPlanner.Code
 
             pathBitmap = bitmap;
         }
-
 
         private System.Drawing.Color getPathColorValue(double gradient, int x, int y)
         {
@@ -117,7 +126,6 @@ namespace DynamicPathPlanner.Code
                 green = 0;
             }
 
-
             if (notKnown == true)
             {
                 green = ((float)green * 0.3f);
@@ -139,26 +147,8 @@ namespace DynamicPathPlanner.Code
                 green = 255; red = 255; blue = 255;
             }
 
-            color = System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
-
-            return color;
+            return System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
         }
-
-        public ImageSource getPathImage()
-        {
-            MemoryStream ms = new MemoryStream();
-            pathBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
-
-            ImageSource img = bi;
-
-            return img;
-        }
-
 
     }
 }
