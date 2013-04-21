@@ -4,7 +4,7 @@
  * This class is used to generate an elevation model
  * The model will be fetched using the Elevation Loader
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -20,19 +20,50 @@ namespace DynamicPathPlanner.Code
 {
     class ElevationModel
     {
-
+        private double maxHeight = -1;
+        private double minHeight = 0;
+        private int width;
+        private int height;
         private double[,] elevationModel;
 
         private ElevationLoader loader = new ElevationLoader();
-
-        private int width;
-        private int height;
-
         private Bitmap image;
 
-        private double maxHeight = -1;
-        private double minHeight = 0;
+        #region GET
 
+        public double[,] getModel()
+        {
+            return elevationModel;
+        }
+
+        public Bitmap getBitmap()
+        {
+            return image;
+        }
+
+        private float getHeight(int red, int green)
+        {
+            float height = 0;
+            height = ((red * 256 + green));
+
+            return height;
+        }
+
+        public ImageSource getImageSource()
+        {
+            MemoryStream ms = new MemoryStream();
+            image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+            ImageSource img = bi;
+
+            return img;
+        }
+
+        #endregion
 
         public ElevationModel()
         {
@@ -56,7 +87,7 @@ namespace DynamicPathPlanner.Code
                 for (int y =0; y < height; y++)
                 {
 
-                     elevationModel[x, y] = elevationModel[x, y] * 100; // CHANGE  Use Rover Size
+                     elevationModel[x, y] = elevationModel[x, y] * 100;
                 }
             }
         }
@@ -78,21 +109,6 @@ namespace DynamicPathPlanner.Code
             height = elevationModel.GetLength(0);
 
             generateBitmap();
-        }
-
-
-        public double[,] getModel()
-        {
-            return elevationModel;
-        }
-   
-
-        private float getHeight(int red, int green)
-        {
-            float height = 0;
-            height = ((red * 256 + green));
-
-            return height;
         }
 
         private void generateBitmap()
@@ -128,29 +144,7 @@ namespace DynamicPathPlanner.Code
         public int getColorValue(String hex)
         {
             int tempNumber = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-
             return tempNumber;
-        }
-
-
-        public Bitmap getBitmap()
-        {
-            return image;
-        }
-
-
-        public ImageSource getImageSource()
-        {
-            MemoryStream ms = new MemoryStream();
-            image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
-            ImageSource img = bi;
-
-            return img;
         }
 
         private void setMaxHeight()
@@ -166,7 +160,6 @@ namespace DynamicPathPlanner.Code
                 }
             }
         }
-
 
         private void setMinHeight()
         {
