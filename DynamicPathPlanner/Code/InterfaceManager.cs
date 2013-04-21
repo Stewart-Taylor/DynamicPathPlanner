@@ -4,7 +4,7 @@
  * This class is used to connect the interface code to the main system
  * It seperates how the interface works from how the system works
  *
- * Last Updated: 25/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -23,13 +23,11 @@ namespace DynamicPathPlanner
 {
     class InterfaceManager
     {
-        private SimulationManager simulationManager = new SimulationManager();
-        private LogManager logManager;
-        private NavigationMapManager navigationMapManager = new NavigationMapManager();
-
-        private Bitmap roverSlideBitmap;
-
         private bool panguStartError = false;
+        private Bitmap roverSlideBitmap;
+        private LogManager logManager;
+        private SimulationManager simulationManager = new SimulationManager();
+        private NavigationMapManager navigationMapManager = new NavigationMapManager();
 
 
         #region GET
@@ -47,27 +45,6 @@ namespace DynamicPathPlanner
         public ImageSource getHazardModelImage()
         {
             return navigationMapManager.getHazardImage();
-        }
-
-        public ImageSource getQuickView()
-        {
-            try
-            {
-                Bitmap bitmap = PANGU_Manager.getImageView(0, -150, 200, 10, -40, 0);
-                MemoryStream ms = new MemoryStream();
-                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                ms.Position = 0;
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-
-                return bi;
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         public ImageSource getAerialView()
@@ -111,6 +88,27 @@ namespace DynamicPathPlanner
                 return true;
             }
             return false;
+        }
+
+        public ImageSource getQuickView()
+        {
+            try
+            {
+                Bitmap bitmap = PANGU_Manager.getImageView(0, -150, 200, 10, -40, 0);
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+
+                return bi;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public ImageSource getResultsAerial()
@@ -321,7 +319,6 @@ namespace DynamicPathPlanner
         #endregion
 
 
-
         #region SET
 
         public void setEnviornmentString(String environment)
@@ -361,8 +358,6 @@ namespace DynamicPathPlanner
             logManager.clearSimulationLog();
         }
 
-
-
         public bool connectToPANGU(String pan)
         {
             panguStartError = false;
@@ -391,7 +386,6 @@ namespace DynamicPathPlanner
 
         private void startPANGU(String pan)
         {
-
             try
             {
                 String filename = Properties.Settings.Default.panguDirectory + "/bin/viewer.exe";
@@ -412,7 +406,6 @@ namespace DynamicPathPlanner
                 addLogEntry("ERROR: Could not start PANGU Server!");
             }
         }
-
 
         public void disconnectFromPANGU()
         {
@@ -575,7 +568,6 @@ namespace DynamicPathPlanner
 
                     bH.UnlockBitmap();
                     roverSlideBitmap = bH.Bitmap;
-
                 }
             }
         }
@@ -602,7 +594,6 @@ namespace DynamicPathPlanner
             simulationManager.runCompareSimulation();
             addLogEntry("Simulation Compare Complete");
         }
-
 
         public void exportResults(String path)
         {
