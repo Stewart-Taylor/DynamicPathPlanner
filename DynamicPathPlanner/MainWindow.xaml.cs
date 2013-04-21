@@ -5,7 +5,7 @@
  * It mainly controls screen animations and passes commands to the InterfaceManager
  * It also handles how real time simulations are controlled e.g pause,speed
  * 
- * Last Updated: 17/04/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -34,11 +34,12 @@ namespace DynamicPathPlanner
     public partial class MainWindow : Window 
     {
         private InterfaceManager interfaceManager;
+        
         private Grid oldGrid;
         private Grid activeGrid;
+
         private Storyboard activeStoryboard;
         private Storyboard startSlideIn;
-
         private Storyboard startup_wait;
         private Storyboard elevation_wait;
         private Storyboard slope_wait;
@@ -54,21 +55,17 @@ namespace DynamicPathPlanner
         private BackgroundWorker simulation_worker = new BackgroundWorker();
         private BackgroundWorker result_worker = new BackgroundWorker();
         private BackgroundWorker exporter_worker = new BackgroundWorker();
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
+        private bool simulationRunning = false;
         private bool started = false;
         private int elevationSize;
         private int hazardSectorSize;
         private String slopeType;
-
-        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-
+        private String exportPath;
+        private List<String> environmentPaths = new List<String>();
         private ImageSource loadImage;
 
-        private bool simulationRunning = false;
-
-        private List<String> environmentPaths = new List<String>();
-
-        private String exportPath;
 
         public MainWindow()
         {
@@ -149,8 +146,6 @@ namespace DynamicPathPlanner
             started = true;
         }
 
-
-
         private void populateEnvironment()
         {
             environmentPaths.Clear();
@@ -190,15 +185,14 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.connectToPANGU( System.IO.Path.GetFullPath(interfaceManager.getEnvironmentPath() )) == true)
             {
-                System.Threading.Thread.Sleep(2000); // REMOVE
+                System.Threading.Thread.Sleep(2000);
 
             }
         }
 
-        //Used for testing 
+        //Used for Testing! 
         private void fastSetup()
         {
-            
             interfaceManager.setEnviornmentString("TestWorld.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/TestWorld.pan");
             interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
@@ -213,25 +207,25 @@ namespace DynamicPathPlanner
             /*
             interfaceManager.setEnviornmentString("Moon.pan");
             interfaceManager.setEnviornmentPath("C:/Users/Stewart/Desktop/Worlds/Moon.pan");
-          interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
-           interfaceManager.generateElevationModel(0.1f, 1024);
-           interfaceManager.setRoverSize(1.0f);
-           interfaceManager.setRoverSlope(0.261f);
-           interfaceManager.generateSlopeModel("AVERAGE");
-           interfaceManager.generateHazardModel(20);
+            interfaceManager.connectToPANGU(interfaceManager.getEnvironmentPath());
+            interfaceManager.generateElevationModel(0.1f, 1024);
+            interfaceManager.setRoverSize(1.0f);
+            interfaceManager.setRoverSlope(0.261f);
+            interfaceManager.generateSlopeModel("AVERAGE");
+            interfaceManager.generateHazardModel(20);
             interfaceManager.setVehicleValues(2, 2, 25, 40, "D_STAR", false);
             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
            
-             interfaceManager.connectToPANGU();
-             interfaceManager.setEnviornmentString("Moon.pan");
-             interfaceManager.generateElevationModel(0.1f, 1024);
-           interfaceManager.setRoverSize(1.0f);
-           interfaceManager.setRoverSlope(0.261f);
-             interfaceManager.generateSlopeModel("HORN");
-             interfaceManager.generateHazardModel(1);
-             interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
-             nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
-    */
+            interfaceManager.connectToPANGU();
+            interfaceManager.setEnviornmentString("Moon.pan");
+            interfaceManager.generateElevationModel(0.1f, 1024);
+            interfaceManager.setRoverSize(1.0f);
+            interfaceManager.setRoverSlope(0.261f);
+            interfaceManager.generateSlopeModel("HORN");
+            interfaceManager.generateHazardModel(1);
+            interfaceManager.setVehicleValues(146, 57, 402, 431, "D_STAR", false);
+            nextSlide(grid_startup_slide, grid_simulation, "Startup_SlideOut", "Simulation_SlideIn");
+            */
         }
 
         private void resultScreen(object sender, EventArgs e)
@@ -259,7 +253,6 @@ namespace DynamicPathPlanner
             btn_simulationNext.IsEnabled = true;
         }
 
-
         private void exportResults(object sender, EventArgs e)
         {
             interfaceManager.exportResults(exportPath);
@@ -283,7 +276,6 @@ namespace DynamicPathPlanner
             img_simulationRover.Source = interfaceManager.getSimulationRoverImage();
             btn_simulationInstant.IsEnabled = true;
         }
-
 
         private void startSlideIn_Completed(object sender, EventArgs e)
         {
@@ -310,7 +302,6 @@ namespace DynamicPathPlanner
             startup_wait.Stop();
         }
 
-
         private void elevation_worker_complete(object sender, EventArgs e)
         {
             elevation_wait.Stop();
@@ -329,14 +320,12 @@ namespace DynamicPathPlanner
             btn_slopeNext.Visibility = Visibility.Visible;
         }
 
-
         private void hazard_worker_complete(object sender, EventArgs e)
         {
             hazard_wait.Stop();
             lbl_hazardWait.Text = "";
             img_hazardSlide.Source = interfaceManager.getHazardModelImage();
         }
-
 
         private void nextSlide(Grid startGrid, Grid nextGrid , String outSlide , String inSlide)
         {
@@ -376,10 +365,8 @@ namespace DynamicPathPlanner
         private void btn_connect_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             bool valid = false;
-
             String selectedText = "";
             lbl_elevationWait.Text = "";
-
 
             if (lst_environment.SelectedValue != null)
             {
@@ -405,7 +392,6 @@ namespace DynamicPathPlanner
             {
                 lbl_environmentFeedback.Content = "Please select a valid environment!";
             }
-          
         }
 
         private void btn_roverNext_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -535,7 +521,6 @@ namespace DynamicPathPlanner
                 }
             }
         }
-
 
         private void roverPositionsUpdated(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -693,8 +678,6 @@ namespace DynamicPathPlanner
             }
         }
 
-
-
         private void btn_simulationNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (interfaceManager.isSimulationComplete())
@@ -741,36 +724,6 @@ namespace DynamicPathPlanner
             simulation_worker.RunWorkerAsync();
         }
 
-
-        #region MENU
-
-        private void men_about_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Window aboutWindow = new About();
-            aboutWindow.Show();
-        }
-
-        private void men_new_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            applicationSetUp();
-        }
-
-        private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void men_settings_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Window settingsWindow = new SettingsScreen();
-            settingsWindow.Show();
-        }
-
-
-
-        #endregion
-
-
         private void sld_simulationYaw_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             try
@@ -801,7 +754,6 @@ namespace DynamicPathPlanner
                     float pitch = (float)sld_simulationPitch.Value;
 
                     interfaceManager.updateRoverCam(pitch, yaw);
-
                     img_simulationRover.Source = interfaceManager.getRoverCam();
                 }
             }
@@ -835,9 +787,34 @@ namespace DynamicPathPlanner
                 exporter_worker.RunWorkerAsync();
                 export_wait.Begin();
                 btn_resultsExport.IsEnabled = false;
-
             }
-           
         }
+
+        #region MENU
+
+        private void men_about_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Window aboutWindow = new About();
+            aboutWindow.Show();
+        }
+
+        private void men_new_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            applicationSetUp();
+        }
+
+        private void men_exit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void men_settings_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Window settingsWindow = new SettingsScreen();
+            settingsWindow.Show();
+        }
+
+        #endregion
+
     }
 }

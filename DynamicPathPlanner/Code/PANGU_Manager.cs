@@ -25,7 +25,6 @@ namespace DynamicPathPlanner.Code
 
         private static PANGU_Connector connector = new PANGU_Connector();
 
-
         #region GET
 
         public static double[,] getElevationModel(float distance, int width, int height)
@@ -93,7 +92,6 @@ namespace DynamicPathPlanner.Code
             if (connector.connect(hostname, port) == true)
             {
                 connectionExists = true;
-                interfaceManager.addLogEntry("Connected");
                 return true;
             }
             return false;

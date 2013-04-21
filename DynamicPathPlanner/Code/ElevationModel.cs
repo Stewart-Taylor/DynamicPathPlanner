@@ -101,16 +101,6 @@ namespace DynamicPathPlanner.Code
             generateBitmap();
         }
 
-
-        public void load_PPM_DEM()
-        {
-            elevationModel = loader.getPPM_DEM();
-            width = elevationModel.GetLength(0);
-            height = elevationModel.GetLength(0);
-
-            generateBitmap();
-        }
-
         private void generateBitmap()
         {
             setMaxHeight();

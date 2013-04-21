@@ -4,7 +4,7 @@
  * This class is used to control the System Settings
  * It will load in settings and allow them to be adjusted and then saved
  * 
- * Last Updated: 06/04/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -108,7 +108,6 @@ namespace DynamicPathPlanner
 
             try
             {
-                //Maybe A PANGU Start Check?
                 Properties.Settings.Default.panguDirectory = dirText;
             }
             catch
@@ -148,6 +147,5 @@ namespace DynamicPathPlanner
             txt_panguPath.Text = dialog.SelectedPath;
         }
  
-
 	}
 }
