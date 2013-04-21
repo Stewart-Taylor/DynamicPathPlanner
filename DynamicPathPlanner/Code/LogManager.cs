@@ -5,7 +5,7 @@
  * It will print out all the information to PathPlannerLog.txt
  * This class can also be used to provide information to a output console
  *
- * Last Updated: 24/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -29,7 +29,6 @@ namespace DynamicPathPlanner.Code
         {
             return entries;
         }
-
 
         public LogManager(TextBox tBox)
         {
