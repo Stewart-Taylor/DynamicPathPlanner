@@ -3,8 +3,9 @@
  *------------------------------------
  * This class generates a hazard map
  * It requires the data from the slope model
+ * A sector size is also required to determine the resolution
  * 
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -22,17 +23,16 @@ namespace DynamicPathPlanner.Code
     class HazardModel
     {
         private int sectorSize;
-
-        private int[,] hazardModel;
-        public double[,] hazardModelImage;  // REMOVE
-        private double[,] slopeModel;
-
-        private Bitmap hazardBitmap;
-
         private int slopeWidth;
         private int slopeHeight;
         private int width;
         private int height;
+
+        private int[,] hazardModel;
+        public double[,] hazardModelImage;
+        private double[,] slopeModel;
+
+        private Bitmap hazardBitmap;
 
         #region GET
 
@@ -71,11 +71,9 @@ namespace DynamicPathPlanner.Code
         public HazardModel(double[,] slope, int sectorSizeT)
         {
             slopeModel = slope;
-
             sectorSize = sectorSizeT;
-
-            slopeWidth = slope.GetLength(0);
-            slopeHeight = slope.GetLength(1);
+            slopeWidth = slopeModel.GetLength(0);
+            slopeHeight = slopeModel.GetLength(1);
 
             generateHazardModel();
             generateHazardImage();
@@ -116,8 +114,6 @@ namespace DynamicPathPlanner.Code
 
         private int getMaxAdjacentValue(int x , int y)
         {
-            int value = 0;
-
             int topLeft = getTileValue(x-1, y-1);
             int topMid = getTileValue(x, y-1);
             int topRight = getTileValue(x+1, y-1);
@@ -140,8 +136,7 @@ namespace DynamicPathPlanner.Code
             if (botMid >= high) { high = botMid; }
             if (botRight >= high) { high = botRight; }
 
-            value = high;
-            return value;
+            return high;
         }
 
         private int getTileValue(int x , int y)
@@ -164,7 +159,7 @@ namespace DynamicPathPlanner.Code
             width = slopeWidth / sectorSize;
             height = slopeHeight / sectorSize;
             hazardModel = new int[width, height];
-           double[,] tempModel = new double[width, height];
+            double[,] tempModel = new double[width, height];
             hazardModelImage = new double[width, height];
 
             int slopeX = 0;
@@ -201,7 +196,6 @@ namespace DynamicPathPlanner.Code
                     hazardModel[x, y] = getHazardValue(tempModel[x, y]);
                 }
             }
-
         }
 
 
@@ -223,12 +217,11 @@ namespace DynamicPathPlanner.Code
 
         private void generateHazardImage()
         {
-            Bitmap bitmap = new Bitmap(slopeWidth, slopeHeight);
-
 
             int slopeX = 0;
             int slopeY = 0;
 
+            Bitmap bitmap = new Bitmap(slopeWidth, slopeHeight);
             BitmapHelper bMap = new BitmapHelper(bitmap);
             bMap.LockBitmap();
 
@@ -262,7 +255,6 @@ namespace DynamicPathPlanner.Code
         private System.Drawing.Color getHazardColorValue(double gradient)
         {
             System.Drawing.Color color = System.Drawing.Color.White;
-
             gradient = Math.Abs(gradient);
 
             float green = 255;
@@ -283,9 +275,7 @@ namespace DynamicPathPlanner.Code
                 green = 0;
             }
 
-            color = System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
-
-            return color;
+            return System.Drawing.Color.FromArgb(255, (int)red, (int)green, (int)blue);
         }
 
 
@@ -300,9 +290,7 @@ namespace DynamicPathPlanner.Code
             bi.StreamSource = ms;
             bi.EndInit();
 
-            ImageSource img = bi;
-
-            return img;
+            return bi;
         }
 
     }
