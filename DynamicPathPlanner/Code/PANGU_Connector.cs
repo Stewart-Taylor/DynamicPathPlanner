@@ -4,7 +4,7 @@
  * This class connects to PANGU directly
  * It makes use of the Pangu.dll which is a compiled PANGU socket client written in C
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -91,15 +91,10 @@ namespace DynamicPathPlanner.Code
        
         //Get Surface Elevation
         [DllImport(@"PanguDLLs\Pangu.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-       public unsafe static extern float pan_protocol_get_surface_elevation(void* s, char b, float x, float y, char* err);
-
+        public unsafe static extern float pan_protocol_get_surface_elevation(void* s, char b, float x, float y, char* err);
 
         //------------------------------------------------------------------------------------------------------------
 
-        public PANGU_Connector()
-        {
-
-        }
 
         public bool connect(string hostname, int port)
         {
@@ -131,10 +126,12 @@ namespace DynamicPathPlanner.Code
             unsafe
             {
                 //  float cx = 0.0f;
-                //   float cy = 0.0f;
+                //  float cy = 0.0f;
+                //  float theta = 0.0f;
+               
                 int nx = width;
                 int ny = height;
-                // float theta = 0.0f;
+
                 char b = '1';
 
                 float[] elevationGrid = new float[(nx * ny)];
@@ -150,11 +147,9 @@ namespace DynamicPathPlanner.Code
                     {
                         for (int y = 0; y < (int)ny; y++)
                         {
-
                             elevationModel[x, y] = elevationGrid[temp];
                             temp++;
                         }
-
                     }
                 }
                 catch 
@@ -166,7 +161,6 @@ namespace DynamicPathPlanner.Code
             return elevationModel;
         }
 
-
         public void disconnect()
         {
             unsafe
@@ -177,18 +171,16 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-
         public float getHeightPoint(float x, float y)
         {
             double value = 0;
 
             unsafe
             {
-                ulong t = 1024;
+                //  pan_protocol_get_viewpoint_by_angle(sock, x, y, 100, 0, 90, 0, &t);
+                //  value = pan_protocol_get_surface_elevation(sock, p);
                 char* p = null;
 
-              //  pan_protocol_get_viewpoint_by_angle(sock, x, y, 100, 0, 90, 0, &t);
-              //  value = pan_protocol_get_surface_elevation(sock, p);
                 value = pan_protocol_get_surface_elevation(sock, '0', x, y, p);
             }
 
@@ -219,8 +211,7 @@ namespace DynamicPathPlanner.Code
             }
             catch
             {
-                //Error at PANGU end. 
-                return null;
+                return null; //Error at PANGU end. 
             }
         }
 
@@ -298,7 +289,6 @@ namespace DynamicPathPlanner.Code
 
             return null;
         }
-
 
         //returns connection status
         public bool getConnectionStatus()

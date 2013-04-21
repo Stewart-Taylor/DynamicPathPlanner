@@ -97,7 +97,6 @@
     <Compile Include="Code\PANGU_Manager.cs" />
     <Compile Include="Code\PathFinder.cs" />
     <Compile Include="Code\PathNode.cs" />
-    <Compile Include="Code\PPM_Loader.cs" />
     <Compile Include="Code\Pathfinding\SearchAlgorithm.cs" />
     <Compile Include="Code\SimulationManager.cs" />
     <Compile Include="Code\Slope\SlopeAlgorithm.cs" />
