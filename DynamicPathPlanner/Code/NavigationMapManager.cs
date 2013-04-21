@@ -3,8 +3,10 @@
  *------------------------------------
  * This is used to manage all of the navigational data 
  * It is used to manage and generate the elevation, slope and hazard models
+ * It provides helper methods to process and access this data
+ * Provides a interface for the VehicleSensorManager to the environment
  *
- * Last Updated: 23/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -19,15 +21,15 @@ namespace DynamicPathPlanner.Code
 {
     class NavigationMapManager
     {
-        private ElevationModel elevationModel;
-        private SlopeModel slopeModel;
-        public HazardModel hazardModel; // CHANGE
+        private float distanceStep;
+        private int areaSize;
 
         private String environmentText;
         private String environmentPath;
 
-        private float distanceStep;
-        private int areaSize;
+        private ElevationModel elevationModel;
+        private SlopeModel slopeModel;
+        public HazardModel hazardModel;
 
         #region GET
 
@@ -142,14 +144,6 @@ namespace DynamicPathPlanner.Code
 
         #region SET
 
-
-        #endregion
-
-        public NavigationMapManager()
-        {
-
-        }
-
         public void setEnvironmentText(String environment)
         {
             environmentText = environment;
@@ -158,6 +152,13 @@ namespace DynamicPathPlanner.Code
         public void setEnvironmentPath(String environment)
         {
             environmentPath = environment;
+        }
+
+        #endregion
+
+        public NavigationMapManager()
+        {
+
         }
 
         public void generateElevationModel(float distance , int size)
@@ -177,8 +178,6 @@ namespace DynamicPathPlanner.Code
         {
             hazardModel = new HazardModel(slopeModel.getModel(), size);
         }
-
-
 
     }
 }
