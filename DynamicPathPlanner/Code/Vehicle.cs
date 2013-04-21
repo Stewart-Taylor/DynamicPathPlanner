@@ -3,9 +3,9 @@
  *------------------------------------
  * This class contains the vehicle logic for the simulation
  * It will access the sensorManager to get enviorment data (Simulates Sensors)
- * It will use it's own internal hazard map for pathfinding only!
+ * It will use it's own internal hazard map for pathfinding data only!
  *
- * Last Updated: 06/04/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -171,7 +171,6 @@ namespace DynamicPathPlanner.Code
             startY = startYt;
             targetX = endXt;
             targetY = endYt;
-
             positionX = startX;
             positionY = startY;
 
@@ -191,7 +190,6 @@ namespace DynamicPathPlanner.Code
             startY = startYt;
             targetX = endXt;
             targetY = endYt;
-
             positionX = startX;
             positionY = startY;
 
@@ -246,8 +244,6 @@ namespace DynamicPathPlanner.Code
                     }
 
                 } while (true);
-
-
             } while (atTarget == false);
         }
 
@@ -266,13 +262,11 @@ namespace DynamicPathPlanner.Code
 
             SearchAlgorithm search;
 
-
             search = new A_Star(map.getMap(), positionX, positionY, targetX, targetY);
             givenPath = search.getPath();
 
             takenPath = givenPath;
             atTarget = true;
-
         }
 
 
@@ -284,14 +278,12 @@ namespace DynamicPathPlanner.Code
             startY = startYt;
             targetX = endXt;
             targetY = endYt;
-
             positionX = startX;
             positionY = startY;
 
-             atTarget = false;
+            atTarget = false;
 
             D_Star search = new D_Star(map.getMap(), positionX, positionY, targetX, targetY);
-
 
             //Add In start Node
             PathNode startNode = new PathNode();
@@ -303,13 +295,10 @@ namespace DynamicPathPlanner.Code
             {
                 search.updateStart(positionX, positionY);
                 search.replan(map.getMap());
-
                 givenPath = search.getPath();
 
-                  
                 do
                 {
-                  
                     sensorManager.updateFrontView(positionX, positionY, previousX, previousY);
                   
                     if (steps >= stepLimit)
@@ -334,12 +323,10 @@ namespace DynamicPathPlanner.Code
 
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
-                    //    knownMap[nextNode.x, nextNode.y] += 1;
                         map.setNode(nextNode.x, nextNode.y, 40);
 
                         previousX = positionX;
                         previousY = positionY;
-
                         positionX = nextNode.x;
                         positionY = nextNode.y;
                         takenPath.Add(nextNode);
@@ -353,7 +340,6 @@ namespace DynamicPathPlanner.Code
                         sensorManager.updateOwnLocation(nextNode.x, nextNode.y);
                         break;
                     }
-
                 } while (true);
             } while (atTarget == false);
 
@@ -361,7 +347,6 @@ namespace DynamicPathPlanner.Code
             generatePathImage();
             generateRoverImage();
         }
-
 
         public void traverseMapDStep()
         {
@@ -419,12 +404,10 @@ namespace DynamicPathPlanner.Code
 
                     if (sensorManager.isAreaSafe(nextNode) == true)
                     {
-                       // knownMap[nextNode.x, nextNode.y] += 1;
                         map.setNode(nextNode.x, nextNode.y, 40);
 
                         previousX = positionX;
                         previousY = positionY;
-
                         positionX = nextNode.x;
                         positionY = nextNode.y;
                         takenPath.Add(nextNode);
@@ -460,9 +443,9 @@ namespace DynamicPathPlanner.Code
 
         public void generatePathImage()
         {
-            if (( map.getAdjustWidth() >0 ) && (map.getAdjustHeight() > 0))
+            if ((map.getAdjustWidth() > 0) && (map.getAdjustHeight() > 0))
             {
-             pathBitmap = new Bitmap(map.getAdjustWidth(), map.getAdjustHeight());
+                pathBitmap = new Bitmap(map.getAdjustWidth(), map.getAdjustHeight());
 
                 BitmapHelper b = new BitmapHelper(pathBitmap);
                 b.LockBitmap();
@@ -483,7 +466,6 @@ namespace DynamicPathPlanner.Code
                 }
 
                 b.UnlockBitmap();
-
                 pathBitmap = b.Bitmap;
             }
         }
@@ -562,7 +544,6 @@ namespace DynamicPathPlanner.Code
             return color;
         }
 
-
         public ImageSource getRoverCam()
         {
             if (camBitmap != null)
@@ -578,7 +559,6 @@ namespace DynamicPathPlanner.Code
 
                 return bi;
             }
-
             return null;
         }
 
@@ -587,60 +567,44 @@ namespace DynamicPathPlanner.Code
         {
             if (roverCamEnabled == true)
             {
-           //     int x = (int)(((float)positionX - ((float)areaSize / 2f)) * distanceStep);
-            //    int y = (int)((float)positionY - (((float)areaSize / 2f)) * distanceStep);
-
                 int x  = getCameraX();
                 int y = getCameraY();
-
-
-                int z = getCameraZ(x, y) ;
-                float yaw = 0;
-                int pitch = cameraPitch;
-                int roll = 0;
-
+                int z = getCameraZ(x, y);
                 float deltaX = (float)positionX - (float)previousX;
                 float deltaY = (float)positionY - (float)previousY;
+                float yaw = -(float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
 
-                yaw = -(float)Math.Atan(deltaY / deltaX) * 180f / (float)Math.PI;
-                
-
-                camBitmap = PANGU_Manager.getImageView(y, x, z, yaw, pitch, cameraRoll, 70.0f);
+                camBitmap = PANGU_Manager.getImageView(y, x, z, yaw, cameraPitch, cameraRoll, 70.0f);
             }
         }
 
         private int getCameraX()
         {
-         //   positionX = 32;
+            //   positionX = 32;
+            //   int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
+            //  int x = (int)( (float)(positionX -16f) * 2f );
+            //    int  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
+            //  x = 32;
 
-            int x = positionX + (int)((float)map.getWidth()/2f);
+            int x = positionX + (int)((float)map.getWidth() / 2f);
+            x = (int)((float)x - (((areaSize / 2f)) * distanceStep));
+            x = (int)((float)x * 2f);
 
-             x = (int)( (float)x  - (((areaSize/2f)) * distanceStep));
-         //   int x = (int)((float)positionX - (((areaSize/hazardSectorSize / 2f))) );
-
-     //       int x = (int)( (float)(positionX -16f) * 2f );
-
-       //    int  x = (int)(((float)positionX - ((float)areaSize )) * distanceStep);
-             x = (int)((float)x * 2f);
-          //  x = 32;
             return x;
         }
 
         private int getCameraY()
         {
-
-            //   positionY = 32;
-            int y = positionY + (int)((float)map.getHeight() / 2f);
-
-                  y = (int)((float)y - (((areaSize/2f )) * distanceStep));
-            //  int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
-
-         //   int y = (int)((float)(positionY - 16f) * 2f);
-
-         //     int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
-
-                  y = (int)((float)y * 2f);
+            // positionY = 32;
+            // int y = (int)((float)positionY - (((areaSize/hazardSectorSize / 2f)) ));
+            // int y = (int)((float)(positionY - 16f) * 2f);
+            // int y = (int)((float)positionY - (((float)areaSize )) * distanceStep);
             // y = 32;
+
+            int y = positionY + (int)((float)map.getHeight() / 2f);
+            y = (int)((float)y - (((areaSize / 2f)) * distanceStep));
+            y = (int)((float)y * 2f);
+
             return y;
         }
 
@@ -651,8 +615,6 @@ namespace DynamicPathPlanner.Code
             z += 9;
             return (int)z;
         }
-
-
 
         //Manual camera control
         public void updateRoverImage(float pitch , float yaw)
