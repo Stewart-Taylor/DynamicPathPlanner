@@ -1,10 +1,11 @@
 ﻿/*      VehicleSensorManager Class
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
- * This class manages the system sensors
+ * This class manages the rover system sensors
  * It allows the vehicle to simulate how it would obtain data from its environment
+ * It receives data directly from the NavigationMapManager, as it stores the data about the environmnet
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -35,7 +36,6 @@ namespace DynamicPathPlanner.Code
             return height;
         }
 
-
         public double getSlopeValue(int x, int y)
         {
             double value = navigationMap.getHazardSlope()[x, y];
@@ -49,12 +49,13 @@ namespace DynamicPathPlanner.Code
             vehicle = v;
             navigationMap = m;
             realMap = navigationMap.getHazardModel();
-            width = navigationMap.getHazardModel().GetLength(0);
-            height = navigationMap.getHazardModel().GetLength(1);
+            width = realMap.GetLength(0);
+            height = realMap.GetLength(1);
         }
 
         public void updateFrontView(int positionX, int positionY, int previousX, int previousY)
         {
+            //Directional View
             if ((previousX != 0) && (previousY != 0))
             {
                 int directionX = positionX - previousX;
@@ -70,7 +71,7 @@ namespace DynamicPathPlanner.Code
                 else if ((directionX == 1) && (directionY == 1)) { updateFacingBottomRight(positionX, positionY); }
             }
 
-         //  areaScan(positionX, positionY, 5);
+          // areaScan(positionX, positionY, 5); // CIRCLE VIEW -- Disabled
         }
 
         private void areaScan(int positionX, int positionY, int size)
@@ -182,7 +183,6 @@ namespace DynamicPathPlanner.Code
             updateNode(positionX + 1, positionY);
             updateNode(positionX + 1, positionY - 1);
         }
-
 
     }
 }
