@@ -5,7 +5,7 @@
  * It handles the results of the simulation
  * and generates visual output
  *
- * Last Updated: 25/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -40,6 +40,7 @@ namespace DynamicPathPlanner.Code
         private Bitmap elevationCompareBitmap;
         private Bitmap slopeCompareBitmap;
         private Bitmap hazardCompareBitmap;
+        private ImageSource imageSource;
 
         private Random r = new Random();
 
@@ -54,25 +55,24 @@ namespace DynamicPathPlanner.Code
         private int startY;
         private int targetX;
         private int targetY;
-        private String searchAlgortihm;
-        private bool knownMap;
+        
         private int hazardSectorSize;
         private int areaSize;
-        private ImageSource imageSource;
+        
+        private String searchAlgortihm;
         private String timeTaken;
         private bool pathGenerated = false;
         private bool simulationInProgress = false;
         private bool stepSet = false;
+        private bool compareCompleted;
+        private bool knownMap;
         private float roverSize;
         private float roverSlope;
 
         private float pathLikeness = 0f;
-
         private float likenessDknownToA = 0f;
         private float likenessDunknownToA = 0f;
         private float likenessDunknownToDknown = 0f;
-
-        private bool compareCompleted;
 
         private System.Drawing.Color pathColor = System.Drawing.Color.Blue;
         private System.Drawing.Color compareColor = System.Drawing.Color.DarkCyan;
@@ -366,7 +366,6 @@ namespace DynamicPathPlanner.Code
 
         #endregion
 
-
         #region SET
 
         public void setRoverSize(float size)
@@ -401,7 +400,7 @@ namespace DynamicPathPlanner.Code
             hazardSectorSize = mapManager.getHazardSectorSize();
             areaSize = mapManager.getAreaSize();
             
-            hazardModel = mapManager.hazardModel; // REMOVE
+            hazardModel = mapManager.hazardModel;
         }
 
         public void setSimulationValues(int xStart , int yStart, int endX , int endY , String algorithm, bool known)
@@ -413,7 +412,6 @@ namespace DynamicPathPlanner.Code
             searchAlgortihm = algorithm;
             knownMap = known;
         }
-
 
         public void startSimulation()
         {
@@ -433,10 +431,9 @@ namespace DynamicPathPlanner.Code
                 {
                     pathfinder = new Pathfinder(hazardModel.getModel(), hazardModel.hazardModelImage, startX, startY, targetX, targetY);
                 }
-                catch (Exception){ }
+                catch{ }
             }
         }
-
 
         public void runCompareSimulation()
         {
@@ -458,7 +455,7 @@ namespace DynamicPathPlanner.Code
             }
         }
 
-        private float comparePaths(List<PathNode> path1 , List<PathNode> path2)
+        private float comparePaths(List<PathNode> path1, List<PathNode> path2)
         {
             int count = 0;
             int length = path1.Count;
@@ -489,8 +486,8 @@ namespace DynamicPathPlanner.Code
                 }
             }
 
-           float likeness = (float)count / (float)length;
-           likeness = likeness * 100f;
+            float likeness = (float)count / (float)length;
+            likeness = likeness * 100f;
 
             return likeness;
         }
@@ -529,7 +526,6 @@ namespace DynamicPathPlanner.Code
             imageSource = rover.getPathImage();
 
             timeTaken = sw.Elapsed.TotalSeconds + " Seconds";
-
             stepTraverseStarted = false;
         }
 
@@ -583,6 +579,7 @@ namespace DynamicPathPlanner.Code
                     rover.generatePathImage();
                     steps = rover.getSteps();
                     imageSource = rover.getPathImage();
+                   
                     if (rover.reachedTarget())
                     {
                         pathGenerated = true;
@@ -606,7 +603,6 @@ namespace DynamicPathPlanner.Code
             return false;
         }
 
-
         public void nextStep(int startX , int startY , int endX , int endY)
         {
             if (pathGenerated == false)
@@ -628,9 +624,6 @@ namespace DynamicPathPlanner.Code
                 }
             }
         }
-
-
-
 
         private Bitmap getComboPathBitmap()
         {
@@ -694,8 +687,6 @@ namespace DynamicPathPlanner.Code
             return comboPathBitmap;
         }
 
-
-
         private Bitmap generatePathBitmap(Bitmap oBitmap)
         {
                 Bitmap pathBitmap = (Bitmap)oBitmap.Clone();
@@ -756,13 +747,8 @@ namespace DynamicPathPlanner.Code
                     }
                 }
             
-
             return pathBitmap;
-
         }
-
-
-
 
         private Bitmap getSkyPathBitmap()
         {
@@ -829,7 +815,6 @@ namespace DynamicPathPlanner.Code
 
             return skyPathBitmap;
         }
-
 
         private Bitmap getAerialCompareBitmap()
         {
@@ -937,7 +922,6 @@ namespace DynamicPathPlanner.Code
             }
             return aerialCompareBitmap;
         }
-
 
         private Bitmap generateCompareBitmap(Bitmap oBitmap)
         {
@@ -1049,7 +1033,6 @@ namespace DynamicPathPlanner.Code
         {
             rover.updateRoverImage(pitch, yaw);
         }
-
 
     }
 }
