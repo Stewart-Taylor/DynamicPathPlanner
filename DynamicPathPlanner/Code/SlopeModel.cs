@@ -4,7 +4,7 @@
  * This class is used to generate a slope model
  * It also generates A visual output of the slope model
  *
- * Last Updated: 23/03/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -23,28 +23,50 @@ namespace DynamicPathPlanner.Code
     {
         private int width;
         private int height;
-
-        private double[,] model;
-        private double[,] slopeModel;
-
-        private Bitmap slopeBitmap;
         private double lowestGradient;
         private double highestGradient;
-
+        private double[,] model;
+        private double[,] slopeModel;
+        private Bitmap slopeBitmap;
         private string algorithmType;
+
+        #region GET
 
         public String getSlopeAlgorithm()
         {
             return algorithmType;
         }
 
+        public double[,] getModel()
+        {
+            return slopeModel;
+        }
+
+        public Bitmap getBitmap()
+        {
+            return slopeBitmap;
+        }
+
+        public ImageSource getImageSource()
+        {
+            MemoryStream ms = new MemoryStream();
+            slopeBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        #endregion
+
         public SlopeModel(double[,] modelT, string type)
         {
             model = modelT;
-
             algorithmType = type;
             algorithmType = algorithmType.ToUpper();
-
             width = model.GetLength(0);
             height = model.GetLength(1);
 
@@ -154,28 +176,7 @@ namespace DynamicPathPlanner.Code
         }
 
 
-        public double[,] getModel()
-        {
-            return slopeModel;
-        }
 
-        public ImageSource getImageSource()
-        {
-            MemoryStream ms = new MemoryStream();
-            slopeBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
-
-            return bi;
-        }
-
-        public Bitmap getBitmap()
-        {
-            return slopeBitmap;
-        }
 
     }
 }
