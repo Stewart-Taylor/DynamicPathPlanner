@@ -5,7 +5,7 @@
  * The data produced can then be used for more in depth analysis
  * Creates a new folder with a Details file, full simulation log, images, map data , path data
  *
- * Last Updated: 15/04/2013
+ * Last Updated: 21/04/2013
 */
 
 using System;
@@ -21,9 +21,9 @@ namespace DynamicPathPlanner.Code
     class ResultManager
     {
         private String resultFolderPath = Properties.Settings.Default.resultsPath;
+        private String simulationName;
         private String imageFolder = "Images";
         private String dataFolder = "Data";
-        private String simulationName;
         private String detailsFilename = "Details.txt";
         private String logFilename = "Log.txt";
 
@@ -54,19 +54,17 @@ namespace DynamicPathPlanner.Code
 
         public void createSimulationResultsFolder()
         {
-            if (!Directory.Exists(resultFolderPath + "/" + simulationName))
+            if (!Directory.Exists(resultFolderPath + "/" + simulationName)) // Simulation Folder
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName);
             }
 
-            // Images Folder
-            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + imageFolder))
+            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + imageFolder)) // Images Folder
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + imageFolder);
             }
 
-            // Data Folder
-            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + dataFolder))
+            if (!Directory.Exists(resultFolderPath + "/" + simulationName + "/" + dataFolder)) // Data Folder
             {
                 Directory.CreateDirectory(resultFolderPath + "/" + simulationName + "/" + dataFolder);
             }
@@ -264,7 +262,6 @@ namespace DynamicPathPlanner.Code
         
             }
         }
-
 
     }
 }
