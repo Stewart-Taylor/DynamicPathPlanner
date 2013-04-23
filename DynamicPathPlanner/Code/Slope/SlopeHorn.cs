@@ -4,9 +4,8 @@
  * This class is used to generate a slope model from elevation data
  * It uses the HORN method. 
  *
- * Last Updated: 04/04/2013
+ * Last Updated: 23/04/2013
 */
-
 
 using System;
 using System.Collections.Generic;
@@ -44,10 +43,6 @@ namespace DynamicPathPlanner.Code.Slope
             double h = getBottomMiddle(x, y) * horzSize;
             double i = getBottomRight(x, y) * horzSize;
 
-
-            double x_cell_size = 0.1f;
-            double y_cell_size = 0.1f;
-
             double fx = (i - g + 2*(f - d) + c - a);
             double fy = (a - g + 2 * (b - h) + c - i);
 
@@ -58,8 +53,6 @@ namespace DynamicPathPlanner.Code.Slope
 
             return slope;
         }
-
-
 
         #region slope Heights
 
@@ -159,6 +152,7 @@ namespace DynamicPathPlanner.Code.Slope
                 return heightMap[x, y];
             }
         }
+
         #endregion
 
     }

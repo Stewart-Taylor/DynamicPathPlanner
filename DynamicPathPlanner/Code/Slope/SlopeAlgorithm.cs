@@ -3,9 +3,8 @@
  *------------------------------------
  * This abstract provides a base for slope algorithms
  * 
- * Last Updated: 16/03/2013
+ * Last Updated: 23/04/2013
 */
-
 
 using System;
 using System.Collections.Generic;
@@ -32,6 +31,10 @@ namespace DynamicPathPlanner.Code
             generateSlopeModel();
         }
 
+        public double[,] getSlopeModel()
+        {
+            return slopeModel;
+        }
 
         protected void generateSlopeModel()
         {
@@ -71,12 +74,10 @@ namespace DynamicPathPlanner.Code
             if (botRight >= high) { high = botRight; }
 
             double total = topLeft + topRight + topMid + midLeft + midRight + botLeft + botMid + botRight;
-
             double value = high;
 
             return value;
         }
-
 
         private double getGradientValue(double x, double y)
         {
@@ -89,7 +90,6 @@ namespace DynamicPathPlanner.Code
             }
 
             return gradient;
-
         }
 
 
@@ -196,13 +196,6 @@ namespace DynamicPathPlanner.Code
 
 
         #endregion
-
-
-
-        public double[,] getSlopeModel()
-        {
-            return slopeModel;
-        }
 
     }
 }

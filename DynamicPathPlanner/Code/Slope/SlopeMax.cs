@@ -5,7 +5,7 @@
  * It uses the MAX method. 
  * This will uses the highest gradient value from all adjacent values
  *
- * Last Updated: 16/03/2013
+ * Last Updated: 23/03/2013
 */
 
 using System;
@@ -29,21 +29,17 @@ namespace DynamicPathPlanner.Code
             generateSlopeModel();
         }
 
-
         protected override double calculateSlopeValue(int x, int y)
         {
 
             double topLeft = getTopLeftSlope(x, y);
             double topMid = getTopMiddleSlope(x, y);
             double topRight = getTopRightSlope(x, y);
-
             double midLeft = getMiddleLeftSlope(x, y);
             double midRight = getMiddleRightSlope(x, y);
-
             double botLeft = getBottomLeftSlope(x, y);
             double botMid = getBottomMiddleSlope(x, y);
             double botRight = getBottomRightSlope(x, y);
-
 
             double high = 0f;
 
@@ -58,7 +54,6 @@ namespace DynamicPathPlanner.Code
 
             return high;
         }
-
 
     }
 }
