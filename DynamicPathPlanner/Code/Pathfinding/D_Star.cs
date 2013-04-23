@@ -2,7 +2,6 @@
  *	    AUTHOR: STEWART TAYLOR
  *------------------------------------
  * This class is used to find a route to a target
- * It uses the D STAR Search algorithm to do this
  * 
  * Last Updated: 16/03/2013
 */
@@ -50,7 +49,6 @@ namespace DynamicPathPlanner.Code
             target = new Node();
             target.x = targetX;
             target.y = targetY;
-
         }
 
 
@@ -67,7 +65,6 @@ namespace DynamicPathPlanner.Code
         public void replan(int[,] gridT)
         {
             grid = gridT;
-
             computeShortestPath();
         }
 
@@ -88,7 +85,6 @@ namespace DynamicPathPlanner.Code
                 do
                 {
                     // This call places the lowest f at the bottom
-
                     open.Sort(
                     delegate(Node x, Node y)
                     {
@@ -110,7 +106,6 @@ namespace DynamicPathPlanner.Code
 
                     checkAdjacent(current.x, current.y, open, closed, current);
 
-
                     //remove a from the open list and move into the 'closed' list
                     open.Remove(current);
                     closed.Add(current);
@@ -121,7 +116,6 @@ namespace DynamicPathPlanner.Code
                 // if a path was found the path is worked out then returned
                 if (found == true)
                 {
-
                     foreach (Node n in closed)
                     {
                         PathNode pathNode = new PathNode();
@@ -136,35 +130,8 @@ namespace DynamicPathPlanner.Code
                         }
                         current = current.parent;
                     }
-
-
-                    /*
-                    do
-                    {
-                        PathNode pathNode = new PathNode();
-                        pathNode.x = current.x;
-                        pathNode.y = current.y;
-
-                        pathNodes.Add(pathNode);
-
-                        if (current.parent.Equals(null))
-                        {
-                            // path.Add(new int[2] { current.x, current.y });
-                            current = current.parent;
-                        }
-                        else
-                        {
-                            closed.Clear();
-                        }
-
-                    } while (closed.Count > 0);
-                    */
                 }
-
-
             }
-
-
         }
 
 
@@ -182,25 +149,21 @@ namespace DynamicPathPlanner.Code
             if (checkTile((x - 1), (y), open, closed) == true)  //MIDDLE LEFT
             {
                 createNewNode((x - 1), y, 10, open, parent);
-
             }
 
             if (checkTile((x + 1), y, open, closed) == true) //MIDDLE RIGHT
             {
                 createNewNode((x + 1), y, 10, open, parent);
-
             }
 
             if (checkTile((x), (y + 1), open, closed) == true) // MIDDLE BOTTOM
             {
                 createNewNode((x), (y + 1), 10, open, parent);
-
             }
 
             if (checkTile((x), (y - 1), open, closed) == true) // MIDDLE TOP
             {
                 createNewNode((x), (y - 1), 10, open, parent);
-
             }
 
             if (checkTile((x - 1), (y - 1), open, closed) == true)    //TOP LEFT
@@ -215,7 +178,6 @@ namespace DynamicPathPlanner.Code
 
             if (checkTile((x + 1), (y - 1), open, closed) == true) //TOP RIGHT
             {
-
                 createNewNode((x + 1), (y - 1), 14, open, parent);
             }
 
@@ -228,14 +190,12 @@ namespace DynamicPathPlanner.Code
 
         private void createNewNode(int x, int y, int value, List<Node> open, Node parent)
         {
-
             Node newNode = new Node();
             newNode.x = x;
             newNode.y = y;
             newNode.g = (int)(grid[x, y]);
             newNode.h = estimateDistance(x, y, target);
             newNode.parent = parent;
-
 
             open.Add(newNode);
         }
@@ -301,8 +261,6 @@ namespace DynamicPathPlanner.Code
 
 
 
-
-
         private int estimateDistance(int currentX, int currentY, Node target)
         {
             int xDist = Math.Abs(currentX - target.x);
@@ -316,12 +274,6 @@ namespace DynamicPathPlanner.Code
             {
                return  (int)(1.4f*xDist + (yDist-xDist));
             }
-
-
-
-
-
-       //     return (Math.Abs(currentX- target.x) + Math.Abs(currentY - target.y));
         }
 
 
