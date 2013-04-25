@@ -574,7 +574,7 @@ namespace DynamicPathPlanner
                 sizeTemp = txt_elevationSize.Text;
                 elevationSize = int.Parse(sizeTemp);
 
-                if ( (elevationSize >= 100) && (elevationSize <= 100000))
+                if ( (elevationSize >= 100) && (elevationSize <= 5000))
                 {
                     elevation_worker.RunWorkerAsync();
                     BeginStoryboard(elevation_wait);

@@ -13,7 +13,7 @@
 			<Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="75" Click="btn_cancel_Click" Foreground="White" BorderBrush="Black" Background="#FF168D23"/>
 			<Grid Margin="8,66.976,8,33.96">
 				<TextBlock Margin="0,8,272.319,0" TextWrapping="Wrap" Text="Simulation Interval Update Time (ms)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
-				<TextBox x:Name="txt_intervalTime" HorizontalAlignment="Right" Margin="0,15.048,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+				<TextBox x:Name="txt_intervalTime" HorizontalAlignment="Right" Margin="0,8,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -22,8 +22,8 @@
 						</LinearGradientBrush>
 					</TextBox.BorderBrush>
 				</TextBox>
-				<TextBlock Margin="0,44.048,288.162,0" TextWrapping="Wrap" Text="Elevation Model Distance Step (m)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25"/>
-				<TextBox x:Name="txt_distanceStep" HorizontalAlignment="Right" Margin="0,44.048,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right">
+				<TextBlock Margin="0,44.048,288.162,0" TextWrapping="Wrap" Text="Elevation Model Distance Step (m)" VerticalAlignment="Top" FontSize="13.333" Foreground="White" HorizontalAlignment="Right" Height="25" Visibility="Hidden"/>
+				<TextBox x:Name="txt_distanceStep" HorizontalAlignment="Right" Margin="0,44.048,82,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13.333" Width="150" Height="25" Foreground="White" Background="{x:Null}" TextAlignment="Right" Visibility="Hidden">
 					<TextBox.BorderBrush>
 						<LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
 							<GradientStop Color="#FFABADB3" Offset="0.05"/>
