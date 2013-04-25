@@ -3,8 +3,9 @@
  *------------------------------------
  * This class is used to control the System Settings
  * It will load in settings and allow them to be adjusted and then saved
+ * Distance step has been disabled. It can be turned on by altering the settings XAML
  * 
- * Last Updated: 21/04/2013
+ * Last Updated: 25/04/2013
 */
 
 using System;
