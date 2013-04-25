@@ -77,7 +77,15 @@ namespace DynamicPathPlanner
             try
             {
                 int interval = int.Parse(intervalText);
-                Properties.Settings.Default.IntervalTime = interval;
+                if ((interval >= 10) && (interval <= 10000))
+                {
+                    Properties.Settings.Default.IntervalTime = interval;
+                }
+                else
+                {
+                    lbl_error.Text = "Error: Interval value must be between 10ms and 10,000ms";
+                    saveValid = false;
+                }
             }
             catch
             {
