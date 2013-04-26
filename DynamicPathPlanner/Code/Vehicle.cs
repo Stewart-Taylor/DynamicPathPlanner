@@ -612,7 +612,7 @@ namespace DynamicPathPlanner.Code
         {
             float z = 1;
             z = (int)PANGU_Manager.getPointHeight(x, y);
-            z += 9;
+            z += 15;
             return (int)z;
         }
 

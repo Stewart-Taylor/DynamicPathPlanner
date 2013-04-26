@@ -381,12 +381,10 @@ namespace DynamicPathPlanner.Code
 
         #endregion
 
-
         public SimulationManager()
         {
           
         }
-
 
         public void setSimulation(NavigationMapManager navMap , Bitmap skyView)
         {
@@ -477,7 +475,7 @@ namespace DynamicPathPlanner.Code
 
                     if (isUsed == false)
                     {
-                        if ((p.x == a.x) && (p.x == a.y))
+                        if ((p.x == a.x) && (p.y == a.y))
                         {
                             count++;
                             usedPoints.Add(a);
