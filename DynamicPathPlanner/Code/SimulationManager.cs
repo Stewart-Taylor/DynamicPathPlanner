@@ -527,7 +527,6 @@ namespace DynamicPathPlanner.Code
             stepTraverseStarted = false;
         }
 
-
         public void startSimulationDSTAR(int startX, int startY, int endX, int endY)
         {
             rover = new Vehicle(mapManager);

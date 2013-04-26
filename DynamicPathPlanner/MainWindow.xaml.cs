@@ -470,6 +470,8 @@ namespace DynamicPathPlanner
         {
             if (interfaceManager.isElevationMapGenerated())
             {
+                txt_elevationFeedback.Text = "";
+
                 interfaceManager.setRoverSize(1.0f);
                 interfaceManager.setRoverSlope(0.3f);
                 
@@ -574,15 +576,22 @@ namespace DynamicPathPlanner
                 sizeTemp = txt_elevationSize.Text;
                 elevationSize = int.Parse(sizeTemp);
 
-                if ( (elevationSize >= 100) && (elevationSize <= 5000))
+                if ((elevationSize >= 100) && (elevationSize <= 5000))
                 {
                     elevation_worker.RunWorkerAsync();
                     BeginStoryboard(elevation_wait);
                     btn_elevationUpdate.IsEnabled = false;
                     elevation_wait.Begin();
                 }
+                else
+                {
+                    txt_elevationFeedback.Text = "Area size must be value between 0 and 5000!";
+                }
             }
-            catch { }
+            catch 
+            {
+                txt_elevationFeedback.Text = "Area size must be value between 0 and 5000!";
+            }
         }
 
         private void btn_simulationSky_Click(object sender, System.Windows.RoutedEventArgs e)

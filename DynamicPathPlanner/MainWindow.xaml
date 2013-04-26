@@ -1367,7 +1367,7 @@
     			<TextBlock x:Name="lbl_connectFeedback" Margin="8,186.916,8,184.708" TextWrapping="Wrap" FontSize="16" Foreground="White" d:LayoutOverrides="Height" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsLocked="True" d:IsHidden="True">
+    	<Grid x:Name="grid_elevation_slide" Background="#FF525252" Margin="0,22.733,0,0">
     		<Grid x:Name="grid_elevationContainer" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
@@ -1386,6 +1386,7 @@
     			<TextBlock Margin="8,176.25,0,198.92" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFE2E2E2" HorizontalAlignment="Left" Text="Area Size" Width="116.943" d:LayoutOverrides="Height" TextAlignment="Right"/>
     			<Button x:Name="btn_elevationUpdate" Content="Load" Margin="135.7,0,0,146.637" Background="#FF969696" BorderBrush="{x:Null}" Foreground="White" FontSize="13.333" FontFamily="Segoe UI Semibold" Padding="15,1" Click="btn_elevationUpdate_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="93.244" Focusable="False"/>
     			<TextBlock Margin="0,62.069,16,0" TextWrapping="Wrap" Foreground="#FFE2E2E2" Text="Retrieve an elevation model form PANGU" VerticalAlignment="Top"/>
+    			<TextBlock x:Name="txt_elevationFeedback" Margin="8,147.29,268,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
     		</Grid>
     	</Grid>
     	<Grid x:Name="grid_roverSetup_Slide" Background="#FF525252" Margin="0,22.733,0,0" RenderTransformOrigin="0.529,0.533" d:IsLocked="True" d:IsHidden="True">
@@ -1460,7 +1461,7 @@
     			<TextBlock Margin="8,0,268,159.529" TextWrapping="Wrap" FontSize="16" Foreground="#FFE2E2E2" Height="26.318" VerticalAlignment="Bottom" Text="1 Sector = Distance Step ( 0.1m By Default)"/>
     		</Grid>
     	</Grid>
-    	<Grid x:Name="grid_rover_slide" Background="#FF525252" Margin="0,22.733,0,0">
+    	<Grid x:Name="grid_rover_slide" Background="#FF525252" Margin="0,22.733,0,0" d:IsHidden="True" d:IsLocked="True">
     		<Grid x:Name="grid_startupContainer4" Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" RenderTransformOrigin="0.5,0.5">
     			<Grid.RenderTransform>
     				<TransformGroup>
